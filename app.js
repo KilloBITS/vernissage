@@ -4,7 +4,10 @@ const http = require('http');
 const express = require('express');
 const bParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const mongoClient = require("mongodb").MongoClient;
 
+
+const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 const app = express();
 
 //project libs use
@@ -26,6 +29,27 @@ app.use('/', index);
 // app.use('/register', register);
 // app.use('/support', support);
 
+
+
+
+
+mongoClient.connect(url, function(err, client){
+    const db = client.db("UsersData");
+    const collection = db.collection("users");
+
+    if(err) return console.log(err);
+
+       collection.find().toArray(function(err, results){
+           console.log(results);
+           client.close();
+       });
+
+      //  db.collection("users").remove({name: 'Tom'}, function(err, obj) {
+      //     if (err) throw err;
+      //     console.log(obj.result.n + " document(s) deleted");
+      //     client.close();
+      // });
+});
 
 //created and started web server node.js
 app.listen(80, function(){
