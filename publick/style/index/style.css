@@ -1,5 +1,6 @@
 body{
   background-image: url(../../../image/city.jpg);
+  background-position: center;
 }
 
 .panel{
@@ -92,4 +93,15 @@ background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiB
 }
 #tops .icon{
 
+}
+
+
+#clock{
+  position: absolute;
+  right: 50px;
+  top: 0;
+  width: 240px;
+  height: 150px;
+  background-image: url(../../../image/clock.png);
+  background-size: cover;
 }
