@@ -25,7 +25,7 @@ body{
     z-index: 51;
 }
 
-.lum-l,.lum-r{
+.lum-l, .lum-r{
     width: 50%;
     position: relative;
     height: 25px;
@@ -40,8 +40,8 @@ body{
     width: 25px;
     height: 10px;
     border-radius: 0 0 8px 8px;
-    -webkit-box-shadow: rgb(255, 90, 24) 0px 20px 90px 18px;
-    box-shadow: rgb(255, 90, 24) 0px 20px 90px 18px;
+    -webkit-box-shadow: rgb(255, 90, 24) 0px 20px 110px 18px;
+    box-shadow: rgb(255, 90, 24) 0px 20px 110px 18px;
 }
 
 .lum-l .light{
