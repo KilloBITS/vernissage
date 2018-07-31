@@ -28,12 +28,27 @@
     </div>
     <div class="auth-block">
       <div class="auth-line" id="login-data">
-        <input type="text" class="auth-data" >
+        <input type="text" class="auth-data" autocomplete="off" name="userNickname">
       </div>
       <div class="auth-line" id="pass-data">
-        <input type="text" class="auth-data" >
+        <input type="password" class="auth-data" autocomplete="off" name="userPassword">
       </div>
-      <div class="auth-line"></div>
+      <div class="auth-line" id="check-data">
+        <section title=".squaredThree">
+          <!-- .squaredThree -->
+          <div class="squaredThree">
+            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
+            <label for="squaredThree"></label>
+          </div>
+          <label for="squaredThree" class="clickLabel">Запомнить меня</label>
+          <!-- end .squaredThree -->
+        </section>
+
+      </div>
+      <div class="auth-line" id="button-data">
+        <div class="btn" id="btnAuth">Войти</div>
+        <div class="btn" id="btnReg">Регистрация</div>
+      </div>
     </div>
     <div class="textures"></div>
   </div>
