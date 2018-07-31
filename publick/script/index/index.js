@@ -1,4 +1,5 @@
 'use strict';
+var indexObj = new Object();
 var randomInteger = function (min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1);
     rand = Math.round(rand);
@@ -23,13 +24,35 @@ setInterval(function () {
 let buttons = () => {
   $('.nev-btn').click(function () {
     let index = $('.nev-btn').index(this);
-console.log(index);
+    $('.nev-btn').removeClass('btnAct');
+    $('.nev-btn:eq('+index+')').addClass('btnAct');
     $('.data-block').css({'bottom':'-100%'});
     $('.data-block:eq('+ index +')').css({'bottom':'0%'});
+  });
 
+  $('.arrow-page').click(function(){
+    //blockTopNavPanel
+    //arrow-page
+    //8px 8px 14px -4px black
+    if(indexObj.openedBottomPanel){
+      $('.blockTopNavPanel').css({"height":"30px"});
+      $('.arrow-page').css({
+        "transform":"translate(-50%, 0) rotate(45deg)",
+        "box-shadow":"-8px -8px 14px -4px black"
+      });
+      indexObj.openedBottomPanel = false;
+    }else{
+      $('.blockTopNavPanel').css({"height":"190px"});
+      $('.arrow-page').css({
+        "transform":"translate(-50%, 0) rotate(225deg)",
+        "box-shadow":"8px 8px 14px -4px black"
+      });
+      indexObj.openedBottomPanel = true;
+    }
   });
 };
 
 $(document).ready(() => {
+  indexObj.openedBottomPanel = false;
   buttons();
 });
