@@ -1,3 +1,4 @@
+'use strict';
 var randomInteger = function (min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1);
     rand = Math.round(rand);
@@ -18,3 +19,17 @@ setInterval(function () {
         });
     }
 }, 80);
+
+let buttons = () => {
+  $('.nev-btn').click(function () {
+    let index = $('.nev-btn').index(this);
+console.log(index);
+    $('.data-block').css({'bottom':'-100%'});
+    $('.data-block:eq('+ index +')').css({'bottom':'0%'});
+
+  });
+};
+
+$(document).ready(() => {
+  buttons();
+});
