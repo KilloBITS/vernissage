@@ -16,3 +16,48 @@ body{
     font-family: 'OneText';
     src: url('fonts/9.ttf');
 }
+
+.star {
+  width: 16px;
+  height: 16px;
+  background: gold;
+  float: left;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.s1{}
+.s2{}
+.s3{}
+.s4{}
+.s5{}
+
+.loader {
+  /* margin: 0 0 2em; */
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  /* padding: 1em; */
+  /* margin: 0 auto 1em; */
+  display: inline-block;
+  vertical-align: top;
+  background: rgba(81, 75, 71, 0.62);
+  z-index: 1;
+  position: absolute;
+  border-radius: 5px;
+  display: none;
+}
+/*
+  Set the color of the icon
+*/
+
+.loader svg{
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+svg path,
+svg rect {
+  fill: #FF6700;
+}

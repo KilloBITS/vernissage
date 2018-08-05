@@ -283,6 +283,59 @@ body{
   line-height: 55px;
 }
 
+.profile-block{
+  background-image: url(../../../image/auth-block2.png);
+  width: 280px;
+  height: 180px;
+  position: absolute;
+  top: 150px;
+  left: 10px;
+  transition: 0.5s;
+  display: none;
+}
+
+.profile-left{
+  width: 75px;
+  height: calc( 100% - 50px);
+  position: absolute;
+  top: 30px;
+  left: 18px;
+}
+
+.avatara{
+  width: 75px;
+  height: 75px;
+}
+
+#avka{
+  width: 90%;
+  height: 90%;
+  background: black;
+  margin: auto;
+}
+
+
+.profile-right{
+  background: #8d9933;
+  width: 165px;
+  height: calc( 100% - 50px);
+  position: absolute;
+  top: 30px;
+  left: 100px;
+}
+
+.stars-block{
+  background: white;
+    width: 67%;
+    height: 15px;
+    right: 0;
+    top: -15px;
+    position: absolute;
+}
+
+
+
+
 .auth-block{
   background-image: url(../../../image/auth-block.png);
   width: 280px;

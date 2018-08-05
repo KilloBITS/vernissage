@@ -29,10 +29,6 @@ app.use('/', index);
 // app.use('/register', register);
 // app.use('/support', support);
 
-
-
-
-//
 // mongoClient.connect(url, function(err, client){
 //     const db = client.db("UsersData");
 //     const collection = db.collection("users");
@@ -51,7 +47,10 @@ app.use('/', index);
 //       // });
 // });
 
+var auth = require('./controllers/controllerAuthification');
+app.post('/auth', auth);
+
 //created and started web server node.js
-app.listen(80, function(){
-  console.warn('started server Dark World from port: 80');5
+app.listen(3000, function(){
+  console.warn('started server Dark World from port: 3000');5
 });
