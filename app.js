@@ -51,6 +51,6 @@ var auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
 
 //created and started web server node.js
-app.listen(3000, function(){
+app.listen(80, function(){
   console.warn('started server Dark World from port: 3000');5
 });

@@ -304,19 +304,25 @@ body{
 
 .avatara{
   width: 75px;
-  height: 75px;
+      height: 75px;
+      background-size: contain;
+      background-position: center;
+      border: 2px solid black;
+      border-radius: 5px;
+      position: relative;
 }
 
 #avka{
-  width: 90%;
-  height: 90%;
-  background: black;
-  margin: auto;
+  width: calc(100% + 1px);
+  height: 100%;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.2) url(../../../image/crack-texture.png);
+  background-size: contain;
+  position: absolute;
 }
 
 
 .profile-right{
-  background: #8d9933;
   width: 165px;
   height: calc( 100% - 50px);
   position: absolute;
@@ -325,17 +331,106 @@ body{
 }
 
 .stars-block{
-  background: white;
-    width: 67%;
+    width: 60%;
     height: 15px;
     right: 0;
-    top: -15px;
+    top: -16px;
     position: absolute;
 }
 
+.toWorld{
+  position: absolute;
+  width: 200px;
+  height: 32px;
+  background: #900000;
+  background: #900000 url(../../../image/crack-texture.png);
+  bottom: 16px;
+  left: 50%;
+  transform: translate(-50%, -7px);
+  border-radius: 5px;
+  border: 2px solid #3a3a3a;
+  text-align: center;
+  line-height: 36px;
+  font-family: index;
+  color: rgba(255, 255, 255, 0.71);
+  background-size: cover;
+  cursor: pointer;
+  outline: 1px dashed rgba(0, 0, 0, 0.35);
+  outline-offset: -5px;
+  transition: 0.3s;
+}
 
+.toWorld:hover{
+  position: absolute;
+  width: 200px;
+  height: 32px;
+  background: #900000;
+  background: #a10000 url(../../../image/crack-texture.png);
+  bottom: 16px;
+  left: 50%;
+  transform: translate(-50%, -7px);
+  border-radius: 5px;
+  border: 2px solid #3a3a3a;
+  text-align: center;
+  line-height: 36px;
+  font-family: index;
+  color: rgba(255, 255, 255, 0.71);
+  background-size: cover;
+  cursor: pointer;
+  outline: 1px dashed rgba(0, 0, 0, 0.35);
+  outline-offset: -5px;
+}
 
+.toWorld:active{
+    box-shadow: inset 1px 1px 3px 1px black;
+}
 
+.nick-name-block{
+  font-family: btnFont;
+  font-size: 13px;
+  width: calc(100% + 11px);
+  text-align: center;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  margin-top: 5px;
+  height: 20px;
+  line-height: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  margin-left: -4px;
+  cursor: pointer;
+    transition: 0.3s;
+}
+
+.nick-name-block span{
+  position: absolute;
+  top: -25px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 3px 10px;
+  font-size: 11px;
+  color: white;
+  font-family: index;
+  border-radius: 5px;
+  transition: 0.3s;
+  display: none;
+}
+
+.nick-name-block:hover span{
+    transition: 0.3s;
+  display: block;
+}
+
+.text-rank{
+  font-family: index;
+font-size: 12px;
+width: 100%;
+text-align: center;
+color: #c2c2c2;
+width: calc(100% + 11px);
+border-bottom: 1px solid black;
+cursor: default;
+background: rgba(0, 0, 0, 0.51);
+margin-left: -4px;
+}
 .auth-block{
   background-image: url(../../../image/auth-block.png);
   width: 280px;

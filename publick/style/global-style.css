@@ -20,17 +20,36 @@ body{
 .star {
   width: 16px;
   height: 16px;
-  background: gold;
   float: left;
   display: inline-block;
-  margin-left: 4px;
+  margin-left: 0px;
 }
 
-.s1{}
-.s2{}
-.s3{}
-.s4{}
-.s5{}
+.s1{
+  background-image: URL(../../../image/stars.png);
+  background-position: -3px -1px;
+  background-size: 90px;
+}
+.s2{
+  background-image: URL(../../../image/stars.png);
+background-position: -21px -1px;
+background-size: 90px;
+}
+.s3{
+  background-image: URL(../../../image/stars.png);
+background-position: -36px -1px;
+background-size: 90px;
+}
+.s4{
+  background-image: URL(../../../image/stars.png);
+background-position: -54px -1px;
+background-size: 90px;
+}
+.s5{
+  background-image: URL(../../../image/stars.png);
+background-position: -70px -1px;
+background-size: 90px;
+}
 
 .loader {
   /* margin: 0 0 2em; */
@@ -60,4 +79,26 @@ body{
 svg path,
 svg rect {
   fill: #FF6700;
+}
+
+.bRed{
+  color: red;
+}
+.bGreen{
+  color: green;
+}
+.bGold{
+  color: gold;
+}
+.bViolet{
+  color: violet;
+}
+.bBlue{
+  color: blue;
+}
+.bBlack{
+  color: black;
+}
+.bWhite{
+  color: white;
 }
