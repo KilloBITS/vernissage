@@ -127,4 +127,13 @@
     bottom: -100%;
     transition: 0.5s;
 }
+.big-logo {
+    width: 216px;
+    height: 110px;
+    background: url(../../../image/DW.png);
+    background-repeat: no-repeat;
+    /* left: 332px; */
+    background-size: contain;
+    margin-top: 0px;
+}
 }

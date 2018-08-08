@@ -1,6 +1,7 @@
 body{
   margin: 0;
   padding: 0;
+  cursor: url(cursors/Arrow.cur), auto;
 }
 
 @font-face {

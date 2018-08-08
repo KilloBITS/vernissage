@@ -18,10 +18,13 @@ body{
 }
 
 .big-logo{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-    /* background: url(../../../image/logo.png); */
+  width: 298px;
+  height: 149px;
+  background: url(../../../image/DW.png);
+  background-repeat: no-repeat;
+  /* left: 332px; */
+  background-size: contain;
+  margin-top: -25px;
 }
 
 .background-texture{
@@ -72,16 +75,21 @@ body{
     width: 25px;
     height: 10px;
     border-radius: 0 0 8px 8px;
-    -webkit-box-shadow: rgb(255, 90, 24) 0px 20px 110px 18px;
-    box-shadow: rgb(255, 90, 24) 0px 20px 110px 18px;
+    -webkit-box-shadow: rgba(255, 255, 0, 1) 0px 20px 140px 32px;
+    box-shadow: rgba(255, 255, 0, 1) 0px 20px 140px 32px;
 }
 
 .lum-l .light{
-    background: rgb(255, 0, 0);
+  background: rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png);
+  background-size: 185px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .lum-r .light{
-    background: rgb(255, 0, 0);
+  background: rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png);
+  background-size: 185px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
+
 .logotype{
   width: calc(100% - 10px);
   height: 298px;
@@ -207,6 +215,13 @@ body{
   font-size: 26px;
 }
 
+#times div{
+  display: inline-block;
+}
+
+.opacity0{
+  opacity: 0;
+}
 #current-date{
   line-height: 4px;
   font-size: 12px;
@@ -235,7 +250,7 @@ body{
 .blockTopNavPanel{
   position: absolute;
   width: 100%;
-  height: 35px;
+  height: 30px;
   bottom: 0;
   background-image: url(../../../image/back2.jpg);
   z-index: 10;
@@ -442,7 +457,7 @@ margin-left: -4px;
 }
 
 .textures{
-  background-image: url(../../../image/aaas.png);
+  background-image: url(../../../image/a/aaas.png);
   width: 274px;
   height: 130px;
   position: absolute;
@@ -451,6 +466,8 @@ margin-left: -4px;
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+
 
 .auth-line{
   width: calc(100% - 38px);
@@ -579,3 +596,146 @@ cursor: pointer;
 }
 
 /* end .squaredThree */
+
+.blockTopNavPanel-data{
+  width: fit-content;
+  height: 150px;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.blockTopNavPanel-btnBack{
+  width: 180px;
+  height: 115px;
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+}
+.blockTopNavPanel-btn{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.52); */
+  transition: 0.3s;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-size: cover;
+}
+
+.blockTopNavPanel-btn:hover{
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  /* background: rgba(0, 0, 0, 0.72); */
+
+}
+
+#sp{
+  background-image: url(../../../image/btn/sp.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#helper{
+  background-image: url(../../../image/btn/helps.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#forum{
+  background-image: url(../../../image/btn/f.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+#news-data{
+  position: absolute;
+  top: 95px;
+  width: 100%;
+  height: calc(100% - 95px);
+  overflow: hidden;
+}
+.news{
+  width: calc(100% - 76px);
+  margin: auto;
+  position: relative;
+  border: 2px solid rgba(0, 0, 0, 0.32);
+  border-bottom: 0;
+  margin-bottom: 70px;
+}
+.news-title{
+  width: 100%;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.48) url(../../../image/back4.jpg);
+
+}
+.news-type{
+  width: 25px;
+  height: 25px;
+  background: white;
+  float: left;
+}
+.news-name{
+  float: left;
+  color: #dedede;
+  padding-left: 10px;
+  font-size: 16px;
+  font-family: index;
+  line-height: 25px;
+  cursor: default;
+}
+.news-text{
+  border-left: 2px solid rgba(255, 255, 255, 0.48);
+  border-right: 2px solid rgba(255, 255, 255, 0.48);
+  border-image: url(http://rpsplanadm.com/wp-content/uploads/2013/10/Dark-Background.jpg);
+  padding: 16px;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: index;
+  background: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+}
+.news-footer{
+  width: 100%;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.48) url(../../../image/back4.jpg);
+}
+.news-author{
+  width: 40%;
+  float: left;
+}
+.news-author-ava{
+  width: 26px;
+  height: 26px;
+  float: left;
+  background: rebeccapurple;
+  margin: 5px 0px 0px 16px;
+  background-size: contain;
+}
+.news-author-nick{
+  float: left;
+  padding-left: 10px;
+  font-family: index;
+  font-size: 16px;
+  line-height: 37px;
+  color: #dedede;
+}
+.news-date{
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-family: index;
+  font-size: 12px;
+  color: #dedede;
+}
+.news-textures{
+  background-image: url(../../../image/a/aaas3.png);
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background-size: contain;
+}

@@ -15,8 +15,9 @@ setInterval(function () {
         });
     } else {
         $(".lum-r .light").css({
-            "box-shadow": "rgb(255, 90, 24) 0px 20px 90px 18px",
-            "background": "rgb(255, 0, 0)"
+            "box-shadow": "rgba(255, 255, 0, 1) 0px 20px 140px 32px",
+            "background": "rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png)",
+            "background-size":"185px"
         });
     }
 }, 80);
@@ -74,8 +75,54 @@ let buttons = () => {
 
 
 
+let currentTimeAndDate = () => {
+
+
+  setInterval(function(){
+    var d = new Date();
+    var month = new Array(12);
+    month[0]="Январь";
+    month[1]="Февраль";
+    month[2]="Март";
+    month[3]="Апрель";
+    month[4]="Май";
+    month[5]="Июнь";
+    month[6]="Июль";
+    month[7]="Август";
+    month[8]="Сентябрь";
+    month[9]="Октябрь";
+    month[10]="Ноябрь";
+    month[11]="Декабрь";
+    $("#current-date").html(d.getDate() + ' ' + month[d.getMonth()] + ' ' + d.getFullYear())
+    
+    // let hour =
+    if(d.getMinutes() <= 9){
+      var minutes = "0"+d.getMinutes();
+    }else{
+      var minutes = d.getMinutes();
+    }
+
+    if(d.getMinutes() <= 9){
+      let hour = "0"+d.getHours();
+    }else{
+      let hour = d.getHours();
+    }
+
+    $("#th").html(d.getHours());
+    $("#tm").html(minutes);
+    if($("#dt").hasClass("opacity0")){
+      $('#dt').removeClass("opacity0");
+    }else{
+      $('#dt').addClass("opacity0");
+    }
+
+  },500);
+};
+
+
 
 $(document).ready(() => {
   indexObj.openedBottomPanel = false;
   buttons();
+  currentTimeAndDate();
 });
