@@ -94,7 +94,7 @@ let currentTimeAndDate = () => {
     month[10]="Ноябрь";
     month[11]="Декабрь";
     $("#current-date").html(d.getDate() + ' ' + month[d.getMonth()] + ' ' + d.getFullYear())
-    
+
     // let hour =
     if(d.getMinutes() <= 9){
       var minutes = "0"+d.getMinutes();
@@ -125,4 +125,23 @@ $(document).ready(() => {
   indexObj.openedBottomPanel = false;
   buttons();
   currentTimeAndDate();
+
+
+  var counter = 0;
+  var c = 0;
+  var i = setInterval(function(){
+      $(".loading-page .counter h1").html(c + "%");
+      $(".loading-page .counter hr").css("width", c + "%");
+
+    counter++;
+    c++;
+
+    if(counter == 101) {
+        clearInterval(i);
+        $('.loading-page').fadeOut(350);
+        $('#leftP').removeClass('pLoad');
+        $('.big-logo').fadeIn(150);
+        $('.auth-block').fadeIn(150);
+    }
+  }, 1);
 });
