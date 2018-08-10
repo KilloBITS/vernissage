@@ -39,9 +39,11 @@ var authStructure = function(req, res, next)  {
 };
 
 
-// router.post('/auth', authStructure, function(req, res, next){});
-router.post('/auth', function(req, res, next){
-  res.send('{"code":500, "userDATA":"asdasdsd"}')
+router.post('/auth', authStructure, function(req, res, next){
+
 });
+// router.post('/auth', function(req, res, next){
+//   res.send('{"code":500, "userDATA":"asdasdsd"}')
+// });
 
 module.exports = router;
