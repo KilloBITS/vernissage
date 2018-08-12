@@ -4,10 +4,10 @@ const http = require('http');
 const express = require('express');
 const bParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const mongoClient = require("mongodb").MongoClient;
+// const mongoClient = require("mongodb").MongoClient;
 
 
-const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+// const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 const app = express();
 
 //project libs use
@@ -18,15 +18,17 @@ app.use(cookieParser());
 
 //routes pages
 const index = require('./routes/getIndex');
+const register = require('./routes/getRegister');
 // const game = require('./routes/getGame');
 // const panel = require('./routes/getPanel');
-// const register = require('./routes/getRegister');
+
 // const support = require('./routes/getSupport');
 
 app.use('/', index);
+app.use('/register', register);
 // app.use('/world', game);
 // app.use('/panel', panel);
-// app.use('/register', register);
+
 // app.use('/support', support);
 
 // mongoClient.connect(url, function(err, client){
@@ -51,6 +53,6 @@ var auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
 
 //created and started web server node.js
-app.listen(80, function(){
-  console.warn('started server Dark World from port: 3000');5
+app.listen(8080, function(){
+  console.warn('started server Dark World from port: 8080');
 });

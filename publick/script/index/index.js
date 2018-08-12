@@ -71,6 +71,12 @@ let buttons = () => {
       $('#auth-loader').fadeOut();
     });
   });
+
+  $('#btnReg').click(function(){
+    let frame = document.createElement('div');
+    frame.id = 'registeModal';
+    $('body').append(frame);
+  });
 };
 
 

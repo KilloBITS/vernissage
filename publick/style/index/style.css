@@ -53,44 +53,7 @@ body{
   left: 0;
   box-shadow: 5px 0px 18px 0px black;
 }
-.head-lumen{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    z-index: 51;
-}
 
-.lum-l, .lum-r{
-    width: 50%;
-    position: relative;
-    height: 25px;
-    display: inline-block;
-    float: left;
-}
-.lum-l .light, .lum-r .light{
-    position: absolute;
-    left: 37%;
-    top: 0;
-    transform: translate(0, -50%);
-    width: 25px;
-    height: 10px;
-    border-radius: 0 0 8px 8px;
-    -webkit-box-shadow: rgba(255, 255, 0, 1) 0px 20px 140px 32px;
-    box-shadow: rgba(255, 255, 0, 1) 0px 20px 140px 32px;
-}
-
-.lum-l .light{
-  background: rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png);
-  background-size: 185px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
-.lum-r .light{
-  background: rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png);
-  background-size: 185px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
 
 .logotype{
   width: calc(100% - 10px);
@@ -675,21 +638,33 @@ cursor: pointer;
   right: 0px;
   top: -50px;
 }
+
 .socials-btn{
-  width: 40px;
-  height: 40px;
-  background: rebeccapurple;
+  width: 35px;
+  height: 35px;
   float: left;
   margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  filter: grayscale(100%);
+  opacity: 0.3;
+  transition: 0.3s;
 }
-#insta{
 
+.socials-btn:hover{
+  filter: grayscale(0%);
+  opacity: 0.8;
+}
+
+#insta{
+  background-image: url(../../../image/btn/instagram.svg);
 }
 #vk{
-
+  background-image: url(../../../image/btn/vk.svg);
 }
 #telega{
-
+  background-image: url(../../../image/btn/telegram.svg);
 }
 
 
@@ -828,4 +803,19 @@ cursor: pointer;
   width: 0px;
   overflow: hidden;
   color: #f60d54;
+}
+
+
+
+
+#registeModal{
+  position: absolute;
+  width: calc(100% - 350px);
+  height: 100%;
+  left: 300px;
+  top: 0;
+  z-index: 10;
+  background: black;
+  transition: 0.3s;
+
 }

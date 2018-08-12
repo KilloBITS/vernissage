@@ -82,6 +82,46 @@ svg rect {
   fill: #FF6700;
 }
 
+
+.head-lumen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    z-index: 51;
+}
+
+.lum-l, .lum-r{
+    width: 50%;
+    position: relative;
+    height: 25px;
+    display: inline-block;
+    float: left;
+}
+.lum-l .light, .lum-r .light{
+    position: absolute;
+    left: 37%;
+    top: 0;
+    transform: translate(0, -50%);
+    width: 25px;
+    height: 10px;
+    border-radius: 0 0 8px 8px;
+    -webkit-box-shadow: rgba(255, 255, 0, 1) 0px 20px 140px 32px;
+    box-shadow: rgba(255, 255, 0, 1) 0px 20px 140px 32px;
+}
+
+.lum-l .light{
+  background: rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png);
+  background-size: 185px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.lum-r .light{
+  background: rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png);
+  background-size: 185px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 .bRed{
   color: red;
 }
