@@ -19,14 +19,14 @@ app.use(cookieParser());
 //routes pages
 const index = require('./routes/getIndex');
 const register = require('./routes/getRegister');
-// const game = require('./routes/getGame');
+const game = require('./routes/getGame');
 // const panel = require('./routes/getPanel');
 
 // const support = require('./routes/getSupport');
 
 app.use('/', index);
 app.use('/register', register);
-// app.use('/world', game);
+app.use('/world', game);
 // app.use('/panel', panel);
 
 // app.use('/support', support);
@@ -53,6 +53,6 @@ var auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
 
 //created and started web server node.js
-app.listen(8080, function(){
+app.listen(8000, function(){
   console.warn('started server Dark World from port: 8080');
 });

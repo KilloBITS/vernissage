@@ -1,0 +1,96 @@
+# Blender MTL File: 'None'
+# Material Count: 9
+
+newmtl NudeEL_Nude__Elexis_reference_s
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.011765 0.011765 0.011765
+Ni 1.000000
+d 0.990000
+illum 2
+map_Kd bikini_black.png
+
+newmtl NudeEL_Nude__Elexis_reference_s0
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bikini_black.png
+
+newmtl NudeEL_Nude__Elexis_reference_s1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd fmouth.png
+
+newmtl NudeEL_Nude__Elexis_reference_s2
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.044706 0.044706 0.044706
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump Face_normal.png
+map_Kd Face_bl_hair.png
+
+newmtl NudeEL_Nude__Elexis_reference_s3
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.035000 0.035000 0.035000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump Body_n.png
+map_Kd Body_2nd.png
+
+newmtl NudeEL_Nude__Elexis_reference_s4
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump Boots_n.png
+map_Kd Boots_white.png
+
+newmtl NudeEL_Nude__Elexis_reference_s5
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.012941 0.012941 0.012941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump Hair_normal.png
+map_Kd Hair_black.png
+
+newmtl NudeEL_Nude__Elexis_reference_s6
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Copia di pupil_l.png
+
+newmtl _6___Default
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd eyeball_l.png
