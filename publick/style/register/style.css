@@ -66,6 +66,10 @@ body{
   transform: translate(-50%, 0);
 }
 
+.PagePrew{
+
+}
+
 .block{
   position: absolute;
   width: calc(100% - 20px);
