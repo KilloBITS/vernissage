@@ -328,22 +328,27 @@ footer p {
   position: absolute;
   transform: translate(-50%, 0);
   left: 50%;
-
+  margin-top: 15px;
 }
 
 .section-select{}
+
 .button-section{
   width: 30px;
   height: 40px;
-  background: wheat;
-  line-height: 40px;
   text-align: center;
+  line-height: 42px;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: index;
+  font-size: 22px;
   cursor: pointer;
 }
+
 .button-section.btnLEFT{
   border-radius: 3px 0 0 3px;
   float: left;
 }
+
 .button-section.btnRIGHT{
   border-radius: 0 3px 3px 0;
   float: right;
@@ -359,6 +364,16 @@ footer p {
   display: none;
   text-align: center;
   line-height: 40px;
+  background: rgb(105, 7, 8);
+  margin: auto;
+  border: 3px solid #250d0d;
+  outline-offset: -10px;
+  box-shadow: inset 0px 0px 10px 0px black;
+  padding-left: 10px;
+  font-family: index;
+  color: white;
+  background-image: url(../../../image/ack-texture.png);
+  background-size: contain;
 }
 .selected{
   display: block;
@@ -462,8 +477,21 @@ footer p {
 }
 
 .data-block{
-
+  position: relative;
 }
+
+.data-textures{
+  background-image: url(../../../image/a/aaas3.png);
+  position: absolute;
+  /* width: 100%; */
+  height: 22px;
+  left: 4px;
+  right: 3px;
+  background-size: contain;
+  opacity: 0.7;
+  bottom: -20px;
+}
+
 .data-block .title{
   width: 100%;
   text-align: left;
@@ -488,7 +516,7 @@ footer p {
 }
 
 #frac1{
-  background-image: url(https://vignette.wikia.nocookie.net/pokemon/images/d/d4/Team_Instinct.png/revision/latest/scale-to-width-down/831?cb=20160712102408);
+  background-image: url(../../../image/teamLogo/1.png);
   width: 100%;
   height: 100%;
   background-size: calc(100% - 55px);
@@ -496,38 +524,38 @@ footer p {
   background-repeat: no-repeat;
 }
 #frac2{
-  background-image: url(https://vignette.wikia.nocookie.net/universe-of-smash-bros-lawl/images/1/1c/Team-mystic-cutout.png/revision/latest?cb=20160806100306);
+  background-image: url(../../../image/teamLogo/2.png);
   width: 100%;
   height: 100%;
-  background-size: calc(100% - 55px);
+background-size: calc(100% - 32px);
   background-position: center;
   background-repeat: no-repeat;
 }
 #frac3{
-  background-image: url(https://s3.amazonaws.com/adsk-designacademy-content-live/s3fs-public/styles/portfolio/public/design_files/team-valor-cutout.png?itok=Gj8xWOUv);
+  background-image: url(../../../image/teamLogo/3.png);
   width: 100%;
   height: 100%;
-  background-size: calc(100% - 55px);
+  background-size: calc(100% - 14px);
   background-position: center;
   background-repeat: no-repeat;
 }
 
 #frac1.selectFraction{
-  outline: 1px dashed yellow;
-  outline-offset: -9px;
-}
-
-#frac2.selectFraction{
   outline: 1px dashed blue;
   outline-offset: -9px;
 }
 
-#frac3.selectFraction{
+#frac2.selectFraction{
   outline: 1px dashed red;
   outline-offset: -9px;
 }
 
-.data-block input[type="text"], .data-block input[type="password"]{
+#frac3.selectFraction{
+  outline: 1px dashed yellow;
+  outline-offset: -9px;
+}
+
+.data-block input[type="text"], .data-block input[type="password"], .data-block input[type="email"]{
   width: 100%;
   height: 37px;
   background: rgb(105, 7, 8);
@@ -543,4 +571,11 @@ footer p {
   color: white;
   background-image: url(../../../image/ack-texture.png);
   background-size: contain;
+}
+
+ /* animation: blur .75s ease-out infinite; */
+@keyframes blur {
+  from {
+    text-shadow:0px 0px 10px rgba(255, 0, 0, 0.48), 0px 0px 10px rgba(255, 0, 0, 0.48), 0px 0px 25px rgba(255, 0, 0, 0.48), 0px 0px 25px rgba(255, 0, 0, 0.48), 0px 0px 25px rgba(255, 0, 0, 0.48), 0px 0px 25px rgba(255, 0, 0, 0.48), 0px 0px 25px rgba(255, 0, 0, 0.48), 0px 0px 25px rgba(255, 0, 0, 0.48), 0px 0px 50px rgba(255, 0, 0, 0.48), 0px 0px 50px rgba(255, 0, 0, 0.48);
+  }
 }

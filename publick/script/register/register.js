@@ -108,10 +108,13 @@ $(document).ready(function(){
  // init();
  // animate();
  $('.button-section').click(function(){
+   $(".option-section").removeClass('selected');
    if(sex ===  'boy'){
      sex = 'girl';
+     $(".option-section:eq(0)").addClass('selected');
    }else{
      sex = 'boy';
+     $(".option-section:eq(1)").addClass('selected');
    }
    while(scene.children.length > 0){
       scene.remove(scene.children[0]);
