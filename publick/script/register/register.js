@@ -120,8 +120,8 @@ $(document).ready(function(){
       scene.remove(scene.children[0]);
   }
   $("#dMOdels").remove();
-  // init();
-  // animate();
+  init();
+  animate();
  });
 
 
