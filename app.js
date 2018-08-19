@@ -52,6 +52,9 @@ app.use('/world', game);
 var auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
 
+var registers = require('./controllers/controllerRegister');
+app.post('/registrations', registers);
+
 //created and started web server node.js
 app.listen(8000, function(){
   console.warn('started server Dark World from port: 8080');

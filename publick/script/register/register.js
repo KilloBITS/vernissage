@@ -1,5 +1,6 @@
 'use strict';
 var sex = 'boy';
+var hairy = 0, face = 0, body = 0, foot = 0, foot2 = 0, fraction = null;
 
 if (!Detector.webgl) {
    Detector.addGetWebGLMessage();
@@ -104,6 +105,19 @@ function render() {
    renderer.render(scene, camera);
 }
 
+function setModal(text, code){
+  $('.modalBackground').fadeIn(400);
+  $('.modalInfo').html(text);
+  setTimeout(() => {
+    $('.modalBackground').fadeOut(400);
+    if(code === 500){
+      setTimeout(() => {
+        window.open('/',"_self");
+      },410);
+    }
+  }, 3500);
+};
+
 $(document).ready(function(){
  // init();
  // animate();
@@ -127,7 +141,50 @@ $(document).ready(function(){
 
  $(".setFraction").click(function(){
    let index = $(".setFraction").index(this);
-   $(".setFraction div").removeClass('selectFraction').css({"filter":"blur(2px)"});
-   $(".setFraction:eq("+index+") div").addClass('selectFraction').css({"filter":"blur(0)"});
+   fraction = index;
+   $(".setFraction div").removeClass('selectFraction').css({"filter":"blur(2px) grayscale(100%)"});
+   $(".setFraction:eq("+index+") div").addClass('selectFraction').css({"filter":"blur(0) grayscale(0%)"});
+ });
+
+
+ $('.registration').click(function(){
+   if($("#check").is(':checked')){
+     if($("#newEmail").val() != '') {
+       var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+        if(pattern.test($("#newEmail").val())){
+          var newUserData = new Object();
+          newUserData.sex = sex;
+          newUserData.hairy = hairy;
+          newUserData.face = face;
+          newUserData.body = body;
+          newUserData.foot = foot;
+          newUserData.foot2 = foot2;
+          newUserData.nick = $("#newNick").val();
+          newUserData.name = $("#newName").val();
+          newUserData.lastname = $("#newLastName").val();
+          newUserData.date = $("#newDate").val();
+          newUserData.email = $("#newEmail").val();
+          newUserData.pass = $("#newPass").val();
+          newUserData.fraction = fraction;
+
+          $.post('/registrations',{data:newUserData}, (result) => {
+            result = JSON.parse(result);
+            console.log(result);
+            setModal(result.message, result.code)
+          });
+        } else {
+            $("#newEmail").css({'border' : '1px solid #ff0000'});
+            setModal("Некорректный EMAIL", 450);
+        }
+    } else {
+      $("#newEmail").css({'border' : '1px solid #ff0000'});
+      setModal("Некорректный EMAIL", 450);
+    }
+
+
+   }else{
+     setModal("Вы что не согласны с правилами ?", 450)
+   }
+
  });
 })

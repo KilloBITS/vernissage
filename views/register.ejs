@@ -24,6 +24,7 @@
     <div class="PagePrew"></div>
     <div class="block">
       <div class="registers-block reg-L">
+        <div class="tops-texture"></div>
         <div class="re-users" id="avatar">
           <main>
             <dna>
@@ -73,15 +74,11 @@
 
           <div class="userVisualBtn foot leftBTN"><span>Ноги</span>◄</div>
           <div class="userVisualBtn foot rightBTN"><span>Ноги</span>►</div>
+          <div id="d3AvaArea">
+
+          </div>
         </div>
-        <div id="d3AvaArea">
-
-        </div>
-
-
-
         <div class="reg-nav-L">
-
           <div class="area">
             <div class="section-select">
               <div class="button-section btnLEFT">◄</div>
@@ -92,12 +89,10 @@
               <div class="button-section btnRIGHT">►</div>
             </div>
           </div>
-
-
-
         </div>
       </div>
       <div class="center-block">
+        <div class="tops-texture"></div>
         <div class="centerSuteBlock">
           <div class="CUTEL"></div>
           <div class="CENTER"></div>
@@ -152,54 +147,53 @@
           ♦ Все сделки, не предусмотренные стандартными функциями игры (аукционы в чате, аренда предметов, договорные правила боев и прочее), совершаются Игроками на свой страх и риск и основаны на доверии пользователей заключающих сделку. Администрация и Полиция не гарантирует возмещение ущерба, нанесенного в следствии обманов и не соблюдения условий сделки.<br>
           ♦ Использование сервисов Игры производится Игроком исключительно самостоятельно и по принципу «как-есть», то есть Администрация игры не отвечает перед Игроком ни при каких обстоятельствах за любой прямой и/или косвенный ущерб, которые могут быть у игрока в связи с получением сервиса игры или невозможностью такой сервис получить.<br>
           ♦ Настоящие правила могут быть изменены Администрацией игры без какого-либо предварительного уведомления. Игрок обязуется проверять данные правила на предмет изменений не менее чем один раз в семь дней. В случае, если такой проверки не будет в указанные сроки или после ознакомления с правилами (новой редакцией правил) Игрок продолжает пользоваться сервисом игры, считается, что игрок ознакомлен и согласен с правилами (новой редакцией правил).<br>
+          <br>
+          Соглашаясь с правилами я снимаю з администрации и разработчиков всю ответственность за безопасность моих данных.
+          <br>
+          И даже в случае их потери я не буду иметь претензии!
+
+          <br><br>
+          Незнание правил не освобождает от ответственности!
         </div>
       </div>
       <div class="registers-block reg-R">
+        <div class="tops-texture"></div>
         <div class="reg-nav-R">
-
           <div class="data-block">
             <div class="title">Ник (Игровое Имя)</div>
-            <input type="text" placeholder="Ник">
+            <input type="text" placeholder="Ник" id="newNick">
             <div class="data-textures"></div>
           </div>
-
           <div class="data-block">
             <div class="title">Ваше Имя (Ваше реальное Имя)</div>
-            <input type="text" placeholder="Имя">
+            <input type="text" placeholder="Имя" id="newName">
             <div class="data-textures"></div>
           </div>
-
           <div class="data-block">
             <div class="title">Отчество (Ваше реальное Отчество)</div>
-            <input type="text" placeholder="Отчество">
+            <input type="text" placeholder="Отчество"  id="newLastName">
             <div class="data-textures"></div>
           </div>
-
           <div class="data-block">
             <div class="title">Дата рождения</div>
-            <input type="text" placeholder="Дата рождения">
+            <input type="text" placeholder="Дата рождения"  id="newDate">
             <div class="data-textures"></div>
           </div>
-
           <div class="data-block">
             <div class="title">Электронная почта</div>
-            <input type="email" placeholder="Электронная почта">
+            <input type="email" placeholder="Электронная почта"  id="newEmail">
             <div class="data-textures"></div>
           </div>
-
-
           <div class="data-block">
             <div class="title">Пароль</div>
-            <input type="password" placeholder="Пароль">
+            <input type="password" placeholder="Пароль"  id="newPass">
             <div class="data-textures"></div>
           </div>
-
           <div class="data-block">
             <div class="title">Повторите пароль</div>
-            <input type="password" placeholder="Повторите пароль">
+            <input type="password" placeholder="Повторите пароль"  id="newPass2">
             <div class="data-textures"></div>
           </div>
-
           <div class="data-block">
             <div class="title">Фракция</div>
             <div class="setFraction">
@@ -212,21 +206,30 @@
               <div id="frac3"></div>
             </div>
           </div>
-
           <div class="data-block">
-
-<div class="form">
-  <input type="checkbox" id="check"/>
-  <label for="check" style="--d: 30px;">
-    <svg viewBox="0,0,50,50">
-      <path d="M5 30 L 20 45 L 45 5"></path>
-    </svg>
-
-  </label>
-    <div class="ttxt">Я согласен с правилами игры</div>
-</div>
+            <div class="form">
+              <input type="checkbox" class="checkedRules" id="check"/>
+              <label for="check" style="--d: 30px;">
+                <svg viewBox="0,0,50,50">
+                  <path d="M5 30 L 20 45 L 45 5"></path>
+                </svg>
+              </label>
+                <div class="ttxt">Я согласен с правилами игры</div>
+            </div>
+          </div>
+          <div class="data-block registration">
+            <div class="RegisterButton">
+              Зарегистрировать персонажа
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="modalBackground">
+      <div class="modalInfo">
+        Вы успешно зарегистрированы.<br>
+        Сообщение с подтверждением отправленно вам на електронную почту!
       </div>
     </div>
 
