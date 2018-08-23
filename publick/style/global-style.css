@@ -6,7 +6,7 @@ body{
 
 @font-face {
     font-family: 'index';
-    src: url('fonts/6.ttf');
+    src: url('fonts/index.ttf');
 }
 @font-face {
     font-family: 'btnFont';
@@ -16,6 +16,11 @@ body{
 @font-face {
     font-family: 'OneText';
     src: url('fonts/9.ttf');
+}
+
+@font-face {
+    font-family: 'alert';
+    src: url('fonts/alert.ttf');
 }
 
 .star {
@@ -150,8 +155,9 @@ svg rect {
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(0, 0, 0, 0.52);
+  background: rgba(0, 0, 0, 0.52) url(../../../image/sitka.png);
   display: none;
+  background-size: 90px;
 }
 
 .modalInfo{
@@ -159,15 +165,29 @@ svg rect {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: red URL(../../../image/ALERT.png);
+  background: URL(../../../image/ALERT.png);
   background-size: contain;
   text-align: center;
   padding: 55px 40px;
-  font-size: 16px;
+  font-size: 22px;
   font-family: index;
-  color: #a90000;
+  color: rgb(204, 24, 19);
   border-radius: 3px;
   background-repeat: no-repeat;
   width: 400px;
-  height: 167px;
+  height: 90px;
+  text-shadow: 2px 2px 0px black;
+  line-height: 75px;
+}
+
+.alertind-block{
+  position: absolute;
+  width: calc(100% - 40px);
+  background: red;
+  padding: 10px 20px;
+  border-radius: 3px;
+}
+
+.thunder{
+  filter: brightness(245%);
 }

@@ -16,27 +16,29 @@
 <body>
   <div class="background">
     <div class="background-image">
-<div class="info-game">
- Темный мир - это браузерная онлайн игра по мистическому миру,
-что полон неизвестных существ, неразгаданных тайн и разных,
-непредвиденных сюрпризов.
-<br>
- В ночь 10-го марта 2025 года, произошла катастрофа.
-В результате проведения научного эксперимента произошел сдвиг граней.
-и открылся разрыв между мирами. Два мира неожиданно подверглись этому
-и сквозь "рану" стали приходить пришельцы из другого мира.
-В результате чего наш мир поглотил хаос, города были разрушенны,
-большенство людей погибло, но тем кому удалось выжить так и держали
-оборону на дальних блок-постах.
-<br>
- Однако не все монстры были враждебны и некоторых люди смогли приручить,
-наш мир казался им чудным, а люди начали обучать их и использовать
-их способности в своих целях.
-
-</div>
-      </div>
+      <div class="thunders-image"></div>
     </div>
-    <div class="background-texture"></div>
+  </div>
+  <div class="background-texture">
+    <div class="info-game">
+     Темный мир - это браузерная онлайн игра по мистическому миру,
+    что полон неизвестных существ, неразгаданных тайн и разных,
+    непредвиденных сюрпризов.
+    <br>
+     В ночь 10-го марта 2025 года, произошла катастрофа.
+    В результате проведения научного эксперимента произошел сдвиг граней.
+    и открылся разрыв между мирами. Два мира неожиданно подверглись этому
+    и сквозь "рану" стали приходить пришельцы из другого мира.
+    В результате чего наш мир поглотил хаос, города были разрушенны,
+    большенство людей погибло, но тем кому удалось выжить так и держали
+    оборону на дальних блок-постах.
+    <br>
+     Однако не все монстры были враждебны и некоторых люди смогли приручить,
+    наш мир казался им чудным, а люди начали обучать их и использовать
+    их способности в своих целях.
+
+    </div>
+  </div>
   </div>
   <div class="preload"></div>
   <div class="panel pLoad" id="leftP">
@@ -44,12 +46,7 @@
     <div class="loading-page">
   <div class="counter">
     <p>loading</p>
-    <h1>0%
-      <!--
-      h1.abs loading
-      h1.abs.color loading
-      -->
-    </h1>
+    <h1>0%</h1>
     <hr/>
   </div>
 </div>
@@ -88,7 +85,7 @@
           </rect>
         </svg>
       </div>
-
+      <div class="zab-pass">Вспомнить пароль</div>
       <div class="auth-line" id="login-data">
         <input type="text" class="auth-data" autocomplete="off" name="userNickname" value="Killa_pro">
       </div>
@@ -156,9 +153,12 @@
         <div class="nick-name-block bRed"><span>Администратор</span>nick-name</div>
         <div class="text-rank">Легенда</div>
       </div>
-      <div class="toWorld">ВОЙТИ В МИР</div>
+      <a href="/world"><div class="toWorld">ВОЙТИ В МИР</div></a>
       <div class="textures"></div>
     </div>
+    <div class="BUTTON" style="margin-top: 70px;">Форум</div>
+    <div class="BUTTON">Энциклопедия</div>
+    <div class="BUTTON">Правила</div>
   </div>
   <div class="panel" id="rightP">
     <div class="mini-panel">
@@ -222,7 +222,7 @@
 
         <div class="solcials">
           <div class="socials-btn" id="insta"></div>
-          <div class="socials-btn" id="vk"></div>
+          <a href="https://vk.com/public170444156" target="_blank"><div class="socials-btn" id="vk"></div></a>
           <div class="socials-btn" id="telega"></div>
         </div>
       </div>
@@ -257,6 +257,9 @@
     <div class="data-block" id="block-tops">
       <div class="block-title">Топ</div>
     </div>
+  </div>
+  <div class="modalBackground">
+    <div class="modalInfo"></div>
   </div>
 </body>
 </html>

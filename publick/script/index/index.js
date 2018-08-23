@@ -22,6 +22,27 @@ setInterval(function () {
     }
 }, 80);
 
+setInterval(function(){
+  var blinkTime = randomInteger(1, 15);
+  if (blinkTime > 14) {
+      $(".thunders-image").show();
+      $(".background-image").addClass('thunder');
+      setTimeout(function(){
+        $(".background-image").removeClass('thunder');
+        $(".thunders-image").fadeOut(35);
+      },220)
+  }
+},100);
+
+function setModal(text){
+  $('.modalBackground').fadeIn(400);
+  $('.modalInfo').html(text);
+  setTimeout(() => {
+    $('.modalBackground').fadeOut(400);
+  }, 3500);
+};
+
+
 let buttons = () => {
   $('.nev-btn').click(function () {
     let index = $('.nev-btn').index(this);
@@ -57,33 +78,31 @@ let buttons = () => {
     let l = $('#login-data input').val();
     let p = $('#pass-data input').val();
     $.post('/auth',{login:l, password:p}, function(result){
-      let result_data = JSON.parse(result);
-      console.log(JSON.parse(result))
-      if(result_data.code === 500){
-        indexObj.userDataObj = result_data.userDATA;
+      if(result.code === 500){
+        indexObj.userDataObj = result.userDATA;
         $('.profile-block').show();
         $('.auth-block').hide();
-
       }else{
-
+        $(".zab-pass").fadeIn(300);
+        setModal(result.error)
       }
-
       $('#auth-loader').fadeOut();
     });
   });
 
-  $('#btnReg').click(function(){
-    let frame = document.createElement('div');
-    frame.id = 'registeModal';
-    $('body').append(frame);
+  $(".toWorld").click(function(){
+    console.log('to World click');
+    let frame = document.createElement("iframe");
+    frame.id = "gameFrame";
+    frame.src = "/world";
+    $("body").append(frame);
   });
+
 };
 
 
 
 let currentTimeAndDate = () => {
-
-
   setInterval(function(){
     var d = new Date();
     var month = new Array(12);
@@ -99,8 +118,7 @@ let currentTimeAndDate = () => {
     month[9]="Октябрь";
     month[10]="Ноябрь";
     month[11]="Декабрь";
-    $("#current-date").html(d.getDate() + ' ' + month[d.getMonth()] + ' ' + d.getFullYear())
-
+    $("#current-date").html(d.getDate() + ' ' + month[d.getMonth()] + ' ' + d.getFullYear());
     // let hour =
     if(d.getMinutes() <= 9){
       var minutes = "0"+d.getMinutes();
@@ -121,7 +139,6 @@ let currentTimeAndDate = () => {
     }else{
       $('#dt').addClass("opacity0");
     }
-
   },500);
 };
 
@@ -132,13 +149,11 @@ $(document).ready(() => {
   buttons();
   currentTimeAndDate();
 
-
   var counter = 0;
   var c = 0;
   var i = setInterval(function(){
       $(".loading-page .counter h1").html(c + "%");
       $(".loading-page .counter hr").css("width", c + "%");
-
     counter++;
     c++;
 
@@ -148,6 +163,7 @@ $(document).ready(() => {
         $('#leftP').removeClass('pLoad');
         $('.big-logo').fadeIn(150);
         $('.auth-block').fadeIn(150);
+        $('.BUTTON').fadeIn(400);
     }
   }, 1);
 });

@@ -48,15 +48,13 @@ var authStructure = function(req, res, next)  {
           res.cookie('uID', results[0]._id);
           res.cookie('language', "rus");
 
-
-
-          res.send('{"code":500, "userDATA":'+JSON.stringify(results[0])+'}')
+          res.send({code:500, userDATA:JSON.stringify(results[0])})
         }else{
-
+          res.send({code:450, type:"nRed", error:"Неверный логин или пароль :("})
         }
         next();
       }else{
-        res.send('{code:450, type:"nRed", error:"Неверный логий или пароль :("}')
+        res.send({code:450, type:"nRed", error:"Неверный логин или пароль :("})
         next();
       }
 
