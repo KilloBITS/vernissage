@@ -106,9 +106,9 @@ svg rect {
 }
 .lum-l .light, .lum-r .light{
     position: absolute;
-    left: 37%;
+    left: 50%;
     top: 0;
-    transform: translate(0, -50%);
+    transform: translate(-50%, -50%);
     width: 25px;
     height: 10px;
     border-radius: 0 0 8px 8px;

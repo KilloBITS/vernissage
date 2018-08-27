@@ -516,7 +516,7 @@ footer p {
   height: 34px;
   line-height: 45px;
 }
-
+/*
 .setFraction{
   width: calc(100% / 3 - 3px);
   height: 100px;
@@ -527,9 +527,9 @@ footer p {
   box-shadow: inset 0px 0px 36px 0px black;
   cursor: pointer;
   background-size: 100% 100%;
-}
+} */
 
-#frac1{
+/* #frac1{
   background-image: url(../../../image/teamLogo/1.png);
   width: 100%;
   height: 100%;
@@ -567,7 +567,7 @@ background-size: calc(100% - 32px);
 #frac3.selectFraction{
   outline: 1px dashed yellow;
   outline-offset: -9px;
-}
+} */
 
 .data-block input[type="text"], .data-block input[type="password"], .data-block input[type="email"]{
   width: 100%;

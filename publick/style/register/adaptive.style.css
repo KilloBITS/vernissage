@@ -1,0 +1,178 @@
+@media screen and (max-width: 800px) {
+  .register-logo {
+      position: absolute;
+      background-image: url(../../../image/register.png);
+      width: 380px;
+      height: 228px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, 0);
+  }
+  .reg-L {
+      left: 0px;
+      border-radius: 10px 10px 0 10px;
+      margin-top: 55px;
+  }
+  #avatar {
+      height: calc(100% - 105px);
+      background-image: url(../../../image/ack-texture.png);
+  }
+  .center-block {
+    left: 50%;
+    bottom: 6px;
+    width: 100%;
+    position: relative;
+    height: 80%;
+    background: rgba(0, 0, 0, 0.71);
+    transform: translate(-50%, 0);
+    background-image: url(../../../image/backgrounds/back6.jpg);
+    z-index: 1;
+}
+
+.registers-block {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 12px);
+    background: rgba(0, 0, 0, 0.73);
+    bottom: 6px;
+    background-image: url(../../../image/backgrounds/back6.jpg);
+    /* border: 3px solid #434343; */
+    z-index: 0;
+    background-position: center;
+}
+.reg-R {
+    right: 0px;
+    border-radius: 0 0 10px 10px;
+    bottom: inherit;
+    margin-top: 0;
+    top: -16px;
+}
+
+.tops-texture{
+  display: none;
+}
+
+.register-logo {
+    position: absolute;
+    background-image: url(../../../image/register.png);
+    width: 100%;
+    height: 228px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+}
+
+.re-users {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    background: rgb(73, 4, 4);
+    margin: auto;
+    /* margin-top: 32px; */
+    border: 3px solid #250d0d;
+    border-radius: 10px;
+    outline: 1px dashed black;
+    outline-offset: -10px;
+    box-shadow: inset 0px 0px 36px 2px black;
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%, 0);
+}
+
+.area {
+    width: calc(100% - 20px);
+    height: 50px;
+    font-family: index;
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    /* margin-top: 15px; */
+    position: absolute;
+    bottom: 40px;
+}
+
+.data-block .title {
+    width: 100%;
+    text-align: left;
+    font-family: index;
+    color: rgba(212, 212, 212, 0.84);
+    text-align: center;
+    font-size: 14px;
+    /* line-height: 36px; */
+    height: 29px;
+    line-height: 36px;
+}
+
+.data-block input[type="text"], .data-block input[type="password"], .data-block input[type="email"] {
+    width: 100%;
+    height: 34px;
+    background: rgb(105, 7, 8);
+    margin: auto;
+    /* margin-top: 10px; */
+    border: 3px solid #250d0d;
+    border-radius: 10px;
+    /* outline: 1px dashed black; */
+    outline-offset: -10px;
+    box-shadow: inset 0px 0px 10px 0px black;
+    padding-left: 10px;
+    font-family: index;
+    color: white;
+    background-image: url(../../../image/ack-texture.png);
+    background-size: contain;
+}
+
+.registration {
+    position: absolute;
+    bottom: 0px;
+    width: calc(100% - 24px);
+    background: #005c21;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 35px;
+    font-size: 16px;
+    font-family: index;
+    border: 2px solid #250d0d;
+    border-radius: 30px 30px 0 0;
+    /* outline: 1px dashed black; */
+    outline-offset: -10px;
+    box-shadow: inset 0px 0px 10px 0px black;
+    background-image: url(../../../image/ack-texture.png);
+    color: #b2b3b2;
+}
+
+.modalInfo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: URL(../../../image/ALERT.png);
+    background-size: contain;
+    text-align: center;
+    padding: 55px 40px;
+    font-size: 12px;
+    font-family: index;
+    color: rgb(204, 24, 19);
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    width: 90%;
+    height: 300px;
+    text-shadow: 2px 2px 0px black;
+    line-height: 16px;
+}
+.modalBackground {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.52) url(../../../image/sitka.png);
+    display: none;
+    background-size: 90px;
+}
+}

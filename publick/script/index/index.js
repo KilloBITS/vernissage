@@ -1,5 +1,6 @@
 'use strict';
 var indexObj = new Object();
+var t = 0;
 var randomInteger = function (min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1);
     rand = Math.round(rand);
@@ -22,17 +23,29 @@ setInterval(function () {
     }
 }, 80);
 
-setInterval(function(){
-  var blinkTime = randomInteger(1, 15);
-  if (blinkTime > 14) {
+
+if(screen.width > 800){
+  setInterval(function(){
+
       $(".thunders-image").show();
       $(".background-image").addClass('thunder');
+
       setTimeout(function(){
+        t++;
         $(".background-image").removeClass('thunder');
         $(".thunders-image").fadeOut(35);
+        var audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = '../../../audio/thunder'+t+'.mp3';
+        audio.play();
+
+        if(t >= 4){
+          t = 0;
+        }
       },220)
-  }
-},100);
+  },15000);
+}
+
 
 function setModal(text){
   $('.modalBackground').fadeIn(400);
@@ -164,6 +177,38 @@ $(document).ready(() => {
         $('.big-logo').fadeIn(150);
         $('.auth-block').fadeIn(150);
         $('.BUTTON').fadeIn(400);
+
+        if(screen.width < 800){
+          document.addEventListener('touchmove', function(event) {
+            event.stopPropagation();
+            var clientY = event.touches[0].clientY;
+            var opened = $(document).height() - clientY;
+            if(event.path[0].className.split(' ')[0] === "drag-menu-btn"){
+              $(".mobileP").css({
+                "height": opened + "px"
+              });
+            }
+          }, false);
+
+          document.addEventListener('touchend', function(event) {
+            event.stopPropagation();
+            var clientY = event.changedTouches[0].clientY;
+            if(event.path[0].className.split(' ')[0] === "drag-menu-btn"){
+              if(parseInt(clientY) < (screen.height / 2)){
+                $(".mobileP").css({
+                  "height": $(document).height() + "px"
+                });
+                $("#DrMaD").addClass('transit');
+              }
+              if(parseInt(clientY) > ($(document).height() / 2)){
+                $(".mobileP").css({
+                  "height": 0 + "px"
+                });
+                $("#DrMaD").removeClass('transit');
+              }
+            }
+          }, false);
+        }
     }
   }, 1);
 });
