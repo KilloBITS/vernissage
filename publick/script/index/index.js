@@ -173,10 +173,9 @@ $(document).ready(() => {
     if(counter == 101) {
         clearInterval(i);
         $('.loading-page').fadeOut(350);
-        $('#leftP').removeClass('pLoad');
-        $('.big-logo').fadeIn(150);
-        $('.auth-block').fadeIn(150);
-        $('.BUTTON').fadeIn(400);
+        // $('.big-logo').fadeIn(150);
+        // $('.auth-block').fadeIn(150);
+        // $('.BUTTON').fadeIn(400);
 
         if(screen.width < 800){
           document.addEventListener('touchmove', function(event) {

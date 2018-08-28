@@ -1,7 +1,3 @@
-body{
-
-}
-
 .background {
     width: 100%;
     height: 100%;
@@ -24,7 +20,6 @@ body{
   background-repeat: no-repeat;
   background-size: contain;
   margin-top: -25px;
-  display: none;
 }
 
 .background-texture{
@@ -282,17 +277,15 @@ body{
   left: 18px;
 }
 
-.auth-block, .profile-block{
-  display: none;
-}
+
 .avatara{
   width: 75px;
-      height: 75px;
-      background-size: contain;
-      background-position: center;
-      border: 2px solid black;
-      border-radius: 5px;
-      position: relative;
+  height: 75px;
+  background-size: contain;
+  background-position: center;
+  border: 2px solid black;
+  border-radius: 5px;
+  position: relative;
 }
 
 #avka{
@@ -778,7 +771,7 @@ background-image:url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBl
 
 
 .loading-page {
-  background: rgba(13, 13, 13, 0.42);
+  background: rgb(0, 0, 0) url(../../../image/backgrounds/back4.jpg);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -786,6 +779,7 @@ background-image:url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBl
   align-items: center;
   font-family: index;
   position: absolute;
+  z-index: 999;
 }
 .loading-page .counter {
   text-align: center;
@@ -793,15 +787,17 @@ background-image:url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBl
 .loading-page .counter p {
   font-size: 40px;
   font-weight: 100;
-  color: #f60d54;
+  color: #ff0000;
+  text-shadow: -1px 1px 1px black;
 }
 .loading-page .counter h1 {
   color: white;
   font-size: 60px;
   margin-top: -10px;
+  text-shadow: -1px 3px 0px black;
 }
 .loading-page .counter hr {
-  background: #f60d54;
+  background: #ff0000;
   border: none;
   height: 1px;
 }
@@ -830,8 +826,7 @@ background-image:url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBl
   font-family: index;
   color: rgba(255, 255, 255, 0.53);
   line-height: 35px;
-  display: none;
-  margin-top: 25px;
+  margin-top: 0px;
 }
 
 .thunders-image{
@@ -849,4 +844,11 @@ background-image:url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBl
 
 .mobileP{
   display: none;
+}
+
+.index-buttons-block{
+  width: 298px;
+  height: 150px;
+  position: absolute;
+  bottom: 0;
 }
