@@ -450,26 +450,28 @@ margin-left: -4px;
   width: calc(100% - 35px);
   height: 100%;
   border-radius: 6px;
-  border: 2px solid #543b3b;
-  background: rgba(31, 15, 15, 0.66) url(../../../image/i1.gif);
-  color: rgba(255, 255, 255, 0.76);
+  border: none;
+  background: rgba(31, 15, 15, 0) url(../../../image/i1.gif);
+  color: rgb(233, 233, 233);
   outline: none;
   text-align: center;
-  padding: 0 5px 0 25px;
+  padding: 2px 5px 0 25px;
   font-family: index;
   background-repeat: no-repeat;
-  background-position: 5px 5px;
+  background-position: 9px 8px;
   background-size: 15px;
+  text-shadow: 1px 1px 1px black;
+  font-size: 15px;
 }
 
 #login-data{
   position: absolute;
-  top: 35px;
+  top: 39px;
   left: 20px;
 }
 #pass-data{
   position: absolute;
-  top: 70px;
+  top: 74px;
   left: 20px;
 }
 #check-data{
@@ -479,25 +481,22 @@ margin-left: -4px;
 }
 #button-data{
   position: absolute;
-  top: 132px;
+  top: 126px;
   left: 20px;
 }
 
 #button-data .btn{
-  width: 110px;
-  height: 24px;
-  background: #b51f1f url(https://jhonnyarte.com.br/catalog/view/zencatalog/image/pattern/low-contrast-linen.png);
-  border: 2px solid #6b161687;
+  width: 117px;
+  height: 30px;
+  /* background: #b51f1f url(https://jhonnyarte.com.br/catalog/view/zencatalog/image/pattern/low-contrast-linen.png); */
   border-radius: 4px;
   text-align: center;
-  line-height: 24px;
+  line-height: 32px;
   margin-right: 3px;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgb(143, 148, 143);
   font-family: index;
   font-size: 14px;
   cursor: pointer;
-  outline: 1px dashed rgba(0, 0, 0, 0.22);
-  outline-offset: -5px;
   transition: 0.3s;
 }
 #btnAuth{
@@ -509,8 +508,7 @@ margin-left: -4px;
 }
 
 #button-data .btn:hover{
-  background: #d02626 url(https://jhonnyarte.com.br/catalog/view/zencatalog/image/pattern/low-contrast-linen.png);
-
+  color: red;
 }
 /* .squaredThree */
 .squaredThree {
@@ -817,17 +815,23 @@ background-image:url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBl
 }
 
 .BUTTON{
-  width: 275px;
+  width: 235px;
   height: 40px;
-  background: url(../../../image/BUTTON.png);
   margin: auto;
   cursor: pointer;
   text-align: center;
   font-family: index;
   color: rgba(255, 255, 255, 0.53);
   line-height: 35px;
-  margin-top: 0px;
+  margin-top: 1px;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
+
+.BUTTON:hover{
+  color: red;
+}
+
 
 .thunders-image{
   background: url(../../../image/thunder/2.png);
@@ -847,8 +851,12 @@ background-image:url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBl
 }
 
 .index-buttons-block{
-  width: 298px;
-  height: 150px;
+  width: 280px;
+  height: 153px;
   position: absolute;
-  bottom: 0;
+  top: 354px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-image: url(../../../image/menu-back.png);
+  padding-top: 37px;
 }
