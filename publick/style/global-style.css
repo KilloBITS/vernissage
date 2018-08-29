@@ -150,7 +150,7 @@ svg rect {
 }
 
 .modalBackground{
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
@@ -158,6 +158,7 @@ svg rect {
   background: rgba(0, 0, 0, 0.52) url(../../../image/sitka.png);
   display: none;
   background-size: 90px;
+  z-index: 10;
 }
 
 .modalInfo{
@@ -179,6 +180,29 @@ svg rect {
   text-shadow: 2px 2px 0px black;
   line-height: 75px;
 }
+
+@media screen and (max-width: 800px) {
+  .modalInfo{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: URL(../../../image/ALERT.png);
+    background-size: contain;
+    text-align: center;
+    padding: 29px 44px;
+    font-size: 16px;
+    font-family: index;
+    color: rgb(204, 24, 19);
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    width: 220px;
+    height: 70px;
+    text-shadow: 2px 2px 0px black;
+    line-height: 75px;
+  }
+}
+
 
 .alertind-block{
   position: absolute;
