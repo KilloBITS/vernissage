@@ -85,11 +85,10 @@ body{
 .registers-block{
   position: absolute;
   width: calc(30% + 5px);
-  height: calc(100% - 12px);
+  height: calc(100% - 100px);
   background: rgba(0, 0, 0, 0.73);
   bottom: 6px;
   background-image: url(../../../image/backgrounds/back6.jpg);
-  /* border: 3px solid #434343; */
   z-index: 0;
   background-position: center;
 }
@@ -128,7 +127,7 @@ body{
 }
 
 #avatar{
-  height: calc(100% - 200px);
+  height: calc(100% - 85px);
   background-image: url(../../../image/ack-texture.png);
 }
 
