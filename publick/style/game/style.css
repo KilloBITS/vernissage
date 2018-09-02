@@ -1,0 +1,74 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.top-nav{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background: url(../../../image/backgrounds/back2.jpg);
+  z-index: 10;
+}
+
+.top-nav:before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 35px;
+  background-image: url(../../../image/a/aaas3.png);
+  background-size: contain;
+  bottom: -35px;
+}
+
+.content{
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 60px);
+  top: 60px;
+  z-index: 0;
+  background: #8e4848 url(http://patcreator.appspot.com/imgs/textures/dark/dark-texture-03.jpg);
+}
+
+.location-block{
+  width: 100%;
+  height: 60%;
+  display: inline-block;
+  float: left;
+}
+
+.CenterNav{
+  width: 800px;
+  height: 518px;
+  margin: auto;
+  position: relative;
+}
+
+.board-game{
+    background: url(../../../image/game/board-game.png);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1
+}
+
+.siti{
+  background: url(../../../image/city3.jpg);
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 10px);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.chat-block{
+  width: 100%;
+  height: 40%;
+  display: inline-block;
+  float: left;
+  /* box-shadow: 0px -1px 24px 0px black; */
+}
