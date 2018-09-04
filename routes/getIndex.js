@@ -1,5 +1,4 @@
 'use strict';
-
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
@@ -12,18 +11,11 @@ router.get('/', function(req, res, next){
 
       if(err) return console.log(err);
 
-         collection.find().toArray(function(err, results){
-             res.render('index.ejs',{news: results})
-             client.close();
-         });
-
-        //  db.collection("users").remove({name: 'Tom'}, function(err, obj) {
-        //     if (err) throw err;
-        //     console.log(obj.result.n + " document(s) deleted");
-        //     client.close();
-        // });
+     collection.find().toArray(function(err, results){
+         res.render('index.ejs',{news: results})
+         client.close();
+     });
   });
-
 });
 
 module.exports = router;

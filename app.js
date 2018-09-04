@@ -52,6 +52,9 @@ app.use('/world', game);
 var auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
 
+var init = require('./controllers/controllerInit');
+app.post('/init', init);
+
 var registers = require('./controllers/controllerRegister');
 app.post('/registrations', registers);
 

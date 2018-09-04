@@ -8,6 +8,14 @@ const bParser = require('body-parser');
 
 router.use(cookieParser());
 
+//шаблоны ответов
+const NotLogin = '{"Code":"450","error":"Неверный логин."}';
+const NotPassword = '{"Code":"450","error":"Неверный пароль."}';
+const BlockedAccaunt = '{"Code":"450","error":"Ваш аккаунт заблокирован. :("}';
+const NotCaptcha = '{"Code":"450","error":"Неверная капча."}';
+const DoubleUser = '{"Code":"450","error":"пользователь с таким ником уже сувществует!"}';
+const NotDoublePassword = '{"code":"400","Error":"пароли не совпадают!"}';
+
 function key_generator(len) {
     var length = (len) ? (len) : (10);
     var string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; //to upper
@@ -36,8 +44,6 @@ var authStructure = function(req, res, next)  {
     let userPass = req.body.password;
 
     collection.find({nick:userLogin}).toArray(function(err, results){
-      console.log(results)
-      results
       if(results[0] !== undefined){
         if(results[0].pass === userPass){
           results[0].pass = 'Информация недоступна!';
@@ -45,7 +51,7 @@ var authStructure = function(req, res, next)  {
           let newKey = key_generator(35);
 
           res.cookie('AuthKEY', newKey);
-          res.cookie('uID', results[0]._id);
+          res.cookie('uID', results[0]._id.toString());
           res.cookie('language', "rus");
 
           res.send({code:500, userDATA:JSON.stringify(results[0])})
@@ -57,19 +63,11 @@ var authStructure = function(req, res, next)  {
         res.send({code:450, type:"nRed", error:"Неверный логин или пароль :("})
         next();
       }
-
-
       client.close();
     });
   });
 };
 
-
-router.post('/auth', authStructure, function(req, res, next){
-
-});
-// router.post('/auth', function(req, res, next){
-//   res.send('{"code":500, "userDATA":"asdasdsd"}')
-// });
+router.post('/auth', authStructure, function(req, res, next){});
 
 module.exports = router;
