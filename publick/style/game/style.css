@@ -36,24 +36,26 @@ body{
   height: calc(50% + 35px);
   display: inline-block;
   float: left;
+  position: relative;
 }
 
 .CenterNav{
   width: 800px;
-  height: 518px;
+  height: 100%;
   margin: auto;
   position: relative;
   overflow: hidden;
 }
 
 .board-game{
-    background: url(../../../image/game/board-game.png);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    z-index: 1
+  background: url(../../../image/game/board-game.png);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  z-index: 1;
+  background-repeat: no-repeat;
 }
 
 .siti{
@@ -67,6 +69,18 @@ body{
   left: 50%;
   transform: translate(-50%, 0);
 }
+
+.LeftNav,.RightNav{
+  width: calc(50% - 378px);
+  position: absolute;
+  height: 100%;
+  background: #8e4848 url(http://patcreator.appspot.com/imgs/textures/dark/dark-texture-03.jpg);
+  z-index: 2;
+  top: 0
+}
+
+.LeftNav{  left: 0;}
+.RightNav{    right: 0;}
 
 .chat-block{
   width: 100%;
