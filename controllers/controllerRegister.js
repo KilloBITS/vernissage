@@ -26,75 +26,63 @@ function randomInteger(min, max) {
     return rand;
 }
 
-
-
 var registrations = function(req, res, next)  {
   let userNEW = req.body.data;
-  res.send('{"code":500, "message":"Регистрация временно недоступна, следите за новостями!"}');
-  // mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-  //   var db = client.db("UsersData");
-  //   var collection = db.collection("users");
-  //   if(err) return console.log(err);
-  //
-  //   collection.find({nick:userNEW.nick}).toArray(function(err, results){
-  //     console.log(results);
-  //     if(results[0] !== undefined){
-  //       res.send('{"code":450, "message":"Пользователь с таким ником уже сущевствует!"}');
-  //     }else{ //Такого пользователя нету, регистрация возможна
-  //       let userDATA = userNEW;
-  //       userDATA.privilegies = 1;
-  //       userDATA.secret = null;
-  //
-  //       //создаем объект с физуальными характеристиками
-  //       let visual = new Object({
-  //         hairy: userDATA.hairy,
-  //         face: userDATA.face,
-  //         body: userDATA.body,
-  //         foot: userDATA.foot,
-  //         foot2: userDATA.foot2
-  //       });
-  //       userDATA.visual = visual;
-  //       let txt = randomInteger(100000, 999999).toString();
-  //       userDATA.private = {
-  //         code: txt,
-  //         pod: undefined
-  //       }
-  //       //удаляем ненужное с глобального объекта
-  //       delete userDATA.hairy;
-  //       delete userDATA.face;
-  //       delete userDATA.body;
-  //       delete userDATA.foot;
-  //       delete userDATA.foot2;
-  //
-  //
-  //
-  //       let ml = new mailOptions("riznik.comment@gmail.com", userDATA.email, 'Код Подтверждения регистрации: ', txt); //panriznik@gmail.com
-  //       transporter.sendMail(ml, function (error, info) {
-  //           if (error) {
-  //               console.log(error);
-  //               res.send('Неверный логин или пароль');
-  //           } else {
-  //               console.log('Email sent: ' + info.response);
-  //               let users1 = 'userSMS' + results[0].Name;
-  //               global[users1] = txt;
-  //               res.send('{"code":500 , "data": "good"}');
-  //           }
-  //       });
-  //
-  //       collection.insertOne(userDATA);
-  //       res.send('{"code":500, "message":"Вы успешно зарегистрированы.<br>Сообщение с подтверждением отправленно вам на електронную почту!"}');
-  //     }
-  //
-  //
-  //     client.close();
-  //   });
-  // });
+  // res.send('{"code":500, "message":"Регистрация временно недоступна, следите за новостями!"}');
+  mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
+    var db = client.db("UsersData");
+    var collection = db.collection("users");
+    if(err) return console.log(err);
+
+    collection.find({nick:userNEW.nick}).toArray(function(err, results){
+      if(results[0] !== undefined){
+        res.send('{"code":450, "message":"Пользователь с таким ником уже сущевствует!"}');
+      }else{ //Такого пользователя нету, регистрация возможна
+        let userDATA = userNEW;
+        userDATA.privilegies = 1;
+        userDATA.secret = null;
+
+        //создаем объект с физуальными характеристиками
+        let visual = new Object({
+          hairy: userDATA.hairy,
+          face: userDATA.face,
+          body: userDATA.body,
+          foot: userDATA.foot,
+          foot2: userDATA.foot2
+        });
+
+        userDATA.visual = visual;
+        let txt = randomInteger(100000, 999999).toString();
+        userDATA.private = {
+          code: txt,
+          pod: undefined
+        }
+        //удаляем ненужное с глобального объекта
+        delete userDATA.hairy;
+        delete userDATA.face;
+        delete userDATA.body;
+        delete userDATA.foot;
+        delete userDATA.foot2;
+
+        let ml = new mailOptions("riznik.comment@gmail.com", userDATA.email, 'Код Подтверждения регистрации: ', txt); //panriznik@gmail.com
+        transporter.sendMail(ml, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+                let users1 = 'userSMS' + results[0].Name;
+                global[users1] = txt;
+            }
+        });
+
+        collection.insertOne(userDATA);
+        res.send('{"code":500, "message":"Вы успешно зарегистрированы.<br>Сообщение с кодом подтверждения отправленно вам на електронную почту!"}');
+      }
+      client.close();
+    });
+  });
 };
 
-
 router.post('/registrations', registrations, function(req, res, next){});
-// router.post('/auth', function(req, res, next){
-//   res.send('{"code":500, "userDATA":"asdasdsd"}')
-// });
 
 module.exports = router;

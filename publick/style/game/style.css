@@ -33,7 +33,7 @@ body{
 
 .location-block{
   width: 100%;
-  height: 60%;
+  height: calc(50% + 35px);
   display: inline-block;
   float: left;
 }
@@ -43,6 +43,7 @@ body{
   height: 518px;
   margin: auto;
   position: relative;
+  overflow: hidden;
 }
 
 .board-game{
@@ -58,17 +59,97 @@ body{
 .siti{
   background: url(../../../image/city3.jpg);
   position: absolute;
-  width: 100%;
+  width: calc(100% + 30px);
   height: calc(100% - 10px);
   background-size: cover;
   background-position: center;
   z-index: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .chat-block{
   width: 100%;
-  height: 40%;
+  height: calc(50% - 35px);
   display: inline-block;
   float: left;
-  /* box-shadow: 0px -1px 24px 0px black; */
 }
+
+
+.chat,.user-li{
+  float: left;
+  display: inline-block;
+  height: calc(100% - 20px);
+  background: rgba(0, 0, 0, 0.4);
+  margin: 10px;
+  border-radius: 7px;
+  box-shadow: inset 0px 0px 10px 3px;
+}
+
+#chat{
+    width: calc(100% - 350px);
+}
+
+#user-li{
+    width: calc(310px);
+}
+
+.rooms-block,.messages-block,.new-message-block{
+  float: left;
+  display: inline-block;
+  width: 100%;
+}
+
+.rooms-block{
+  height: 30px;
+  border-radius: 7px 7px 0 0;
+}
+.rooms{
+
+}
+.search{
+  float: right;
+  width: 140px;
+  padding-top: 10px;
+  margin-right: 5px;
+}
+#search-chat{
+  width: 120px;
+  float: left;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid #464646;
+  border-radius: 3px;
+  height: 20px;
+  /* margin-top: 10px; */
+  color: silver;
+  padding-left: 5px;
+}
+.scbtn{
+  float: left;
+height: 14px;
+display: inline-block;
+color: silver;
+font-size: 12px;
+
+cursor: pointer;
+}
+
+#totopsearch{}
+#tobottomsearch{
+  margin-top: -3px;
+}
+
+.messages-block{
+  height: calc(100% - 60px);
+}
+.new-message-block{
+  height: 30px;
+  border-radius: 0 0 7px 7px;
+}
+.to-user{
+
+}
+.new-msg{
+
+}
+.send-msg{}

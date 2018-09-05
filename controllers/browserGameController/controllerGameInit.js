@@ -29,12 +29,12 @@ var initFunction = (req, res, next) => {
         }
         client.close();
       });
-      
+
     });
   }
 
 };
 
-router.post('/init', initFunction, function(req, res, next){});
+router.post('/gameInit', initFunction, function(req, res, next){});
 
 module.exports = router;
