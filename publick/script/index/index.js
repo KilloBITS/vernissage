@@ -68,12 +68,13 @@ var IndexInit = {
               $(".background-image").removeClass('thunder');
               $(".thunders-image").fadeOut(35);
               var audio = new Audio();
-              audio.preload = 'auto';
-              audio.src = '../../../audio/thunder'+t+'.mp3';
+              // audio.preload = 'auto';
+              audio.src = '../../../audio/thunder'+IndexInit.t+'.mp3';
+              audio.pause();
               audio.play();
 
-              if(t >= 4){
-                t = 0;
+              if(IndexInit.t >= 4){
+                IndexInit.t = 0;
               }
             },220)
         },15000);
