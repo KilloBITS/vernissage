@@ -73,7 +73,7 @@ body{
 }
 
 .LeftNav,.RightNav{
-  width: calc(50% - 402px);
+  width: calc(50% - 378px);
   position: absolute;
   height: 100%;
   background: #8e4848 url(http://patcreator.appspot.com/imgs/textures/dark/dark-texture-03.jpg);
