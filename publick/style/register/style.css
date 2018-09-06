@@ -705,3 +705,11 @@ float: left;
 .center-block .tops-texture{
     top: -30px;
 }
+
+.to-index-btn{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1;
+  font-family: index;
+}

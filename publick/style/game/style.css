@@ -45,6 +45,8 @@ body{
   margin: auto;
   position: relative;
   overflow: hidden;
+  max-width: 800px;
+  max-height: 520px;
 }
 
 .board-game{
@@ -61,8 +63,8 @@ body{
 .siti{
   background: url(../../../image/city3.jpg);
   position: absolute;
-  width: calc(100% + 30px);
-  height: calc(100% - 10px);
+  width: calc(100% - 2px);
+  height: calc(100% - 30px);
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -71,7 +73,7 @@ body{
 }
 
 .LeftNav,.RightNav{
-  width: calc(50% - 378px);
+  width: calc(50% - 402px);
   position: absolute;
   height: 100%;
   background: #8e4848 url(http://patcreator.appspot.com/imgs/textures/dark/dark-texture-03.jpg);
@@ -124,33 +126,44 @@ body{
 .search{
   float: right;
   width: 140px;
-  padding-top: 10px;
-  margin-right: 5px;
+  padding-top: 0px;
+  margin-right: -2px;
+  border-radius: 0px 3px 3px 11px;
+  background: #8e4848 url(http://patcreator.appspot.com/imgs/textures/dark/dark-texture-03.jpg);
+  box-shadow: -4px 4px 8px -1px;
 }
 #search-chat{
   width: 120px;
   float: left;
-  background: rgba(0, 0, 0, 0.55);
-  border: 1px solid #464646;
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid #46464600;
+  border-radius: 0px 3px 3px 10px;
   height: 20px;
-  /* margin-top: 10px; */
   color: silver;
   padding-left: 5px;
+  border-right: 0;
+  text-align: center;
+  font-family: index;
 }
 .scbtn{
   float: left;
-height: 14px;
-display: inline-block;
-color: silver;
-font-size: 12px;
-
-cursor: pointer;
+  height: 14px;
+  display: inline-block;
+  color: silver;
+  font-size: 9px;
+  cursor: pointer;
+  /* border-right: 1px solid #464646; */
+  padding-right: 2px;
 }
 
-#totopsearch{}
+#totopsearch{
+  /* border-top: 1px solid #464646; */
+  margin-top: 0px;
+}
 #tobottomsearch{
-  margin-top: -3px;
+  margin-top: -6px;
+  /* border-bottom: 1px solid #464646; */
+  line-height: 16px;
 }
 
 .messages-block{
