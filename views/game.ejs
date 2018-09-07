@@ -10,8 +10,11 @@
   <!-- <link rel="stylesheet" type="text/css" href="/style/game/adaptive.style.css"> -->
   <script src="script/jquery-3.2.1.min.js" type="text/javascript"></script>
   <script src="script/jquery-3.2.1.js" type="text/javascript"></script>
-  <script src="/script/global/global.js"></script>
+
+  <script src="script/socketIO/socket.io.js" type="text/javascript"></script>
+  <script src="script/global/global.js"></script>
   <script src="script/game/game.js" type="text/javascript"></script>
+  <script src="script/game/socket.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="top-nav"></div>
@@ -27,19 +30,31 @@
   <div class="chat-block">
     <div class="chat" id="chat">
       <div class="rooms-block">
-        <div class="rooms"></div>
+        <div class="rooms">
+          <div class="RoomBTN RoomActive" id="ChatDefault" chat="mainChat" title="Общий чат"></div>
+          <div class="RoomBTN" id="ChatLocation" chat="loc1" title="Чат локации"></div>
+          <div class="RoomBTN" id="ChatShops"  chat="ShopChat" title="Чат для торговли"></div>
+        </div>
         <div class="search">
           <input type="text" name="srchChat" id="search-chat" placeholder="Поиск">
           <div class="scbtn" id="totopsearch">▲</div>
           <div class="scbtn" id="tobottomsearch">▼</div>
         </div>
       </div>
-      <div class="messages-block"></div>
+      <div class="messages-block msgBlockActive" onRoom="mainChat"></div>
+      <div class="messages-block" onRoom="loc1"></div>
+      <div class="messages-block" onRoom="ShopChat"></div>
       <div class="new-message-block">
-        <div class="to-user"></div>
-        <div class="new-msg"></div>
-        <div class="send-msg"></div>
+        <div class="to-user">
+          <input type="text" class="chatInputText" placeholder="Кому">
+        </div>
+        <div class="new-msg">
+          <input type="text" class="chatInputText" placeholder="Введите ваше сообщение..." id="msgText">
+          <div class="smile_btn"></div>
+        </div>
+        <div class="send-msg" id="sendingMessage"></div>
       </div>
+      <div class="smiles_block"></div>
     </div>
     <div class="user-li" id="user-li"></div>
   </div>

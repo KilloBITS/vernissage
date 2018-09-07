@@ -45,6 +45,9 @@ app.post('/gameInit', gameInit);
 const locInit = require('./controllers/browserGameController/controllerLocationInit');
 app.post('/locInit', locInit);
 
+const chat = require('./controllers/browserGameController/controllerChat');
+app.post('/chat', chat);
+
 app.listen(8000, function(){
   console.warn('started server Dark World from port: 8000');
 });

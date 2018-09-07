@@ -13,6 +13,15 @@ var Game = {
   },
   goLoc: function(){},
   clickMenu: function(){},
+  styles: function(){
+    $(".smile_btn").click(function(){
+      if($(".smiles_block").hasClass("show")){
+        $(".smiles_block").removeClass("show")
+      }else{
+        $(".smiles_block").addClass("show")
+      }
+    });
+  },
   goNPC: function(){},
   parallax: function(){
     $(document).on('mousemove',function(e){
@@ -23,6 +32,8 @@ var Game = {
     Game.parallax();
     Game.UserInit();
     Game.LocationInit();
+    Game.styles();
+    CHAT.chat_init();
   }
 };
 
