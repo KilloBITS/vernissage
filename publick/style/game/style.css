@@ -61,15 +61,16 @@ body{
 }
 
 .siti{
-  background: url(../../../image/city3.jpg);
+  background: url(../../../data/location/image/1.jpg);
   position: absolute;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  background-size: cover;
+  width: calc(100% - 5px);
+  height: calc(100% - 5px);
+  background-size: contain;
   background-position: center;
   z-index: 0;
   left: 50%;
   transform: translate(-50%, 0);
+  background-repeat: no-repeat;
 }
 
 .LeftNav,.RightNav{
