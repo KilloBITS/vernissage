@@ -306,7 +306,7 @@ body{
 .msg{
   color: white;
   font-family: index;
-  font-size: 11px;
+  font-size: 14px;
   text-shadow: 1px 1px 1px black;
   margin: 2px 15px 0 7px;
   width: 100%;
@@ -363,4 +363,48 @@ body{
 .show{
   display: block;
   transition: 0.3s;
+}
+
+
+.NavPointtitle{
+  position: absolute;
+  width: 220px;
+  height: 50px;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: rgba(255, 255, 255, 0.61);
+  font-family: index;
+  text-align: center;
+}
+
+#NPTL{
+  /* background: url(../../../image/btnTitle1.png);
+  opacity: 0.8; */
+}
+#NPTR{
+  /* background: url(../../../image/btnTitle2.png);
+  transform: translate(-50%, 0) rotate(-5deg);
+  opacity: 0.8; */
+}
+
+
+.menu_btn_block{
+  width: fit-content;
+  margin: auto;
+}
+.BUTTON_MENU{
+  width: 110px;
+  height: 40px;
+  background: url(../../../image/BUTTON.png);
+  margin: 10px;
+  display: inline-block;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.61);
+  font-family: index;
+  text-align: center;
+  line-height: 43px;
+}
+.BUTTON_MENU:hover{
+  color: rgba(255, 255, 255, 0.81);
 }

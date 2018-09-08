@@ -6,7 +6,10 @@ var data = {
 
 var Game = {
   UserInit: function(){
-    $.post('/gameInit', {aKey: data.ak},function(d){data.ud.us = d;});
+
+    $.post('/gameInit', {aKey: data.ak},function(d){
+      console.log(d.userDATA)
+      data.ud.us = d;});
   },
   LocationInit: function(){
     $.post('/locInit', {aKey: data.ak},function(d){data.ud.loc = d;});

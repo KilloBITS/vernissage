@@ -17,15 +17,29 @@
   <script src="script/game/socket.js" type="text/javascript"></script>
 </head>
 <body>
-<div class="top-nav"></div>
+<div class="top-nav">
+  <div class="menu_btn_block">
+    <div class="BUTTON_MENU">Профиль</div>
+    <div class="BUTTON_MENU">Рюкзак</div>
+    <div class="BUTTON_MENU">Команда</div>
+    <div class="BUTTON_MENU">Сообщения</div>
+    <div class="BUTTON_MENU">Друзья</div>
+    <div class="BUTTON_MENU">Клан</div>
+    <div class="BUTTON_MENU">Дневник</div>
+  </div>
+</div>
 <div class="content">
   <div class="location-block">
-    <div class="BLOCK LeftNav"></div>
+    <div class="BLOCK LeftNav">
+      <div class="NavPointtitle" id="NPTL">ПЕРЕХОДЫ</div>
+    </div>
     <div class="BLOCK CenterNav" id="centerBlockCity">
       <div class="board-game"></div>
       <div class="siti"></div>
     </div>
-    <div class="BLOCK RightNav"></div>
+    <div class="BLOCK RightNav">
+      <div class="NavPointtitle" id="NPTR">ПЕРСОНАЖИ</div>
+    </div>
   </div>
   <div class="chat-block">
     <div class="chat" id="chat">
@@ -57,6 +71,15 @@
       <div class="smiles_block"></div>
     </div>
     <div class="user-li" id="user-li"></div>
+  </div>
+</div>
+<div class="GlobalMsgContainer">
+  <div class="GM">
+    <div class="close_global">X</div>
+    <div class="type_global"></div>
+    <div class="author_global"></div>
+    <div class="message_global"></div>
+    <div class="texture-global"></div>
   </div>
 </div>
 </body>

@@ -52,6 +52,9 @@ var registrations = function(req, res, next)  {
         });
 
         userDATA.visual = visual;
+        userDATA.rank = 1;
+        userDATA.repa = 1;
+
         let txt = randomInteger(100000, 999999).toString();
         userDATA.private = {
           code: txt,

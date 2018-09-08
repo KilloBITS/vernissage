@@ -20,8 +20,9 @@ var initFunction = (req, res, next) => {
       collection.find({c:req.cookies.AuthKEY}).toArray(function(err, results){
         if(results[0] !== undefined){
           collection2.find({nick:results[0].a}).toArray(function(err, results2){
-            results[0].pass = 'Информация недоступна!';
-            results[0].secret = 'Информация недоступна!';
+            delete results2[0].pass;
+            delete results2[0].secret;
+            delete results2[0].private;
             res.send({code:500, userDATA: JSON.stringify(results2[0])})
           });
         }else{
@@ -29,7 +30,7 @@ var initFunction = (req, res, next) => {
         }
         client.close();
       });
-      
+
     });
   }
 

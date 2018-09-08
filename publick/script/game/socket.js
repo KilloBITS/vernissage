@@ -24,6 +24,13 @@ var CHAT = {
         case 1: CHAT.msg_system(msg); break;
     }
   },
+  bindButoons: function(){
+    $("#msgText").keyup(function(event){
+        if(event.keyCode == 13){
+          $("#sendingMessage").click();
+        }
+    });
+  },
   chat_init: function(){
     //подключаемся к сокету
     CHAT.socket = io.connect(location.hostname + ':3000');
@@ -54,6 +61,8 @@ var CHAT = {
       }
     });
 
+
+
     $("#sendingMessage").click(function(){
       var text = $("#msgText").val();
       $("#sendingMessage").addClass('sendload');
@@ -62,5 +71,7 @@ var CHAT = {
       $("#msgText").val("");
       CHAT.socket.emit("message", {message: text, ak: data.ak, r: CHAT.selectChat});
     });
+
+    CHAT.bindButoons();
   }
 }
