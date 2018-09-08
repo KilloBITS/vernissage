@@ -63,7 +63,7 @@ body{
 .siti{
   background: url(../../../data/location/image/1.jpg);
   position: absolute;
-  width: calc(100% - 5px);
+  width: calc(100% - 6px);
   height: calc(100% - 5px);
   background-size: contain;
   background-position: center;
@@ -74,7 +74,7 @@ body{
 }
 
 .LeftNav,.RightNav{
-  width: calc(50% - 378px);
+  width: calc(50% - 400px);
   position: absolute;
   height: 100%;
   background: #8e4848 url(http://patcreator.appspot.com/imgs/textures/dark/dark-texture-03.jpg);
@@ -91,7 +91,6 @@ body{
   display: inline-block;
   float: left;
 }
-
 
 .chat,.user-li{
   float: left;
@@ -407,4 +406,41 @@ body{
 }
 .BUTTON_MENU:hover{
   color: rgba(255, 255, 255, 0.81);
+}
+
+
+.Button_area{
+  position: absolute;
+  top: 55px;
+  width: 100%;
+}
+
+.GameNavButton_AB{
+  background: url(../../../image/btnLN.png);
+  margin: 10px auto;
+  max-width: 250px;
+  height: 34px;
+  text-align: center;
+  font-family: index;
+  line-height: 26px;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 250px;
+  color: white;
+  font-size: 14px;
+  line-height: 34px;
+  background-size: 100%;
+  box-shadow: inset 0px 0px 11px 1px black;
+}
+
+.GameNavButton_AB:hover{
+  box-shadow: inset 0px 0px 11px 1px red;
+}
+
+.LocIcon{
+
+}
+
+.NPCIcon{
+
 }
