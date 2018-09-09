@@ -79,9 +79,23 @@ var registrations = function(req, res, next)  {
         });
 
         collection.insertOne(userDATA);
+
+
+
+        client.db("UsersData").collection("users").find({nick:userNEW.nick}).toArray(function(err, results){
+          let NewUserGame = {
+            userID: results[0]._id.toString(),
+            userLocation: 8,
+            userRegion: 1
+          }
+          client.db("GameProcess").collection("UserLocationsData").insertOne(NewUserGame);
+        });
+
+
+
         res.send('{"code":500, "message":"Вы успешно зарегистрированы.<br>Сообщение с кодом подтверждения отправленно вам на електронную почту!"}');
       }
-      client.close();
+      // client.close();
     });
   });
 };
