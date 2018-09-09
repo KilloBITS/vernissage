@@ -45,12 +45,36 @@ app.post('/gameInit', gameInit);
 const locInit = require('./controllers/browserGameController/controllerLocationInit');
 app.post('/locInit', locInit);
 
+const doLocGo = require('./controllers/browserGameController/controllerGoToLocation');
+app.post('/doLocGo', doLocGo);
+
 const chat = require('./controllers/browserGameController/controllerChat');
 app.post('/chat', chat);
 
 app.listen(8000, function(){
+  const mongoClient = require("mongodb").MongoClient;
+  const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+
+  mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
+    var GameData = client.db("locations");
+    var loc = GameData.collection("locations");
+    var npc  = GameData.collection("NPC");
+
+    if(err) return console.log(err);
+
+    loc.find().toArray(function(err, results){
+      global.LOCATION = results;
+    });
+    npc.find().toArray(function(err, results){
+      global.NPC = results;
+    });
+
+  });
+
   console.warn('started server Dark World from port: 8000');
 });
+
+
 
 
 // var options = {
