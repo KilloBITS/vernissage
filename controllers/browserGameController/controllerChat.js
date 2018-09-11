@@ -70,12 +70,31 @@ io.sockets.on('connection', function (client) {
         });
       });
     });
+
+
+
+    // Отключение от сервера
+    // client.on('disconnect', function() {
+    //     if(usernames[client.aKey]){
+    //         setOnline(global.usernames[client.aKey].id, 0);
+    //     }
+    //     client.leave(global.usernames[client.aKey].rooms); //выходим из комнаты
+    //     let userRoomLength =  io.sockets.adapter.rooms[global.usernames[client.aKey].rooms ];
+    //     clients.splice(clients.indexOf(client), 1); //удаляем из массива юзеров
+    //
+    //     let delUserRoom = usernames[client.aKey].rooms
+    //     delete global.usernames[client.aKey]; //удаляем из обекта юзеров
+    //
+    //     if(userRoomLength !== undefined){
+    //         io.sockets.in(delUserRoom).emit('users', {data: userRoomLength.length, users: users_location(delUserRoom)}); //обновляем данные у пользователей
+    //     }else{
+    //         io.sockets.in(delUserRoom).emit('users', {data: 0, users: users_location(delUserRoom)}); //обновляем данные у пользователей
+    //     }
+    // });
 });
 
 server.listen(3000, function (err) {
   console.log('Chat server starter...');
 });
-
-
 
 module.exports = router;

@@ -48,6 +48,9 @@ app.post('/locInit', locInit);
 const doLocGo = require('./controllers/browserGameController/controllerGoToLocation');
 app.post('/doLocGo', doLocGo);
 
+const doNPCGo = require('./controllers/browserGameController/controllerGoToNPC');
+app.post('/doNPCGo', doNPCGo);
+
 const chat = require('./controllers/browserGameController/controllerChat');
 app.post('/chat', chat);
 

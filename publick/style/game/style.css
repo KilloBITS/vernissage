@@ -61,7 +61,6 @@ body{
 }
 
 .siti{
-  background: url(../../../data/location/image/1.jpg);
   position: absolute;
   width: calc(100% - 6px);
   height: calc(100% - 5px);
@@ -477,7 +476,7 @@ body{
   width: 100%;
   height: 100%;
   background: rgba(62, 62, 62, 0.9) url(../../../image/ack-texture.png);
-  display: none;
+  /* display: none; */  
   overflow: hidden;
 }
 
@@ -1025,4 +1024,128 @@ i:nth-child(62) {
     opacity: 0.6;
     transform: translate3d(-4px, -4px, 570px);
   }
+}
+
+
+.NPC_DIALOGS{
+  position: absolute;
+    width: 320px;
+    top: 40px;
+    z-index: 10;
+    right: 330px;
+    background: url(../../../image/backgrounds/back4.jpg);
+    border-radius: 5px;
+    border: 2px solid black;
+    box-shadow: -4px 5px 20px -3px black;
+    display: none;
+}
+
+.NPC_load{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #171a1c url(https://static-tss.warthunder.com/images/load.gif);
+  background-size: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+.NPC_CLOSE{
+  position: absolute;
+  color: rgba(255, 255, 255, 0.78);
+  right: 3px;
+  top: 3px;
+  cursor: pointer;
+  font-family: sans-serif;
+}
+.NPC_TITLE{
+  width: 100%;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.46);
+  color: white;
+  font-family: index;
+  text-align: center;
+  line-height: 26px;
+}
+.NPC_TEXT{
+  width: calc(100% - 16px);
+  padding: 8px;
+  color: white;
+  font-family: index;
+  font-size: 14px;
+}
+.NPC_OTVET{
+  width: 100%;
+  padding: 8px;
+  color: #ff5400;
+  font-family: index;
+
+}
+
+.NPC_OTVET span{
+  cursor: pointer;
+  text-decoration: underline;
+  width: 100%;
+  float: left;
+  margin: 0 0 5px 0;
+}
+
+.GlobalMsgContainer{
+  position: fixed;
+  width: 250px;
+  background: red;
+  z-index: 100500;
+  top: 75px;
+  right: 10px;
+  border-radius: 4px;
+  background: url(../../../image/backgrounds/back6.jpg);
+  box-shadow: -3px 3px 5px 0px black;
+  border: 2px solid black;
+  display: none;
+}
+.GM{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.07);
+}
+.close_global{
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+.type_global{
+
+}
+.author_global{
+  width: 100%;
+  height: 23px;
+  border-bottom: 2px solid rgba(255, 0, 0, 0.52);
+  background: rgba(0, 0, 0, 0.51);
+  font-family: index;
+  color: rgba(255, 0, 0, 0.78);
+  padding-left: 5px;
+  line-height: 24px;
+}
+.message_global{
+  width: calc(100% - 10px);
+  padding: 11px 5px;
+  font-family: index;
+  color: rgba(255, 255, 255, 0.65);
+  bottom: 0;
+  font-size: 14px;
+  text-shadow: 1px 1px 1px black;
+}
+.texture_global{
+  position: absolute;
+  width: 100%;
+  height: 29px;
+  bottom: -30px;
+  left: 0;
+  background: url(../../../image/a/aaas10.png);
+  background-size: contain;
 }
