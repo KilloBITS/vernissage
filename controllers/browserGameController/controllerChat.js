@@ -25,13 +25,13 @@ io.sockets.on('connection', function (client) {
 
         client.join('mainChat');
         client.join('ShopChat');
-        mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
-            clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
-              client.join("loc"+reslocLen[0].userLocation);
-
-              console.log("My Join Locayion:"  + "loc"+reslocLen[0].userLocation)
-            });
-        });
+        client.join("loc1");
+        // mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
+        //     clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
+        //       client.join("loc"+reslocLen[0].userLocation);
+        //       console.log("My Join Locayion:"  + "loc"+reslocLen[0].userLocation)
+        //     });
+        // });
 
 
     });
@@ -52,43 +52,25 @@ io.sockets.on('connection', function (client) {
               }
 
               if(MD.r !== "mainChat" && MD.r !== "ShopChat"){
-
-                mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
-                    clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: results2[0].nick}).toArray(function(err, reslocLen){
-                      // client.join("loc"+reslocLen[0].userLocation);
-                      let msg = {
-                        m: MD.message,
-                        n: results2[0].nick,
-                        r: 'textColor'+results2[0].rank,
-                        t: typeMSG,
-                        ro: "loc"+reslocLen[0].userLocation
-                      };
-
-                      console.log("Send Message To location:"  + "loc"+reslocLen[0].userLocation);
-                      
-                      switch(msg.t){
-                        case 0: io.sockets.in("loc"+reslocLen[0].userLocation).emit('message', msg);break;
-                        case 1: io.sockets.emit('message', msg); break;
-                      }
-                    });
-                });
+                var userLoc = "loc1";
 
               }else{
                 var userLoc = MD.r;
-                let msg = {
-                  m: MD.message,
-                  n: results2[0].nick,
-                  r: 'textColor'+results2[0].rank,
-                  t: typeMSG,
-                  ro: userLoc
-                };
 
-                switch(msg.t){
-                  case 0: io.sockets.in(userLoc).emit('message', msg);break;
-                  case 1: io.sockets.emit('message', msg); break;
-                }
               }
+              
+              let msg = {
+                m: MD.message,
+                n: results2[0].nick,
+                r: 'textColor'+results2[0].rank,
+                t: typeMSG,
+                ro: userLoc
+              };
 
+              switch(msg.t){
+                case 0: io.sockets.in(userLoc).emit('message', msg);break;
+                case 1: io.sockets.emit('message', msg); break;
+              }
 
 
             });
