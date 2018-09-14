@@ -14,22 +14,29 @@ let server = http.createServer(app);
 const io = require('socket.io').listen(server,  options);
 global.socketIO = io;
 
-var GetUserLoc = function(nick){
-  return 'loc1'
-};
-
 io.sockets.on('connection', function (client) {
-
     client.on('clientConnect', function(data){ //подключение к чату
         client.username = data.nickName;
         client.ak = data.AuthKEY;
+
+        if(global.onlineUsers.indexOf(data.nickName) === -1){
+          global.onlineUsers.push(data.nickName);
+        }
+
         client.join('mainChat');
         client.join('ShopChat');
-        client.join(GetUserLoc(data.nickName));
+        mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
+            clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
+              client.join("loc"+reslocLen[0].userLocation);
+
+              console.log("My Join Locayion:"  + "loc"+reslocLen[0].userLocation)
+            });
+        });
+
+
     });
 
     client.on('message', function (MD) { //функция отправки сообщений
-
       mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientMDB){
         var db = clientMDB.db("UsersData");
         var collection = db.collection("Session"),
@@ -44,53 +51,69 @@ io.sockets.on('connection', function (client) {
                 var typeMSG = 0;
               }
 
-
               if(MD.r !== "mainChat" && MD.r !== "ShopChat"){
-                var userLoc = GetUserLoc(results2[0].nick);
+
+                mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
+                    clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: results2[0].nick}).toArray(function(err, reslocLen){
+                      // client.join("loc"+reslocLen[0].userLocation);
+                      let msg = {
+                        m: MD.message,
+                        n: results2[0].nick,
+                        r: 'textColor'+results2[0].rank,
+                        t: typeMSG,
+                        ro: "loc"+reslocLen[0].userLocation
+                      };
+
+                      console.log("Send Message To location:"  + "loc"+reslocLen[0].userLocation);
+                      
+                      switch(msg.t){
+                        case 0: io.sockets.in("loc"+reslocLen[0].userLocation).emit('message', msg);break;
+                        case 1: io.sockets.emit('message', msg); break;
+                      }
+                    });
+                });
+
               }else{
                 var userLoc = MD.r;
+                let msg = {
+                  m: MD.message,
+                  n: results2[0].nick,
+                  r: 'textColor'+results2[0].rank,
+                  t: typeMSG,
+                  ro: userLoc
+                };
+
+                switch(msg.t){
+                  case 0: io.sockets.in(userLoc).emit('message', msg);break;
+                  case 1: io.sockets.emit('message', msg); break;
+                }
               }
 
-              let msg = {
-                m: MD.message,
-                n: results2[0].nick,
-                r: 'textColor'+results2[0].rank,
-                t: typeMSG,
-                ro: userLoc
-              };
 
-              switch(msg.t){
-                case 0: io.sockets.in(userLoc).emit('message', msg);break;
-                case 1: io.sockets.emit('message', msg); break;
-              }
 
-              //
             });
           clientMDB.close();
         });
       });
     });
 
-
+    client.on('ULL', function(loc){ //подключение к чату
+      mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
+          client.db("GameProcess").collection("UserLocationsData").find({userLocation: loc.myLoc}).toArray(function(err, reslocLen){
+            io.sockets.in('loc1').emit('ULL', reslocLen)
+          });
+      });
+    });
 
     // Отключение от сервера
-    // client.on('disconnect', function() {
-    //     if(usernames[client.aKey]){
-    //         setOnline(global.usernames[client.aKey].id, 0);
-    //     }
-    //     client.leave(global.usernames[client.aKey].rooms); //выходим из комнаты
-    //     let userRoomLength =  io.sockets.adapter.rooms[global.usernames[client.aKey].rooms ];
-    //     clients.splice(clients.indexOf(client), 1); //удаляем из массива юзеров
-    //
-    //     let delUserRoom = usernames[client.aKey].rooms
-    //     delete global.usernames[client.aKey]; //удаляем из обекта юзеров
-    //
-    //     if(userRoomLength !== undefined){
-    //         io.sockets.in(delUserRoom).emit('users', {data: userRoomLength.length, users: users_location(delUserRoom)}); //обновляем данные у пользователей
-    //     }else{
-    //         io.sockets.in(delUserRoom).emit('users', {data: 0, users: users_location(delUserRoom)}); //обновляем данные у пользователей
-    //     }
-    // });
+    client.on('disconnect', function() {
+      console.log("Disconecter user: "+ client.username);
+      let index = global.onlineUsers.indexOf(client.username);
+      if( index !== -1 ){
+        global.onlineUsers.splice(index, 1);
+      }
+    });
+
 });
 
 server.listen(3000, function (err) {

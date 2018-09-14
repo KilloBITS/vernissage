@@ -55,11 +55,14 @@ const chat = require('./controllers/browserGameController/controllerChat');
 app.post('/chat', chat);
 
 app.listen(8000, function(){
+  global.onlineUsers = [];
+
   const mongoClient = require("mongodb").MongoClient;
   const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
   mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
     var GameData = client.db("locations");
+    
     var loc = GameData.collection("locations");
     var npc  = GameData.collection("NPC");
 

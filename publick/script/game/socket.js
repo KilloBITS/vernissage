@@ -31,6 +31,16 @@ var CHAT = {
         }
     });
   },
+  getUserLocationLength: function(){
+    CHAT.socket.on('ULL', function (data) {
+        console.log(data);
+    });
+
+    setInterval(function(){
+      CHAT.socket.emit("ULL", {myLoc: data.ud.loc.locDATA.LOC_ID});
+    },1000);
+    // CHAT.socket.emit("ULL", {location: data.ud.loc.locDATA.LOC_ID});
+  },
   chat_init: function(){
     //подключаемся к сокету
     CHAT.socket = io.connect(location.hostname + ':3000');
@@ -38,6 +48,7 @@ var CHAT = {
         CHAT.socket.emit('clientConnect', {
             data: 'connection',
             AuthKEY: data.ak,
+            nickName: data.ud.us.userDATA.nick,
             sc: CHAT.selectChat
         });
     });
@@ -61,8 +72,6 @@ var CHAT = {
       }
     });
 
-
-
     $("#sendingMessage").click(function(){
       var text = $("#msgText").val();
       $("#sendingMessage").addClass('sendload');
@@ -73,5 +82,6 @@ var CHAT = {
     });
 
     CHAT.bindButoons();
+    CHAT.getUserLocationLength();
   }
 }

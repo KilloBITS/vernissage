@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
       if(err) return console.log(err);
 
      collection.find().toArray(function(err, results){
-         res.render('index.ejs',{news: results})
+         res.render('index.ejs',{news: results, online: global.onlineUsers.length})
          client.close();
      });
   });

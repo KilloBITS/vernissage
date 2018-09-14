@@ -86,7 +86,8 @@ var registrations = function(req, res, next)  {
           let NewUserGame = {
             userID: results[0]._id.toString(),
             userLocation: 8,
-            userRegion: 1
+            userRegion: 1,
+            userNick: userNEW.nick
           }
           client.db("GameProcess").collection("UserLocationsData").insertOne(NewUserGame);
         });

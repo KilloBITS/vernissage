@@ -11,7 +11,6 @@ var Game = {
     });
   },
   GlobalMessage(d){
-    console.log(d);
     var GMC = document.createElement('div');
     GMC.className = 'GlobalMsgContainer';
     var GM = document.createElement('div');
@@ -73,7 +72,8 @@ var Game = {
     }
     $("#LocNameGlobal").html(d.locDATA.name);
     $("#LocInfoGlobal").html(d.locDATA.text);
-    Game.loadDesign(false, '...')
+    CHAT.chat_init();
+    Game.loadDesign(false, '...');
   },
   LocationInit: function(){
     $.post('/locInit', {aKey: data.ak},function(d){
@@ -90,6 +90,7 @@ var Game = {
     Game.loadDesign(true, 'Переходи на другую локацию...');
     $.post("/doLocGo",{l:e, aKey: data.ak},(d) => {
       Game.CreateGameData(d);
+      data.ud.loc = d;
     });
     console.log(e)
   },
@@ -151,7 +152,6 @@ var Game = {
     Game.UserInit();
     Game.LocationInit();
     Game.styles();
-    CHAT.chat_init();
   }
 };
 
