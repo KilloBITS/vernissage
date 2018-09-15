@@ -19,21 +19,23 @@ io.sockets.on('connection', function (client) {
         client.username = data.nickName;
         client.ak = data.AuthKEY;
 
+        mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
+          clientDB.db("GameProcess").collection("UserLocationsData").updateOne({ userNick: data.nickName },{ $set: {online: true}  });
+        });
+
         if(global.onlineUsers.indexOf(data.nickName) === -1){
           global.onlineUsers.push(data.nickName);
         }
 
         client.join('mainChat');
         client.join('ShopChat');
-        client.join("loc1");
-        // mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
-        //     clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
-        //       client.join("loc"+reslocLen[0].userLocation);
-        //       console.log("My Join Locayion:"  + "loc"+reslocLen[0].userLocation)
-        //     });
-        // });
-
-
+        // client.join("loc1");
+        mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
+            clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
+              client.join("loc"+reslocLen[0].userLocation);
+              console.log("My Join Locayion:"  + "loc"+reslocLen[0].userLocation)
+            });
+        });
     });
 
     client.on('message', function (MD) { //функция отправки сообщений
@@ -52,13 +54,11 @@ io.sockets.on('connection', function (client) {
               }
 
               if(MD.r !== "mainChat" && MD.r !== "ShopChat"){
-                var userLoc = "loc1";
-
+                var userLoc = userLoc;
               }else{
                 var userLoc = MD.r;
-
               }
-              
+
               let msg = {
                 m: MD.message,
                 n: results2[0].nick,
@@ -72,7 +72,6 @@ io.sockets.on('connection', function (client) {
                 case 1: io.sockets.emit('message', msg); break;
               }
 
-
             });
           clientMDB.close();
         });
@@ -81,7 +80,7 @@ io.sockets.on('connection', function (client) {
 
     client.on('ULL', function(loc){ //подключение к чату
       mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-          client.db("GameProcess").collection("UserLocationsData").find({userLocation: loc.myLoc}).toArray(function(err, reslocLen){
+          client.db("GameProcess").collection("UserLocationsData").find({userLocation: loc.myLoc, online: true}).toArray(function(err, reslocLen){
             io.sockets.in('loc1').emit('ULL', reslocLen)
           });
       });
@@ -89,13 +88,14 @@ io.sockets.on('connection', function (client) {
 
     // Отключение от сервера
     client.on('disconnect', function() {
-      console.log("Disconecter user: "+ client.username);
       let index = global.onlineUsers.indexOf(client.username);
       if( index !== -1 ){
         global.onlineUsers.splice(index, 1);
+        mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
+          clientDB.db("GameProcess").collection("UserLocationsData").updateOne({ userNick: client.username },{ $set: {online: false}  });
+        });
       }
     });
-
 });
 
 server.listen(3000, function (err) {

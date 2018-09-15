@@ -72,6 +72,9 @@ var Game = {
     }
     $("#LocNameGlobal").html(d.locDATA.name);
     $("#LocInfoGlobal").html(d.locDATA.text);
+
+    $(".messages-block:eq(1)").attr("onRoom","loc"+data.ud.loc.locDATA.LOC_ID);
+    $("#ChatLocation").attr("chat","loc"+data.ud.loc.locDATA.LOC_ID);
     CHAT.chat_init();
     Game.loadDesign(false, '...');
   },
@@ -87,6 +90,7 @@ var Game = {
   },
   goLoc: function(e){
     $(".NPC_DIALOGS").hide(150);
+    
     Game.loadDesign(true, 'Переходи на другую локацию...');
     $.post("/doLocGo",{l:e, aKey: data.ak},(d) => {
       Game.CreateGameData(d);

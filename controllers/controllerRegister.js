@@ -67,20 +67,18 @@ var registrations = function(req, res, next)  {
         delete userDATA.foot;
         delete userDATA.foot2;
 
-        let ml = new mailOptions("riznik.comment@gmail.com", userDATA.email, 'Код Подтверждения регистрации: ', txt); //panriznik@gmail.com
-        transporter.sendMail(ml, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-                let users1 = 'userSMS' + results[0].Name;
-                global[users1] = txt;
-            }
-        });
+        // let ml = new mailOptions("riznik.comment@gmail.com", userDATA.email, 'Код Подтверждения регистрации: ', txt); //panriznik@gmail.com
+        // transporter.sendMail(ml, function (error, info) {
+        //     if (error) {
+        //         console.log(error);
+        //     } else {
+        //         console.log('Email sent: ' + info.response);
+        //         let users1 = 'userSMS' + results[0].Name;
+        //         global[users1] = txt;
+        //     }
+        // });
 
         collection.insertOne(userDATA);
-
-
 
         client.db("UsersData").collection("users").find({nick:userNEW.nick}).toArray(function(err, results){
           let NewUserGame = {
@@ -92,9 +90,22 @@ var registrations = function(req, res, next)  {
           client.db("GameProcess").collection("UserLocationsData").insertOne(NewUserGame);
         });
 
-
-
         res.send('{"code":500, "message":"Вы успешно зарегистрированы.<br>Сообщение с кодом подтверждения отправленно вам на електронную почту!"}');
+
+          var GameData = client.db("locations");
+
+          var loc = GameData.collection("locations");
+          var npc  = GameData.collection("NPC");
+
+          if(err) return console.log(err);
+
+          loc.find().toArray(function(err, results){
+            global.LOCATION = results;
+          });
+          npc.find().toArray(function(err, results){
+            global.NPC = results;
+          });
+
       }
       // client.close();
     });

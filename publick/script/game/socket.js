@@ -33,12 +33,18 @@ var CHAT = {
   },
   getUserLocationLength: function(){
     CHAT.socket.on('ULL', function (data) {
+      $("#users_online_list .gamer").remove();
+      for(let i = 0; i < data.length; i++){
+
+        var ul = '<div class="gamer"><div class="include">i</div><div class="nick_name">' + data[i].userNick + '</div></div>';
+        $("#users_online_list").append(ul);
+      }
         console.log(data);
     });
 
     setInterval(function(){
       CHAT.socket.emit("ULL", {myLoc: data.ud.loc.locDATA.LOC_ID});
-    },1000);
+    },500);
     // CHAT.socket.emit("ULL", {location: data.ud.loc.locDATA.LOC_ID});
   },
   chat_init: function(){

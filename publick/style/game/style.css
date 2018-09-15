@@ -19,12 +19,24 @@ body{
   position: absolute;
   width: 214px;
   height: 60px;
-  background: rebeccapurple;
   top: 0;
 }
+
 .user_nav_block_L{
   left: 0;
 }
+
+.users_mini_ava{
+  width: 50px;
+  height: 50px;
+  background: red;
+  margin: 5px;
+}
+
+.users_game_nick_name{
+
+}
+
 .user_nav_block_R{
   right: 0;
 }
@@ -1167,7 +1179,6 @@ i:nth-child(62) {
   background-size: contain;
 }
 
-
 .users_online_list{
   width: 100%;
   height: calc(100% - 30px);
@@ -1194,6 +1205,7 @@ i:nth-child(62) {
 }
 
 .gamer{
-  margin: 5px;
+  margin: 2px;
   float: left;
+  width: 100%;
 }
