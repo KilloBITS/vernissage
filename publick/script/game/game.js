@@ -8,11 +8,24 @@ var Game = {
   UserInit: function(){
     $.post('/gameInit', {aKey: data.ak},function(d){
       data.ud.us = d;
+
+      var img = new Image();
+      img.src = '/data/users/avatar/'+d.userDATA.nick+'.jpg';
+      img.onload = function(){$("#users_mini_ava").css({"background":"url(/data/users/avatar/"+d.userDATA.nick+".jpg)", "background-size": "contain"});};
+      img.onerror = function(){$("#users_mini_ava").css({"background":"url(/data/users/avatar/nophoto.jpg)", "background-size": "contain"});};
+
+      $("#users_game_nick_name").html(d.userDATA.nick);
+      GlobalObj.PARSE_RANC(d.userDATA.rank);
+      console.log(d)
     });
   },
-  GlobalMessage(d){
+  GlobalMessage(d, t){
     var GMC = document.createElement('div');
     GMC.className = 'GlobalMsgContainer';
+    if($(".GlobalMsgContainer").length >= 1){
+      GMC.style.top = (75 * $(".GlobalMsgContainer").length) + 25 + "px";
+    }
+
     var GM = document.createElement('div');
     GM.className = "GM";
     var close_global = document.createElement('div');
@@ -44,6 +57,12 @@ var Game = {
       $("body").append(GMC);
       $(".GlobalMsgContainer").show();
       $(".NPC_DIALOGS").hide();
+
+      if(t !== undefined, t > 0){
+        setTimeout(function(){
+          $(GMC).remove();
+        }, t);
+      }
     }
   },
   CreateGameData: function(d){
@@ -73,9 +92,13 @@ var Game = {
     $("#LocNameGlobal").html(d.locDATA.name);
     $("#LocInfoGlobal").html(d.locDATA.text);
 
-    $(".messages-block:eq(1)").attr("onRoom","loc"+data.ud.loc.locDATA.LOC_ID);
-    $("#ChatLocation").attr("chat","loc"+data.ud.loc.locDATA.LOC_ID);
-    CHAT.chat_init();
+    $(".messages-block:eq(1)").attr("onRoom","loc"+d.locDATA.LOC_ID);
+    $("#ChatLocation").attr("chat","loc"+d.locDATA.LOC_ID);
+
+    if(!CHAT.inited){
+      CHAT.chat_init();
+    }
+
     Game.loadDesign(false, '...');
   },
   LocationInit: function(){
@@ -90,13 +113,25 @@ var Game = {
   },
   goLoc: function(e){
     $(".NPC_DIALOGS").hide(150);
-    
-    Game.loadDesign(true, 'Переходи на другую локацию...');
+    Game.loadDesign(true, 'Переходим на другую локацию...');
     $.post("/doLocGo",{l:e, aKey: data.ak},(d) => {
-      Game.CreateGameData(d);
-      data.ud.loc = d;
+      if(d.code === 500){
+        Game.CreateGameData(d);
+        data.ud.loc = d;
+        let m = '<div class="msg lg"><span class="msg_text lg">&#9658; Вы перешли на локацию: '+d.locDATA.name+'</span></div>';
+        $(".messages-block:eq(1)").append(m);
+        CHAT.JoinRoom(data.ud.loc.locDATA.LOC_ID);
+
+        if(CHAT.selectChat !== "mainChat" && CHAT.selectChat !==  "ShopChat"){
+          CHAT.selectChat = "loc"+data.ud.loc.locDATA.LOC_ID;
+        }
+        GlobalObj.socket.emit("ULL", {myLoc: data.ud.loc.locDATA.LOC_ID});
+      }else{
+        Game.GlobalMessage(d, 5000);
+        Game.loadDesign(false, '...');
+      }
+
     });
-    console.log(e)
   },
   goNPC: function(e, name){
     $('.NPC_load').show();
@@ -122,7 +157,37 @@ var Game = {
       }
     });
   },
-  clickMenu: function(){},
+  clickMenu: function(){
+    $(".BUTTON_MENU").click(function(){
+      var index = $(".BUTTON_MENU").index(this);
+      $(".block_of_modal").fadeIn(150);
+      $(".modaB_content").hide();
+      $(".block_of_modal .modaB_content:eq("+index+")").show();
+
+      switch(index){
+        case 0: var url = '/doProfile';break;
+        case 1: var url = '/doItems';break;
+        case 2: var url = '/doMonsters';break;
+        case 3: var url = '/doMessage';break;
+        case 4: var url = '/doFriends';break;
+        case 5: var url = '/doClans';break;
+        case 6: var url = '/doList';break;
+      }
+      let dou = {
+        aKey: data.ak,
+        n: data.ud.us.userDATA.nick
+      };
+
+      $.post(url, {d:dou}, function(res){
+        alert("good");
+      }).fail(function() {
+        $(".block_of_modal").hide();
+        $(".modaB_content").hide();
+        Game.GlobalMessage({code: 450, author: "System", error: "Отказано в доступе!"}, 5000);
+      });
+
+    });
+  },
   loadDesign: function(t,s){
     if(t){
       $(".load").show();
@@ -137,6 +202,11 @@ var Game = {
     });
 
   },
+  randomInteger: function (min, max) {
+      var rand = min - 0.5 + Math.random() * (max - min + 1);
+      rand = Math.round(rand);
+      return rand;
+  },
   styles: function(){
     $(".smile_btn").click(function(){
       if($(".smiles_block").hasClass("show")){
@@ -145,6 +215,23 @@ var Game = {
         $(".smiles_block").addClass("show")
       }
     });
+    if(screen.width > 800){
+        setInterval(function () {
+            var blinkTime = Game.randomInteger(1, 15);
+            if (blinkTime > 12) {
+                $(".lum-r .light").css({
+                    "box-shadow": "none",
+                    "background": "rgba(83, 86, 55, 0.78)"
+                });
+            } else {
+                $(".lum-r .light").css({
+                    "box-shadow": "rgba(255, 255, 0, 1) 0px 20px 140px 32px",
+                    "background": "rgb(237, 255, 0) url(https://avatanplus.com/files/resources/mid/583ac15f0f27d158a5835b56.png)",
+                    "background-size":"185px"
+                });
+            }
+        }, 80);
+    }
   },
   parallax: function(){
     $(document).on('mousemove',function(e){
@@ -156,6 +243,7 @@ var Game = {
     Game.UserInit();
     Game.LocationInit();
     Game.styles();
+    Game.clickMenu();
   }
 };
 

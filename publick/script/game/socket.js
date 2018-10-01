@@ -1,9 +1,10 @@
 var CHAT = {
+  inited: false,
   sendRoom: undefined,
   myrooms: undefined,
   socket: undefined,
   roomActiveIndex: undefined,
-  socket: undefined,
+  // socket: undefined,
   selectChat: 'mainChat',
   selectIndexChat: 0,
   msg: function(msg){
@@ -32,26 +33,26 @@ var CHAT = {
     });
   },
   getUserLocationLength: function(){
-    CHAT.socket.on('ULL', function (data) {
+    GlobalObj.socket.on('ULL', function (data) {
       $("#users_online_list .gamer").remove();
+      $("#loc_online").html("На локации: "+ data.length)
       for(let i = 0; i < data.length; i++){
-
         var ul = '<div class="gamer"><div class="include">i</div><div class="nick_name">' + data[i].userNick + '</div></div>';
         $("#users_online_list").append(ul);
       }
         console.log(data);
     });
 
-    setInterval(function(){
-      CHAT.socket.emit("ULL", {myLoc: data.ud.loc.locDATA.LOC_ID});
-    },500);
-    // CHAT.socket.emit("ULL", {location: data.ud.loc.locDATA.LOC_ID});
+    GlobalObj.socket.emit("ULL", {myLoc: data.ud.loc.locDATA.LOC_ID});
+  },
+  JoinRoom: function(R){
+    GlobalObj.socket.emit("JoinRoom", {JR: R});
   },
   chat_init: function(){
     //подключаемся к сокету
-    CHAT.socket = io.connect(location.hostname + ':3000');
-    CHAT.socket.on('connect', function (d) {
-        CHAT.socket.emit('clientConnect', {
+    GlobalObj.socket = io.connect(location.hostname + ':3000');
+    GlobalObj.socket.on('connect', function (d) {
+        GlobalObj.socket.emit('clientConnect', {
             data: 'connection',
             AuthKEY: data.ak,
             nickName: data.ud.us.userDATA.nick,
@@ -59,7 +60,7 @@ var CHAT = {
         });
     });
 
-    CHAT.socket.on('message', function (data) {
+    GlobalObj.socket.on('message', function (data) {
         CHAT.sendMessage(data);
     });
 
@@ -84,10 +85,11 @@ var CHAT = {
       if (text.length <= 0)
           return;
       $("#msgText").val("");
-      CHAT.socket.emit("message", {message: text, ak: data.ak, r: CHAT.selectChat});
+      GlobalObj.socket.emit("message", {message: text, ak: data.ak, r: CHAT.selectChat});
     });
 
     CHAT.bindButoons();
     CHAT.getUserLocationLength();
+    CHAT.inited = true;
   }
 }

@@ -24,6 +24,8 @@ var IndexInit = {
       $('.profile-block').show();
       $('.auth-block').hide();
       IndexInit.USER = JSON.parse(data);
+
+      $(".avatara:eq(0)").css({"background-image":"url(data/users/avatar/"+IndexInit.USER.nick+".jpg)"})
       $(".nick-name-block").html('<span>'+GlobalObj.PARSE_RANC(IndexInit.USER.rank)+'</span>'+IndexInit.USER.nick);
       $(".text-rank").html(GlobalObj.PARSE_REPUTATION(parseInt(IndexInit.USER.repa)));
       GlobalObj.SET_STARS(parseInt(IndexInit.USER.repa), '.stars-block');

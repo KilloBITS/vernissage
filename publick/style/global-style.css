@@ -127,27 +127,14 @@ svg rect {
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.bRed{
-  color: red;
-}
-.bGreen{
-  color: green;
-}
-.bGold{
-  color: gold;
-}
-.bViolet{
-  color: violet;
-}
-.bBlue{
-  color: blue;
-}
-.bBlack{
-  color: black;
-}
-.bWhite{
-  color: white;
-}
+.color0{color: white}
+.color1{color: #ff0000}
+.color2{color: #ff6c00}
+.color3{color: #00f1ff}
+.color4{color: #e1ff00}
+.color5{color: #b9b8ff}
+.color6{color: #ff64ce}
+.color7{color: #017b00}
 
 .modalBackground{
   position: fixed;

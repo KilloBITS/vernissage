@@ -1,6 +1,15 @@
 'use strict';
 var GlobalObj = {
+  socket: undefined,
   PARSE_RANC: function(rank){
+    if(rank <= 7){ $(".nicknameUsersLine").addClass("color0")}
+    if(rank === 7){ $(".nicknameUsersLine").addClass("color7")}
+    if(rank === 8){ $(".nicknameUsersLine").addClass("color6")}
+    if(rank === 9){ $(".nicknameUsersLine").addClass("color5")}
+    if(rank === 10){ $(".nicknameUsersLine").addClass("color4")}
+    if(rank === 11){ $(".nicknameUsersLine").addClass("color3")}
+    if(rank === 12){ $(".nicknameUsersLine").addClass("color2")}
+    if(rank === 13){ $(".nicknameUsersLine").addClass("color1")}
     switch(rank){
       case 1: return "Новичек" ;break;
       case 2: return "Кадет";break;
@@ -16,6 +25,7 @@ var GlobalObj = {
       case 12: return "Помошник администратора";break;
       case 13: return "Администратор";break;
     }
+    // nicknameUsersLine
   },
   PARSE_REPUTATION: function(repa){
     if(repa < 1000){ return 'Неизвестный'}

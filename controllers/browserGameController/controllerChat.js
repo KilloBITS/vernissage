@@ -29,13 +29,16 @@ io.sockets.on('connection', function (client) {
 
         client.join('mainChat');
         client.join('ShopChat');
-        // client.join("loc1");
         mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientDB){
             clientDB.db("GameProcess").collection("UserLocationsData").find({userNick: data.nickName}).toArray(function(err, reslocLen){
               client.join("loc"+reslocLen[0].userLocation);
-              console.log("My Join Locayion:"  + "loc"+reslocLen[0].userLocation)
             });
         });
+    });
+
+    client.on('JoinRoom', function (JL) {
+      console.log(JL.JR);
+      client.join("loc"+JL.JR);
     });
 
     client.on('message', function (MD) { //функция отправки сообщений
@@ -46,18 +49,13 @@ io.sockets.on('connection', function (client) {
 
         collection.find({c:MD.ak}).toArray(function(err, results){
             collection2.find({nick: results[0].a}).toArray(function(err, results2){
-
               if(MD.type && (MD.type === 1) && parseInt(results2[0].rank) > 8){
                 var typeMSG = 1;
               }else{
                 var typeMSG = 0;
               }
 
-              if(MD.r !== "mainChat" && MD.r !== "ShopChat"){
-                var userLoc = userLoc;
-              }else{
-                var userLoc = MD.r;
-              }
+              var userLoc = MD.r;
 
               let msg = {
                 m: MD.message,
@@ -71,7 +69,6 @@ io.sockets.on('connection', function (client) {
                 case 0: io.sockets.in(userLoc).emit('message', msg);break;
                 case 1: io.sockets.emit('message', msg); break;
               }
-
             });
           clientMDB.close();
         });
@@ -79,9 +76,10 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on('ULL', function(loc){ //подключение к чату
-      mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-          client.db("GameProcess").collection("UserLocationsData").find({userLocation: loc.myLoc, online: true}).toArray(function(err, reslocLen){
-            io.sockets.in('loc1').emit('ULL', reslocLen)
+      mongoClient.connect(url, { useNewUrlParser: true } ,function(err, clientdb){
+          clientdb.db("GameProcess").collection("UserLocationsData").find({userLocation: loc.myLoc, online: true}).toArray(function(err, reslocLen){
+            io.sockets.in("loc"+loc.myLoc).emit('ULL', reslocLen)
+            // client.emit('ULL', reslocLen);
           });
       });
     });

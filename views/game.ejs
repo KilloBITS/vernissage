@@ -21,8 +21,22 @@
 <div class="top-nav">
 
   <div class="user_nav_block_L">
-    <div class="users_mini_ava"></div>
-    <div class="users_game_nick_name"></div>
+    <div class="users_mini_ava" id="users_mini_ava"></div>
+    <div class="users_status_lines">
+      <div class="users_status" id="toxic">
+        <span>Отравление</span>
+      </div>
+      <div class="users_status" id="radiation">
+        <span>Облучение</span>
+      </div>
+      <div class="users_status" id="fatigue">
+        <span>Усталость</span>
+      </div>
+    </div>
+    <div class="weeding_icon" id="weeding_icon">
+      <span>Супруг(-а)</span>
+    </div>
+    <div class="users_game_nick_name nicknameUsersLine" id="users_game_nick_name"></div>
   </div>
 
   <div class="menu_btn_block">
@@ -36,6 +50,30 @@
   </div>
   <div class="user_nav_block_R"></div>
 
+</div>
+
+<div class="block_of_modal" id="BOM">
+  <div class="head-lumen">
+    <div class="lum-l">
+      <div class="light"></div>
+    </div>
+    <div class="lum-r">
+      <div class="light"></div>
+    </div>
+  </div>
+
+  <div class="modaB_content">
+    <div class="modal_preload"></div>
+  </div>
+
+  <div class="modaB_content"></div>
+  <div class="modaB_content"></div>
+  <div class="modaB_content"></div>
+  <div class="modaB_content"></div>
+  <div class="modaB_content"></div>
+  <div class="modaB_content"></div>
+
+  <div class="BM_texture"></div>
 </div>
 <div class="content">
   <div class="load">
@@ -56,8 +94,8 @@
     <div class="BLOCK CenterNav" id="centerBlockCity">
       <div class="board-game">
         <div id="LocNameGlobal">...</div>
-        <div id="LocInfoGlobal">...</div>
       </div>
+        <div id="LocInfoGlobal">...</div>
       <div class="siti" id="SityImage" style=""></div>
     </div>
     <div class="BLOCK RightNav">
@@ -65,15 +103,21 @@
       <div class="Button_area"></div>
     </div>
 
-<div class="NPC_DIALOGS">
-  <div class="NPC_load"></div>
-  <div class="NPC_CLOSE">X</div>
-  <div class="NPC_TITLE"></div>
-  <div class="NPC_TEXT"></div>
-  <div class="NPC_OTVET"></div>
-</div>
+    <div class="NPC_DIALOGS">
+      <div class="NPC_load"></div>
+      <div class="NPC_CLOSE">X</div>
+      <div class="NPC_TITLE"></div>
+      <div class="NPC_TEXT"></div>
+      <div class="NPC_OTVET"></div>
+    </div>
 
   </div>
+
+  <div class="battle_block" style="display: none;">
+    <div class="battle"></div>
+    <div class="battle_bottom_texture"></div>
+  </div>
+
   <div class="chat-block">
     <div class="chat" id="chat">
       <div class="rooms-block">
@@ -104,6 +148,7 @@
       <div class="smiles_block"></div>
     </div>
     <div class="user-li" id="user-li">
+      <div class="loc_online" id="loc_online">0</div>
       <div class="search">
         <input type="text" name="srchChat" id="search-user" placeholder="Поиск">
         <div class="scbtn" id="totopsearch_1">▲</div>
