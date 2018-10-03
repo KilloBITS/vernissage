@@ -70,8 +70,8 @@ var Game = {
     $("#SityImage").css({"background-image":"url(../../../data/location/image/"+d.locDATA.LOC_ID+".jpg)"})
     for(let l = 0; l < d.locGO.length; l++){
       let NewLoc = document.createElement("div");
-      NewLoc.className = "GameNavButton_AB LocIcon",
-      NewLoc.innerHTML = d.locGO[l].name;
+      NewLoc.className = "GameNavButton_AB",
+      NewLoc.innerHTML = "<div class='locIcon "+ d.locGO[l].type_loc +"'></div>"+d.locGO[l].name;
       NewLoc.id = 'Loc_'+d.locGO[l].LOC_ID;
       NewLoc.onclick = () => {
         Game.goLoc('Loc_'+d.locGO[l].LOC_ID);
@@ -207,6 +207,28 @@ var Game = {
       rand = Math.round(rand);
       return rand;
   },
+  ContextMenu: function(type){
+
+
+    $('.ContextMenu').remove();
+
+    if(type === 0){
+      var contextMenu = document.createElement("div");
+      contextMenu.className = "ContextMenu ma";
+      var type1arr = ['Профиль','Настройки','Заменить аватарку', 'Пригласить друзей', 'Заблокировать' ,'Выйти'];
+      for(let i = 0; i < type1arr.length; i++){
+        var CMP = document.createElement('div');
+        CMP.className = 'CMP';
+        CMP.innerHTML = type1arr[i];
+        contextMenu.append(CMP);
+      }
+
+      contextMenu.style.top = $("#users_mini_ava").offset().top + $("#users_mini_ava").height() + 10 + 'px';
+      $('body').append(contextMenu);
+    }else{
+      $(".ma").remove();
+    }
+  },
   styles: function(){
     $(".smile_btn").click(function(){
       if($(".smiles_block").hasClass("show")){
@@ -215,6 +237,20 @@ var Game = {
         $(".smiles_block").addClass("show")
       }
     });
+    $(document).click(function(e) {
+
+      switch(e.target.className){
+        case "users_mini_ava":Game.ContextMenu(0); break;
+        default: Game.ContextMenu(-1);
+      }
+      // Game.ContextMenu(-1);
+        // console.log(e.target.className);
+        // $('.ContextMenu').remove();
+    });
+    // $("#users_mini_ava").click(function(){
+    //
+    // });
+
     if(screen.width > 800){
         setInterval(function () {
             var blinkTime = Game.randomInteger(1, 15);

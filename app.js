@@ -54,6 +54,9 @@ app.post('/doNPCGo', doNPCGo);
 const chat = require('./controllers/browserGameController/controllerChat');
 app.post('/chat', chat);
 
+const doItems = require('./controllers/browserGameController/postsController/items');
+app.post('/doItems', doItems);
+
 app.listen(8000, function(){
   global.onlineUsers = [];
 
@@ -62,7 +65,7 @@ app.listen(8000, function(){
 
   mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
     var GameData = client.db("locations");
-    
+
     var loc = GameData.collection("locations");
     var npc  = GameData.collection("NPC");
 
