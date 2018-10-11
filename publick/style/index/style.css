@@ -729,6 +729,7 @@ h3 {
     margin-top: 25px;
     margin: 25px auto 10px;
     opacity: 0.8;
+    transition: 0.3s;
 }
 .copiright{
     color: #9a9898;
