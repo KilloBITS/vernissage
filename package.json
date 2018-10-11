@@ -1,26 +1,26 @@
 {
-  "name": "darkworld",
+  "name": "Vernissage",
   "version": "1.0.0",
-  "description": "game for Ihor Kalenyuk",
+  "description": "Vernissage for Ihor Kalenyuk",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KilloBITS/new.dark-world.online.git"
+    "url": "git+https://github.com/KilloBITS/vernissage-shop.git"
   },
   "keywords": [
-    "dw",
-    "dark-world",
-    "темный_мир"
+    "v",
+    "Vernissage",
+    "Vernissage shop"
   ],
   "author": "Killa_pro",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/KilloBITS/new.dark-world.online/issues"
+    "url": "https://github.com/KilloBITS/vernissage-shop/issues"
   },
-  "homepage": "https://github.com/KilloBITS/new.dark-world.online#readme",
+  "homepage": "https://github.com/KilloBITS/vernissage-shop#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
