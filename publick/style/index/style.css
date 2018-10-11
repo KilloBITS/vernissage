@@ -461,8 +461,7 @@ svg {
 }
 @media (max-width: 991px) {
   .slide__text-heading {
-    line-height: 20rem;
-    font-size: 3.5rem;
+    font-size: 30px;
   }
 }
 .slide__text-desc {
@@ -472,7 +471,8 @@ svg {
 }
 @media (max-width: 991px) {
   .slide__text-desc {
-    display: none;
+        font-size: 15px;
+    /* display: none; */
   }
 }
 .slide__text-link {
@@ -488,7 +488,8 @@ svg {
 }
 @media (max-width: 991px) {
   .slide__text-link {
-    display: none;
+    /* display: none; */
+      padding: 0;
   }
 }
 .slide__text-link:before {
@@ -574,7 +575,7 @@ h3 {
     background-color: #FFFFFF;
     width: 20%;
     height: auto;
-    min-width: 120px;
+    min-width: 140px;
     margin: 0 20px;
     transition: transform 500ms ease;
     border: 1px solid silver;
