@@ -1,6 +1,18 @@
 'use strict';
 var Index = {
    DESIGHN: function(){
+     var $button = $('#menu-btn');
+
+$button.on('click', function(e){
+    e.preventDefault();
+    if( $button.hasClass('open') ){
+      $button.removeClass('open');
+      $button.addClass('close');
+    } else {
+      $button.removeClass('close');
+      $button.addClass('open');
+    }
+});
     // $( ".menuBlock" ).hover(function() {$(".").show();}, function(){$(".").hide();};
     $( ".menuBTN" ).hover(function() {
       let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
