@@ -5,7 +5,7 @@ var Index = {
        $('.hamburger-menu').toggleClass('animate');
        $('.twoLine').toggleClass('openMenuClass');
      })
-    // $( ".menuBlock" ).hover(function() {$(".").show();}, function(){$(".").hide();};
+     
     $( ".menuBTN" ).hover(function() {
       let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
 
@@ -15,7 +15,11 @@ var Index = {
     }, function(){
       let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
 
-      $("."+ML+",.opensMenu").hide();
+      // $('body').on("mousemove", function(e){
+        // if(e.target.offsetParent.className != 'opensMenu'){
+          $("."+ML+",.opensMenu").hide();
+        // }
+      // });
     });
 
 
