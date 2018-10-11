@@ -193,4 +193,8 @@
   .openMenuClass{
     display: block;
   }
+  .slide__text {
+      padding-bottom: 50px;
+      height: auto;
+  }
 }

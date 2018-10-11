@@ -9,14 +9,17 @@ router.get('/', function(req, res, next){
       const db = client.db("VERNISSAGE");
       const config = db.collection("config");
       const menu  = db.collection("menu");
+      const slider  = db.collection("slider");
 
       if(err) return console.log(err);
 
      config.find().toArray(function(err, results_config){
         menu.find().toArray(function(err, results_menu ){
-          console.log(results_menu)
-          res.render('index.ejs',{conf: results_config[0], menu: results_menu})
-          client.close();
+          slider.find().toArray(function(err, results_slider ){
+            console.log(results_slider)
+            res.render('index.ejs',{conf: results_config[0], menu: results_menu, slides: results_slider})
+            client.close();
+          });
         });
      });
   });

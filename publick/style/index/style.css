@@ -485,6 +485,7 @@ svg {
   font-size: 2.3rem;
   -webkit-perspective: 1000px;
           perspective: 1000px;
+  color: white;
 }
 @media (max-width: 991px) {
   .slide__text-link {
