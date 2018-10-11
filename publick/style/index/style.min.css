@@ -93,7 +93,7 @@
   }
   .menuBTN {
       display: inline-block;
-      padding: 14px 10px;
+      padding: 5px 10px;
       cursor: pointer;
       font-family: 'Didact Gothic', sans-serif;
       transition: 0.3s;
@@ -103,6 +103,8 @@
   }
   .menuBTN{
     float: initial;
+    width: 100%;
+    text-align: left;
   }
 
   .hamburger-menu:before {
@@ -161,6 +163,9 @@
   .RBB {
       float: initial;
       text-align: center;
+  }
+  .mainTextDLG{
+    font-size: 16px;
   }
   .punktMapMenu {
       width: 48%;
