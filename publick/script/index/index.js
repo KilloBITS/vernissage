@@ -3,6 +3,7 @@ var Index = {
    DESIGHN: function(){
      $('.menu-wrapper').on('click', function() {
        $('.hamburger-menu').toggleClass('animate');
+       $('.twoLine').toggleClass('openMenuClass');
      })
     // $( ".menuBlock" ).hover(function() {$(".").show();}, function(){$(".").hide();};
     $( ".menuBTN" ).hover(function() {

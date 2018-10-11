@@ -84,6 +84,26 @@
   .hamburger-menu.animate {
     background: rgba(255, 255, 255, 0);
   }
+  .mainTitleDLG, .mainTextDLG {
+      width: fit-content;
+      margin: 0 auto;
+      font-size: 26px;
+      padding-bottom: 30px;
+      text-align: center;
+  }
+  .menuBTN {
+      display: inline-block;
+      padding: 14px 10px;
+      cursor: pointer;
+      font-family: 'Didact Gothic', sans-serif;
+      transition: 0.3s;
+      /* float: left; */
+      color: black;
+      font-size: 18px;
+  }
+  .menuBTN{
+    float: initial;
+  }
 
   .hamburger-menu:before {
     content: "";
@@ -164,5 +184,8 @@
       box-sizing: border-box;
       /* float: left; */
       margin-bottom: 20px;
+  }
+  .openMenuClass{
+    display: block;
   }
 }
