@@ -1,11 +1,22 @@
 'use strict';
 var Index = {
    DESIGHN: function(){
+     $(".searchBlock").hover(function(){
+       $(".searchLine").css({"width":"170px"});
+     });
+
+     $('body').click(function(e){
+       console.log()
+       if(e.target.className != 'searchBlockVal' && $('#SEARCH').val().length === 0){
+         $(".searchLine").css({"width":"0px"});
+       }
+     });
+
      $('.menu-wrapper').on('click', function() {
        $('.hamburger-menu').toggleClass('animate');
        $('.twoLine').toggleClass('openMenuClass');
      })
-     
+
     $( ".menuBTN" ).hover(function() {
       let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
 

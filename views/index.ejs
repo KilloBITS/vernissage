@@ -29,16 +29,20 @@
 			</a>
 			<div class="topNavBlockOfBtm">
 				<div class="logInBlock"></div>
-				<div class="searchBlock"></div>
+				<div class="searchBlock">
+					<div class="searchLine">
+						<input type="text" name="searchTOP" class="searchBlockVal" id="SEARCH" placeholder="Поиск">
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="topLine twoLine">
 			<div class="menuBlock">
         <% for(var i = 0; i < menu.length; i++) { %>
           <% if(menu[i].podlink.length > 1){ %>
-            <div class="menuBTN" menu-link="<%= menu[i].ml %>"><%= menu[i].name %></div>
-          <% } else { %>
-            <div class="menuBTN"><%= menu[i].name %></div>
+						<a href="<%= menu[i].glink %>"><div class="menuBTN" menu-link="<%= menu[i].ml %>"><%= menu[i].name %></div></a>
+	        <% } else { %>
+	          <a href="<%= menu[i].glink %>"><div class="menuBTN"><%= menu[i].name %></div></a>
           <% } %>
         <% } %>
 			</div>
@@ -88,46 +92,6 @@
   			    </div>
           <% } %>
 
-
-			    <!-- <div class="slide slide-1 ">
-			      <div class="slide__bg" style="background-image: url(../../../data/slider/2.jpg)"></div>
-			      <div class="slide__content">
-			        <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-			          <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-			        </svg>
-			        <div class="slide__text">
-			          <h2 class="slide__text-heading">Project name 2</h2>
-			          <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia.</p>
-			          <a class="slide__text-link">Project link</a>
-			        </div>
-			      </div>
-			    </div>
-			    <div class="slide slide-2">
-			      <div class="slide__bg" style="background-image: url(../../../data/slider/3.jpg)"></div>
-			      <div class="slide__content">
-			        <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-			          <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-			        </svg>
-			        <div class="slide__text">
-			          <h2 class="slide__text-heading">Project name 3</h2>
-			          <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia.</p>
-			          <a class="slide__text-link">Project link</a>
-			        </div>
-			      </div>
-			    </div>
-			    <div class="slide slide-3">
-			      <div class="slide__bg" style="background-image: url(../../../data/slider/1.jpg)" ></div>
-			      <div class="slide__content">
-			        <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-			          <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-			        </svg>
-			        <div class="slide__text">
-			          <h2 class="slide__text-heading">Project name 4</h2>
-			          <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia.</p>
-			          <a class="slide__text-link">Project link</a>
-			        </div>
-			      </div>
-			    </div> -->
 			  </div>
 			</div></div>
 		<div class="data block">
@@ -142,37 +106,25 @@
 			      <h3>Product 1</h3>
 			      <a class="more" href="">Explore more</a>
 			      <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
-			     <!--  <div class="line"></div>
-			      <div class="price">
-			        <span>225<sup>€</sup></span>
-			      </div> -->
+
 			    </div>
 			    <div class="carousel-cell">
 			      <h3>Product 2</h3>
 			      <a class="more" href="">Explore more</a>
 			      <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
-			     <!--  <div class="line"></div>
-			      <div class="price">
-			        <span>225<sup>€</sup></span>
-			      </div> -->
+
 			    </div>
 			    <div class="carousel-cell">
 			      <h3>Product 3</h3>
 			      <a class="more" href="">Explore more</a>
 			      <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
-			     <!--  <div class="line"></div>
-			      <div class="price">
-			        <span>225<sup>€</sup></span>
-			      </div> -->
+
 			    </div>
 			      <div class="carousel-cell">
 			      <h3>Product 2</h3>
 			      <a class="more" href="">Explore more</a>
 			      <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
-			     <!--  <div class="line"></div>
-			      <div class="price">
-			        <span>225<sup>€</sup></span>
-			      </div> -->
+
 			    </div>
 			      <div class="carousel-cell">
 			      <h3>Product 2</h3>
@@ -205,49 +157,30 @@
 		<div class="mainTitleDLG"><%= conf.news %></div>
 		<!-- <div class="mainTextDLG">Браслеты, сережци кольца и многое другое, только у нас вы найдете то что вам понравится, и добавит красок в серые осенние будни.</div> -->
 	</div>
-  <!-- Normal Demo-->
-  <div class="column">
-    <!-- Post-->
-    <div class="post-module">
-      <!-- Thumbnail-->
-      <div class="thumbnail">
-        <div class="date">
-          <div class="day">27</div>
-          <div class="month">Mar</div>
-        </div><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/photo-1429043794791-eb8f26f44081.jpeg"/>
-      </div>
-      <!-- Post Content-->
-      <div class="post-content">
-        <div class="category">Новинка</div>
-        <h1 class="title">City Lights in New York</h1>
-        <h2 class="sub_title">The city that never sleeps.</h2>
-        <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-        <div class="post-meta"><span class="timestamp"><i class="fa fa-clock-">o</i> 6 mins ago</span><span class="comments"><i class="fa fa-comments"></i><a href="#"> 39 comments</a></span></div>
-      </div>
-    </div>
-  </div>
 
-    <!-- Normal Demo-->
-  <div class="column">
-    <!-- Post-->
-    <div class="post-module">
-      <!-- Thumbnail-->
-      <div class="thumbnail">
-        <div class="date">
-          <div class="day">27</div>
-          <div class="month">Mar</div>
-        </div><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/photo-1429043794791-eb8f26f44081.jpeg"/>
-      </div>
-      <!-- Post Content-->
-      <div class="post-content">
-        <div class="category">Новая коллекция</div>
-        <h1 class="title">City Lights in New York</h1>
-        <h2 class="sub_title">The city that never sleeps.</h2>
-        <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-        <div class="post-meta"><span class="timestamp"><i class="fa fa-clock-">o</i> 6 mins ago</span><span class="comments"><i class="fa fa-comments"></i><a href="#"> 39 comments</a></span></div>
-      </div>
-    </div>
-  </div>
+	<% for(var i = 0; i < news.length; i++) { %>
+		<!-- Normal Demo-->
+	  <div class="column">
+	    <!-- Post-->
+	    <div class="post-module">
+	      <!-- Thumbnail-->
+	      <div class="thumbnail">
+	        <div class="date">
+	          <div class="day"><%= news[i].date.split('.')[0] %></div>
+	          <div class="month"><%= news[i].date.split('.')[1] %></div>
+	        </div><img src="../../../data/news/<%= news[i].img %>"/>
+	      </div>
+	      <!-- Post Content-->
+	      <div class="post-content">
+	        <div class="category"><%= news[i].minName %></div>
+	        <h1 class="title"><%= news[i].title %></h1>
+	        <p class="description"><%= news[i].text %></p>
+	        <div class="post-meta"><span class="comments"><i class="fa fa-comments"></i><a href="#"> 39 Комментариев</a></span></div>
+	      </div>
+	    </div>
+	  </div>
+	<% } %>
+
 </div>
 		</div>
 		<div class="contact block">
@@ -257,39 +190,42 @@
 			</div>
 			<form class="cf">
 			  <div class="half left cf">
-			    <input type="text" id="input-name" placeholder="Name">
-			    <input type="email" id="input-email" placeholder="Email address">
-			    <input type="text" id="input-subject" placeholder="Subject">
+			    <input type="text" id="input-name" placeholder="Ваше имя">
+			    <input type="email" id="input-email" placeholder="Ваш email">
+			    <input type="text" id="input-subject" placeholder="Тема сообщения">
 			  </div>
 			  <div class="half right cf">
-			    <textarea name="message" type="text" id="input-message" placeholder="Message"></textarea>
+			    <textarea name="message" type="text" id="input-message" placeholder="Введите текст..."></textarea>
 			  </div>
-			  <input type="submit" value="Submit" id="input-submit">
+			  <input type="submit" value="Отправить" id="input-submit">
 			</form></div>
 	</div>
 	<div class="siteMap">
 		<div class="mapmap">
 			<div class="LBB">
-				<div class="punktMapMenu">• Новинки</div>
+				<% for(var i = 0; i < menu.length; i++) { %>
+						<a href="<%= menu[i].glink %>"><div class="punktMapMenu">• <%= menu[i].name %></div></a>
+        <% } %>
+				<!-- <div class="punktMapMenu">• Новинки</div>
 				<div class="punktMapMenu">• Бижутерия</div>
 				<div class="punktMapMenu">• Аксессуары</div>
 				<div class="punktMapMenu">• Кошельки</div>
 				<div class="punktMapMenu">• Часы</div>
 				<div class="punktMapMenu">• Очки</div>
 				<div class="punktMapMenu">• Оплата и доставка</div>
-				<div class="punktMapMenu">• Контакты</div>
+				<div class="punktMapMenu">• Контакты</div> -->
 			</div>
 			<div class="CBB">
 				<div class="vectorLogo"></div>
 				<div class="copiright">Vernissage (c) 2018, Все права защищены.</div>
+				<div class="copiright">Сайт сделан ФОП "<a target="_blank" href="http://kalenyuk.pro" style="color: red;">Kaleniuk Ihor</a>"</div>
 			</div>
 			<div class="RBB">
 				<div class="adressLineMap">Наш телефон для связи</div>
-        <div class="adressLineMap"><%= conf.number %></div>
+				<a href="tel:<%= conf.number %>" class="adressLineMap"><%= conf.number %></a>
 				<div class="adressLineMap"></div>
         <div class="adressLineMap">Електронная почта</div>
-        <div class="adressLineMap"><%= conf.email %></div>
-
+				<a href="mailto:<%= conf.email %>?subject=SweetWords" class="adressLineMap"><%= conf.email %></a>
 			</div>
 		</div>
 	</div>

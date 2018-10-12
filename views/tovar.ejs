@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <meta charset="utf-8"> -->
+	<title>Vernissage</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/style/tovar/tovar.css">
+	<link rel="stylesheet" type="text/css" href="/style/tovar/tovar.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
+	<script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+	<script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
+	<script type="text/javascript" src="script/tovar/tovar.js"></script>
+</head>
+<body>
+<div class="top">
+	<div class="topLine oneLine">
+    <div class="topNavMobMenuOfBtm">
+
+      <div class="menu-wrapper">
+        <div class="hamburger-menu"></div>
+      </div>
+
+    </div>
+
+
+		<a href="index.html">
+			<div class="logotype"></div>
+		</a>
+		<div class="topNavBlockOfBtm">
+      <div class="contact_number"><%= conf.number %></div>
+			<div class="basketBlock">
+        <span>0</span>
+      </div>
+		</div>
+	</div>
+	<div class="topLine twoLine">
+		<div class="menuBlock">
+      <% for(var i = 0; i < menu.length; i++) { %>
+        <% if(menu[i].podlink.length > 1){ %>
+          <a href="<%= menu[i].glink %>"><div class="menuBTN" menu-link="<%= menu[i].ml %>"><%= menu[i].name %></div></a>
+        <% } else { %>
+          <a href="<%= menu[i].glink %>"><div class="menuBTN"><%= menu[i].name %></div></a>
+        <% } %>
+      <% } %>
+		</div>
+	</div>
+
+	<div class="opensMenu">
+  <% for(var i = 0; i < menu.length; i++) { %>
+    <% if(menu[i].podlink.length > 1){ %>
+      <div class="menu_data <%= menu[i].ml %>">
+  			<div class="menu_title"><%= menu[i].name %></div>
+  			<div class="menuLeft">
+          <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
+            <a href="#"><div class="punktMenu">• <%= menu[i].podlink[il].pname %> </div></a>
+          <% } %>
+  			</div>
+  			<div class="menuRight"></div>
+  		</div>
+    <% } %>
+  <% } %>
+	</div>
+</div>
+
+<div class="content tovar">
+
+</div>
+
+<div class="siteMap">
+	<div class="mapmap">
+		<div class="LBB">
+			<div class="punktMapMenu">• Новинки</div>
+			<div class="punktMapMenu">• Бижутерия</div>
+			<div class="punktMapMenu">• Аксессуары</div>
+			<div class="punktMapMenu">• Кошельки</div>
+			<div class="punktMapMenu">• Часы</div>
+			<div class="punktMapMenu">• Очки</div>
+			<div class="punktMapMenu">• Оплата и доставка</div>
+			<div class="punktMapMenu">• Контакты</div>
+		</div>
+		<div class="CBB">
+			<div class="vectorLogo"></div>
+			<div class="copiright">Vernissage (c) 2018, Все права защищены.</div>
+			<div class="copiright">Сайт сделан ФОП "<a target="_blank" href="http://kalenyuk.pro" style="color: red;">Kaleniuk Ihor</a>"</div>
+		</div>
+		<div class="RBB">
+			<div class="adressLineMap">Наш телефон для связи</div>
+      <div class="adressLineMap"><%= conf.number %></div>
+			<div class="adressLineMap"></div>
+      <div class="adressLineMap">Електронная почта</div>
+      <div class="adressLineMap"><%= conf.email %></div>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

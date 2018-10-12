@@ -16,9 +16,13 @@ app.use(cookieParser());
 
 //routes pages
 const index = require('./routes/getIndex');
+const tovar = require('./routes/getTovar');
+const get404 = require('./routes/get404');
+
 
 app.use('/', index);
-
+app.use('/tovar', tovar);
+app.get('*', get404);
 
 app.listen(4000, function(){
   console.warn('started server Dark World from port: 4000');

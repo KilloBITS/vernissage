@@ -140,6 +140,23 @@ font-family: 'Didact Gothic', sans-serif;*/
     cursor: pointer;
 }
 
+.searchLine{
+  position: absolute;
+  right: 30px;
+  width: 0px;
+  background: #dd127b;
+  height: 27px;
+  transition: 0.3s;
+}
+
+.searchLine input{
+  width: 100%;
+  height: 26px;
+  border: 0;
+  border-bottom: 1px solid black;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
 .logInBlock:hover{
 	opacity: 0.8;
 }
@@ -845,7 +862,6 @@ form textarea {
 }
 .post-module .thumbnail {
   background: #000000;
-  height: 400px;
   overflow: hidden;
 }
 .post-module .thumbnail .date {
@@ -924,7 +940,7 @@ form textarea {
   font-weight: 400;
 }
 .post-module .post-content .description {
-  display: none;
+  /* display: none; */
   color: #666666;
   font-size: 14px;
   line-height: 1.8em;
