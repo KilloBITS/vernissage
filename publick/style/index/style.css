@@ -80,6 +80,7 @@ font-family: 'Didact Gothic', sans-serif;*/
 
 .menuBlock{
     width: fit-content;
+    width: -moz-fit-content;
     margin: auto;
 }
 
@@ -182,6 +183,7 @@ font-family: 'Didact Gothic', sans-serif;*/
 .menu_title{
     text-align: center;
     width: fit-content;
+    width: -moz-fit-content;
     margin: auto;
     padding: 4px 40px;
     font-size: 18px;
@@ -546,6 +548,7 @@ svg {
 
 .mainTitleDLG,.mainTextDLG{
     width: fit-content;
+    width: -moz-fit-content;
     margin: 0 auto;
     font-size: 30px;
     padding-bottom: 30px;
@@ -664,6 +667,7 @@ h3 {
     padding: 10px 40px;
     margin: auto;
     width: fit-content;
+    width: -moz-fit-content;
     border: 1px solid #4c4c4c;
     border-radius: 3px;
     cursor: pointer;
@@ -728,6 +732,7 @@ h3 {
     border-bottom: 1px solid rgba(140, 152, 152, 0.18);
     margin-top: 3px;
     width: fit-content;
+    width: -moz-fit-content;
 }
 
 .adressLineMap{

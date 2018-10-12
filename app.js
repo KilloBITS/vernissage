@@ -26,6 +26,10 @@ app.use('/shop', tovar);
 app.use('/login', login);
 app.get('*', get404);
 
+
+const PostTovar = require('./controllers/controllerTovar');
+app.post('/tovar', PostTovar);
+
 app.listen(4000, function(){
   console.warn('started server Dark World from port: 4000');
 });

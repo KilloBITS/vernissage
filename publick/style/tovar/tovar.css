@@ -80,6 +80,7 @@ font-family: 'Didact Gothic', sans-serif;*/
 
 .menuBlock{
     width: fit-content;
+    width: -moz-fit-content;
     margin: auto;
 }
 
@@ -178,6 +179,7 @@ font-family: 'Didact Gothic', sans-serif;*/
 .menu_title{
     text-align: center;
     width: fit-content;
+    width: -moz-fit-content;
     margin: auto;
     padding: 4px 40px;
     font-size: 18px;
@@ -203,7 +205,7 @@ font-family: 'Didact Gothic', sans-serif;*/
 
 .content{
   width: fit-content;
-  /* max-width: 1024px; */
+  width: -moz-fit-content;
   background: white;
   margin: auto;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
@@ -344,6 +346,7 @@ font-family: 'Didact Gothic', sans-serif;*/
     border-bottom: 1px solid rgba(140, 152, 152, 0.18);
     margin-top: 3px;
     width: fit-content;
+    width: -moz-fit-content;
 }
 
 .adressLineMap{

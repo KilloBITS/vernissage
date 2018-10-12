@@ -1,10 +1,7 @@
 'use strict';
 var Index = {
    DESIGHN: function(){
-
-
      $(document).ready(function() {
-
          $('#list').click(function(event){
            event.preventDefault();
            $('#products .item').addClass('list-group-item');
@@ -15,7 +12,6 @@ var Index = {
            $('#products .item').addClass('grid-group-item');
          });
      });
-
 
      $('.menu-wrapper').on('click', function() {
        $('.hamburger-menu').toggleClass('animate');
@@ -30,7 +26,6 @@ var Index = {
       }
     }, function(){
       let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
-
       // $('body').on("mousemove", function(e){
         // if(e.target.offsetParent.className != 'opensMenu'){
           $("."+ML+",.opensMenu").hide();
@@ -38,14 +33,29 @@ var Index = {
       // });
     });
    },
+   TOVAR_CONSTRUCTOR: function(dataARR){
+     console.log(dataARR)
+   },
+   LOAD_TOVAR: function(filter){
+     if(filter){
+       $.post('/tovar',filter,function(tov){
+         Index.TOVAR_CONSTRUCTOR(tov);
+       });
+     }else{
+       $.post('/tovar',function(tov){
+         Index.TOVAR_CONSTRUCTOR(tov);
+       });
+     }
+   },
    INIT: function(){
     Index.DESIGHN();
+    Index.LOAD_TOVAR(false);
    }
 }
 
 $(document).ready(() => {
   Index.INIT();
-  
+
 });
 
 // $(window).load(function() {
