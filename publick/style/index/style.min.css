@@ -136,7 +136,12 @@
     transform: rotate(-45deg);
     transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
   }
-
+  .content {
+    width: 100%;
+  }
+  .tovar {
+    width: 100%;
+  }
 
   .logotype {
     width: 200px;
@@ -187,14 +192,15 @@
       -webkti-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box;
-      /* float: left; */
       margin-bottom: 20px;
   }
   .openMenuClass{
     display: block;
   }
+
   .slide__text {
       padding-bottom: 50px;
       height: auto;
   }
+
 }
