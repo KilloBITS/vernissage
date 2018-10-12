@@ -44,7 +44,8 @@ var Index = {
 }
 
 $(document).ready(() => {
-  Index.INIT();  
+  Index.INIT();
+  
 });
 
 // $(window).load(function() {
