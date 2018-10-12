@@ -102,12 +102,12 @@ font-family: 'Didact Gothic', sans-serif;*/
 
 .logotype{
 	width: 330px;
-    height: 100px;
-    background-image: url(../../../image/vernissageLogo.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    margin: auto;
+  height: 140px;
+  background-image: url(../../../image/vernissageLogo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: auto;
 }
 
 .logInBlock{
