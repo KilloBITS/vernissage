@@ -18,11 +18,9 @@
 	<div class="top">
 		<div class="topLine oneLine">
       <div class="topNavMobMenuOfBtm">
-
         <div class="menu-wrapper">
           <div class="hamburger-menu"></div>
         </div>
-
       </div>
 			<a href="index.html">
 				<div class="logotype"></div>
@@ -47,7 +45,6 @@
         <% } %>
 			</div>
 		</div>
-
 		<div class="opensMenu">
     <% for(var i = 0; i < menu.length; i++) { %>
       <% if(menu[i].podlink.length > 1){ %>
@@ -62,10 +59,8 @@
     		</div>
       <% } %>
     <% } %>
+		</div>
 	</div>
-	</div>
-
-
 
 	<div class="content">
 		<div class="header block">
@@ -74,10 +69,12 @@
 			  <div class="slider-control right"></div>
 			  <ul class="slider-pagi"></ul>
 			  <div class="slider">
-
-
           <% for(var i = 0; i < slides.length; i++) { %>
-            <div class="slide slide-<%= i %>">
+					<% if(i <= 0){ %>
+						<div class="slide slide-<%= i %> active">
+					<% } else { %>
+						<div class="slide slide-<%= i %>">
+					<% } %>
   			      <div class="slide__bg" style="background-image: url(../../../data/slider/<%= slides[i].slideImage %>)"></div>
   			      <div class="slide__content">
   			        <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
@@ -91,7 +88,6 @@
   			      </div>
   			    </div>
           <% } %>
-
 			  </div>
 			</div></div>
 		<div class="data block">
@@ -206,18 +202,10 @@
 				<% for(var i = 0; i < menu.length; i++) { %>
 						<a href="<%= menu[i].glink %>"><div class="punktMapMenu">• <%= menu[i].name %></div></a>
         <% } %>
-				<!-- <div class="punktMapMenu">• Новинки</div>
-				<div class="punktMapMenu">• Бижутерия</div>
-				<div class="punktMapMenu">• Аксессуары</div>
-				<div class="punktMapMenu">• Кошельки</div>
-				<div class="punktMapMenu">• Часы</div>
-				<div class="punktMapMenu">• Очки</div>
-				<div class="punktMapMenu">• Оплата и доставка</div>
-				<div class="punktMapMenu">• Контакты</div> -->
 			</div>
 			<div class="CBB">
 				<div class="vectorLogo"></div>
-				<div class="copiright">Vernissage (c) 2018, Все права защищены.</div>
+				<div class="copiright">Vernissage © 2018, Все права защищены.</div>
 				<div class="copiright">Сайт сделан ФОП "<a target="_blank" href="http://kalenyuk.pro" style="color: red;">Kaleniuk Ihor</a>"</div>
 			</div>
 			<div class="RBB">

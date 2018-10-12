@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- <meta charset="utf-8"> -->
-	<title>Vernissage</title>
+  <meta charset="utf-8">
+	<title>≡ Каталог товаров</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="	//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/style/tovar/tovar.css">
 	<link rel="stylesheet" type="text/css" href="/style/tovar/tovar.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
@@ -18,19 +19,15 @@
 <div class="top">
 	<div class="topLine oneLine">
     <div class="topNavMobMenuOfBtm">
-
       <div class="menu-wrapper">
         <div class="hamburger-menu"></div>
       </div>
-
     </div>
-
-
 		<a href="index.html">
 			<div class="logotype"></div>
 		</a>
 		<div class="topNavBlockOfBtm">
-      <div class="contact_number"><%= conf.number %></div>
+			<a href="tel:<%= conf.number %>" class="contact_number"><%= conf.number %></a>
 			<div class="basketBlock">
         <span>0</span>
       </div>
@@ -66,33 +63,132 @@
 </div>
 
 <div class="content tovar">
+	<div class="topfilters"></div>
+	<div class="leftfilters"></div>
+	<div class="tovar_data">
+		<div class="container">
+    <div class="well well-sm">
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span></a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span></a>
+        </div>
+    </div>
+    <div id="products" class="row list-group">
 
+			<div class="item  col-xs-4 col-lg-4 grid-group-item">
+					<div class="thumbnail">
+							<img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+							<div class="caption">
+									<h4 class="group inner list-group-item-heading">
+											Product title</h4>
+									<p class="group inner list-group-item-text">
+											Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+											sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+									<div class="row">
+											<div class="col-xs-12 col-md-6">
+													<p class="lead">
+															$21.000</p>
+											</div>
+											<div class="col-xs-12 col-md-6">
+													<a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+
+			<div class="item  col-xs-4 col-lg-4 grid-group-item">
+					<div class="thumbnail">
+							<img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+							<div class="caption">
+									<h4 class="group inner list-group-item-heading">
+											Product title</h4>
+									<p class="group inner list-group-item-text">
+											Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+											sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+									<div class="row">
+											<div class="col-xs-12 col-md-6">
+													<p class="lead">
+															$21.000</p>
+											</div>
+											<div class="col-xs-12 col-md-6">
+													<a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+
+			<div class="item  col-xs-4 col-lg-4 grid-group-item">
+					<div class="thumbnail">
+							<img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+							<div class="caption">
+									<h4 class="group inner list-group-item-heading">
+											Product title</h4>
+									<p class="group inner list-group-item-text">
+											Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+											sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+									<div class="row">
+											<div class="col-xs-12 col-md-6">
+													<p class="lead">
+															$21.000</p>
+											</div>
+											<div class="col-xs-12 col-md-6">
+													<a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+
+			<div class="item  col-xs-4 col-lg-4 grid-group-item">
+					<div class="thumbnail">
+							<img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+							<div class="caption">
+									<h4 class="group inner list-group-item-heading">
+											Product title</h4>
+									<p class="group inner list-group-item-text">
+											Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+											sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+									<div class="row">
+											<div class="col-xs-12 col-md-6">
+													<p class="lead">
+															$21.000</p>
+											</div>
+											<div class="col-xs-12 col-md-6">
+													<a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+
+
+    </div>
+</div>
+
+	</div>
 </div>
 
 <div class="siteMap">
 	<div class="mapmap">
 		<div class="LBB">
-			<div class="punktMapMenu">• Новинки</div>
-			<div class="punktMapMenu">• Бижутерия</div>
-			<div class="punktMapMenu">• Аксессуары</div>
-			<div class="punktMapMenu">• Кошельки</div>
-			<div class="punktMapMenu">• Часы</div>
-			<div class="punktMapMenu">• Очки</div>
-			<div class="punktMapMenu">• Оплата и доставка</div>
-			<div class="punktMapMenu">• Контакты</div>
+			<% for(var i = 0; i < menu.length; i++) { %>
+					<a href="<%= menu[i].glink %>"><div class="punktMapMenu">• <%= menu[i].name %></div></a>
+			<% } %>
 		</div>
 		<div class="CBB">
 			<div class="vectorLogo"></div>
-			<div class="copiright">Vernissage (c) 2018, Все права защищены.</div>
+			<div class="copiright">Vernissage © 2018, Все права защищены.</div>
 			<div class="copiright">Сайт сделан ФОП "<a target="_blank" href="http://kalenyuk.pro" style="color: red;">Kaleniuk Ihor</a>"</div>
 		</div>
 		<div class="RBB">
 			<div class="adressLineMap">Наш телефон для связи</div>
-      <div class="adressLineMap"><%= conf.number %></div>
+			<a href="tel:<%= conf.number %>" class="adressLineMap"><%= conf.number %></a>
 			<div class="adressLineMap"></div>
-      <div class="adressLineMap">Електронная почта</div>
-      <div class="adressLineMap"><%= conf.email %></div>
-
+			<div class="adressLineMap">Електронная почта</div>
+			<a href="mailto:<%= conf.email %>?subject=SweetWords" class="adressLineMap"><%= conf.email %></a>
 		</div>
 	</div>
 </div>

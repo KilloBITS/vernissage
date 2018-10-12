@@ -18,10 +18,12 @@ app.use(cookieParser());
 const index = require('./routes/getIndex');
 const tovar = require('./routes/getTovar');
 const get404 = require('./routes/get404');
+const login = require('./routes/getLogin');
 
 
 app.use('/', index);
-app.use('/tovar', tovar);
+app.use('/shop', tovar);
+app.use('/login', login);
 app.get('*', get404);
 
 app.listen(4000, function(){

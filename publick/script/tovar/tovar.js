@@ -1,6 +1,22 @@
 'use strict';
 var Index = {
    DESIGHN: function(){
+
+
+     $(document).ready(function() {
+
+         $('#list').click(function(event){
+           event.preventDefault();
+           $('#products .item').addClass('list-group-item');
+         });
+         $('#grid').click(function(event){
+           event.preventDefault();
+           $('#products .item').removeClass('list-group-item');
+           $('#products .item').addClass('grid-group-item');
+         });
+     });
+
+
      $('.menu-wrapper').on('click', function() {
        $('.hamburger-menu').toggleClass('animate');
        $('.twoLine').toggleClass('openMenuClass');
@@ -21,8 +37,6 @@ var Index = {
         // }
       // });
     });
-
-
    },
    INIT: function(){
     Index.DESIGHN();
@@ -30,7 +44,7 @@ var Index = {
 }
 
 $(document).ready(() => {
-  Index.INIT();
+  Index.INIT();  
 });
 
 // $(window).load(function() {
