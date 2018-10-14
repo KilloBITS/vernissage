@@ -1,5 +1,6 @@
 'use strict';
 var Index = {
+    ML:"",
    DESIGHN: function(){
      $(".searchBlock").hover(function(){
        $(".searchLine").css({"width":"170px"});
@@ -17,20 +18,23 @@ var Index = {
      })
 
     $( ".menuBTN" ).hover(function() {
-      let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
-
-      if(ML != undefined){
-        $("."+ML+",.opensMenu").show();
+      try{
+        $("."+Index.ML+",.opensMenu").hide();
+      }catch(e){
+        console.warn('Есть небольшой конфликт, но это не критично')
       }
-    }, function(){
-      let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
-
-      // $('body').on("mousemove", function(e){
-        // if(e.target.offsetParent.className != 'opensMenu'){
-          $("."+ML+",.opensMenu").hide();
-        // }
-      // });
+      Index.ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
+      if(Index.ML != undefined){
+        $("."+Index.ML+",.opensMenu").show();
+      }
+    }, function(e){
+      Index.ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
+          $( ".opensMenu" ).hover(function() {}, function(e){
+                $("."+Index.ML+",.opensMenu").hide();
+          });
     });
+
+
 
     var $slider = $(".slider"),
     $slideBGs = $(".slide__bg"),

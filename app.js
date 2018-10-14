@@ -19,11 +19,15 @@ const index = require('./routes/getIndex');
 const tovar = require('./routes/getTovar');
 const get404 = require('./routes/get404');
 const login = require('./routes/getLogin');
+const panel = require('./routes/admin/panel');
+const basket = require('./routes/getBasket');
 
 
 app.use('/', index);
 app.use('/shop', tovar);
 app.use('/login', login);
+app.use('/panel', panel);
+app.use('/basket', basket);
 app.get('*', get404);
 
 

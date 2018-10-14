@@ -1,7 +1,5 @@
 'use strict';
-let pages = 25;
-
-
+let pages = 666;
 
 function createPagination(pages, page) {
   let str = '<ul>';
@@ -74,6 +72,10 @@ function createPagination(pages, page) {
 
 var Index = {
    DESIGHN: function(){
+     $(".basketBlock").click(function(){
+       
+     });
+
      let pages = 25;
      $(".btn-success").click(function(){
        let ind = $(".btn-success").index(this);
@@ -112,20 +114,22 @@ var Index = {
        $('.twoLine').toggleClass('openMenuClass');
      })
 
-    $( ".menuBTN" ).hover(function() {
-      let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
-
-      if(ML != undefined){
-        $("."+ML+",.opensMenu").show();
-      }
-    }, function(){
-      let ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
-      // $('body').on("mousemove", function(e){
-        // if(e.target.offsetParent.className != 'opensMenu'){
-          $("."+ML+",.opensMenu").hide();
-        // }
-      // });
-    });
+     $( ".menuBTN" ).hover(function() {
+       try{
+         $("."+Index.ML+",.opensMenu").hide();
+       }catch(e){
+         console.warn('Есть небольшой конфликт, но это не критично')
+       }
+       Index.ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
+       if(Index.ML != undefined){
+         $("."+Index.ML+",.opensMenu").show();
+       }
+     }, function(e){
+       Index.ML = $(".menuBTN:eq("+$(".menuBTN").index(this)+")").attr('menu-link');
+           $( ".opensMenu" ).hover(function() {}, function(e){
+                 $("."+Index.ML+",.opensMenu").hide();
+           });
+     });
    },
    TOVAR_CONSTRUCTOR: function(dataARR){
      console.log(dataARR)
@@ -149,5 +153,5 @@ var Index = {
 
 $(document).ready(() => {
   Index.INIT();
-  document.getElementById('pagination').innerHTML = createPagination(pages, 12);
+  document.getElementById('pagination').innerHTML = createPagination(pages, 1);
 });
