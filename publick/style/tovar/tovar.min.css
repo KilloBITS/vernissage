@@ -74,12 +74,12 @@
     font-size: 24px;
 }
 
-  .half {
+  /* .half {
       width: 90%;
       float: none;
       margin-bottom: 0;
       margin: auto;
-  }
+  } */
   form #input-submit {
       color: white;
       background: #e74c3c;
