@@ -21,6 +21,7 @@ const get404 = require('./routes/get404');
 const login = require('./routes/getLogin');
 const panel = require('./routes/admin/panel');
 const basket = require('./routes/getBasket');
+const oplata = require('./routes/getOplata');
 
 
 app.use('/', index);
@@ -28,6 +29,9 @@ app.use('/shop', tovar);
 app.use('/login', login);
 app.use('/panel', panel);
 app.use('/basket', basket);
+app.use('/oplata', oplata);
+
+
 app.get('*', get404);
 
 
