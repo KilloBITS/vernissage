@@ -87,6 +87,7 @@
                     <span><%= tovarArr[i].sale[1] %> %</span>
                   </div>
                 <% } %>
+                  <div class="water_icon"></div>
     							<img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
     							<div class="caption">
     									<h4 class="group inner list-group-item-heading"><%= tovarArr[i].title %></h4>
@@ -95,7 +96,7 @@
     											<div class="col-xs-12 col-md-6">
                             <% if(tovarArr[i].sale[0]){ %>
                               <p class="lead" style="text-decoration: line-through"><%= tovarArr[i].price %> Грн</p>
-                              <p class="lead2" style="color: red"><%= tovarArr[i].price - tovarArr[i].price / 100 * 20 %> Грн</p>
+                              <p class="lead2" style="color: red"><%= parseInt(tovarArr[i].price - tovarArr[i].price / 100 * parseInt(tovarArr[i].sale[1])) %> Грн</p>
                             <% } else { %>
                               <p class="lead"><%= tovarArr[i].price %> Грн</p>
                             <% } %>

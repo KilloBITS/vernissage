@@ -103,8 +103,8 @@
             <div class="carousel-cell">
               <h3> <%= newtovar[i].title %> </h3>
               <a class="more" href="">Посмотреть товар</a>
-              <img src="../../../data/tovar/<%= newtovar[i].image %>" />
-
+              <!-- <img src="../../../data/tovar/<%= newtovar[i].image %>" /> -->
+              <div class="backCaruselImage" style="background-image: url(../../../data/tovar/<%= newtovar[i].image %>)"></div>
             </div>
             <% } %>
 			  </div>
