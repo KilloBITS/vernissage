@@ -393,6 +393,7 @@ font-family: 'Didact Gothic', sans-serif;*/
     color: #fff;
     background-color: #dd127b;
     border-color: #c51671;
+    float: right;
 }
 .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     max-height: 230px;
@@ -498,3 +499,48 @@ ul li:last-child a {
   opacity: 0.1;
   z-index: 1;
 }
+
+
+fieldset, label { margin: 0; padding: 0; }
+
+
+/****** Style Star Rating Widget *****/
+.rating {
+  border: none;
+  float: left;
+  position: absolute;
+  z-index: 10;
+  right: 5px;
+  top: -40px;
+}
+
+.rating > input { display: none; }
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label {
+  color: #ddd;
+  float: right;
+  cursor: pointer;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
