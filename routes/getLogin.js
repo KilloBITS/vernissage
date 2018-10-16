@@ -5,7 +5,7 @@ const mongoClient = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 router.get('/', function(req, res, next){
-   res.render('login.ejs')      
+   res.render('login.ejs')
 });
 
 module.exports = router;

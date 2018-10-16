@@ -26,10 +26,10 @@ a{
 body{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
     font-size: 16px;
     background: #f3f3f5 url(../../../image/body.jpg);
     margin-top: 152px;
+    font-family: 'Didact Gothic', sans-serif;
 }
 
 .top{
@@ -215,6 +215,11 @@ font-family: 'Didact Gothic', sans-serif;*/
 
 }
 
+.lead2{
+  color: red;
+    margin: 0;
+    margin-top: -18px;
+}
 .thumbnail
 {
     margin-bottom: 20px;
@@ -222,6 +227,15 @@ font-family: 'Didact Gothic', sans-serif;*/
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
+    height: 385px;
+    position: relative;
+    overflow: hidden;
+}
+.thumbnail .caption {
+    padding: 9px;
+    color: #333;
+    /* position: absolute; */
+    bottom: 0;
 }
 
 .item.list-group-item
@@ -379,7 +393,7 @@ font-family: 'Didact Gothic', sans-serif;*/
     border-color: #c51671;
 }
 .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
-    max-height: 300px;
+    max-height: 230px;
 }
 
 .getSuccess{
@@ -401,7 +415,7 @@ font-family: 'Didact Gothic', sans-serif;*/
 }
 
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
-    float: right;
+    float: left;
 }
 
 
@@ -445,4 +459,20 @@ ul li:last-child a {
 }
 #pagination a{
     color: #565656;
+}
+
+.sale{
+  position: absolute;
+  z-index: 1;
+  transform: rotate(45deg);
+  background: red;
+  right: -45px;
+  top: 20px;
+  color: white;
+  padding: 10px 42px;
+  box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, 0.5);
+  border: 1px solid dimgrey;
+}
+.sale span{
+
 }

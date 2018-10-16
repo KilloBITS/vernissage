@@ -230,10 +230,31 @@
   {
     background: #ececec;
   }
+  .lead {
+      margin-bottom: 12px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.4;
+      font-weight: bold;
+  }
+
+  .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    max-height: 200px;
+  }
+
+  .btn-success {
+    color: #fff;
+    background-color: #dd127b;
+    border-color: #c51671;
+    width: 100%;
+    margin-bottom: 10px;
+}
 
   .item.grid-group-item .list-group-image
   {
-      margin-right: 10px;
+    margin-right: 10px;
+    margin: auto;
+    float: inherit;
   }
   .item.grid-group-item .thumbnail
   {

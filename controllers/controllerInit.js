@@ -11,7 +11,7 @@ router.use(cookieParser());
 var initFunction = (req, res, next) => {
   if (req.cookies.uID) {
     mongoClient.connect(url, { useNewUrlParser: true } ,function(err, client){
-      var db = client.db("UsersData");
+      var db = client.db(global.baseName);
       var collection = db.collection("Session"),
           collection2 = db.collection("users");
 

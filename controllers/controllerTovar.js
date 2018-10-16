@@ -10,7 +10,7 @@ router.use(cookieParser());
 
 var getTovars = (req, res, next) => {
   mongoClient.connect(url, function(err, client){
-      const db = client.db("VERNISSAGE");
+      const db = client.db(global.baseName);
       const config = db.collection("tovar");
 
       if(err) return console.log(err);

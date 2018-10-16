@@ -31,7 +31,7 @@
 			<div class="basketBlock">
         <span>0</span>
       </div>
-      
+
 		</div>
 	</div>
 	<div class="topLine twoLine">
@@ -79,14 +79,26 @@
       <div id="products" class="row list-group">
         <% for(var i = 0; i < tovarArr.length; i++) { %>
           <div class="item  col-xs-4 col-lg-4 grid-group-item">
+
     					<div class="thumbnail">
+                <% if(tovarArr[i].sale[0]){ %>
+                  <div class="sale">
+                    <span>Скидка</span>
+                    <span><%= tovarArr[i].sale[1] %> %</span>
+                  </div>
+                <% } %>
     							<img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
     							<div class="caption">
     									<h4 class="group inner list-group-item-heading"><%= tovarArr[i].title %></h4>
     									<p class="group inner list-group-item-text"><%= tovarArr[i].text %></p>
     									<div class="row">
     											<div class="col-xs-12 col-md-6">
-    													<p class="lead"><%= tovarArr[i].price %> Грн</p>
+                            <% if(tovarArr[i].sale[0]){ %>
+                              <p class="lead" style="text-decoration: line-through"><%= tovarArr[i].price %> Грн</p>
+                              <p class="lead2" style="color: red"><%= tovarArr[i].price - tovarArr[i].price / 100 * 20 %> Грн</p>
+                            <% } else { %>
+                              <p class="lead"><%= tovarArr[i].price %> Грн</p>
+                            <% } %>
     											</div>
     											<div class="col-xs-12 col-md-6">
     													<a class="btn btn-success" >В Корзину</a>

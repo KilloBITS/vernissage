@@ -35,7 +35,8 @@ const PostTovar = require('./controllers/controllerTovar');
 app.post('/tovar', PostTovar);
 
 app.listen(4000, function(){
-  console.warn('started server Dark World from port: 4000');
+  global.baseName = 'VERNISSAGE';
+  console.warn('STARTED VERNISSAGE SERVER ON PORT: 4000');
 });
 
 
