@@ -1,4 +1,5 @@
 'use strict';
+var BASKET = [];
 let pages = 666;
 
 function createPagination(pages, page) {
@@ -73,28 +74,16 @@ function createPagination(pages, page) {
 var Index = {
    DESIGHN: function(){
      $(".basketBlock").click(function(){
-       
+       if($("#basketDATA").height() <= 0){
+         $("#basketDATA").css({"height":"50%"});
+       }else{
+         $("#basketDATA").css({"height":"0%"});
+       }
      });
 
      let pages = 25;
      $(".btn-success").click(function(){
-       let ind = $(".btn-success").index(this);
-       $(".getSuccess:eq("+ind+")").fadeIn(300);
-       $(".basketBlock").css({
-         "width": "32px",
-         "height": "32px"
-       });
 
-       setTimeout(function(){
-         $(".basketBlock").css({
-           "width": "26px",
-           "height": "26px"
-         });
-       },300);
-
-       setTimeout(function(){
-         $(".getSuccess:eq("+ind+")").fadeOut(300);
-       },2000);
      });
 
      $(document).ready(function() {
@@ -145,13 +134,50 @@ var Index = {
        });
      }
    },
+   BASKET: function(){
+     if(localStorage.getItem('VernissageBasket') !== null){
+       let MY = localStorage.getItem("VernissageBasket").split(",");
+       $(".basketBlock span").html(MY.length);
+       BASKET = MY;
+     }
+   },
+   setBasket: function(ind, btn){
+     if(BASKET.indexOf(ind) === -1){
+       BASKET.push(ind.toString());
+       localStorage.setItem("VernissageBasket", BASKET);
+       $(".basketBlock span").html(BASKET.length);
+       $(".getSuccess:eq("+btn+")").fadeIn(300);
+
+       $(".basketBlock").css({
+         "width": "32px",
+         "height": "32px"
+       });
+
+       setTimeout(function(){
+         $(".basketBlock").css({
+           "width": "26px",
+           "height": "26px"
+         });
+       },300);
+
+       setTimeout(function(){
+         $(".getSuccess:eq("+btn+")").fadeOut(300);
+       },2000);
+     }else{
+       $(".getError:eq("+btn+")").fadeIn(300);
+       setTimeout(function(){
+         $(".getError:eq("+btn+")").fadeOut(300);
+       },2000);
+       createAlert('','','Такой товар уже есть в вашей корзине!','warning',false,true,'pageMessages');
+     }
+   },
    INIT: function(){
     Index.DESIGHN();
     Index.LOAD_TOVAR(false);
+    Index.BASKET();
    }
 }
 
 $(document).ready(() => {
   Index.INIT();
-  document.getElementById('pagination').innerHTML = createPagination(pages, 1);
 });

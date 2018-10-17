@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="	//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
   <link rel="stylesheet" type="text/css" href="/style/global.css">
 	<link rel="stylesheet" type="text/css" href="/style/global.min.css">
@@ -14,12 +14,16 @@
   <link rel="stylesheet" type="text/css" href="/style/tovar/tovar.css">
 	<link rel="stylesheet" type="text/css" href="/style/tovar/tovar.min.css">
   <link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
 
 	<script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
-	<script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
   <script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
-	<script type="text/javascript" src="script/tovar/tovar.js"></script>
+	<script type="text/javascript" src="script/global.js"></script>
+  <script type="text/javascript" src="script/tovar/tovar.js"></script>
 </head>
 <body>
 <div class="top">
@@ -59,7 +63,7 @@
   			<div class="menu_title"><%= menu[i].name %></div>
   			<div class="menuLeft">
           <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
-            <a href="#"><div class="punktMenu">• <%= menu[i].podlink[il].pname %> </div></a>
+            <a href="<%= menu[i].podlink[il].plink %>"><div class="punktMenu">• <%= menu[i].podlink[il].pname %> </div></a>
           <% } %>
   			</div>
   			<div class="menuRight"></div>
@@ -125,7 +129,7 @@
                             <% } %>
     											</div>
     											<div class="col-xs-12 col-md-6">
-    													<a class="btn btn-success" >В Корзину</a>
+    													<a class="btn btn-success" onclick="Index.setBasket(<%= tovarArr[i].AI %>, <%= i %>)">В Корзину</a>
     											</div>
     									</div>
     							</div>
@@ -133,10 +137,22 @@
               <div class="getSuccess">
                 <span>Добавлено</span>
               </div>
+              <div class="getError">
+                <span>Товар уже добавлен</span>
+              </div>
     			</div>
         <% } %>
       </div>
-      <div id="pagination"></div>
+      <% if(tovarArr.length > 24){ %>
+        <div id="pagination"></div>
+        <script>
+        $("#pagination").html(createPagination(<%= tovarArr.length / 24 %>, 1));
+        </script>
+      <% } %>
+
+      <% if(tovarArr.length === 0){ %>
+          <div class="NONE_TOVAR">Нет товаров в данной категории :(</div>
+      <% } %>
     </div>
 	</div>
 </div>
@@ -166,6 +182,16 @@
 			<a href="mailto:<%= conf.email %>?subject=SweetWords" class="adressLineMap"><%= conf.email %></a>
 		</div>
 	</div>
+</div>
+<div id="pageMessages"></div>
+<!-- <div class="container">
+  <button class="btn btn-danger" onclick="createAlert('Opps!','Something went wrong','Here is a bunch of text about some stuff that happened.','danger',true,false,'pageMessages');">Add Danger Alert</button>
+  <button class="btn btn-success" onclick="createAlert('','Nice Work!','Here is a bunch of text about some stuff that happened.','success',true,true,'pageMessages');">Add Success Alert</button>
+  <button class="btn btn-info" onclick="createAlert('BTDubs','','Here is a bunch of text about some stuff that happened.','info',false,true,'pageMessages');">Add Info Alert</button>
+  <button class="btn btn-warning" onclick="createAlert('','','Here is a bunch of text about some stuff that happened.','warning',false,true,'pageMessages');">Add Warning Alert</button>
+</div> -->
+<div id="basketDATA">
+
 </div>
 </body>
 </html>

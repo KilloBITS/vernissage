@@ -325,10 +325,85 @@ font-family: 'Didact Gothic', sans-serif;*/
 
 .OPLATA_TITLE{
   width: 100%;
-    font-size: 24px;
-    text-align: center;
-    padding: 18px 0 6px 0;
-    color: #920b51;
-    font-family: 'Didact Gothic', sans-serif;
-    border-bottom: 1px solid rgba(192, 192, 192, 0.52);
+  font-size: 24px;
+  text-align: center;
+  padding: 18px 0 6px 0;
+  color: #920b51;
+  font-family: 'Didact Gothic', sans-serif;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.52);
+}
+
+
+.search_result{
+  position: absolute;
+  background: white;
+  width: 100%;
+  height: 270px;
+  z-index: 0;
+  right: 0;
+  top: calc(100% + 51px);
+  border-bottom: 1px solid silver;
+  display: none;
+}
+.search_title{
+  width: 100%;
+  text-align: center;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  color: silver;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.32);
+}
+.search_data{
+  width: 100%;
+  height: 150px;
+  background: whitesmoke;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.32);
+}
+.search_object{}
+.search_min_img{}
+.search_min_title{}
+
+.NONE_TOVAR{
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  line-height: 400px;
+  font-size: 18px;
+}
+#pageMessages {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  width: 30%;
+  z-index: 100;
+}
+
+.alert {
+  position: relative;
+}
+
+.alert .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1em;
+}
+
+.alert .fa {
+  margin-right:.3em;
+}
+
+#basketDATA{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  background: white;
+  z-index: 2;
+  border-top: 1px solid silver;
+  height: 0;
+  /* display: none; */
+  transition: 0.3s;
 }

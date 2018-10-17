@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
 	<script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
 	<script type="text/javascript" src="script/oplata/oplata.js"></script>
+  <script type="text/javascript" src="script/global.js"></script>
 </head>
 <body>
 <div class="top">
@@ -56,7 +57,7 @@
         <div class="menu_title"><%= menu[i].name %></div>
         <div class="menuLeft">
           <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
-            <a href="#"><div class="punktMenu">• <%= menu[i].podlink[il].pname %> </div></a>
+            <a href="<%= menu[i].podlink[il].plink %>"><div class="punktMenu">• <%= menu[i].podlink[il].pname %> </div></a>
           <% } %>
         </div>
         <div class="menuRight"></div>

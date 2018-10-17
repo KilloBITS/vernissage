@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 
 const app = express();
-
 //project libs use
 app.use(bParser.urlencoded({extended: true}));
 app.use(bParser.json());
@@ -30,10 +29,10 @@ app.use('/login', login);
 app.use('/panel', panel);
 app.use('/basket', basket);
 app.use('/oplata', oplata);
-
-
 app.get('*', get404);
 
+const search = require('./controllers/controllerSearch');
+app.post('/search', search);
 
 const PostTovar = require('./controllers/controllerTovar');
 app.post('/tovar', PostTovar);

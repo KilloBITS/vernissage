@@ -6,6 +6,18 @@ var Index = {
        $(".searchLine").css({"width":"170px"});
      });
 
+     $("#SEARCH").on("keyup",function(){
+       console.log($("#SEARCH").val());
+       if($("#SEARCH").val().length > 3){
+         $(".search_result").fadeIn(150);
+         $.post("/search",{name: $("#SEARCH").val()},function(result){
+           console.log(result);
+         });
+       }else{
+         $(".search_result").fadeOut(150);
+       }
+     });
+
      $('body').click(function(e){
        if(e.target.className != 'searchBlockVal' && $('#SEARCH').val().length === 0){
          $(".searchLine").css({"width":"0px"});
