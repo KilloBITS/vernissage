@@ -7,6 +7,10 @@
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="	//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/style/global.css">
+	<link rel="stylesheet" type="text/css" href="/style/global.min.css">
+
   <link rel="stylesheet" type="text/css" href="/style/tovar/tovar.css">
 	<link rel="stylesheet" type="text/css" href="/style/tovar/tovar.min.css">
   <link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
@@ -95,19 +99,18 @@
     							<div class="caption">
                     <fieldset class="rating">
                         <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="5" /><label class = "full" for="star5_<%= i %>" title="Awesome - 5 stars"></label>
-                        <input type="radio" id="star4half_<%= i %>" name="rating_<%= i %>" value="4 and a half" /><label class="half" for="star4half_<%= i %>" title="Pretty good - 4.5 stars"></label>
+                        <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="4.5" /><label class="half" for="star5_<%= i %>" title="Pretty good - 4.5 stars"></label>
                         <input type="radio" id="star4_<%= i %>" name="rating_<%= i %>" value="4" /><label class = "full" for="star4_<%= i %>" title="Pretty good - 4 stars"></label>
-                        <input type="radio" id="star3half_<%= i %>" name="rating_<%= i %>" value="3 and a half" /><label class="half" for="star3half_<%= i %>" title="Meh - 3.5 stars"></label>
+                        <input type="radio" id="star4_<%= i %>" name="rating_<%= i %>" value="3.5" /><label class="half" for="star4_<%= i %>" title="Meh - 3.5 stars"></label>
                         <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="3" /><label class = "full" for="star3_<%= i %>" title="Meh - 3 stars"></label>
-                        <input type="radio" id="star2half_<%= i %>" name="rating_<%= i %>" value="2 and a half" /><label class="half" for="star2half_<%= i %>" title="Kinda bad - 2.5 stars"></label>
-                        <input type="radio" id="star2_<%= i %>" name="rating_<%= i %>" value="2" /><label class = "full" for="star2_<%= i %>" title="Kinda bad - 2 stars"></label>
-                        <input type="radio" id="star1half_<%= i %>" name="rating_<%= i %>" value="1 and a half" /><label class="half" for="star1half_<%= i %>" title="Meh - 1.5 stars"></label>
+                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="2.5" /><label class="half" for="star3_<%= i %>" title="Kinda bad - 2.5 stars"></label>
+                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="2" /><label class = "full" for="star2_<%= i %>" title="Kinda bad - 2 stars"></label>
+                        <input type="radio" id="star2_<%= i %>" name="rating_<%= i %>" value="1.5" /><label class="half" for="star2_<%= i %>" title="Meh - 1.5 stars"></label>
                         <input type="radio" id="star1_<%= i %>" name="rating_<%= i %>" value="1" /><label class = "full" for="star1_<%= i %>" title="Sucks big time - 1 star"></label>
-                        <input type="radio" id="starhalf_<%= i %>" name="rating_<%= i %>" value="half" /><label class="half" for="starhalf_<%= i %>" title="Sucks big time - 0.5 stars"></label>
+                        <input type="radio" id="star0_<%= i %>" name="rating_<%= i %>" value="0" /><label class="half" for="star0_<%= i %>" title="Sucks big time - 0.5 stars"></label>
 
                         <script>
-
-                          $("#star"+3+"_<%= i %>").attr("checked","checked")
+                          $("#star"+<%= tovarArr[i].popular %>+"_<%= i %>").attr("checked","checked")
                         </script>
                     </fieldset>
     									<h4 class="group inner list-group-item-heading"><%= tovarArr[i].title %></h4>
@@ -148,6 +151,11 @@
 		<div class="CBB">
 			<div class="vectorLogo"></div>
 			<div class="copiright">Vernissage © 2018, Все права защищены.</div>
+      <div class="socials">
+        <% for(var i = 0; i < conf.socials.length; i++) { %>
+            <a href="<%= conf.socials[i].link %>"><div class="socBtn" style="<%= conf.socials[i].img %>"></div></a>
+        <% } %>
+      </div>
 			<div class="copiright">Сайт сделан ФЛП "<a target="_blank" href="http://kalenyuk.pro" style="color: red;">Kaleniuk Ihor</a>"</div>
 		</div>
 		<div class="RBB">

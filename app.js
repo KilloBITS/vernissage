@@ -25,7 +25,7 @@ const oplata = require('./routes/getOplata');
 
 
 app.use('/', index);
-app.use('/shop', tovar);
+app.use('/shop*', tovar);
 app.use('/login', login);
 app.use('/panel', panel);
 app.use('/basket', basket);

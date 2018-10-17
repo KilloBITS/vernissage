@@ -6,6 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="/style/global.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.min.css">
+
   <link rel="stylesheet" type="text/css" href="/style/index/style.css">
 	<link rel="stylesheet" type="text/css" href="/style/index/style.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
@@ -182,6 +186,11 @@
 			<div class="CBB">
 				<div class="vectorLogo"></div>
 				<div class="copiright">Vernissage © 2018, Все права защищены.</div>
+        <div class="socials">
+          <% for(var i = 0; i < conf.socials.length; i++) { %>
+              <a href="<%= conf.socials[i].link %>"><div class="socBtn" style="<%= conf.socials[i].img %>"></div></a>
+          <% } %>
+        </div>
 				<div class="copiright">Сайт сделан ФЛП "<a target="_blank" href="http://kalenyuk.pro" style="color: red;">Kaleniuk Ihor</a>"</div>
 			</div>
 			<div class="RBB">

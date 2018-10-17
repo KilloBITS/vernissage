@@ -4,7 +4,8 @@ const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
-router.get('/', function(req, res, next){
+router.get('/*', function(req, res, next){
+  console.log(req.url)
   mongoClient.connect(url, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("config");
