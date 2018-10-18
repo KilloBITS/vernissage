@@ -5,13 +5,15 @@ const mongoClient = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 router.get('/*', function(req, res, next){
+  // var datetime = new Date();
+  // var date = datetime.getDate() + ":" + datetime.getMonth() + ":" +datetime.getFullYear();
+  // console.log(date);
   var searchData;
   var DA = req.url.split('=');
 
   if(DA[0] !== "/"){
     searchData = DA[1].split(',');
   }
-  console.log(searchData)
   mongoClient.connect(url, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("config");

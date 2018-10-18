@@ -37,6 +37,15 @@ app.post('/search', search);
 const PostTovar = require('./controllers/controllerTovar');
 app.post('/tovar', PostTovar);
 
+const setStars = require('./controllers/controllerTovar');
+app.post('/setStars', setStars);
+
+const SendMail = require('./controllers/controllerSendMail');
+app.post('/sendMessage', SendMail);
+
+const getbasket = require('./controllers/controllerGetBasket');
+app.post('/getbasket', getbasket);
+
 app.listen(4000, function(){
   global.baseName = 'VERNISSAGE';
   console.warn('STARTED VERNISSAGE SERVER ON PORT: 4000');

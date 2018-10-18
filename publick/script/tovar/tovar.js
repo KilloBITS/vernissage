@@ -72,16 +72,91 @@ function createPagination(pages, page) {
 }
 
 var Index = {
-   DESIGHN: function(){
-     $(".basketBlock").click(function(){
-       if($("#basketDATA").height() <= 0){
-         $("#basketDATA").css({"height":"50%"});
-       }else{
-         $("#basketDATA").css({"height":"0%"});
+   UPDATE_BASCET: function(){
+     $('.basket_doc').remove();
+     $("#basketDATA").fadeIn(300);
+     $("body").css({"overflow":"hidden"});
+     $.post('/getbasket',{data:BASKET},function(tovar){
+       console.log(tovar);
+       for(let i = 0; i < tovar.tovar.length; i++){
+         var newDiv = document.createElement("div");
+         newDiv.className = "basket_doc";
+         $(".basket_tovar").append(newDiv)
+
+         var minBasImg = document.createElement("div");
+         minBasImg.style.backgroundImage = "url(../../../data/tovar/"+tovar.tovar[i].image+")";
+         minBasImg.className = "minBasImg";
+
+         var minBasTitle = document.createElement("div");
+         minBasTitle.innerHTML = tovar.tovar[i].title;
+         minBasTitle.className = "minBasTitle";
+
+         var minAllSum = document.createElement("div");
+         minAllSum.className = "minAllSum";
+
+         var minBasLength = document.createElement("div");
+         minBasLength.className = "minBasLength";
+
+         var minBasDel = document.createElement("div");
+         minBasDel.className = "minBasDel";
+
+         $(newDiv).append(minBasImg);
+         $(newDiv).append(minBasTitle);
+         $(newDiv).append(minAllSum);
+         $(newDiv).append(minBasLength);
+         $(newDiv).append(minBasDel);
        }
+       $(".backet_load").hide();
+     });
+   },
+   DESIGHN: function(){
+     $(".half,.full").click(function(){
+       var tovID = $(this).attr("tovid");
+       var setStar = $(this).attr("for").split('_')[0].replace(/[^-0-9]/gim,'');
+       console.log(tovID);
+       console.log(setStar);
+
+       $.post("/setStars",{id: tovID, ss: setStar},function(d){
+         console.log(d)
+       });
      });
 
-     let pages = 25;
+     $(".basketBlock").click(function(){
+       if(BASKET.length >= 1){
+         Index.UPDATE_BASCET();
+       }else{
+         createAlert('','','Ваша корзина пуста :(','warning',false,true,'pageMessages')
+       }
+
+     });
+
+     $(".basket_close").click(function(){
+       $(".backet_load").show();
+       $("body").css({"overflow":"auto"});
+       $("#basketDATA").fadeOut(300);
+     });
+
+     $( document ).ready(function() {
+       $(".input-login").each(function() {
+         if ($(this).val() != "") {
+           $(this).parent().addClass("animation");
+         }
+       });
+     });
+
+     //Add animation when input is focused
+     $(".login-input").focus(function(){
+       $(this).parent().addClass("animation animation-color");
+     });
+
+     //Remove animation(s) when input is no longer focused
+     $(".login-input").focusout(function(){
+       if($(this).val() === "")
+         $(this).parent().removeClass("animation");
+       $(this).parent().removeClass("animation-color");
+     })
+
+
      $(".btn-success").click(function(){
 
      });
@@ -142,7 +217,7 @@ var Index = {
      }
    },
    setBasket: function(ind, btn){
-     if(BASKET.indexOf(ind) === -1){
+     if(BASKET.indexOf(ind.toString()) === -1){
        BASKET.push(ind.toString());
        localStorage.setItem("VernissageBasket", BASKET);
        $(".basketBlock span").html(BASKET.length);

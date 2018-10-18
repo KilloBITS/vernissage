@@ -6,22 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+  <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/flickity.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/animate.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="/style/global.css">
 	<link rel="stylesheet" type="text/css" href="/style/global.min.css">
-
   <link rel="stylesheet" type="text/css" href="/style/tovar/tovar.css">
 	<link rel="stylesheet" type="text/css" href="/style/tovar/tovar.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
-
-	<script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
   <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-  <script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
 	<script type="text/javascript" src="script/global.js"></script>
   <script type="text/javascript" src="script/tovar/tovar.js"></script>
 </head>
@@ -33,7 +29,7 @@
         <div class="hamburger-menu"></div>
       </div>
     </div>
-		<a href="index.html">
+		<a href="/">
 			<div class="logotype"></div>
 		</a>
 		<div class="topNavBlockOfBtm">
@@ -81,9 +77,12 @@
       <div class="well well-sm">
 
           <div class="btn-group">
-              <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-              </span></a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                  class="glyphicon glyphicon-th"></span></a>
+              <a href="#" id="list" class="btn btn-default btn-sm">
+                <!-- <span class="glyphicon glyphicon-th-list"></span> -->
+              </a>
+              <a href="#" id="grid" class="btn btn-default btn-sm">
+                <!-- <span class="glyphicon glyphicon-th"></span> -->
+              </a>
           </div>
       </div>
       <div id="products" class="row list-group">
@@ -101,17 +100,18 @@
 
     							<img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
     							<div class="caption">
+                    <a class="toDetails" href="/details?tov=<%= tovarArr[i].AI %>">Детальнee</a>
                     <fieldset class="rating">
-                        <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="5" /><label class = "full" for="star5_<%= i %>" title="Awesome - 5 stars"></label>
-                        <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="4.5" /><label class="half" for="star5_<%= i %>" title="Pretty good - 4.5 stars"></label>
-                        <input type="radio" id="star4_<%= i %>" name="rating_<%= i %>" value="4" /><label class = "full" for="star4_<%= i %>" title="Pretty good - 4 stars"></label>
-                        <input type="radio" id="star4_<%= i %>" name="rating_<%= i %>" value="3.5" /><label class="half" for="star4_<%= i %>" title="Meh - 3.5 stars"></label>
-                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="3" /><label class = "full" for="star3_<%= i %>" title="Meh - 3 stars"></label>
-                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="2.5" /><label class="half" for="star3_<%= i %>" title="Kinda bad - 2.5 stars"></label>
-                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="2" /><label class = "full" for="star2_<%= i %>" title="Kinda bad - 2 stars"></label>
-                        <input type="radio" id="star2_<%= i %>" name="rating_<%= i %>" value="1.5" /><label class="half" for="star2_<%= i %>" title="Meh - 1.5 stars"></label>
-                        <input type="radio" id="star1_<%= i %>" name="rating_<%= i %>" value="1" /><label class = "full" for="star1_<%= i %>" title="Sucks big time - 1 star"></label>
-                        <input type="radio" id="star0_<%= i %>" name="rating_<%= i %>" value="0" /><label class="half" for="star0_<%= i %>" title="Sucks big time - 0.5 stars"></label>
+                        <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="5" /><label class = "full" tovid="<%= tovarArr[i].AI %>" for="star5_<%= i %>" title="Awesome - 5 stars"></label>
+                        <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="4.5" /><label class="half" tovid="<%= tovarArr[i].AI %>" for="star5_<%= i %>" title="Pretty good - 4.5 stars"></label>
+                        <input type="radio" id="star4_<%= i %>" name="rating_<%= i %>" value="4" /><label class = "full" tovid="<%= tovarArr[i].AI %>" for="star4_<%= i %>" title="Pretty good - 4 stars"></label>
+                        <input type="radio" id="star4_<%= i %>" name="rating_<%= i %>" value="3.5" /><label class="half" tovid="<%= tovarArr[i].AI %>" for="star4_<%= i %>" title="Meh - 3.5 stars"></label>
+                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="3" /><label class = "full" tovid="<%= tovarArr[i].AI %>" for="star3_<%= i %>" title="Meh - 3 stars"></label>
+                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="2.5" /><label class="half" tovid="<%= tovarArr[i].AI %>" for="star3_<%= i %>" title="Kinda bad - 2.5 stars"></label>
+                        <input type="radio" id="star3_<%= i %>" name="rating_<%= i %>" value="2" /><label class = "full" tovid="<%= tovarArr[i].AI %>" for="star2_<%= i %>" title="Kinda bad - 2 stars"></label>
+                        <input type="radio" id="star2_<%= i %>" name="rating_<%= i %>" value="1.5" /><label class="half" tovid="<%= tovarArr[i].AI %>" for="star2_<%= i %>" title="Meh - 1.5 stars"></label>
+                        <input type="radio" id="star1_<%= i %>" name="rating_<%= i %>" value="1" /><label class = "full" tovid="<%= tovarArr[i].AI %>" for="star1_<%= i %>" title="Sucks big time - 1 star"></label>
+                        <input type="radio" id="star0_<%= i %>" name="rating_<%= i %>" value="0" /><label class="half" tovid="<%= tovarArr[i].AI %>" for="star0_<%= i %>" title="Sucks big time - 0.5 stars"></label>
 
                         <script>
                           $("#star"+<%= tovarArr[i].popular %>+"_<%= i %>").attr("checked","checked")
@@ -190,8 +190,42 @@
   <button class="btn btn-info" onclick="createAlert('BTDubs','','Here is a bunch of text about some stuff that happened.','info',false,true,'pageMessages');">Add Info Alert</button>
   <button class="btn btn-warning" onclick="createAlert('','','Here is a bunch of text about some stuff that happened.','warning',false,true,'pageMessages');">Add Warning Alert</button>
 </div> -->
+<div class='back-to-top' id='back-to-top' title='Back to top'><i class='fa fa-chevron-up'></i></div>
 <div id="basketDATA">
+  <div id="bas">
+    <div class="basket_close"></div>
+    <div class="backet_load"></div>
+    <div class="basket_tovar"></div>
+    <div class="basket_info">
+      <p class="input-container">
+        <input type="text" id="input-PaymentName" class="login-input">
+        <label for="input-PaymentName" unselectable="on">Имя</label>
+      </p>
+      <p class="input-container">
+        <input type="text" id="input-PaymentFourname" class="login-input">
+        <label for="input-PaymentFourname" unselectable="on">Фамилия</label>
+      </p>
+      <p class="input-container">
+        <input type="text" id="input-PaymentCity" class="login-input">
+        <label for="input-PaymentCity" unselectable="on">Город</label>
+      </p>
 
+
+
+      <div class="ui-combobox ui-combobox-options-left">
+        <div class="ui-value" placeholder="Выберите тип доставки"></div>
+        <div class="ui-options">
+          <!-- <label>Выберите тип доставки:</label>
+          <i class="separator"></i> -->
+          <label>Самовывоз</label>
+          <label>Доставка курьером</label>
+          <label>Доставка Новой Почтой</label>
+          <label>Доставка УкрПочтой</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 </body>
 </html>

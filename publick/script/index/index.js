@@ -171,6 +171,32 @@ var Index = {
 
 
    },
+   message: function(e){
+     e.preventDefault(e);
+
+     var msg_data = {
+       MyName: $("#input-name").val(),
+       myEmail:$("#input-email").val(),
+       myTheme:$("#input-subject").val(),
+       message:$("#input-message").val(),
+     };
+     $.post('/sendMessage',msg_data, function(data){
+       if(
+         ($("#input-name").val().length > 1)||
+         ($("#input-email").val().length > 1)||
+         ($("#input-subject").val().length > 1)||
+         ($("#input-message").val().length > 1)){
+           createAlert('','Сообщение отправленно!','Ваше сообщение біло успешно отправлено.','success',true,true,'pageMessages');
+           $(".cf input[type='text'],.cf input[type='email']").val('');
+
+       }else{
+         createAlert('','','Сообщение не отправлено!','warning',false,true,'pageMessages');
+         return false
+       }
+
+     });
+
+   },
    INIT: function(){
     Index.DESIGHN();
    }

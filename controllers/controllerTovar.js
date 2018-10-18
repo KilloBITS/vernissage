@@ -21,6 +21,26 @@ var getTovars = (req, res, next) => {
   });
 };
 
+
+var setStars = (req, res, next) => {
+  mongoClient.connect(url ,function(err, client){
+   const db = client.db(global.baseName);
+   const tovar  = db.collection("tovar");
+
+   if(err) return console.log(err);
+
+   tovar.find( { AI: parseInt(req.body.id)}).toArray(function(err, results){
+     console.log(results[0].popular);
+     tovar.updateOne({ AI: parseInt(req.body.id) },{
+       $set: { popular: parseInt(req.body.ss) },
+         $currentDate: { lastModified: true }
+       });
+   });
+  });
+};
+
 router.post('/tovar', getTovars, function(req, res, next){});
+
+router.post('/setStars', setStars, function(req, res, next){});
 
 module.exports = router;
