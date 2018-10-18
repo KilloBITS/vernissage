@@ -1217,3 +1217,8 @@ input[type=radio]:checked:disabled + .ui-radio-after:after {
   border: 1px solid rgba(255, 0, 0, 0.6);
   border-radius: 5px;
 }
+
+.developer{
+  opacity: 0.5;
+  text-shadow: 1px 1px 1px black;
+}
