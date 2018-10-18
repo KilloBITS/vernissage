@@ -5,9 +5,18 @@ const mongoClient = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 router.get('/*', function(req, res, next){
-  // var datetime = new Date();
-  // var date = datetime.getDate() + ":" + datetime.getMonth() + ":" +datetime.getFullYear();
-  // console.log(date);
+  var languageSystem;
+  console.log(req.cookies.vernissageLang);
+  if(req.cookies.vernissageLang === undefined){
+    languageSystem = 0;
+  }else{
+    if(req.cookies.vernissageLang === 'ua'){
+      languageSystem = 1;
+    }else{
+      languageSystem = 0;
+    }
+  }
+
   var searchData;
   var DA = req.url.split('=');
 
@@ -23,7 +32,7 @@ router.get('/*', function(req, res, next){
     if(err) return console.log(err);
 
      config.find().toArray(function(err, results_config){
-       if(results_config[0].opens){
+       if(results_config[languageSystem].opens){
 
          menu.find().toArray(function(err, results_menu ){
            if(DA[0] !== "/"){
@@ -37,12 +46,12 @@ router.get('/*', function(req, res, next){
              console.log(FILTER)
 
              tovar.find(FILTER).sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{conf: results_config[0], menu: results_menu, tovarArr: results_tovar})
+               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar})
                client.close();
              });
            }else{
              tovar.find().sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{conf: results_config[0], menu: results_menu, tovarArr: results_tovar})
+               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar})
                client.close();
              });
            }

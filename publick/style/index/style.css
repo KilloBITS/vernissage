@@ -80,17 +80,6 @@ font-family: 'Didact Gothic', sans-serif;*/
     transition: 0.3s;
 }
 
-
-.logotype{
-	width: 330px;
-  height: 100px;
-  background-image: url(../../../image/vernissageLogo.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  margin: auto;
-}
-
 .logInBlock{
 	position: absolute;
     width: 26px;
