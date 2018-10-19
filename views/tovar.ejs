@@ -34,7 +34,7 @@
 		</a>
 		<div class="topNavBlockOfBtm">
 			<a href="tel:<%= conf.number %>" class="contact_number"><%= conf.number %></a>
-      <div class="logInBlock"></div>
+      <a href="/auth"><div class="logInBlock"></div></a>
 			<div class="basketBlock">
         <span>0</span>
       </div>
@@ -76,15 +76,11 @@
 	<div class="tovar_data">
 		<div class="container">
       <div class="well well-sm">
-
-          <div class="btn-group">
-              <a href="#" id="list" class="btn btn-default btn-sm">
-                <!-- <span class="glyphicon glyphicon-th-list"></span> -->
-              </a>
-              <a href="#" id="grid" class="btn btn-default btn-sm">
-                <!-- <span class="glyphicon glyphicon-th"></span> -->
-              </a>
-          </div>
+        <div class=""
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"></a>
+            <a href="#" id="grid" class="btn btn-default btn-sm"></a>
+        </div>
       </div>
       <div id="products" class="row list-group">
         <% for(var i = 0; i < tovarArr.length; i++) { %>

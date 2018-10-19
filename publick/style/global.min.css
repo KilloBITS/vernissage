@@ -312,4 +312,22 @@
     display: none;
   }
 
+  .basket_tovar {
+    position: relative;
+    background: white;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    top: 15px;
+    left: 15px;
+    border-radius: 5px;
+    overflow-x: hidden;
+    transform: translate(0, 0);
+  }
+  #basketDATA{
+    z-index: 90;
+  }
+  .basket_info {
+    display: none;
+  }
+
 }
