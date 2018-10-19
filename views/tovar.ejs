@@ -100,7 +100,7 @@
 
     							<img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
     							<div class="caption">
-                    <a class="toDetails" href="/details?tov=<%= tovarArr[i].AI %>">Детальнee</a>
+
                     <fieldset class="rating">
                         <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="5" /><label class = "full" tovid="<%= tovarArr[i].AI %>" for="star5_<%= i %>" title="Awesome - 5 stars"></label>
                         <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="4.5" /><label class="half" tovid="<%= tovarArr[i].AI %>" for="star5_<%= i %>" title="Pretty good - 4.5 stars"></label>
@@ -118,7 +118,12 @@
                         </script>
                     </fieldset>
     									<h4 class="group inner list-group-item-heading"><%= tovarArr[i].title %></h4>
-    									<p class="group inner list-group-item-text"><%= tovarArr[i].text %></p>
+    									<p class="group inner list-group-item-text">
+                        <%= tovarArr[i].text %>
+                        <div class="shadow">
+                          <a class="toDetails" href="/details?tov=<%= tovarArr[i].AI %>"><%= conf.btnDetails %></a>
+                        </div>
+                      </p>
     									<div class="row">
     											<div class="col-xs-12 col-md-6">
                             <% if(tovarArr[i].sale[0]){ %>
@@ -129,7 +134,7 @@
                             <% } %>
     											</div>
     											<div class="col-xs-12 col-md-6">
-    													<a class="btn btn-success" onclick="Index.setBasket(<%= tovarArr[i].AI %>, <%= i %>)">В Корзину</a>
+    													<a class="btn btn-success" onclick="Index.setBasket(<%= tovarArr[i].AI %>, <%= i %>)"><%= conf.toBasket %></a>
     											</div>
     									</div>
     							</div>
@@ -183,7 +188,7 @@
       <div class="adressLineMap"></div>
       <div class="adressLineMap">
         <div class="lang" id="ua" title="Українська версія"></div>
-        <div class="lang" id="ru" title="Русскач версия"></div>
+        <div class="lang" id="ru" title="Русская версия"></div>
       </div>
     </div>
   </div>

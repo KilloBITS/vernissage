@@ -21,6 +21,7 @@ const login = require('./routes/getLogin');
 const panel = require('./routes/admin/panel');
 const basket = require('./routes/getBasket');
 const oplata = require('./routes/getOplata');
+const details = require('./routes/getDetails');
 
 
 app.use('/', index);
@@ -29,6 +30,7 @@ app.use('/login', login);
 app.use('/panel', panel);
 app.use('/basket', basket);
 app.use('/oplata', oplata);
+app.use('/details', details);
 app.get('*', get404);
 
 const search = require('./controllers/controllerSearch');

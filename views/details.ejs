@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title><%= tovarArr[0].title %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/flickity.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/animate.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.css">
+	<link rel="stylesheet" type="text/css" href="/style/global.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/details/details.css">
+  <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
+	<script type="text/javascript" src="script/global.js"></script>
+  <script type="text/javascript" src="script/details/details.js"></script>
+</head>
+<body>
+<div class="top">
+	<div class="topLine oneLine">
+    <div class="topNavMobMenuOfBtm">
+      <div class="menu-wrapper">
+        <div class="hamburger-menu"></div>
+      </div>
+    </div>
+		<a href="/">
+			<div class="logotype"></div>
+		</a>
+		<div class="topNavBlockOfBtm">
+			<a href="tel:<%= conf.number %>" class="contact_number"><%= conf.number %></a>
+			<div class="basketBlock">
+        <span>0</span>
+      </div>
+
+		</div>
+	</div>
+	<div class="topLine twoLine">
+		<div class="menuBlock">
+      <% for(var i = 0; i < menu.length; i++) { %>
+        <% if(menu[i].podlink.length > 1){ %>
+          <a href="<%= menu[i].glink %>"><div class="menuBTN" menu-link="<%= menu[i].ml %>"><%= menu[i].name %></div></a>
+        <% } else { %>
+          <a href="<%= menu[i].glink %>"><div class="menuBTN"><%= menu[i].name %></div></a>
+        <% } %>
+      <% } %>
+		</div>
+	</div>
+
+	<div class="opensMenu">
+  <% for(var i = 0; i < menu.length; i++) { %>
+    <% if(menu[i].podlink.length > 1){ %>
+      <div class="menu_data <%= menu[i].ml %>">
+  			<div class="menu_title"><%= menu[i].name %></div>
+  			<div class="menuLeft">
+          <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
+            <a href="<%= menu[i].podlink[il].plink %>"><div class="punktMenu">• <%= menu[i].podlink[il].pname %> </div></a>
+          <% } %>
+  			</div>
+  			<div class="menuRight"></div>
+  		</div>
+    <% } %>
+  <% } %>
+	</div>
+</div>
+
+<div class="content tovar">
+
+    <div class="container">
+      <div class="grid product">
+        <% if(tovarArr[0].sale[0]){ %>
+          <div class="sale">
+            <span>Скидка</span>
+            <span><%= tovarArr[0].sale[1] %> %</span>
+          </div>
+        <% } %>
+        <div class="column-xs-12 column-md-7">
+          <div class="product-gallery">
+            <div class="product-image">
+              <img class="active" src="../../../data/tovar/<%= tovarArr[0].image %>">
+            </div>
+          </div>
+        </div>
+        <div class="column-xs-12 column-md-5">
+          <h1><%= tovarArr[0].title %></h1>
+          <% if(tovarArr[0].sale[0]){ %>
+            <h2 style="text-decoration: line-through"><%= tovarArr[0].price %> Грн</h2>
+            <h3 style="color: red"><%= parseInt(tovarArr[0].price - tovarArr[0].price / 100 * parseInt(tovarArr[0].sale[1])) %> Грн</h3>
+          <% } else { %>
+            <h2><%= tovarArr[0].price %> Грн</h2>
+          <% } %>
+
+          <div class="description">
+            <p><%= tovarArr[0].text %></p>
+          </div>
+          <button class="add-to-cart"onclick="Details.setBasket(<%= tovarArr[0].AI %>)"><%= conf.toBasket %></button>
+        </div>
+      </div>
+      <div class="grid related-products">
+        <div class="column-xs-12">
+          <h3>You may also like</h3>
+        </div>
+        <div class="column-xs-12 column-md-4">
+          <img src="https://source.unsplash.com/miziNqvJx5M">
+          <h4>Succulent</h4>
+          <p class="price">$19.99</p>
+        </div>
+        <div class="column-xs-12 column-md-4">
+          <img src="https://source.unsplash.com/2y6s0qKdGZg">
+          <h4>Terranium</h4>
+          <p class="price">$19.99</p>
+        </div>
+        <div class="column-xs-12 column-md-4">
+          <img src="https://source.unsplash.com/6Rs76hNbIWE">
+          <h4>Cactus</h4>
+          <p class="price">$19.99</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="comments">
+    		<div class="comment-wrap">
+    				<div class="photo">
+    						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+    				</div>
+    				<div class="comment-block">
+    						<form action="">
+    								<textarea name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
+    						</form>
+    				</div>
+    		</div>
+
+    		<div class="comment-wrap">
+    				<div class="photo">
+    						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+    				</div>
+    				<div class="comment-block">
+    						<p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam reprehenderit quasi
+    								sapiente modi tempora at perspiciatis mollitia, dolores voluptate. Cumque, corrupti?</p>
+    						<div class="bottom-comment">
+    								<div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
+    								<ul class="comment-actions">
+    										<li class="complain">Complain</li>
+    										<li class="reply">Reply</li>
+    								</ul>
+    						</div>
+    				</div>
+    		</div>
+
+    		<div class="comment-wrap">
+    				<div class="photo">
+    						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
+    				</div>
+    				<div class="comment-block">
+    						<p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam.</p>
+    						<div class="bottom-comment">
+    								<div class="comment-date">Aug 23, 2014 @ 10:32 AM</div>
+    								<ul class="comment-actions">
+    										<li class="complain">Complain</li>
+    										<li class="reply">Reply</li>
+    								</ul>
+    						</div>
+    				</div>
+    		</div>
+    </div>
+
+    </div>
+</div>
+
+<div class="siteMap">
+  <div class="mapmap">
+    <div class="LBB">
+      <% for(var i = 0; i < menu.length; i++) { %>
+          <a href="<%= menu[i].glink %>"><div class="punktMapMenu">• <%= menu[i].name %></div></a>
+      <% } %>
+    </div>
+    <div class="CBB">
+      <div class="vectorLogo"></div>
+      <div class="copiright"><%= conf.copiright %></div>
+      <div class="socials">
+        <% for(var i = 0; i < conf.socials.length; i++) { %>
+            <a href="<%= conf.socials[i].link %>"><div class="socBtn" style="<%= conf.socials[i].img %>"></div></a>
+        <% } %>
+      </div>
+      <div class="copiright developer">Site created by "<a target="_blank" href="http://kalenyuk.pro" style="color: red;">Kaleniuk Ihor</a>"</div>
+    </div>
+    <div class="RBB">
+      <div class="adressLineMap"><%= conf.phoneTitle %></div>
+      <a href="tel:<%= conf.number %>" class="adressLineMap"><%= conf.number %></a>
+      <div class="adressLineMap"></div>
+      <div class="adressLineMap"><%= conf.emailTitle %></div>
+      <a href="mailto:<%= conf.email %>?subject=SweetWords" class="adressLineMap"><%= conf.email %></a>
+      <div class="adressLineMap"></div>
+      <div class="adressLineMap">
+        <div class="lang" id="ua" title="Українська версія"></div>
+        <div class="lang" id="ru" title="Русская версия"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pageMessages"></div>
+<div class='back-to-top' id='back-to-top' title='Back to top'><i class='fa fa-chevron-up'></i></div>
+<div id="basketDATA">
+  <div id="bas">
+    <div class="basket_close"></div>
+    <div class="backet_load"></div>
+    <div class="basket_tovar"></div>
+    <div class="basket_info">
+      <p class="input-container">
+        <input type="text" id="input-PaymentName" class="login-input">
+        <label for="input-PaymentName" unselectable="on">Имя</label>
+      </p>
+      <p class="input-container">
+        <input type="text" id="input-PaymentFourname" class="login-input">
+        <label for="input-PaymentFourname" unselectable="on">Фамилия</label>
+      </p>
+      <p class="input-container">
+        <input type="text" id="input-PaymentCity" class="login-input">
+        <label for="input-PaymentCity" unselectable="on">Город</label>
+      </p>
+
+
+
+      <div class="ui-combobox ui-combobox-options-left">
+        <div class="ui-value" placeholder="Выберите тип доставки"></div>
+        <div class="ui-options">
+          <!-- <label>Выберите тип доставки:</label>
+          <i class="separator"></i> -->
+          <label>Самовывоз</label>
+          <label>Доставка курьером</label>
+          <label>Доставка Новой Почтой</label>
+          <label>Доставка УкрПочтой</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

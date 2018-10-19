@@ -23,14 +23,6 @@ a{
     background: #a20d5b;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    background: #f3f3f5 url(../../../image/body.jpg);
-    margin-top: 152px;
-    font-family: 'Didact Gothic', sans-serif;
-}
 .content {
     max-width: none;
 }
@@ -89,14 +81,19 @@ background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiB
 
 .thumbnail .caption .toDetails{
   position: absolute;
-  top: -33px;
+  top: 7px;
   color: black;
-  opacity: 0.5;
   transition: 0.2s;
+  border-radius: 5px;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  transform: translate(-50%, 0);
 }
 
 .thumbnail .caption .toDetails:hover{
-  opacity: 0.8;
+  /* opacity: 0.8; */
 }
 
 .item.list-group-item
@@ -158,7 +155,10 @@ background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiB
 }
 .list-group-item-text
 {
-    margin: 0 0 11px;
+  margin: 0 0 11px;
+  max-height: 48px;
+  min-height: 48px;
+  overflow: hidden;
 }
 
 .well {
@@ -352,3 +352,15 @@ fieldset, label { margin: 0; padding: 0; }
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+.shadow{
+  width: 100%;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.65);
+  /* position: absolute; */
+  bottom: 0;
+  margin-top: -44px;
+  z-index: 9;
+  position: relative;
+  background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgb(255, 255, 255));
+}

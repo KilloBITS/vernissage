@@ -19,12 +19,9 @@ router.get('/*', function(req, res, next){
     }
   }
 
-  var searchData;
   var DA = req.url.split('=');
+  var searchData = DA[1].split(',');
 
-  if(DA[0] !== "/"){
-    searchData = DA[1].split(',');
-  }
   mongoClient.connect(url, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("config");
@@ -37,26 +34,13 @@ router.get('/*', function(req, res, next){
        if(results_config[languageSystem].opens){
 
          menu.find().toArray(function(err, results_menu ){
-           if(DA[0] !== "/"){
-             let FILTER = {
-               category: parseInt(searchData[0])
-             };
-             if(searchData.length >= 2 ){
-               FILTER.types = searchData[1];
-             }
 
-             console.log(FILTER)
-
-             tovar.find(FILTER).sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar})
+             tovar.find({AI: parseInt(searchData)}).toArray(function(err, results_tovar ){
+               console.log(results_tovar)
+               res.render('details.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar})
                client.close();
              });
-           }else{
-             tovar.find().sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar})
-               client.close();
-             });
-           }
+
 
          });
        }else{
