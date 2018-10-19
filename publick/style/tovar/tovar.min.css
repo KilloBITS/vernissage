@@ -8,18 +8,9 @@
   body{
       margin-top: 60px;
   }
-
-.topNavBlockOfBtm{
-  /* display: none; */
-}
-
-.contact_number{
-    display: none;
-}
-
-.basketBlock{
-  right: 18px;
-}
+  .contact_number{
+      display: none;
+  }
 
   .topNavMobMenuOfBtm{
     display: block;
@@ -50,7 +41,9 @@
     height: 6px;
     border-radius: 10px;
   }
-
+  .basketBlock{
+    right: 8px;
+  }
   .carousel-wrapper {
     height: 290px;
   }
