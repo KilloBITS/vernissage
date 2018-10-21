@@ -1,0 +1,11 @@
+@media screen and (max-width: 800px) {
+  .rating {
+      border: none;
+      float: left;
+      position: absolute;
+      z-index: 999;
+      right: 5px;
+      top: auto;
+      bottom: 0;
+  }  
+}

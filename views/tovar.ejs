@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-	<title>≡ <%= title %></title>
+	<title>≡ <%= title %> </title>
+
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
@@ -47,7 +48,12 @@
 		<div class="menuBlock">
       <% for(var i = 0; i < menu.length; i++) { %>
         <% if(menu[i].podlink.length > 1){ %>
-          <a href="<%= menu[i].glink %>"><div class="menuBTN" menu-link="<%= menu[i].ml %>"><%= menu[i].name %></div></a>
+          <a href="<%= menu[i].glink %>">
+            <div class="menuBTN" menu-link="<%= menu[i].ml %>">
+              <%= menu[i].name %>
+              <!-- <div class="arrow_bottom"></div> -->
+            </div>
+          </a>
         <% } else { %>
           <a href="<%= menu[i].glink %>"><div class="menuBTN"><%= menu[i].name %></div></a>
         <% } %>
@@ -96,16 +102,17 @@
                   </div>
                 <% } %>
                   <div class="water_icon"></div>
-                  <div class="blockOfNavBtn">
-                    <div class="BIG_BTN addToJelaniya">
-                      <span><%= conf.big_btn[0] %></span>
-                    </div>
-                    <div class="BIG_BTN addToSravnenie">
-                      <span><%= conf.big_btn[1] %></span>
-                    </div>
-                  </div>
+
     							<img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
     							<div class="caption">
+                    <div class="blockOfNavBtn">
+                      <div class="BIG_BTN addToJelaniya">
+                        <span><%= conf.big_btn[0] %></span>
+                      </div>
+                      <div class="BIG_BTN addToSravnenie">
+                        <span><%= conf.big_btn[1] %></span>
+                      </div>
+                    </div>
 
                     <fieldset class="rating">
                         <input type="radio" id="star5_<%= i %>" name="rating_<%= i %>" value="5" /><label class = "full" tovid="<%= tovarArr[i].AI %>" for="star5_<%= i %>" title="Awesome - 5 stars"></label>

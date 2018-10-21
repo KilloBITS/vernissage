@@ -4,6 +4,12 @@ $(document).ready(() => {
     document.cookie = "vernissageLang="+$(this).attr("id");
     location.reload();
   });
+
+  if($("body").width() > 800){
+      return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
+  }else{
+      return $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
+  }
 });
 
 function runOnKeys(func) {
@@ -32,7 +38,6 @@ runOnKeys(function() {
     window.location.href = "/login";
   }
 },"Q".charCodeAt(0),"A".charCodeAt(0));
-
 function createAlert(title, summary, details, severity, dismissible, autoDismiss, appendToId) {
   var iconMap = {
     info: "fa fa-info-circle",
@@ -111,7 +116,6 @@ function createAlert(title, summary, details, severity, dismissible, autoDismiss
     }, 5000);
   }
 }
-
 $(function() {
   if ($('#sidecontent3').length) {
     var el = $('#sidecontent3');
@@ -137,15 +141,12 @@ $(function() {
     });
   }
 });
-
 // Back to top button
 (function() {
   $(document).ready(function() {
-
-
     if($("body").width() > 800){
       return $(window).scroll(function() {
-        return $(window).scrollTop() > 600 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
+        return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
       }), $("#back-to-top").click(function() {
         return $("html,body").animate({
           scrollTop: "0"

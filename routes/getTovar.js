@@ -49,7 +49,7 @@ router.get('/*', function(req, res, next){
              console.log(FILTER)
 
              tovar.find(FILTER).sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar})
+               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar, title: titles[languageSystem]})
                client.close();
              });
            }else{
