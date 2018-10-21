@@ -2,6 +2,8 @@
 var BASKET = [];
 let pages = 666;
 
+
+
 function createPagination(pages, page) {
   let str = '<ul>';
   let active;

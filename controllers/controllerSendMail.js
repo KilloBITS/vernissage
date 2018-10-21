@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 const nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
@@ -26,7 +25,7 @@ router.post('/sendMessage', function(req, res, next){
   transporter.sendMail(ml, function (error, info) {
 
     res.send({code:500, msg: 'Сообщение отправлено'});
-  
+
   });
 });
 

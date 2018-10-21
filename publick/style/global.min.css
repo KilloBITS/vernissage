@@ -11,6 +11,7 @@
 }
 
 @media screen and (max-width: 800px) {
+  #list,#grid{display: none;}
   body{
       margin-top: 60px;
   }
@@ -67,7 +68,7 @@
       position: relative;
       padding: 0.5rem;
       cursor: pointer;
-      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-family: 'Didact Gothic', sans-serif; "Open Sans", Helvetica, Arial, sans-serif;
       font-size: 20px;
       -webkit-perspective: 1000px;
       perspective: 1000px;
@@ -117,7 +118,7 @@
       display: inline-block;
       padding: 5px 10px;
       cursor: pointer;
-      font-family: 'Didact Gothic', sans-serif;
+      font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
       transition: 0.3s;
       /* float: left; */
       color: black;

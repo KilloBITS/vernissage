@@ -50,6 +50,7 @@ app.post('/getbasket', getbasket);
 
 app.listen(4000, function(){
   global.baseName = 'VERNISSAGE';
+  global.baseIP = 'mongodb://localhost:27017/';
   console.warn('STARTED VERNISSAGE SERVER ON PORT: 4000');
 });
 

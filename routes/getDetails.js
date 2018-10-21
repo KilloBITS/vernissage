@@ -2,10 +2,15 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+// const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+function randomInteger(min, max) {
+  var rand = min - 0.5 + Math.random() * (max - min + 1)
+  rand = Math.round(rand);
+  return rand;
+}
 
 router.get('/*', function(req, res, next){
-  var languageSystem, langMenu;
+  var languageSystem, langMenu, recomendedTovar = [];
   if(req.cookies.vernissageLang === undefined){
     languageSystem = 0;
     langMenu = 'menu';
@@ -22,7 +27,7 @@ router.get('/*', function(req, res, next){
   var DA = req.url.split('=');
   var searchData = DA[1].split(',');
 
-  mongoClient.connect(url, function(err, client){
+  mongoClient.connect(global.baseIP, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("config");
     const menu  = db.collection(langMenu);
@@ -36,9 +41,18 @@ router.get('/*', function(req, res, next){
          menu.find().toArray(function(err, results_menu ){
 
              tovar.find({AI: parseInt(searchData)}).toArray(function(err, results_tovar ){
-               console.log(results_tovar)
-               res.render('details.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar})
-               client.close();
+
+               for(let i = 0; i < 3; i++){
+                 recomendedTovar.push(randomInteger(0, 20) )
+               }
+
+               console.log(recomendedTovar)
+
+               tovar.find({AI:  { $in: recomendedTovar } }).toArray(function(err, results_recTovar ){
+                 res.render('details.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar, rec: results_recTovar})
+                 client.close();
+               });
+
              });
 
 

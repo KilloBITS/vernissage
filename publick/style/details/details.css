@@ -285,7 +285,7 @@
   }
   .grid > [class*="column-"] {
     margin: 0;
-    max-width: 100%;
+    max-width: 98%;
   }
 
   .column-xs-1 {
@@ -428,6 +428,8 @@
     .column-md-4 {
       grid-column-start: span 4;
       grid-column-end: span 4;
+      border: 1px solid rgba(192, 192, 192, 0.28);
+      text-align: center;
     }
 
     .column-md-5 {
@@ -593,6 +595,11 @@ img {
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
+
+}
+
+.related-products img{
+       max-height: 220px;
 }
 
 nav {
@@ -750,7 +757,8 @@ footer {
 }
 
 .product-image {
-  display: none;
+  /* display: none; */
+  position: relative;
 }
 
 .image-list li {
@@ -842,7 +850,7 @@ input, textarea {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
-  font-family: "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-family: 'Didact Gothic', sans-serif; "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
   font-size: 1rem;
   color: #555f77;
 }
@@ -860,7 +868,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 p {
-  line-height: 1.3125rem;
+    line-height: 20px;
 }
 
 .comments {
@@ -949,4 +957,54 @@ p {
 }
 .sale span{
 
+}
+
+/****** Style Star Rating Widget *****/
+.rating {
+  border: none;
+  float: left;
+  position: absolute;
+  z-index: 999;
+  right: 5px;
+  top: 0px;
+}
+
+.rating > input { display: none; }
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: 'FontAwesome', sans-serif;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label {
+  color: #ddd;
+  float: right;
+  cursor: pointer;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+
+.comments_title{
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid silver;
+  padding-bottom: 10px;
 }

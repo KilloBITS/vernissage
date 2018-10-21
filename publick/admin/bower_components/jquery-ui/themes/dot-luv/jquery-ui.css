@@ -830,7 +830,7 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Arial,sans-serif;
+	font-family: 'Didact Gothic', sans-serif; Arial,sans-serif;
 	font-size: 1.3em;
 }
 .ui-widget .ui-widget {
@@ -840,7 +840,7 @@ body .ui-tooltip {
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Arial,sans-serif;
+	font-family: 'Didact Gothic', sans-serif; Arial,sans-serif;
 	font-size: 1em;
 }
 .ui-widget-content {

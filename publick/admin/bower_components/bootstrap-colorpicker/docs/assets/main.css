@@ -20,7 +20,7 @@ h4 ~ p {
   word-break: break-all;
   word-wrap: break-word;
   border: 1px solid #000;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: 'Didact Gothic', sans-serif; Menlo, Monaco, Consolas, "Courier New", monospace;
   white-space: pre;
   overflow: auto;
 }

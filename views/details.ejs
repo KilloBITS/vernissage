@@ -79,14 +79,38 @@
             <span><%= tovarArr[0].sale[1] %> %</span>
           </div>
         <% } %>
-        <div class="column-xs-12 column-md-7">
+        <div class="column-xs-12 column-md-6">
           <div class="product-gallery">
             <div class="product-image">
+              <div class="blockOfNavBtn">
+                <div class="BIG_BTN addToJelaniya">
+                  <span><%= conf.big_btn[0] %></span>
+                </div>
+                <div class="BIG_BTN addToSravnenie">
+                  <span><%= conf.big_btn[1] %></span>
+                </div>
+              </div>
               <img class="active" src="../../../data/tovar/<%= tovarArr[0].image %>">
+              <fieldset class="rating">
+                  <input type="radio" id="star5_<%= 0 %>" name="rating_<%= 0 %>" value="5" /><label class = "full" tovid="<%= tovarArr[0].AI %>" for="star5_<%= 0 %>" title="Awesome - 5 stars"></label>
+                  <input type="radio" id="star5_<%= 0 %>" name="rating_<%= 0 %>" value="4.5" /><label class="half" tovid="<%= tovarArr[0].AI %>" for="star5_<%= 0 %>" title="Pretty good - 4.5 stars"></label>
+                  <input type="radio" id="star4_<%= 0 %>" name="rating_<%= 0 %>" value="4" /><label class = "full" tovid="<%= tovarArr[0].AI %>" for="star4_<%= 0 %>" title="Pretty good - 4 stars"></label>
+                  <input type="radio" id="star4_<%= 0 %>" name="rating_<%= 0 %>" value="3.5" /><label class="half" tovid="<%= tovarArr[0].AI %>" for="star4_<%= 0 %>" title="Meh - 3.5 stars"></label>
+                  <input type="radio" id="star3_<%= 0 %>" name="rating_<%= 0 %>" value="3" /><label class = "full" tovid="<%= tovarArr[0].AI %>" for="star3_<%= 0 %>" title="Meh - 3 stars"></label>
+                  <input type="radio" id="star3_<%= 0 %>" name="rating_<%= 0 %>" value="2.5" /><label class="half" tovid="<%= tovarArr[0].AI %>" for="star3_<%= 0 %>" title="Kinda bad - 2.5 stars"></label>
+                  <input type="radio" id="star3_<%= 0 %>" name="rating_<%= 0 %>" value="2" /><label class = "full" tovid="<%= tovarArr[0].AI %>" for="star2_<%= 0 %>" title="Kinda bad - 2 stars"></label>
+                  <input type="radio" id="star2_<%= 0 %>" name="rating_<%= 0 %>" value="1.5" /><label class="half" tovid="<%= tovarArr[0].AI %>" for="star2_<%= 0 %>" title="Meh - 1.5 stars"></label>
+                  <input type="radio" id="star1_<%= 0 %>" name="rating_<%= 0 %>" value="1" /><label class = "full" tovid="<%= tovarArr[0].AI %>" for="star1_<%= 0 %>" title="Sucks big time - 1 star"></label>
+                  <input type="radio" id="star0_<%= 0 %>" name="rating_<%= 0 %>" value="0" /><label class="half" tovid="<%= tovarArr[0].AI %>" for="star0_<%= 0 %>" title="Sucks big time - 0.5 stars"></label>
+
+                  <script>
+                    $("#star"+<%= tovarArr[0].popular %>+"_<%= 0 %>").attr("checked","checked")
+                  </script>
+              </fieldset>
             </div>
           </div>
         </div>
-        <div class="column-xs-12 column-md-5">
+        <div class="column-xs-12 column-md-6">
           <h1><%= tovarArr[0].title %></h1>
           <% if(tovarArr[0].sale[0]){ %>
             <h2 style="text-decoration: line-through"><%= tovarArr[0].price %> Грн</h2>
@@ -103,27 +127,29 @@
       </div>
       <div class="grid related-products">
         <div class="column-xs-12">
-          <h3>You may also like</h3>
+          <h3><%= conf.detailsTovar.recomended %></h3>
         </div>
-        <div class="column-xs-12 column-md-4">
-          <img src="https://source.unsplash.com/miziNqvJx5M">
-          <h4>Succulent</h4>
-          <p class="price">$19.99</p>
-        </div>
-        <div class="column-xs-12 column-md-4">
-          <img src="https://source.unsplash.com/2y6s0qKdGZg">
-          <h4>Terranium</h4>
-          <p class="price">$19.99</p>
-        </div>
-        <div class="column-xs-12 column-md-4">
-          <img src="https://source.unsplash.com/6Rs76hNbIWE">
-          <h4>Cactus</h4>
-          <p class="price">$19.99</p>
-        </div>
+
+        <% for(var i = 0; i < rec.length; i++) { %>
+
+            <div class="column-xs-12 column-md-4">
+              <a href="/details?tov=<%= rec[i].AI %>">
+              <img src="../../../data/tovar/<%= rec[i].image %>">
+              <h4><%= rec[i].title %></h4>
+              <% if(rec[i].sale[0]){ %>
+                <p class="price" style="text-decoration: line-through"><%= rec[i].price %> Грн</p>
+                <p class="price2" style="color: red"><%= parseInt(rec[i].price - rec[i].price / 100 * parseInt(rec[i].sale[1])) %> Грн</p>
+              <% } else { %>
+                <p class="price"><%= rec[i].price %> Грн</p>
+              <% } %>
+              </a>
+            </div>
+        <% } %>
       </div>
     </div>
 
     <div class="comments">
+      <div class="comments_title"><%= conf.detailsTovar.comments %></div>
     		<div class="comment-wrap">
     				<div class="photo">
     						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>

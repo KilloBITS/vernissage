@@ -58,7 +58,7 @@ var Details = {
        var setStar = $(this).attr("for").split('_')[0].replace(/[^-0-9]/gim,'');
 
        $.post("/setStars",{id: tovID, ss: setStar},function(d){
-         console.log(d)
+         createAlert('','Ваш голос принят!','','success',true,true,'pageMessages');
        });
      });
      $(".basketBlock").click(function(){

@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 const bParser = require('body-parser');
 
 router.post('/getbasket', function(req, res, next){
@@ -11,7 +10,7 @@ router.post('/getbasket', function(req, res, next){
     arrayTovar.push(parseInt(req.body.data[i]));
   }
 
-  mongoClient.connect(url, function(err, client){
+  mongoClient.connect(global.baseIP, function(err, client){
     const db = client.db(global.baseName);
     const tovar  = db.collection("tovar");
 

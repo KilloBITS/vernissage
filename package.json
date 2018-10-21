@@ -34,6 +34,7 @@
     "nodemailer": "^4.6.8",
     "os": "^0.1.1",
     "socket.io": "^2.1.1",
+    "tunnel-ssh": "^4.1.4",
     "vue-3d-model": "^1.0.2"
   }
 }

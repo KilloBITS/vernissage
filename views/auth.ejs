@@ -9,15 +9,20 @@
   <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/style/flickity.min.css">
   <link rel="stylesheet" type="text/css" href="/style/animate.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+
   <link rel="stylesheet" type="text/css" href="/style/global.css">
 	<link rel="stylesheet" type="text/css" href="/style/global.min.css">
+
   <link rel="stylesheet" type="text/css" href="/style/auth/auth.css">
 	<link rel="stylesheet" type="text/css" href="/style/auth/auth.min.css">
   <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
   <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/script/bootstrap.min.js"></script>
   <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
 	<script type="text/javascript" src="script/global.js"></script>
   <script type="text/javascript" src="script/auth/auth.js"></script>
 </head>
@@ -66,47 +71,78 @@
 </div>
 
 <div class="content">
-  <div class="container">
-    <div class="welcome">
-      <div class="pinkbox">
-        <div class="signup nodisplay">
-          <h1>Регистрация</h1>
-          <form autocomplete="off">
-            <input type="text" placeholder="Имя">
-            <input type="email" placeholder="Електронная почта">
-            <input type="password" placeholder="Пароль">
-            <input type="password" placeholder="Повторить пароль">
-            <button class="button submit">Создать аккаунт </button>
-          </form>
+  <div class="main-box">
+    <div class="slider-cont">
+      <div class="signup-slider">
+        <div class="img-txt">
+          <div class="img-layer"></div>
+          <h1>The hardest part of starting up is starting out for you.</h1>
+          <img src="https://static.pexels.com/photos/33972/pexels-photo.jpg"/>
         </div>
-        <div class="signin">
-          <h1>Авторизация</h1>
-          <form class="more-padding" autocomplete="off">
-            <input type="text" placeholder="Логин">
-            <input type="password" placeholder="Пароль">
-            <div class="checkbox">
-              <input type="checkbox" id="remember" /><label for="remember">Запомнить меня</label>
-            </div>
-
-            <button class="button submit">Войти</button>
-          </form>
+        <div class="img-txt">
+          <div class="img-layer"></div>
+          <h1>We understand you and your business, We have the right solutions for you.</h1>
+          <img src="https://static.pexels.com/photos/257897/pexels-photo-257897.jpeg"/>
         </div>
-      </div>
-      <div class="leftbox">
-        <h2 class="title">Verni<span>ss</span>age</h2>
-        <img class="flower smaller" src="https://image.ibb.co/d5X6pn/1357d638624297b.jpg" alt="1357d638624297b" border="0">
-        <p class="account">У вас есть аккаунт ?</p>
-        <button class="button" id="signin">Вход</button>
-      </div>
-      <div class="rightbox">
-        <h2 class="title">Verni<span>ss</span>age</h2>
-        <img class="flower" src="https://preview.ibb.co/jvu2Un/0057c1c1bab51a0.jpg"/>
-        <p class="account">Вы хотите создать аккаунт ?</p>
-        <button class="button" id="signup">Регистрация</button>
+        <div class="img-txt">
+          <div class="img-layer"></div>
+          <h1>Join US Now!</h1>
+          <img src="https://static.pexels.com/photos/317383/pexels-photo-317383.jpeg"/>
+        </div>
       </div>
     </div>
-   </div>
 
+
+    <div class="form-cont">
+
+      <div class="top-buttons">
+        <button class="to-signup ">
+          Регистрация
+        </button>
+        <button class="to-signin top-active-button">
+          Авторизация
+        </button>
+      </div>
+
+      <div class="form form-signup">
+        <form action="#">
+          <lable>Полное имя</lable>
+          <input type="text"
+                 placeholder="Введите полное имя">
+          <lable>E-MAIL</lable>
+          <input type="email"
+                 placeholder="Введите ваш E-mail">
+          <lable>Пароль</lable>
+          <input type="password"
+                 placeholder="Придумайте пароль">
+          <p class="terms">
+            <input type="checkbox">
+            Я согласен с
+            <a href="#" class="lined-link">правилами сайта</a>
+          </p>
+          <input type="submit"
+                 class="form-btn"
+                 value="Зарегистрировать"/>
+          <a href="#" class="lined-link to-signin-link">Я уже зарегистрирован</a>
+        </form>
+      </div>
+
+      <div class="form form-signin">
+        <form action="#">
+          <lable>E-MAIL</lable>
+          <input type="email"
+                 placeholder="Ваш логин">
+          <lable>Пароль</lable>
+          <input type="password"
+                 placeholder="Ваш пароль">
+          <input type="submit"
+                 class="form-btn"
+                 value="Войти"/>
+          <a href="#" class="lined-link to-signup-link">Зарегистрировать аккаунт</a>
+        </form>
+      </div>
+    </div>
+    <div class="clear-fix"></div>
   </div>
 </div>
 

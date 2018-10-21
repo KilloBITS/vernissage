@@ -628,7 +628,7 @@ TODO: more distinction between this file and common.css
   font-size: 1em;
   text-align: center;
   overflow: hidden;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Didact Gothic', sans-serif; "Courier New", Courier, monospace;
   /* don't allow browser text-selection */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -1146,7 +1146,7 @@ be a descendant of the grid when it is being dragged.
   overflow: hidden;
   line-height: 8px;
   font-size: 11px;
-  font-family: monospace;
+  font-family: 'Didact Gothic', sans-serif; monospace;
   text-align: center;
   cursor: s-resize; }
 

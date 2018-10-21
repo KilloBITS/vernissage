@@ -6,7 +6,7 @@ a{
 body{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Didact Gothic', sans-serif; sans-serif;
     font-size: 16px;
     background: #f3f3f5 url(../../../image/body.jpg);
     margin-top: 152px;
@@ -52,11 +52,11 @@ body{
 .twoLine{
 	box-shadow: 0px 0px 14px 0px rgba(123, 11, 69, 0.38);
 }
-/*font-family: 'Comfortaa', cursive;
-font-family: 'Yanone Kaffeesatz', sans-serif;
-font-family: 'PT Mono', monospace;
-font-family: 'Fira Sans Extra Condensed', sans-serif;
-font-family: 'Didact Gothic', sans-serif;*/
+/*font-family: 'Didact Gothic', sans-serif; 'Comfortaa', cursive;
+font-family: 'Didact Gothic', sans-serif; 'Yanone Kaffeesatz', sans-serif;
+font-family: 'Didact Gothic', sans-serif; 'PT Mono', monospace;
+font-family: 'Didact Gothic', sans-serif; 'Fira Sans Extra Condensed', sans-serif;
+font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;*/
 
 .menuBlock{
     width: fit-content;
@@ -68,7 +68,7 @@ font-family: 'Didact Gothic', sans-serif;*/
     display: inline-block;
     padding: 14px 10px;
     cursor: pointer;
-    font-family: 'Didact Gothic', sans-serif;
+    font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
     transition: 0.3s;
     float: left;
     color: black;
@@ -124,7 +124,7 @@ font-family: 'Didact Gothic', sans-serif;*/
   height: 26px;
   border: 0;
   border-bottom: 1px solid black;
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
 }
 
 .logInBlock:hover{
@@ -157,7 +157,7 @@ font-family: 'Didact Gothic', sans-serif;*/
     padding: 4px 40px;
     font-size: 18px;
     color: #dd127b;
-    font-family: 'Didact Gothic', sans-serif;
+    font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
     border-bottom: 1px solid #dd127b26;
     text-transform: uppercase;
 }
@@ -172,7 +172,7 @@ font-family: 'Didact Gothic', sans-serif;*/
     width: 100%;
     padding: 5px 0px 3px 10px;
     color: #dd127b;
-    font-family: 'Didact Gothic', sans-serif;
+    font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
     cursor: pointer;
 }
 
@@ -443,7 +443,7 @@ svg {
   }
 }
 .slide__text-heading {
-  font-family: "Polar", Helvetica, Arial, sans-serif;
+  font-family: 'Didact Gothic', sans-serif; "Polar", Helvetica, Arial, sans-serif;
   font-size: 22px;
   margin-bottom: 2rem;
 }
@@ -453,7 +453,7 @@ svg {
   }
 }
 .slide__text-desc {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: 'Didact Gothic', sans-serif; "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 18px;
   margin-bottom: 1.5rem;
 }
@@ -469,11 +469,12 @@ svg {
   position: relative;
   padding: 0.5rem;
   cursor: pointer;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
   font-size: 2.3rem;
   -webkit-perspective: 1000px;
           perspective: 1000px;
   color: white;
+  text-decoration: none;
 }
 @media (max-width: 991px) {
   .slide__text-link {
@@ -489,7 +490,7 @@ svg {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000;
+  background: #fff;
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
   -webkit-transform: rotateX(-85deg);
@@ -512,7 +513,7 @@ svg {
 
 .mainDLG{
 	width: 100%;
-    font-family: 'Didact Gothic', sans-serif;
+    font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
 }
 
 .mainTitleDLG,.mainTextDLG{
@@ -669,7 +670,7 @@ form input, form textarea {
     display: block;
     width: 100%;
     margin-top: 1em;
-	font-family: 'Didact Gothic', sans-serif;
+	font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.51);
@@ -759,7 +760,7 @@ form textarea {
   opacity: 0.6;
 }
 .post-module .thumbnail {
-  background: #000000;
+  background: #ffffff;
   overflow: hidden;
 }
 .post-module .thumbnail .date {
@@ -770,7 +771,7 @@ form textarea {
   background: #e74c3c;
   width: 55px;
   height: 55px;
-  padding: 12.5px 0;
+  padding: 5.5px 0;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
@@ -939,5 +940,5 @@ form textarea {
 
 .carousel-cell h3{
   font-size: 18px;
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
 }

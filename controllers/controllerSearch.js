@@ -3,13 +3,12 @@ const express = require('express');
 const router = express.Router();
 const cookieParser = require('cookie-parser');
 const mongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 const bParser = require('body-parser');
 
 router.use(cookieParser());
 
 var searchFunction = (req, res, next) => {
-    mongoClient.connect(url, { useNewUrlParser: true,textSearchEnabled:true } ,function(err, client){
+    mongoClient.connect(global.baseIP, { useNewUrlParser: true,textSearchEnabled:true } ,function(err, client){
       const db = client.db(global.baseName);
       const tovar  = db.collection("tovar");
 

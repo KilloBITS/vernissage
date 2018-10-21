@@ -65,7 +65,7 @@ body {
 
 #mocha .test.pending:hover h2::after {
   content: '(pending)';
-  font-family: arial, sans-serif;
+  font-family: 'Didact Gothic', sans-serif; arial, sans-serif;
 }
 
 #mocha .test.pass.medium .duration {

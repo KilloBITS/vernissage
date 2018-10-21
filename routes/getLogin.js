@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+// const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 router.get('/', function(req, res, next){
   var languageSystem, langMenu;
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next){
   if(DA[0] !== "/"){
     searchData = DA[1].split(',');
   }
-  mongoClient.connect(url, function(err, client){
+  mongoClient.connect(global.baseIP, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("config");
     const menu  = db.collection(langMenu);

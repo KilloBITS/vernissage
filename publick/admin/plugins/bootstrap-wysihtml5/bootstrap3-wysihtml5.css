@@ -103,7 +103,7 @@ ul.wysihtml5-toolbar div[data-wysihtml5-command-value="orange"] {
 
 .glyphicon-quote:before {
   content: "\201C";
-  font-family: Georgia, serif;
+  font-family: 'Didact Gothic', sans-serif; Georgia, serif;
   font-size: 50px;
   position: absolute;
   top: -4px;

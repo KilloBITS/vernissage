@@ -26,7 +26,7 @@ a{
 body{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Didact Gothic', sans-serif; sans-serif;
     font-size: 16px;
     background: #f3f3f5 url(../../../image/body.jpg);
     margin-top: 152px;
@@ -152,7 +152,7 @@ img {
   width: 100%;
   padding: 20px 0 10px 0;
   text-align: center;
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
 }
 
 .vector_head{
