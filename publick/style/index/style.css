@@ -670,10 +670,10 @@ form input, form textarea {
     display: block;
     width: 100%;
     margin-top: 1em;
-	font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;
-    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	font-family: 'Didact Gothic', sans-serif;
+    /* -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.51);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.51); */
     resize: none;
 }
 form input:focus, form textarea:focus {
@@ -692,7 +692,7 @@ form #input-submit:hover {
   box-shadow: 0 1px 1px 1px rgba(170, 170, 170, 0.6);
 }
 form textarea {
-  height: 126px;
+    height: 194px;
 }
 
 .half {

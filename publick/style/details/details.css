@@ -732,6 +732,7 @@ nav li {
 
 .grid > [class*="column-"] {
   padding: 1rem;
+  text-align: center;
 }
 .grid.menu, .grid.product {
   border-bottom: 0.0625rem solid #e3dddd;

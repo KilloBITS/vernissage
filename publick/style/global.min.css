@@ -325,7 +325,7 @@
     transform: translate(0, 0);
   }
   #basketDATA{
-    z-index: 90;
+    /* z-index: 90; */
   }
   .basket_info {
     display: none;
