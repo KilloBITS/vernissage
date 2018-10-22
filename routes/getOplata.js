@@ -30,7 +30,12 @@ router.get('/', function(req, res, next){
      config.find().toArray(function(err, results_config){
        if(results_config[languageSystem].opens){
          menu.find().toArray(function(err, results_menu ){
-           res.render('oplata.ejs',{conf: results_config[languageSystem], menu: results_menu, title: titles[languageSystem]})
+           res.render('oplata.ejs',{
+             conf: results_config[languageSystem],
+             menu: results_menu,
+             title: titles[languageSystem],
+             sessionUser: req.session.user
+           })
            client.close();
          });
        }else{

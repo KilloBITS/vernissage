@@ -32,24 +32,33 @@ router.get('/', function(req, res, next){
 
       if(err) return console.log(err);
 
-     config.find().toArray(function(err, results_config){
-       if(results_config[languageSystem].opens){
-         menu.find().toArray(function(err, results_menu ){
-           slider.find().toArray(function(err, results_slider ){
-             news.find().toArray(function(err, results_news ){
-               tovar.find().sort({ AI: -1 }).limit(5).toArray(function(err, results_tovar ){
-                 res.render('index.ejs',{conf: results_config[languageSystem], menu: results_menu, slides: results_slider, news: results_news, newtovar: results_tovar})
-                 client.close();
-               });
+       config.find().toArray(function(err, results_config){
+         if(results_config[languageSystem].opens){
+           menu.find().toArray(function(err, results_menu ){
+             slider.find().toArray(function(err, results_slider ){
+               news.find().toArray(function(err, results_news ){
+                 tovar.find().sort({ AI: -1 }).limit(5).toArray(function(err, results_tovar ){
 
+                     res.render('index.ejs',{
+                       conf: results_config[languageSystem],
+                       menu: results_menu,
+                       slides: results_slider,
+                       news: results_news,
+                       newtovar: results_tovar,
+                       sessionUser: req.session.user
+                     });
+
+                   client.close();
+                 });
+
+               });
              });
            });
-         });
-       }else{
-         res.render('close.ejs')
-       }
+         }else{
+           res.render('close.ejs')
+         }
 
-     });
+       });
   });
 });
 

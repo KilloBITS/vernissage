@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-	<title>≡ Каталог товаров</title>
+	<title>≡ Авторизация</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
@@ -105,7 +105,7 @@
       </div>
 
       <div class="form form-signup">
-        <form action="#">
+        <div class="aForm" action="#">
           <lable>Полное имя</lable>
           <input type="text"
                  placeholder="Введите полное имя">
@@ -120,26 +120,20 @@
             Я согласен с
             <a href="#" class="lined-link">правилами сайта</a>
           </p>
-          <input type="submit"
-                 class="form-btn"
-                 value="Зарегистрировать"/>
+          <input type="submit" class="form-btn" value="Зарегистрировать"/>
           <a href="#" class="lined-link to-signin-link">Я уже зарегистрирован</a>
-        </form>
+        </div>
       </div>
 
       <div class="form form-signin">
-        <form action="#">
+        <div class="aForm">
           <lable>E-MAIL</lable>
-          <input type="email"
-                 placeholder="Ваш логин">
+          <input type="email" placeholder="Ваш логин" value="mr.kalinuk@gmail.com" id="login">
           <lable>Пароль</lable>
-          <input type="password"
-                 placeholder="Ваш пароль">
-          <input type="submit"
-                 class="form-btn"
-                 value="Войти"/>
+          <input type="password" placeholder="Ваш пароль" value="admin" id="pass">
+          <input type="submit" class="form-btn" value="Войти" onclick="AUTH.POST_AUTH()"/>
           <a href="#" class="lined-link to-signup-link">Зарегистрировать аккаунт</a>
-        </form>
+        </div>
       </div>
     </div>
     <div class="clear-fix"></div>

@@ -49,7 +49,13 @@ router.get('/*', function(req, res, next){
                console.log(recomendedTovar)
 
                tovar.find({AI:  { $in: recomendedTovar } }).toArray(function(err, results_recTovar ){
-                 res.render('details.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar, rec: results_recTovar})
+                 res.render('details.ejs',{
+                   conf: results_config[languageSystem],
+                   menu: results_menu,
+                   tovarArr: results_tovar,
+                   rec: results_recTovar,
+                   sessionUser: req.session.user
+                 })
                  client.close();
                });
 

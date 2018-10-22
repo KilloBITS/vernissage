@@ -26,6 +26,7 @@ router.get('/*', function(req, res, next){
   if(DA[0] !== "/"){
     searchData = DA[1].split(',');
   }
+
   mongoClient.connect(global.baseIP, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("config");
@@ -33,7 +34,7 @@ router.get('/*', function(req, res, next){
     const tovar  = db.collection("tovar");
 
     if(err) return console.log(err);
-
+    console.log(req.session.user)
      config.find().toArray(function(err, results_config){
        if(results_config[languageSystem].opens){
 
@@ -46,15 +47,25 @@ router.get('/*', function(req, res, next){
                FILTER.types = searchData[1];
              }
 
-             console.log(FILTER)
-
              tovar.find(FILTER).sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar, title: titles[languageSystem]})
+               res.render('tovar.ejs',{
+                 conf: results_config[languageSystem],
+                 menu: results_menu,
+                 tovarArr: results_tovar,
+                 title: titles[languageSystem],
+                 sessionUser: req.session.user
+               })
                client.close();
              });
            }else{
              tovar.find().sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{conf: results_config[languageSystem], menu: results_menu, tovarArr: results_tovar, title: titles[languageSystem]})
+               res.render('tovar.ejs',{
+                 conf: results_config[languageSystem],
+                 menu: results_menu,
+                 tovarArr: results_tovar,
+                 title: titles[languageSystem],
+                 sessionUser: req.session.user
+               })
                client.close();
              });
            }

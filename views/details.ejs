@@ -34,7 +34,11 @@
 		</a>
 		<div class="topNavBlockOfBtm">
 			<a href="tel:<%= conf.number %>" class="contact_number"><%= conf.number %></a>
-      <a href="/auth"><div class="logInBlock"></div></a>
+      <% if(sessionUser !== undefined){ %>
+        <div class="userAccountInBlock"></div>
+      <% } else { %>
+        <a href="/auth"><div class="logInBlock"></div></a>
+      <% } %>
 			<div class="basketBlock">
         <span>0</span>
       </div>

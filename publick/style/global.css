@@ -203,7 +203,7 @@ font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;*/
   border-radius: 16px;
 }
 
-.logInBlock{
+.logInBlock,.userAccountInBlock{
 	 position: absolute;
     width: 26px;
     height: 26px;
@@ -217,6 +217,12 @@ font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;*/
     transition: 0.3s;
     cursor: pointer;
 }
+
+.userAccountInBlock{
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyNTguNzUgMjU4Ljc1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTguNzUgMjU4Ljc1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCI+CjxnPgoJPGNpcmNsZSBjeD0iMTI5LjM3NSIgY3k9IjYwIiByPSI2MCIgZmlsbD0iIzAwMDAwMCIvPgoJPHBhdGggZD0iTTEyOS4zNzUsMTUwYy02MC4wNjEsMC0xMDguNzUsNDguNjg5LTEwOC43NSwxMDguNzVoMjE3LjVDMjM4LjEyNSwxOTguNjg5LDE4OS40MzYsMTUwLDEyOS4zNzUsMTUweiIgZmlsbD0iIzAwMDAwMCIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
+}
+
+
 
 .searchBlock{
 	position: absolute;

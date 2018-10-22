@@ -4,14 +4,22 @@ const https = require('https');
 const express = require('express');
 const bParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const fs = require('fs');
 
 const app = express();
+
+app.use(session({
+    secret: '2C44-4D44-WppQ38S',
+    resave: true,
+    saveUninitialized: true
+}));
 //project libs use
 app.use(bParser.urlencoded({extended: true}));
 app.use(bParser.json());
 app.use(express.static(__dirname + '/publick/'));
 app.use(cookieParser());
+app.use(bParser({limit: '50mb'}));
 
 //routes pages
 const index = require('./routes/getIndex');
@@ -49,6 +57,32 @@ app.post('/sendMessage', SendMail);
 
 const getbasket = require('./controllers/controllerGetBasket');
 app.post('/getbasket', getbasket);
+
+const auth = require('./controllers/controllerAuthification');
+app.post('/auth', auth);
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*ADMIN*/
+const AdmiGetTovar = require('./controllers/admin/controllerTovar');
+app.post('/getAdmTovar', AdmiGetTovar);
+const delAdmTovar = require('./controllers/admin/controllerTovar');
+app.post('/delAdmTovar', delAdmTovar);
+const setAdmTovar = require('./controllers/admin/controllerTovar');
+app.post('/setAdmTovar', setAdmTovar);
+
+const getMenu = require('./controllers/admin/controllerMenu');
+app.post('/getMenu', getMenu);
 
 app.listen(4000, function(){
   global.baseName = 'VERNISSAGE';
