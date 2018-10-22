@@ -96,9 +96,10 @@
       </div>
       <div id="products" class="row list-group">
         <% for(var i = 0; i < tovarArr.length; i++) { %>
+          <% if(tovarArr[i].availability) { %>
           <div class="item  col-xs-4 col-lg-4 grid-group-item">
 
-    					<div class="thumbnail">
+              <div class="thumbnail">
                 <% if(tovarArr[i].sale[0]){ %>
                   <div class="sale">
                     <span>Скидка</span>
@@ -107,8 +108,8 @@
                 <% } %>
                   <div class="water_icon"></div>
 
-    							<img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
-    							<div class="caption">
+                  <img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
+                  <div class="caption">
                     <div class="blockOfNavBtn">
                       <div class="BIG_BTN addToJelaniya">
                         <span><%= conf.big_btn[0] %></span>
@@ -134,35 +135,36 @@
                           $("#star"+<%= tovarArr[i].popular %>+"_<%= i %>").attr("checked","checked")
                         </script>
                     </fieldset>
-    									<h4 class="group inner list-group-item-heading"><%= tovarArr[i].title %></h4>
-    									<p class="group inner list-group-item-text">
+                      <h4 class="group inner list-group-item-heading"><%= tovarArr[i].title %></h4>
+                      <p class="group inner list-group-item-text">
                         <%= tovarArr[i].text %>
                         <div class="shadow">
                           <a class="toDetails" href="/details?tov=<%= tovarArr[i].AI %>"><%= conf.btnDetails %></a>
                         </div>
                       </p>
-    									<div class="row">
-    											<div class="col-xs-12 col-md-6">
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
                             <% if(tovarArr[i].sale[0]){ %>
                               <p class="lead" style="text-decoration: line-through"><%= tovarArr[i].price %> Грн</p>
                               <p class="lead2" style="color: red"><%= parseInt(tovarArr[i].price - tovarArr[i].price / 100 * parseInt(tovarArr[i].sale[1])) %> Грн</p>
                             <% } else { %>
                               <p class="lead"><%= tovarArr[i].price %> Грн</p>
                             <% } %>
-    											</div>
-    											<div class="col-xs-12 col-md-6">
-    													<a class="btn btn-success" onclick="Index.setBasket(<%= tovarArr[i].AI %>, <%= i %>)"><%= conf.toBasket %></a>
-    											</div>
-    									</div>
-    							</div>
-    					</div>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" onclick="Index.setBasket(<%= tovarArr[i].AI %>, <%= i %>)"><%= conf.toBasket %></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               <div class="getSuccess">
                 <span>Добавлено</span>
               </div>
               <div class="getError">
                 <span>Товар уже добавлен</span>
               </div>
-    			</div>
+          </div>
+          <% } %>
         <% } %>
       </div>
       <% if(tovarArr.length > 24){ %>

@@ -10,22 +10,23 @@ router.use(cookieParser());
 var getAdmTovar = (req, res, next) => {
   mongoClient.connect(global.baseIP, function(err, client){
       const db = client.db(global.baseName);
-      const config = db.collection("tovar");
+      const tovar = db.collection("tovar");
+      const tovaruk = db.collection("tovar-uk");
       if(err) return console.log(err);
-     config.find({ AI: parseInt(req.body.d)}).toArray(function(err, results_tovar){
-       res.send({code: 500, tovarArr: results_tovar});
-
-       // tovar.find( { AI: req.body.id}).toArray(function(err, results){
-       //   tovar.updateOne({ AI: parseInt(req.body.d) },{
-       //     $set: { popular: parseInt(req.body.ss) },
-       //       $currentDate: { lastModified: true }
-       //     });
-       //     res.send({code:500});
-       // });
+     tovar.find({ AI: parseInt(req.body.d)}).toArray(function(err, results_tovar){
+       tovar.find({ AI: parseInt(req.body.d)}).toArray(function(err, results_tovar_ua){
+         res.send({code: 500, tovar_ru: results_tovar, tovar_ua: results_tovar_ua});
+       });
      });
   });
 };
-
+// tovar.find( { AI: req.body.id}).toArray(function(err, results){
+//   tovar.updateOne({ AI: parseInt(req.body.d) },{
+//     $set: { popular: parseInt(req.body.ss) },
+//       $currentDate: { lastModified: true }
+//     });
+//     res.send({code:500});
+// });
 
 var delAdmTovar = (req, res, next) => {
   mongoClient.connect(global.baseIP ,function(err, client){

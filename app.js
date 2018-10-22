@@ -15,11 +15,11 @@ app.use(session({
     saveUninitialized: true
 }));
 //project libs use
-app.use(bParser.urlencoded({extended: true}));
+app.use(bParser.urlencoded({limit: '50mb'}));
 app.use(bParser.json());
 app.use(express.static(__dirname + '/publick/'));
 app.use(cookieParser());
-app.use(bParser({limit: '50mb'}));
+app.use(bParser.raw({limit: '50mb'}));
 
 //routes pages
 const index = require('./routes/getIndex');

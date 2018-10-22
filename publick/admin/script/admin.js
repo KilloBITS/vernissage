@@ -11,6 +11,7 @@ var ADMIN = {
         option.text = res.menu.podlink[i].pname;
         $("#tType").append(option);
       }
+      $("#tType").prepend("<option disabled selected>выберите тип</option>");
     })
   },
   CANCEL: function(){
@@ -32,7 +33,7 @@ var ADMIN = {
       price: $("#tPrice").val(),
       category: parseInt($("#tCategories").val()),
       types: $("#tType").val(),
-      text: $("#tText").val(),
+      text: $("#tText_ua").val(),
     };
 
     if(ADMIN.NEW_TOVAR){
@@ -91,10 +92,6 @@ var ADMIN = {
   }
 };
 
-
-
-
-
 $(document).ready(function(){
   ADMIN.INIT();
 
@@ -115,5 +112,30 @@ $(document).ready(function(){
           reader.readAsDataURL(this.files[0]);
       }
   }, false);
+
+
+  var area = new Morris.Area({
+  element   : 'revenue-chart',
+  resize    : true,
+  data      : [
+    { y: '2018 Q1', item1: 1 },
+    { y: '2018 Q2', item1: 10 },
+    { y: '2018 Q3', item1: 22 },
+    { y: '2018 Q4', item1: 18 },
+    { y: '2018 Q1', item1: 28 },
+    // { y: '2018 Q2', item1: 5670, item2: 4293 },
+    // { y: '2018 Q3', item1: 4820, item2: 3795 },
+    // { y: '2018 Q4', item1: 15073, item2: 5967 },
+    // { y: '2018 Q1', item1: 10687, item2: 4460 },
+    // { y: '2018 Q2', item1: 8432, item2: 5713 }
+  ],
+  xkey      : 'y',
+  ykeys     : ['item1'],
+  labels    : ['Item 1'],
+  lineColors: ['#a0d0e0'],
+  hideHover : 'auto'
+});
+
+area.redraw();
 
 });
