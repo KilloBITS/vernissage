@@ -34,6 +34,7 @@ router.get('/', function(req, res, next){
           const tovaruk  = db.collection("tovar-uk");
           const types  = db.collection("types");
           const categories  = db.collection("categories");
+          const users  = db.collection("users");
 
           if(err) return console.log(err);
 
@@ -45,18 +46,23 @@ router.get('/', function(req, res, next){
                    tovaruk.find().toArray(function(err, results_tovaruk ){
                      types.find().toArray(function(err, results_types ){
                        categories.find().toArray(function(err, results_categories ){
-                         res.render('admin/panel.ejs',{
-                           conf: results_config[languageSystem],
-                           menu: results_menu,
-                           slides: results_slider,
-                           news: results_news,
-                           tovar: results_tovar,
-                           tovaruk: results_tovar,
-                           type: results_types,
-                           categorie: results_categories,
-                           user: req.session.user
-                         })
-                         client.close();
+                         users.find().toArray(function(err, results_users ){
+                           console.log(global.online);
+                           res.render('admin/panel.ejs',{
+                             conf: results_config[languageSystem],
+                             menu: results_menu,
+                             slides: results_slider,
+                             news: results_news,
+                             tovar: results_tovar,
+                             tovaruk: results_tovar,
+                             type: results_types,
+                             categorie: results_categories,
+                             users: results_users,
+                             online: global.online,
+                             user: req.session.user
+                           })
+                           client.close();
+                         });
                        });
                      });
                    });

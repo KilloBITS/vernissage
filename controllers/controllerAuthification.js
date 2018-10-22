@@ -20,6 +20,7 @@ router.post('/auth', function(req, res, next){
         if(req.body.login === results_users[0].email || req.body.password === results_users[0].password) {
           req.session.user = results_users[0].email;
           req.session.admin = results_users[0].isAdmin;
+          global.online = global.online + 1;
           res.send({code:500});
         }else{
           res.send({code:450, message: 'Неверный логин или пароль'});
