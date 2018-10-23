@@ -34,9 +34,7 @@
         <div class="hamburger-menu"></div>
       </div>
     </div>
-		<a href="/">
-			<div class="logotype"></div>
-		</a>
+		<div class="logotype" style="background-image: url(../../../image/<%= conf.site_logo %>)"></div>
 		<div class="topNavBlockOfBtm">
 			<a href="tel:<%= conf.number %>" class="contact_number"><%= conf.number %></a>
 		</div>
@@ -94,7 +92,6 @@
 
 
     <div class="form-cont">
-
       <div class="top-buttons">
         <button class="to-signup ">
           Регистрация
@@ -105,6 +102,7 @@
       </div>
 
       <div class="form form-signup">
+        <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
         <div class="aForm" action="#">
           <lable>Полное имя</lable>
           <input type="text"
@@ -126,6 +124,7 @@
       </div>
 
       <div class="form form-signin">
+        <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
         <div class="aForm">
           <lable>E-MAIL</lable>
           <input type="email" placeholder="Ваш логин" value="mr.kalinuk@gmail.com" id="login">

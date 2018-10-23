@@ -84,6 +84,16 @@ app.post('/setAdmTovar', setAdmTovar);
 const getMenu = require('./controllers/admin/controllerMenu');
 app.post('/getMenu', getMenu);
 
+const updateAva = require('./controllers/admin/controllerUpdateData');
+app.post('/updateAva', updateAva);
+const updateLoader = require('./controllers/admin/controllerUpdateData');
+app.post('/updateLoader', updateLoader);
+const updateLocal = require('./controllers/admin/controllerUpdateData');
+app.post('/updateLocal', updateLocal);
+
+
+
+
 app.listen(4000, function(){
   global.baseName = 'VERNISSAGE';
   global.baseIP = 'mongodb://localhost:27017/';

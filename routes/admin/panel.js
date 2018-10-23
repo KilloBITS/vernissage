@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 //&& req.session.user === "mr.kalinuk@gmail.com"
 router.get('/', function(req, res, next){
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (req.session) //&& req.session.admin && req.session.user !== undefined
     {
       var languageSystem, langMenu;
       if(req.cookies.vernissageLang === undefined){
@@ -49,7 +49,8 @@ router.get('/', function(req, res, next){
                          users.find().toArray(function(err, results_users ){
                            console.log(global.online);
                            res.render('admin/panel.ejs',{
-                             conf: results_config[languageSystem],
+                             conf: results_config[0],
+                             confua: results_config[1],
                              menu: results_menu,
                              slides: results_slider,
                              news: results_news,

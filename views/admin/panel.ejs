@@ -26,8 +26,9 @@
   <script src="/admin/script/raphael.min.js"></script>
   <script src="/admin/script/morris.min.js"></script>
 
-  <script type="text/javascript" src="/admin/script/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript" src="/admin/script/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/admin/script/dataTables.bootstrap.min.js"></script>
+
   <script type="text/javascript" src="/admin/script/admin.js"></script>
 </head>
 <body>
@@ -43,7 +44,7 @@
     <div class="account">
       <div class="user">
         <div class="min_user_ava">
-          <img src="../../../image/load.gif">
+          <img src="../../../image/loaders/<%= conf.loader %>">
         </div>
         <div class="min_user_name"><%= user %></div>
         <div class="min_user_btn">
@@ -54,12 +55,12 @@
     </div>
   </div>
   <div class="left_menu">
-    <div class="menu_btn btnact">Статистика</div>
-    <div class="menu_btn">Локализация</div>
-    <div class="menu_btn">Товары</div>
-    <div class="menu_btn">Меню и навигация</div>
-    <div class="menu_btn">Пользователи</div>
-    <div class="menu_btn">Почта</div>
+    <div class="dashboard menu_btn btnact">Статистика</div>
+    <div class="visual menu_btn">Визуальные настройки</div>
+    <div class="tovar menu_btn">Товары</div>
+    <div class="menuandnav menu_btn">Меню и навигация</div>
+    <div class="usersset menu_btn">Пользователи</div>
+    <div class="mailset menu_btn">Почта</div>
     <div class="menu_btn">Отчеты</div>
   </div>
   <div class="content">
@@ -132,48 +133,167 @@
     </div>
     <!-- Настройки сайта -->
     <div class="page">
-      <div class="block_box">
-        <span>Активность сайта</span>
-        <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
-        <div class="online_site_status">Сайт открыт для пользователей</div>
-      </div>
-
       <div class="block_box big">
-        <span>Локализация</span>
+        <!-- Настройки дизайна -->
+        <div class="local_line big_width" style="border-bottom: 1px solid #d4d4d4;">
+          <div class="local_line_title bRed">
+            Настройки изображений
+            <small>...</small>
+          </div>
+          <div class="local_line_box">
+            <div class="mini_title ">Логотип сайта</div>
+            <div class="DEMO" id="visiblelogo" style="background-image: url(../../../image/<%= conf.site_logo %>)"></div>
+            <button type="button" id="sendNewLogo" class="btn btn-block btn-success btn-lg">Выбрать логотип</button>
+            <input type="file" id="newLogotype">
+          </div>
 
+          <div class="local_line_box">
+            <div class="mini_title ">Загрузчики</div>
+            <div class="DEMO" id="newLoaders" style="background-image: url(../../../image/loaders/<%= conf.loader %>)">
+              <div class="list_loaders">
+                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load0.gif)"></div>
+                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load1.gif)"></div>
+                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load2.gif)"></div>
+                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load3.gif)"></div>
+                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load4.gif)"></div>
+                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load5.gif)"></div>
+              </div>
+            </div>
+            <button type="button" id="selectLoaders" class="btn btn-block btn-success btn-lg">Выбрать анимацию</button>
+          </div>
+
+          <div class="local_line_box">
+            <div class="mini_title ">Активность сайта</div>
+            <div class="DEMO">
+              <div class="ll_block">
+                <input type="text" class="txt_area ru" id="active_ru" value="<%= conf.opens_msg %>">
+              </div>
+              <div class="ll_block">
+                <input type="text" class="txt_area ua" id="active_ua" value="<%= confua.opens_msg %>">
+              </div>
+              <input class="switch" type="checkbox" checked>
+              <label class="online_site">Сайт работает</label>
+            </div>
+            <button type="button" class="btn btn-block btn-success btn-lg">Сохранить статус</button>
+          </div>
+
+          <div class="local_line_box">
+            <div class="mini_title ">Какая то хуйня</div>
+            <div class="DEMO"></div>
+            <button type="button" class="btn btn-block btn-success btn-lg">Выбрать изображение</button>
+          </div>
+
+        </div>
+        <!-- Блок Новинок на главной -->
         <div class="local_line" style="border-bottom: 1px solid #d4d4d4;">
+          <div class="local_line_title">
+            Блок новинок на главной странице
+            <small>...</small>
+          </div>
+          <div class="mini_title">Заголовок блока</div>
           <div class="ll_block">
-            <textarea class="txt_area ru"></textarea>
+            <textarea class="txt_area ru" id="news_titleNEW_ru"><%= conf.news_tovar[0] %></textarea>
           </div>
           <div class="ll_block">
-            <textarea class="txt_area ua"></textarea>
+            <textarea class="txt_area ua" id="news_titleNEW_ua"><%= confua.news_tovar[0] %></textarea>
+          </div>
+          <div class="mini_title">Описание блока</div>
+          <div class="ll_block">
+            <textarea class="txt_area ru" id="news_textNEW_ru"><%= conf.news_tovar[1] %></textarea>
+          </div>
+          <div class="ll_block">
+            <textarea class="txt_area ua" id="news_textNEW_ua"><%= confua.news_tovar[1] %></textarea>
+          </div>
+          <div class="mini_title">Настройки кнопки</div>
+          <div class="ll_block">
+            <input type="text" class="txt_area ru" id="news_btnNEW_ru" value="<%= conf.news_tovar[2].btnTitle %>">
+          </div>
+          <div class="ll_block">
+            <input type="text" class="txt_area ua" id="news_btnNEW_ua" value="<%= confua.news_tovar[2].btnTitle %>">
           </div>
         </div>
 
+        <!-- блок о нас -->
         <div class="local_line" style="border-bottom: 1px solid #d4d4d4;">
+          <div class="local_line_title">
+            Блок "О НАС" на главной странице
+            <small>...</small>
+          </div>
+          <div class="mini_title">Заголовок блока</div>
           <div class="ll_block">
-            <textarea class="txt_area ru"></textarea>
+            <textarea class="txt_area ru" id="about_titleNEW_ru"><%= conf.about[0] %></textarea>
           </div>
           <div class="ll_block">
-            <textarea class="txt_area ua"></textarea>
+            <textarea class="txt_area ua" id="about_titleNEW_ua"><%= confua.about[0] %></textarea>
+          </div>
+          <div class="mini_title">Описание блока</div>
+          <div class="ll_block">
+            <textarea class="txt_area ru" id="about_textNEW_ru"><%= conf.about[1] %></textarea>
+          </div>
+          <div class="ll_block">
+            <textarea class="txt_area ua" id="about_textNEW_ua"><%= confua.about[1] %></textarea>
+          </div>
+          <div class="mini_title">Настройки кнопки</div>
+          <div class="ll_block">
+            <input type="text" class="txt_area ru" id="about_btnNEW_ru" value="<%= conf.about[2].btnTitle %>">
+          </div>
+          <div class="ll_block">
+            <input type="text" class="txt_area ua" id="about_btnNEW_ua" value="<%= confua.about[2].btnTitle %>">
           </div>
         </div>
 
+        <!-- блок "Наши новости  на главной" -->
         <div class="local_line" style="border-bottom: 1px solid #d4d4d4;">
+          <div class="local_line_title">
+            Блок "Наши новости" на главной странице
+            <small>...</small>
+          </div>
+          <div class="mini_title">Заголовок блока</div>
           <div class="ll_block">
-            <textarea class="txt_area ru"></textarea>
+            <input type="text" class="txt_area ru" id="newsB_titleNEW_ru" value="<%= conf.news %>">
           </div>
           <div class="ll_block">
-            <textarea class="txt_area ua"></textarea>
+            <input type="text" class="txt_area ua" id="newsB_titleNEW_ua" value="<%= confua.news %>">
+          </div>
+          <button type="button" class="btn btn-block btn-success btn-lg">Добавить новость</button>
+        </div>
+
+        <!-- блок "Обратная связь" -->
+        <div class="local_line" style="border-bottom: 1px solid #d4d4d4;">
+          <div class="local_line_title">
+            Блок "Обратная связь" на главной странице
+            <small>...</small>
+          </div>
+          <div class="mini_title">Заголовок блока</div>
+          <div class="ll_block">
+            <textarea class="txt_area ru" id="mail_titleNEW_ru"><%= conf.contact[0] %></textarea>
+          </div>
+          <div class="ll_block">
+            <textarea class="txt_area ua" id="mail_titleNEW_ua"><%= confua.contact[0] %></textarea>
+          </div>
+          <div class="mini_title">Описание блока</div>
+          <div class="ll_block">
+            <textarea class="txt_area ru" id="mail_textNEW_ru"><%= conf.contact[1] %></textarea>
+          </div>
+          <div class="ll_block">
+            <textarea class="txt_area ua" id="mail_textNEW_ua"><%= confua.contact[1] %></textarea>
+          </div>
+          <div class="mini_title">Настройки кнопки</div>
+          <div class="ll_block">
+            <input type="text" class="txt_area ru" id="mail_btnNEW_ru" value="<%= conf.input_submit %>">
+          </div>
+          <div class="ll_block">
+            <input type="text" class="txt_area ua" id="mail_btnNEW_ua" value="<%= confua.input_submit %>">
           </div>
         </div>
 
       </div>
+      <button type="button" class="btn btn-block btn-success btn-lg saveLocal" id="globalDataSave" onclick="ADMIN.SAVE_GLOBAL()">Сохранить</button>
     </div>
     <!-- Товары -->
     <div class="page">
       <div class="EDIT_MODAL" id="EDIT_MODAL">
-        <div class="backet_load"></div>
+        <div class="backet_load" style="background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
         <div class="edit_data">
 
           <div class="ed_line el_max">
@@ -181,8 +301,6 @@
             <input type="text" id="tName" placeholder="Введите название товара на Русском">
             <input type="text" id="tName_ua" placeholder="Введите название товара на Украинском">
           </div>
-
-
 
           <div class="ed_line el_50">
             <span>Категория</span>
@@ -206,8 +324,15 @@
             <input type="text" id="tPrice">
           </div>
 
+          <div class="ed_line el_50 toEdit">
+            <span>Скидка</span>
+            <input class="switch toEdit" type="checkbox" id="tSaleEnabled">
+            <input type="text" class="toEdit" id="tSale">
+          </div>
+
           <div class="ed_line el_50">
             <span>Изображение</span>
+            <img class="toEdit" id="tImageDemo" src="">
             <input type="file" name="file" id="tFile">
           </div>
 
@@ -220,9 +345,7 @@
             <span>Описание на Украинском</span>
             <textarea id="tText_ua"></textarea>
           </div>
-
-
-
+          
           <button type="button" class="btn btn-block btn-success btn-lg" onclick="ADMIN.SAVE();">Сохранить</button>
           <button type="button" class="btn btn-block btn-danger btn-lg" onclick="ADMIN.CANCEL()">Отмена</button>
         </div>
@@ -236,14 +359,10 @@
 
       <div class="block_box big">
         <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Список товаров</h3>
-            </div>
-            <!-- /.box-header -->
             <div class="box-body" style="background: white;">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
-                <tr>
+                <tr style="background-color: #3c8dbc; color: white;">
                   <th>#</th>
                   <th>Название</th>
                   <th>Цена</th>
@@ -272,9 +391,9 @@
                       </td>
 
                       <% if(tovar[i].availability){ %>
-                          <td style="background: linear-gradient(to top, #146f1d, #1db91a); text-align: center; color: white">Товар активен</td>
+                          <td class="tovar_active" style="background-color: #169814; text-align: center; color: white">Товар активен</td>
                       <% } else { %>
-                        <td style="background: linear-gradient(to top, #6f1414, #b91a1a); text-align: center; color: white">Товар неактивен</td>
+                        <td class="tovar_none_active" style="background-color: #981414; text-align: center; color: white">Товар неактивен</td>
                       <% } %>
 
                       <td>
@@ -282,7 +401,7 @@
                           <i class="fa fa-edit"></i>
                         </a>
                         <a class="btn btn-app" title="Удалить" onclick="ADMIN.REMOVE(<%= tovar[i].AI %>)">
-                          <i class="fa fa-ban"></i>
+                          <i class="fa fa-ban" ></i>
                         </a>
                       </td>
                     </tr>
@@ -290,15 +409,6 @@
 
 
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Название</th>
-                  <th>Цена</th>
-                  <th>Активность</th>
-                  <th>Действия</th>
-                </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
@@ -306,7 +416,6 @@
           <!-- /.box -->
       </div>
     </div>
-
 
     <div class="page"></div>
     <div class="page"></div>

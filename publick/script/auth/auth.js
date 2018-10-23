@@ -72,13 +72,14 @@ var AUTH = {
     });
   },
   POST_AUTH: function(){
+    $(".backet_load").fadeIn(200);
     let ld = {
       login: $("#login").val(),
       password: $("#pass").val()
     };
 
     $.post('/auth',ld,function(res){
-      console.log(res);
+      $(".backet_load").fadeOut(200);
       if(res.code === 500){
         window.location.replace("/");
       }

@@ -72,7 +72,9 @@ router.get('/*', function(req, res, next){
 
          });
        }else{
-         res.render('close.ejs')
+         res.render('close.ejs',{
+           conf: results_config[languageSystem]
+         })
        }
      });
   });
