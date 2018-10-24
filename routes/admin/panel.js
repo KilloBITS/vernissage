@@ -47,7 +47,6 @@ router.get('/', function(req, res, next){
                      types.find().toArray(function(err, results_types ){
                        categories.find().toArray(function(err, results_categories ){
                          users.find().toArray(function(err, results_users ){
-                           console.log(global.online);
                            res.render('admin/panel.ejs',{
                              conf: results_config[0],
                              confua: results_config[1],
@@ -55,7 +54,7 @@ router.get('/', function(req, res, next){
                              slides: results_slider,
                              news: results_news,
                              tovar: results_tovar,
-                             tovaruk: results_tovar,
+                             tovaruk: results_tovaruk,
                              type: results_types,
                              categorie: results_categories,
                              users: results_users,

@@ -83,6 +83,8 @@ app.post('/setAdmTovar', setAdmTovar);
 
 const getMenu = require('./controllers/admin/controllerMenu');
 app.post('/getMenu', getMenu);
+const addCategory = require('./controllers/admin/controllerMenu');
+app.post('/addCategory', addCategory);
 
 const updateAva = require('./controllers/admin/controllerUpdateData');
 app.post('/updateAva', updateAva);

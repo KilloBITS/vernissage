@@ -31,10 +31,14 @@ router.get('/*', function(req, res, next){
     const db = client.db(global.baseName);
     const config = db.collection("config");
     const menu  = db.collection(langMenu);
-    const tovar  = db.collection("tovar");
+    if(languageSystem === 0){
+      var tovar  = db.collection("tovar");
+    }else{
+      var tovar  = db.collection("tovar-uk");
+    }
 
     if(err) return console.log(err);
-    console.log(req.session.user)
+
      config.find().toArray(function(err, results_config){
        if(results_config[languageSystem].opens){
 
@@ -47,7 +51,7 @@ router.get('/*', function(req, res, next){
                FILTER.types = searchData[1];
              }
 
-             tovar.find(FILTER).sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
+             tovar.find(FILTER).sort({ AI: -1 }).limit(40).toArray(function(err, results_tovar ){
                res.render('tovar.ejs',{
                  conf: results_config[languageSystem],
                  menu: results_menu,

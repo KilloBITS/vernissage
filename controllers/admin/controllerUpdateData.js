@@ -42,12 +42,12 @@ var updateLocal = (req, res, next) => {
     config.update({LANG: "RU"},{ $set : { news: a.newsB_titleNEW_ru}});
     config.update({LANG: "RU"},{ $set : { contact: [a.mail_titleNEW_ru, a.mail_textNEW_ru]}});
     config.update({LANG: "RU"},{ $set : { input_submit: a.mail_btnNEW_ru}});
-
-
-
-    
     // Для украинского языка
-
+    config.update({LANG: "UA"},{ $set : { news_tovar: [b.news_titleNEW_ua, b.news_textNEW_ua, { btnTitle: b.news_btnNEW_ua, btnLink: "/shop"}]}});
+    config.update({LANG: "UA"},{ $set : { about: [b.about_titleNEW_ua, b.about_textNEW_ua, { btnTitle: b.about_btnNEW_ua, btnLink: "/"}]}});
+    config.update({LANG: "UA"},{ $set : { news: b.newsB_titleNEW_ua}});
+    config.update({LANG: "UA"},{ $set : { contact: [b.mail_titleNEW_ua, b.mail_textNEW_ua]}});
+    config.update({LANG: "UA"},{ $set : { input_submit: b.mail_btnNEW_ua}});
 
     res.send(req.body);
     client.close();

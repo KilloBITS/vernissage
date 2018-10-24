@@ -20,26 +20,19 @@ var getAdmTovar = (req, res, next) => {
      });
   });
 };
-// tovar.find( { AI: req.body.id}).toArray(function(err, results){
-//   tovar.updateOne({ AI: parseInt(req.body.d) },{
-//     $set: { popular: parseInt(req.body.ss) },
-//       $currentDate: { lastModified: true }
-//     });
-//     res.send({code:500});
-// });
 
 var delAdmTovar = (req, res, next) => {
   mongoClient.connect(global.baseIP ,function(err, client){
    const db = client.db(global.baseName);
    const tovar  = db.collection("tovar");
+   const tovaruk  = db.collection("tovar-uk");
+
    if(err) return console.log(err);
-   tovar.find( { AI: req.body.id}).toArray(function(err, results){
-     // tovar.updateOne({ AI: parseInt(req.body.d) },{
-     //   $set: { popular: parseInt(req.body.ss) },
-     //     $currentDate: { lastModified: true }
-     //   });
-       res.send({code:500});
-   });
+
+   tovar.remove({ AI: parseInt(req.body.d)});
+   tovaruk.remove({ AI: parseInt(req.body.d)});
+
+   res.send({code: 500, msg: "Товар удален!"})
   });
 };
 
@@ -57,11 +50,11 @@ var createUA = function(data, ai){
     if(err) return console.log(err);
     var NEW_TOVAR_UA = data;
     NEW_TOVAR_UA.availability = true;
-    NEW_TOVAR_UA.sale = [false, "0"];
     NEW_TOVAR_UA.category = parseInt(NEW_TOVAR_UA.category),
     NEW_TOVAR_UA.popular = 5;
     NEW_TOVAR_UA.AI = ai;
     NEW_TOVAR_UA.image = "tov"+ai+".jpg";
+    NEW_TOVAR_UA.sale = data.sale;
     tovaruk.insertOne(NEW_TOVAR_UA);
   });
 };
@@ -73,13 +66,51 @@ var createRU = function(data, ai){
     if(err) return console.log(err);
     var NEW_TOVAR = data;
     NEW_TOVAR.availability = true;
-    NEW_TOVAR.sale = [false, "0"];
     NEW_TOVAR.category = parseInt(NEW_TOVAR.category),
     NEW_TOVAR.popular = 5;
     NEW_TOVAR.AI = ai;
     NEW_TOVAR.image = "tov"+ai+".jpg";
+    NEW_TOVAR.sale = data.sale;
     tovar.insertOne(NEW_TOVAR);
   });
+};
+
+var updateUA = function(data, ai){
+  mongoClient.connect(global.baseIP ,function(err, client){
+   const db = client.db(global.baseName);
+   const tovaruk  = db.collection("tovar-uk");
+   if(err) return console.log(err);
+   data.category = parseInt(data.category);
+   tovaruk.update({ AI: parseInt(ai) },{$set: data});
+  });
+};
+
+var updateRU = function(data, ai){
+  mongoClient.connect(global.baseIP ,function(err, client){
+   const db = client.db(global.baseName);
+   const tovar  = db.collection("tovar");
+   if(err) return console.log(err);
+   data.category = parseInt(data.category);
+   tovar.update({ AI: parseInt(ai) },{$set: data});
+  });
+};
+
+var updateFile = function(file,AI){
+  mongoClient.connect(global.baseIP, function(err, client){
+      const db = client.db(global.baseName);
+      const tovar = db.collection("tovar");
+      const tovaruk = db.collection("tovar-uk");
+      if(err) return console.log(err);
+     tovar.find({ AI: parseInt(AI)}).toArray(function(err, results_tovar){
+
+       var base64Data = file.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,'');
+       require("fs").writeFile("./publick/data/tovar/"+results_tovar[0].image, base64Data, 'base64', function(err) {
+         console.log(err);
+       });
+
+     });
+  });
+
 };
 
 var setAdmTovar = (req, res, next) => {
@@ -90,9 +121,18 @@ var setAdmTovar = (req, res, next) => {
     tovar.find().sort({AI:-1}).limit(1).toArray(function(err, results_tovar ){
       var mainData = req.body;
       var NEXT_AI = results_tovar[0].AI + 1;
-      createUA(mainData.ua, NEXT_AI);
-      createRU(mainData.ru, NEXT_AI);
-      createFile(mainData.file, NEXT_AI);
+
+      if(mainData.te === "true"){
+        createUA(mainData.ua, NEXT_AI);
+        createRU(mainData.ru, NEXT_AI);
+        createFile(mainData.file, NEXT_AI);
+      }else{
+        updateUA(mainData.ua, mainData.ai);
+        updateRU(mainData.ru, mainData.ai);
+        if(mainData.file.length > 20){
+          updateFile(mainData.file, mainData.ai);
+        }
+      }
       res.send({code: 500});
     });
   });

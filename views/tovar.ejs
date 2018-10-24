@@ -100,7 +100,7 @@
           <div class="item  col-xs-4 col-lg-4 grid-group-item">
 
               <div class="thumbnail">
-                <% if(tovarArr[i].sale[0]){ %>
+                <% if(tovarArr[i].sale[0] && (tovarArr[i].sale[0] === 'true')){ %>
                   <div class="sale">
                     <span>Скидка</span>
                     <span><%= tovarArr[i].sale[1] %> %</span>
