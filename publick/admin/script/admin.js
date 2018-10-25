@@ -37,30 +37,26 @@ var ADMIN = {
   },
   /*Работа с товарами*/
   CHANGE_TYPE: function(){
-    console.log('azamat');
-      $.post("/getMenu",{c: $("#tCategories").val()},(res) => {
-        $("#tType option").remove();
-        console.log(res)
-        if(res.menu.podlink.length > 1){
-          $("#tType").attr("disabled",false).removeAttr("style")
-          for (var i = 0; i < res.menu.podlink.length; i++) {
-            var option = document.createElement("option");
-            option.value = res.menu.podlink[i].types;
-            option.text = res.menu.podlink[i].pname;
-            $("#tType").append(option);
-          }
-          $("#tType").prepend("<option disabled selected>выберите тип</option>");
-          if(!ADMIN.NEW_TOVAR){
-          // }else{
-            $("#tType").val(ADMIN.EDIT_TYPE).change();
-          }
-        }else{
-          $("#tType").attr("disabled",true).css({"background-color":"silver"})
+    $.post("/getMenu",{c: $("#tCategories").val()},(res) => {
+      $("#tType option").remove();
+      console.log(res)
+      if(res.menu.podlink.length > 1){
+        $("#tType").attr("disabled",false).removeAttr("style")
+        for (var i = 0; i < res.menu.podlink.length; i++) {
+          var option = document.createElement("option");
+          option.value = res.menu.podlink[i].types;
+          option.text = res.menu.podlink[i].pname;
+          $("#tType").append(option);
         }
-
-      })
-
-
+        $("#tType").prepend("<option disabled selected>выберите тип</option>");
+        if(!ADMIN.NEW_TOVAR){
+        // }else{
+          $("#tType").val(ADMIN.EDIT_TYPE).change();
+        }
+      }else{
+        $("#tType").attr("disabled",true).css({"background-color":"silver"})
+      }
+    })
   },
   CANCEL: function(canWin){
     switch(canWin){
@@ -232,11 +228,22 @@ var ADMIN = {
     $('.menu_btn').click(function(){
       let index = $('.menu_btn').index(this);
       localStorage.setItem("click_menu",index);
+      $("#pageMenu_list").css({"height":"0px"});
       $('.menu_btn').removeClass("btnact");
       $('.menu_btn:eq('+index+')').addClass("btnact");
-      $('.page').removeClass("active");
+      $('.page,.page-min').removeClass("active");
       $('.page:eq('+index+')').addClass("active");
     });
+
+    $('.menu_btn_min').click(function(){
+      let index = $('.menu_btn_min').index(this);
+      localStorage.setItem("click_menu_min",index);
+      // $('.menu_btn').removeClass("btnact");
+      // $('.menu_btn:eq('+index+')').addClass("btnact");
+      $('.page,.page-min').removeClass("active");
+      $('.page-min:eq('+index+')').addClass("active");
+    });
+
     $('.mobile_menu').click(function(){
       if(!$('.left_menu').hasClass('active')){
         $('.left_menu').addClass('active');
@@ -247,9 +254,9 @@ var ADMIN = {
 
     $(".visual").click(function(){
       if($("#pageMenu_list").height() > 10){
-        $("#pageMenu_list").css({"height":"0"});
+        $("#pageMenu_list").css({"height":"0px"});
       }else{
-        $("#pageMenu_list").css({"height":"auto"});
+        $("#pageMenu_list").css({"height":"150px"});
       }
     });
     $('#example2').DataTable({
@@ -296,30 +303,41 @@ $(document).ready(function(){
       }
   }, false);
 
-/*Для загрузки новой аватарки*/
-  newLogotype = document.getElementById('newLogotype');
-  newLogotype.addEventListener('change', function () {
-    $("#visiblelogo").css({"background-image":" url(../../../image/loaders/load.gif)"});
-    var fullPath = newLogotype.value;
-    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-    var filename = fullPath.substring(startIndex);
-    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-        filename = filename.substring(1);
-    }
+  /*Для загрузки новой аватарки*/
+    newLogotype = document.getElementById('newLogotype');
+    newLogotype.addEventListener('change', function () {
+      $("#visiblelogo").css({"background-image":" url(../../../image/loaders/load.gif)"});
+      var fullPath = newLogotype.value;
+      var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+      var filename = fullPath.substring(startIndex);
+      if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+          filename = filename.substring(1);
+      }
 
-    if (this.files && this.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            ADMIN.GLOBAL_FILE = e.target.result;
-            $.post('/updateAva',{n: ADMIN.GLOBAL_FILE},(res) => {
-              $("#visiblelogo").css({"background-image":" url("+res.img+")"});
-            });
-        };
-        reader.readAsDataURL(this.files[0]);
-    }
-  }, false);
+      if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              ADMIN.GLOBAL_FILE = e.target.result;
+              $.post('/updateAva',{n: ADMIN.GLOBAL_FILE},(res) => {
+                $("#visiblelogo").css({"background-image":" url("+res.img+")"});
+              });
+          };
+          reader.readAsDataURL(this.files[0]);
+      }
+    }, false);
 
-
+  $("#profile").click(function () {
+      $(".animate-profile").toggle(function () {
+      });
+  });
+  $("#notification").click(function () {
+      $(".animate-notification").toggle(function () {
+      });
+  });
+  $(" .filter ").click(function () {
+      $(".drop-down-filter").toggle(function () {
+      });
+  });
 
 
 });

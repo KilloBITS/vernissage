@@ -47,7 +47,7 @@ router.get('/', function(req, res, next){
                      types.find().toArray(function(err, results_types ){
                        categories.find().toArray(function(err, results_categories ){
                          users.find().toArray(function(err, results_users ){
-                           res.render('admin/panel.ejs',{
+                           res.render('admin/panel/panel.ejs',{  //admin/panel/panel.ejs
                              conf: results_config[0],
                              confua: results_config[1],
                              menu: results_menu,

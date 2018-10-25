@@ -10,7 +10,10 @@
   <link rel="stylesheet" type="text/css" href="/style/flickity.min.css">
   <link rel="stylesheet" type="text/css" href="/style/animate.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
+
+
 
   <link rel="stylesheet" type="text/css" href="/admin/style/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/admin/style/dataTables.bootstrap.min.css">
@@ -22,13 +25,15 @@
   <script type="text/javascript" src="/script/bootstrap.min.js"></script>
   <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
   <!-- Morris.js charts -->
   <script src="/admin/script/raphael.min.js"></script>
   <script src="/admin/script/morris.min.js"></script>
 
   <script type="text/javascript" src="/admin/script/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="/admin/script/dataTables.bootstrap.min.js"></script>
-
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
   <script type="text/javascript" src="/admin/script/admin.js"></script>
 </head>
 <body>
@@ -57,7 +62,7 @@
   <div class="left_menu">
     <div class="dashboard menu_btn btnact">Статистика</div>
     <div class="menuandnav menu_btn">Меню</div>
-    <div class="visual menu_btn">Страницы</div>
+    <div class="visual menu_btn">Настройки страниц</div>
     <div class="stran_list" id="pageMenu_list">
       <div class="menu_btn_min">Главная</div>
       <div class="menu_btn_min">Товары</div>
@@ -155,88 +160,109 @@
       </div>
 
 
-      <div class="maket_menu">
-        <div class="maketMenuData">
-          <% for(var i = 0; i < menu.length; i++) { %>
-            <% if(menu[i].categories !== 0){ %>
-              <div class="maket_btn mbtnIcon">
-                <%= menu[i].name %>
-                <div class="cat_delete" menu-index-btn="<%= menu[i].index %>"></div>
-                <div class="cat_edit" menu-index-btn="<%= menu[i].index %>"></div>
-
-                <div class="pLinkList" id="menuItemslistNum_<%= i %>">
-                  <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
-                    <div class="plink_item">
-                      <div class="pLink_text">• <%= menu[i].podlink[il].pname %></div>
-                      <div class="plink_delete"></div>
-                      <div class="plink_edit"></div>
-                    </div>
-                  <% } %>
-                  <div class="plink_item newLinkitem" menu-name="<%= menu[i].name %>" to-menu="menuItemslistNum_<%= i %>">+</div>
+      <div class="wrapper" style="height: 100%;">
+        <section class="container_menus_links" style="height: 100%;">
+          <div class="row" style="height:100%">
+            <div id="one" class="col-md-4 split">
+              <h2>Категории</h2>
+              <p>(Категории меню)</p>
+              <div class="position-fixed">
+                <div id="html" class="demo">
+                  <ul>
+                    <% for(var i = 0; i < menu.length; i++) { %>
+                      <% if(menu[i].categories !== 0){ %>
+                        <!-- Меню с подлинками -->
+                        <li>
+                          <div class="edit_menu">
+                            <div class="edit_btn oc"></div>
+                            <div class="edit_btn edit"></div>
+                            <div class="edit_btn remove"></div>
+                          </div>
+                          <%= menu[i].name %>
+                          <ul>
+                            <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
+                              <% if( menu[i].podlink[il].pname !== undefined){ %>
+                                <li data-jstree='{"icon":"fa fa-map-marker"}'>• <%= menu[i].podlink[il].pname %></li>
+                              <% } %>
+                            <% } %>
+                          </ul>
+                        </li>
+                      <% } else { %>
+                        <!-- Обычное меню без подлинков -->
+                          <li>
+                            <div class="edit_menu">
+                              <div class="edit_btn oc"></div>
+                              <div class="edit_btn edit"></div>
+                              <div class="edit_btn remove"></div>
+                            </div>
+                            <%= menu[i].name %>
+                          </li>
+                      <% } %>
+                    <% } %>
+                  </ul>
                 </div>
               </div>
-            <% } else { %>
-                <div class="maket_btn"><%= menu[i].name %></div>
-            <% } %>
-          <% } %>
-          <div class="maket_btn PlusBtn" id="newCategoryMenu" title="Новая категория"></div>
-        </div>
+            </div>
+          </div>
+        </section>
       </div>
-
     </div>
     <!-- Настройки сайта -->
     <div class="page">
+      <div class="local_line big_width" style="border-bottom: 1px solid #d4d4d4;">
+        <div class="local_line_title bRed">
+          Настройки изображений
+          <small>...</small>
+        </div>
+        <div class="local_line_box">
+          <div class="mini_title ">Логотип сайта</div>
+          <div class="DEMO" id="visiblelogo" style="background-image: url(../../../image/<%= conf.site_logo %>)"></div>
+          <button type="button" id="sendNewLogo" class="btn btn-block btn-success btn-lg">Выбрать логотип</button>
+          <input type="file" id="newLogotype">
+        </div>
+
+        <div class="local_line_box">
+          <div class="mini_title ">Загрузчики</div>
+          <div class="DEMO" id="newLoaders" style="background-image: url(../../../image/loaders/<%= conf.loader %>)">
+            <div class="list_loaders">
+              <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load0.gif)"></div>
+              <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load1.gif)"></div>
+              <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load2.gif)"></div>
+              <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load3.gif)"></div>
+              <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load4.gif)"></div>
+              <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load5.gif)"></div>
+            </div>
+          </div>
+          <button type="button" id="selectLoaders" class="btn btn-block btn-success btn-lg">Выбрать анимацию</button>
+        </div>
+
+        <div class="local_line_box">
+          <div class="mini_title ">Активность сайта</div>
+          <div class="DEMO">
+            <div class="ll_block">
+              <input type="text" class="txt_area ru" id="active_ru" value="<%= conf.opens_msg %>">
+            </div>
+            <div class="ll_block">
+              <input type="text" class="txt_area ua" id="active_ua" value="<%= confua.opens_msg %>">
+            </div>
+            <input class="switch" type="checkbox" checked>
+            <label class="online_site">Сайт работает</label>
+          </div>
+          <button type="button" class="btn btn-block btn-success btn-lg">Сохранить статус</button>
+        </div>
+
+        <div class="local_line_box">
+          <div class="mini_title ">Какая то хуйня</div>
+          <div class="DEMO"></div>
+          <button type="button" class="btn btn-block btn-success btn-lg">Выбрать изображение</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="page-min">
       <div class="block_box big">
         <!-- Настройки дизайна -->
-        <div class="local_line big_width" style="border-bottom: 1px solid #d4d4d4;">
-          <div class="local_line_title bRed">
-            Настройки изображений
-            <small>...</small>
-          </div>
-          <div class="local_line_box">
-            <div class="mini_title ">Логотип сайта</div>
-            <div class="DEMO" id="visiblelogo" style="background-image: url(../../../image/<%= conf.site_logo %>)"></div>
-            <button type="button" id="sendNewLogo" class="btn btn-block btn-success btn-lg">Выбрать логотип</button>
-            <input type="file" id="newLogotype">
-          </div>
 
-          <div class="local_line_box">
-            <div class="mini_title ">Загрузчики</div>
-            <div class="DEMO" id="newLoaders" style="background-image: url(../../../image/loaders/<%= conf.loader %>)">
-              <div class="list_loaders">
-                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load0.gif)"></div>
-                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load1.gif)"></div>
-                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load2.gif)"></div>
-                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load3.gif)"></div>
-                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load4.gif)"></div>
-                <div class="mini_load_demo" style="background-image: url(../../../image/loaders/load5.gif)"></div>
-              </div>
-            </div>
-            <button type="button" id="selectLoaders" class="btn btn-block btn-success btn-lg">Выбрать анимацию</button>
-          </div>
-
-          <div class="local_line_box">
-            <div class="mini_title ">Активность сайта</div>
-            <div class="DEMO">
-              <div class="ll_block">
-                <input type="text" class="txt_area ru" id="active_ru" value="<%= conf.opens_msg %>">
-              </div>
-              <div class="ll_block">
-                <input type="text" class="txt_area ua" id="active_ua" value="<%= confua.opens_msg %>">
-              </div>
-              <input class="switch" type="checkbox" checked>
-              <label class="online_site">Сайт работает</label>
-            </div>
-            <button type="button" class="btn btn-block btn-success btn-lg">Сохранить статус</button>
-          </div>
-
-          <div class="local_line_box">
-            <div class="mini_title ">Какая то хуйня</div>
-            <div class="DEMO"></div>
-            <button type="button" class="btn btn-block btn-success btn-lg">Выбрать изображение</button>
-          </div>
-
-        </div>
         <!-- Блок Новинок на главной -->
         <div class="local_line" style="border-bottom: 1px solid #d4d4d4;">
           <div class="local_line_title">
@@ -343,6 +369,7 @@
       </div>
       <button type="button" class="btn btn-block btn-success btn-lg saveLocal" id="globalDataSave" onclick="ADMIN.SAVE_GLOBAL()">Сохранить</button>
     </div>
+    <div class="page-min">2</div>
     <!-- Товары -->
     <div class="page">
       <div class="EDIT_MODAL" id="EDIT_MODAL">
@@ -478,7 +505,502 @@
     </div>
 
     <div class="page"></div>
-    <div class="page"></div>
+    <div class="page">
+      <div class="navbar-header">
+  <ul class="navbar-left">
+    <li>
+      <a href=#><div class="arrow"></div></a>
+    </li>
+    <li>
+      <h5>Dashboard</h5>
+    </li>
+  </ul>
+  <ul class="navbar-right">
+    <li class="drop-down" id="friends">
+      <a href="#"><i class="fa fa-th" aria-hidden="true"></i></a>
+      <div class="drop-down-menu   media-group-f animate-friends ">
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="https://s-media-cache-ak0.pinimg.com/564x/03/3f/c5/033fc537c42bfe4e2eb5b6e128a2d083.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="https://s-media-cache-ak0.pinimg.com/564x/03/3f/c5/033fc537c42bfe4e2eb5b6e128a2d083.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="https://s-media-cache-ak0.pinimg.com/564x/03/3f/c5/033fc537c42bfe4e2eb5b6e128a2d083.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    </li>
+    <li class="drop-down " id="profile">
+      <a href="#"><i class="fa fa-gear" aria-hidden="true"></i></a>
+      <ul class="drop-down-menu-p media-group-p animate-profile">
+        <li><a href="#" class="drop-down-item">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          My phone
+          </a></li>
+        <li><a href="#" class="drop-down-item">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          Balance
+          </a></li>
+        <li><a href="#" class="drop-down-item">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          Connections
+          </a></li>
+        <li><a href="#" class="drop-down-item">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          My phone
+          </a></li>
+      </ul>
+    </li>
+    <li class="drop-down" id="notification">
+      <a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a>
+      <div class="drop-down-menu media-group animate-notification">
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="https://s-media-cache-ak0.pinimg.com/564x/03/3f/c5/033fc537c42bfe4e2eb5b6e128a2d083.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+        <a href="" class="drop-down-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="avatar">
+                <img src="http://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" />
+              </div>
+            </div>
+            <div class="media-body">
+              <h5>Mohamed Fathy</h5>
+              <h6>2 hours ago</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="app-content">
+   <div class="mail-toolbar">
+    <div class="action-panel-header">
+      <a href="">Compose</a>
+    </div>
+    <div class="filter">
+      <button>
+        Filter
+        <span>
+          <i class="fa-down" aria-hidden="true"></i>
+        </span>
+      </button>
+      <ul class="drop-down-filter">
+        <li><a href="#">Time</a></li>
+        <li><a href="#">Importance</a></li>
+      </ul>
+    </div>
+    <div class="delete">
+      <a href="#" id="trash">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </a>
+      <a href="#" id="exclamation">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      </a>
+    </div>
+    <a href="javascript:location.reload(true)" class="refresh" >
+      <i class="fa fa-refresh" aria-hidden="true"></i>
+    </a>
+    <div class="pull-right">
+      <a href="#" id="angle-l">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </a>
+      <a href="#" id="angle-r">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  <div class="action-panel">
+      <div class="list-group">
+        <a href="#">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          Inbox
+        </a>
+        <a href="#">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          Starred
+        </a>
+        <a href="#">
+          <i class="fa fa-bookmark" aria-hidden="true"></i>
+          Important
+        </a>
+        <a href="#">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          Sent
+        </a>
+        <a href="#">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          Drafts
+        </a>
+        <a href="#">
+          <i class="fa fa-folder" aria-hidden="true"></i>
+          All Mail
+        </a>
+        <a href="#">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          Spam
+        </a>
+        <a href="#">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+          Trash
+        </a>
+</div>
+      <hr>
+      <div class="list-group">
+        <h4>Labels</h4>
+      <a href="#">
+        <i class="fa fa-circle" aria-hidden="true" data-color="yellow"></i>
+        Personal
+      </a>
+      <a href="#">
+        <i class="fa fa-circle" aria-hidden="true" data-color="blue"></i>
+        Work
+      </a>
+      <a href="#">
+        <i class="fa fa-circle" aria-hidden="true" data-color="red"></i>
+        Bussiness
+      </a>
+      <a href="#">
+        <i class="fa fa-circle" aria-hidden="true" data-color="green"></i>
+        Clients
+      </a>
+    </div>
+      <hr>
+
+     <div class="list-group">
+      <a href="#">
+        <i class="fa fa-gear" aria-hidden="true"></i>
+        setting
+      </a>
+      <a href="#">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        Need help?
+      </a>
+    </div>
+    </div>
+  <div class="clearfix"></div>
+  <div class="mail-item">
+    <div class="mail-list">
+       <div class="mail-container">
+         <div class="avatar">
+          <img src='https://static.pexels.com/photos/33045/lion-wild-africa-african.jpg' alt="" />
+       </div>
+         <div class="center">
+         <div>
+           <h4>Welcome To Dashboard</h4>
+           <a href="#" data-box="green">Client</a>
+           <a href="#" data-box="blue">work</a>
+         </div>
+         <p>Welcome To your dashboard. here you can manage and coordinate any activities
+</p>
+       </div>
+         <div class="right">
+         <p>2 hours</p>
+         <a href="#" ><i class="fa" data-marked="true"> </i></a>
+       </div>
+       </div>
+     </div>
+    <div class="mail-list">
+       <div class="mail-container">
+         <div class="avatar">
+         <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAbjAAAAJGM0MjkxOWY1LWZjNzktNDdjOS1hZmQwLTE3NDA2OGU1ZGZjYg.jpg" alt="" />
+       </div>
+         <div class="center">
+         <div>
+           <h4>Account Activity</h4>
+           <a href="#" data-box="yellow">Personal</a>
+         </div>
+         <p>A login activity detected from unusual location. please check this mail
+</p>
+       </div>
+         <div class="right">
+         <p>2 hours</p>
+         <a href="" ><i class="fa" data-marked="false" aria-hidden="true"></i></a>
+       </div>
+       </div>
+     </div>
+    <div class="mail-list">
+       <div class="mail-container">
+         <div class="avatar">
+          <img src='https://static.pexels.com/photos/33045/lion-wild-africa-african.jpg' alt="" />
+       </div>
+         <div class="center">
+         <div>
+           <h4>Sales Report 2014</h4>
+           <a href="#" data-box="blue">work</a>
+         </div>
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur quo nemo sint, animi sunt alias.
+</p>
+       </div>
+         <div class="right">
+         <p>2 hours</p>
+         <a href=""><i class="fa" data-marked="false"  aria-hidden="true"></i></a>
+       </div>
+       </div>
+     </div>
+    <div class="mail-list">
+    <div class="mail-container">
+         <div class="avatar">
+         <img src='https://static.pexels.com/photos/33045/lion-wild-africa-african.jpg' alt="" />
+       </div>
+         <div class="center">
+         <div>
+           <h4>Sales Report 2014</h4>
+           <a href="#" data-box="red">Busniess</a>
+         </div>
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus nostrum rem, odio. A, mollitia, hic.
+</p>
+       </div>
+         <div class="right">
+         <p>2 hours</p>
+         <a href=""><i class="fa" data-marked="false" aria-hidden="true"></i></a>
+       </div>
+       </div>
+     </div>
+    <div class="mail-list">
+       <div class="mail-container">
+         <div class="avatar">
+         <img src='https://static.pexels.com/photos/33045/lion-wild-africa-african.jpg' alt="" />
+       </div>
+         <div class="center">
+         <div>
+           <h4>Sales Report 2014</h4>
+           <a href="#" data-box="yellow">Personal</a>
+         </div>
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum maxime, quas consecteturx fugiat sapiente cupiditate!
+</p>
+       </div>
+         <div class="right">
+         <p>2 hours</p>
+         <a href=""><i class="fa" data-marked="true" aria-hidden="true"></i></a>
+       </div>
+       </div>
+     </div>
+    <div class="mail-list">
+       <div class="mail-container">
+         <div class="avatar">
+          <img src='https://static.pexels.com/photos/33045/lion-wild-africa-african.jpg' alt="" />
+       </div>
+         <div class="center">
+         <div>
+           <h4>Sales Report 2014</h4>
+           <a href="#" data-box="blue">work</a>
+         </div>
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur obcaecati mollitia um! Ullam, nobis.
+</p>
+       </div>
+         <div class="right">
+         <p>2 hours</p>
+         <a href=""><i class="fa" data-marked="false" aria-hidden="true"></i></a>
+       </div>
+       </div>
+     </div>
+    <div class="mail-list">
+    <div class="mail-container">
+         <div class="avatar">
+          <img src='https://static.pexels.com/photos/33045/lion-wild-africa-african.jpg' alt="" />
+       </div>
+         <div class="center">
+         <div>
+           <h4>Sales Report 2014</h4>
+           <a href="#" data-box="green">Client</a>
+         </div>
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis beatae, quo molestias? Quo iusto, facere!
+</p>
+       </div>
+         <div class="right">
+         <p>2 hours</p>
+         <a href=""><i class="fa" data-marked="true" aria-hidden="true"></i></a>
+       </div>
+       </div>
+     </div>
+  </div>
+</div>
+    </div>
     <div class="page"></div>
   </div>
   <div class="bottom"></div>

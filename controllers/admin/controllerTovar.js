@@ -121,7 +121,7 @@ var setAdmTovar = (req, res, next) => {
     tovar.find().sort({AI:-1}).limit(1).toArray(function(err, results_tovar ){
       var mainData = req.body;
       var NEXT_AI = results_tovar[0].AI + 1;
-
+      
       if(mainData.te === "true"){
         createUA(mainData.ua, NEXT_AI);
         createRU(mainData.ru, NEXT_AI);

@@ -91,7 +91,16 @@ app.post('/updateAva', updateAva);
 const updateLoader = require('./controllers/admin/controllerUpdateData');
 app.post('/updateLoader', updateLoader);
 const updateLocal = require('./controllers/admin/controllerUpdateData');
+
 app.post('/updateLocal', updateLocal);
+const updateLocalTovar = require('./controllers/admin/controllerUpdateData');
+app.post('/updateLocalTovar', updateLocalTovar);
+
+
+const saveTitle = require('./controllers/admin/controllerUpdateData');
+app.post('/saveTitle', saveTitle);
+const siteStatus = require('./controllers/admin/controllerUpdateData');
+app.post('/siteStatus', saveTitle);
 
 
 
