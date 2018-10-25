@@ -31,6 +31,7 @@ const basket = require('./routes/getBasket');
 const oplata = require('./routes/getOplata');
 const details = require('./routes/getDetails');
 const contacts = require('./routes/getContacts');
+const payment = require('./routes/getPayment');
 
 
 app.use('/', index);
@@ -41,6 +42,7 @@ app.use('/basket', basket);
 app.use('/oplata', oplata);
 app.use('/details', details);
 app.use('/contacts', contacts);
+app.use('/payment', payment);
 app.get('*', get404);
 
 const search = require('./controllers/controllerSearch');

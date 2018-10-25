@@ -1,4 +1,3 @@
-
 $(document).ready(() => {
   $(".lang").click(function(){
     document.cookie = "vernissageLang="+$(this).attr("id");
@@ -10,6 +9,9 @@ $(document).ready(() => {
   }else{
       return $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
   }
+
+
+
 });
 
 function runOnKeys(func) {

@@ -226,32 +226,30 @@
     <div class="backet_load" style="background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
     <div class="basket_tovar"></div>
     <div class="basket_info">
-      <p class="input-container">
-        <input type="text" id="input-PaymentName" class="login-input">
-        <label for="input-PaymentName" unselectable="on">Имя</label>
-      </p>
-      <p class="input-container">
-        <input type="text" id="input-PaymentFourname" class="login-input">
-        <label for="input-PaymentFourname" unselectable="on">Фамилия</label>
-      </p>
-      <p class="input-container">
-        <input type="text" id="input-PaymentCity" class="login-input">
-        <label for="input-PaymentCity" unselectable="on">Город</label>
-      </p>
+      <form action="/payment">
+        <p class="input-container">
+          <input type="text" name="name" id="input-PaymentName" class="login-input">
+          <label for="input-PaymentName" unselectable="on">Имя</label>
+        </p>
+        <p class="input-container">
+          <input type="text" name="foname" id="input-PaymentFourname" class="login-input">
+          <label for="input-PaymentFourname" unselectable="on">Фамилия</label>
+        </p>
+        <p class="input-container">
+          <input type="text" name="city" id="input-PaymentCity" class="login-input">
+          <label for="input-PaymentCity" unselectable="on">Город</label>
+        </p>
+
+          <select class="selector" name="dosttype" id="typeOfDostavka" >
+            <option>Самовывоз</option>
+            <option>Доставка курьером</option>
+            <option>Доставка Новой Почтой</option>
+            <option>Доставка УкрПочтой</option>
+          </select>
 
 
-
-      <div class="ui-combobox ui-combobox-options-left">
-        <div class="ui-value" placeholder="Выберите тип доставки"></div>
-        <div class="ui-options">
-          <!-- <label>Выберите тип доставки:</label>
-          <i class="separator"></i> -->
-          <label>Самовывоз</label>
-          <label>Доставка курьером</label>
-          <label>Доставка Новой Почтой</label>
-          <label>Доставка УкрПочтой</label>
-        </div>
-      </div>
+          <button class="bubbly-button" onclick="">Подтвердить заказ</button>
+      </form>
 
     </div>
   </div>

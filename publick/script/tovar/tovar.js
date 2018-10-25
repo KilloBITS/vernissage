@@ -2,8 +2,6 @@
 var BASKET = [];
 let pages = 666;
 
-
-
 function createPagination(pages, page) {
   let str = '<ul>';
   let active;
@@ -93,6 +91,7 @@ var Index = {
          minBasTitle.className = "minBasTitle";
 
          var minAllSum = document.createElement("div");
+         minAllSum.innerHTML = tovar.tovar[i].price + " ГРН";
          minAllSum.className = "minAllSum";
 
          var minBasLength = document.createElement("div");
@@ -119,6 +118,12 @@ var Index = {
          $(newDiv).append(minAllSum);
          $(newDiv).append(minBasLength);
          $(newDiv).append(minBasDel);
+
+         var inplen = document.createElement("input");
+         inplen.className = "InputLength";
+         inplen.type = "number"
+         inplen.value = 1;
+         $(minBasLength).append(inplen)
        }
        $(".backet_load").hide();
      });
