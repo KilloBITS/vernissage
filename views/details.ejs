@@ -154,14 +154,23 @@
     <div class="comments">
       <div class="comments_title"><%= conf.detailsTovar.comments %></div>
     		<div class="comment-wrap">
-    				<div class="photo">
-    						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
-    				</div>
-    				<div class="comment-block">
-    						<form action="">
-    								<textarea name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
-    						</form>
-    				</div>
+          <% if(sessionUser !== undefined){ %>
+            <div class="photo">
+                <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+            </div>
+            <div class="comment-block">
+                <form action="">
+                    <textarea name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
+                </form>
+            </div>
+          <% } else { %>
+            <div class="comment-block">
+                <div class="no_comment">Для того чтобы вы могли оставлять комментарии вам нужно <a href="/login">зарегистрироватся</a> или <a href="/login">войти</a> в свой аккаунт</div>
+            </div>
+
+          <% } %>
+
+
     		</div>
 
     		<div class="comment-wrap">

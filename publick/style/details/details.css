@@ -873,9 +873,9 @@ p {
 }
 
 .comments {
-  margin: 50px auto 0;
-  max-width: 90%;
-  padding: 0 50px 24px 0px;
+  margin: 34px auto;
+  max-width: 100%;
+  padding: 30px;
 }
 
 .comment-wrap {
@@ -904,7 +904,9 @@ p {
   vertical-align: top;
   border-radius: 0.1875rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.41);
+  position: relative;
 }
+
 .comment-block textarea {
   width: 100%;
   resize: none;
@@ -1008,4 +1010,16 @@ p {
   margin-bottom: 20px;
   border-bottom: 1px solid silver;
   padding-bottom: 10px;
+}
+
+
+.no_comment{
+  background: #e8e8e8;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
 }
