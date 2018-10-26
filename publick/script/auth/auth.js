@@ -78,10 +78,9 @@ var AUTH = {
       password: $("#pass").val()
     };
 
-    $.post('/auth',ld,function(res){
-      $(".backet_load").fadeOut(200);
+    $.post('/auth',ld,function(res){      
       if(res.code === 500){
-        window.location.replace("/");
+        window.location.replace("/profile");
       }
     });
   },

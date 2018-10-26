@@ -957,20 +957,3 @@ form textarea {
   transition: 0.3s;
   cursor: pointer;
 }
-
-a.indexBtnToShop{
-  font-family: 'Didact Gothic', sans-serif;
-    font-size: 20px;
-    color: black;
-    left: 0;
-    top: 50%;
-    position: absolute;
-    transform: translate(0, -50%);
-    opacity: 0.5;
-    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDQ4IDQ4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0OCA0ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnPgoJCTxnPgoJCQk8cGF0aCBkPSJNMTUuNzMzLDIwLjEyNWMxLjEwNCwwLDItMC44OTYsMi0ydi03LjhDMTcuNzMzLDYuODM4LDIwLjU3LDQsMjQuMDU4LDRjMy40ODcsMCw2LjMyNSwyLjgzOCw2LjMyNSw2LjMyNXY3LjggICAgIGMwLDEuMTA0LDAuODk2LDIsMiwyYzEuMTA0LDAsMi0wLjg5NiwyLTJ2LTcuOEMzNC4zODMsNC42MzIsMjkuNzUxLDAsMjQuMDU4LDBjLTUuNjkyLDAtMTAuMzI0LDQuNjMyLTEwLjMyNCwxMC4zMjV2Ny44ICAgICBDMTMuNzMzLDE5LjIyOSwxNC42MjksMjAuMTI1LDE1LjczMywyMC4xMjV6IiBmaWxsPSIjNWM1YzVjIi8+CgkJCTxwYXRoIGQ9Ik00NywxNS42MzFIMzYuMzgzdjIuNDk0YzAsMi4yMDYtMS43OTQsNC00LDRjLTIuMjA1LDAtNC0xLjc5NC00LTR2LTIuNDk0aC04LjY0OXYyLjQ5NGMwLDIuMjA2LTEuNzk0LDQtNCw0ICAgICBzLTQtMS43OTQtNC00di0yLjQ5NEgxYy0wLjU1MiwwLTAuODkzLDAuNDM1LTAuNzYyLDAuOTcxTDcuMjM1LDQ1LjFDNy42NTgsNDYuNzAyLDkuMzQzLDQ4LDExLDQ4aDI2ICAgICBjMS42NTgsMCwzLjM0Mi0xLjI5OSwzLjc2Ny0yLjlsNi45OTYtMjguNDk4QzQ3Ljg5MywxNi4wNjUsNDcuNTUzLDE1LjYzMSw0NywxNS42MzF6IiBmaWxsPSIjNWM1YzVjIi8+CgkJPC9nPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
-    background-repeat: no-repeat;
-    background-position: 0px 5px;
-    background-size: 18px;
-    padding: 0 0 0 22px;
-    cursor: pointer;
-}

@@ -77,6 +77,7 @@ var Index = {
      $("#basketDATA").fadeIn(300);
      $("body").css({"overflow":"hidden"});
      $.post('/getbasket',{data:BASKET},function(tovar){
+       $("#JSTOVAR").val(JSON.stringify(tovar.tovar));
        for(let i = 0; i < tovar.tovar.length; i++){
          var newDiv = document.createElement("div");
          newDiv.className = "basket_doc";

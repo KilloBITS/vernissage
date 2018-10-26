@@ -2,11 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
-// const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 router.get('/', function(req, res, next){
   var languageSystem, langMenu;
-  var titles = ["Оплата товара","Оплата товару"];
+  var titles = ["Профиль","Профіль"];
   if(req.cookies.vernissageLang === undefined){
     languageSystem = 0;
     langMenu = 'menu';
@@ -26,11 +25,11 @@ router.get('/', function(req, res, next){
       const menu  = db.collection(langMenu);
 
       if(err) return console.log(err);
-      console.log(req.query)
-      config.find().toArray(function(err, results_config){
+
+     config.find().toArray(function(err, results_config){
        if(results_config[languageSystem].opens){
          menu.find().toArray(function(err, results_menu ){
-           res.render('payment.ejs',{
+           res.render('account.ejs',{
              conf: results_config[languageSystem],
              menu: results_menu,
              title: titles[languageSystem],

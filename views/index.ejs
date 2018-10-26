@@ -35,11 +35,14 @@
 				<div class="logotype" style="background-image: url(../../../image/<%= conf.site_logo %>)"></div>
 			<!-- </a> -->
 			<div class="topNavBlockOfBtm">
+        <a href="/shop" class="indexBtnToShop"> <%= conf.BTN_TOSHOP %> </a>
+
         <% if(sessionUser !== undefined){ %>
-          <div class="userAccountInBlock"></div>
+          <a href="/profile"><div class="userAccountInBlock"></div></a>
         <% } else { %>
           <a href="/auth"><div class="logInBlock"></div></a>
         <% } %>
+
 
 				<div class="searchBlock">
 					<div class="searchLine">
@@ -194,7 +197,7 @@
 			  <div class="half right cf">
 			    <textarea name="message" type="text" id="input-message" placeholder="Введите текст..."></textarea>
 			  </div>
-			  <input type="submit" value="Отправить" id="input-submit" onclick="Index.message(event)">
+			  <input type="submit" value="Отправить" id="input-submit" onclick="Global.message(event)">
 			</form>
     </div>
 	</div>

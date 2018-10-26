@@ -30,6 +30,11 @@
 <div class="top">
 	<div class="topLine oneLine">
     <div class="topNavMobMenuOfBtm">
+      <% if(sessionUser !== undefined){ %>
+        <a href="/profile"><div class="userAccountInBlock"></div></a>
+      <% } else { %>
+        <a href="/auth"><div class="logInBlock"></div></a>
+      <% } %>
       <div class="menu-wrapper">
         <div class="hamburger-menu"></div>
       </div>
@@ -100,7 +105,6 @@
           Авторизация
         </button>
       </div>
-
       <div class="form form-signup">
         <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
         <div class="aForm" action="#">

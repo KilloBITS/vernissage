@@ -32,6 +32,7 @@ const oplata = require('./routes/getOplata');
 const details = require('./routes/getDetails');
 const contacts = require('./routes/getContacts');
 const payment = require('./routes/getPayment');
+const account = require('./routes/getAccount');
 
 
 app.use('/', index);
@@ -43,6 +44,8 @@ app.use('/oplata', oplata);
 app.use('/details', details);
 app.use('/contacts', contacts);
 app.use('/payment', payment);
+app.use('/profile', account);
+
 app.get('*', get404);
 
 const search = require('./controllers/controllerSearch');

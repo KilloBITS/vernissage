@@ -244,6 +244,7 @@
     </div>
     <div class="basket_info">
       <form action="/payment" enctype="application/json" type="get">
+        <input type="text" name="JSON_Tovar" id="JSTOVAR" style="display: none;">
         <p class="input-container">
           <input type="text" name="name" id="input-PaymentName" class="login-input" autocomplete="off" required>
           <label for="input-PaymentName" unselectable="on">Имя</label>
@@ -263,7 +264,7 @@
         </p>
 
 
-          <select class="selector" name="dosttype" id="typeOfDostavka" onchange="changeTypeDost($(this).val())" required>
+          <select class="selector" name="dosttype" id="typeOfDostavka" onchange="Global.changeTypeDost($(this).val())" required>
             <option value="0">Самовывоз</option>
             <option value="1">Доставка курьером</option>
             <option value="2">Доставка Новой Почтой</option>
@@ -278,6 +279,21 @@
           <p class="input-container" id="CityOfPostNP">
             <input type="text" name="city" id="input-PaymentOtdelNP" class="login-input" required>
             <label for="input-PaymentOtdelNP" unselectable="on">Отделение</label>
+          </p>
+
+          <p class="input-container" id="CityOfPostUl">
+            <input type="text" name="city" id="input-PaymentUlica" class="login-input" required>
+            <label for="input-PaymentUlica" unselectable="on">Улица</label>
+          </p>
+
+          <p class="input-container min50" id="CityOfPostD">
+            <input type="text" name="city" id="input-PaymentDom" class="login-input" required>
+            <label for="input-PaymentDom" unselectable="on">Дом</label>
+          </p>
+
+          <p class="input-container min50" id="CityOfPostK">
+            <input type="text" name="city" id="input-PaymentKV" class="login-input" required>
+            <label for="input-PaymentKV" unselectable="on">Улица</label>
           </p>
 
           <button class="bubbly-button" onclick="">Подтвердить заказ</button>

@@ -1,38 +1,70 @@
-function changeTypeDost(t){
-  $("#CityOfDost,#CityOfPostNP").fadeOut(130)
-  if(parseInt(t) === 0){
+var Global = {
+  changeTypeDost: function(t){
+    $("#CityOfDost,#CityOfPostNP,#CityOfPostUl,#CityOfPostD,#CityOfPostK").fadeOut(130)
+    if(parseInt(t) === 0){
 
-  }
-  if(parseInt(t) === 1){
-    $("#CityOfDost").fadeIn(300);
-    $("#input-PaymentCity").val("Львів").attr("disabled",true);
-    $("#CityOfDost label").hide();
-  }
-  if(parseInt(t) === 2){
-    $("#CityOfDost,#CityOfPostNP").fadeIn(300);
-    $("#input-PaymentCity").val("").attr("disabled",false);
-    $("#CityOfDost label").show();
-  }
-  if(parseInt(t) === 3){
+    }
+    if(parseInt(t) === 1){
+      $("#CityOfDost,#CityOfPostUl,#CityOfPostD,#CityOfPostK").fadeIn(300);
+      $("#input-PaymentCity").val("Львів").attr("disabled",true);
+      $("#CityOfDost label").hide();
+    }
+    if(parseInt(t) === 2){
+      $("#CityOfDost,#CityOfPostNP").fadeIn(300);
+      $("#input-PaymentCity").val("").attr("disabled",false);
+      $("#CityOfDost label").show();
+    }
+    if(parseInt(t) === 3){
 
-  }
+    }
+  },
+  message: function(e){
+    e.preventDefault(e);
 
+    var msg_data = {
+      MyName: $("#input-name").val(),
+      myEmail:$("#input-email").val(),
+      myTheme:$("#input-subject").val(),
+      message:$("#input-message").val(),
+    };
+    $.post('/sendMessage',msg_data, function(data){
+      if(
+        ($("#input-name").val().length > 1)||
+        ($("#input-email").val().length > 1)||
+        ($("#input-subject").val().length > 1)||
+        ($("#input-message").val().length > 1)){
+          createAlert('','Сообщение отправленно!','Ваше сообщение біло успешно отправлено.','success',true,true,'pageMessages');
+          $(".cf input[type='text'],.cf input[type='email']").val('');
+
+      }else{
+        createAlert('','','Сообщение не отправлено!','warning',false,true,'pageMessages');
+        return false
+      }
+
+    });
+
+  },
+  BTN: function(){
+    $(".NEXT_pay_bas").click(function(){
+      $('.basket_info').show(300);
+    });
+
+    $(".lang").click(function(){
+      document.cookie = "vernissageLang="+$(this).attr("id");
+      location.reload();
+    });
+    
+    if($("body").width() > 800){
+        return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
+    }else{
+        return $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
+    }
+  }
 };
 
-$(document).ready(() => {
-  $(".NEXT_pay_bas").click(function(){
-    $('.basket_info').show(300);
-  });
 
-  $(".lang").click(function(){
-    document.cookie = "vernissageLang="+$(this).attr("id");
-    location.reload();
-  });
-  if($("body").width() > 800){
-      return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
-  }else{
-      return $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
-  }
+$(document).ready(() => {
+  Global.BTN();
 });
 
 function runOnKeys(func) {
@@ -187,33 +219,3 @@ $(function() {
 
   })
 }).call(this);
-//
-//
-// var initialPoint;
-// var finalPoint;
-// document.addEventListener('touchstart', function(event) {
-//   event.preventDefault();
-//   event.stopPropagation();
-//   initialPoint=event.changedTouches[0];
-// }, false);
-// document.addEventListener('touchend', function(event) {
-//   event.preventDefault();
-//   event.stopPropagation();
-//   finalPoint=event.changedTouches[0];
-//   var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
-//   var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
-//   if (xAbs > 20 || yAbs > 20) {
-//   if (xAbs > yAbs) {
-//   if (finalPoint.pageX < initialPoint.pageX){
-//   /*СВАЙП ВЛЕВО*/}
-//   else{
-//   /*СВАЙП ВПРАВО*/}
-//   }
-//   else {
-//   if (finalPoint.pageY < initialPoint.pageY){
-//   /*СВАЙП ВВЕРХ*/}
-//   else{
-//   /*СВАЙП ВНИЗ*/}
-//   }
-//   }
-// }, false);
