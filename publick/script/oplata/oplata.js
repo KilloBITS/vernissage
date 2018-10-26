@@ -1,16 +1,79 @@
 'use strict';
+var BASKET = [];
 var Oplata = {
     ML:"",
-   DESIGHN: function(){
+    UPDATE_BASCET: function(){
+      $('.basket_doc').remove();
+      $("#basketDATA").fadeIn(300);
+      $("body").css({"overflow":"hidden"});
+      $.post('/getbasket',{data:BASKET},function(tovar){
+        for(let i = 0; i < tovar.tovar.length; i++){
+          var newDiv = document.createElement("div");
+          newDiv.className = "basket_doc";
+          $(".basket_tovar .BSK").append(newDiv)
 
+          var minBasImg = document.createElement("div");
+          minBasImg.style.backgroundImage = "url(../../../data/tovar/"+tovar.tovar[i].image+")";
+          minBasImg.className = "minBasImg";
+
+          var minBasTitle = document.createElement("div");
+          minBasTitle.innerHTML = tovar.tovar[i].title;
+          minBasTitle.className = "minBasTitle";
+
+          var minAllSum = document.createElement("div");
+          minAllSum.innerHTML = tovar.tovar[i].price + " ГРН";
+          minAllSum.className = "minAllSum";
+
+          var minBasLength = document.createElement("div");
+          minBasLength.className = "minBasLength";
+
+          var minBasDel = document.createElement("div");
+          minBasDel.onclick = function(){
+            let index = $(".minBasDel").index(this);
+            BASKET.splice(index, 1);
+            localStorage.setItem("VernissageBasket", BASKET);
+            $(".basketBlock span").html(BASKET.length);
+            $(this).parent().remove();
+
+            if(BASKET.length === 0){
+              $(".backet_load").show();
+              $("body").css({"overflow":"auto"});
+              $("#basketDATA").fadeOut(300);
+            }
+          };
+          minBasDel.className = "minBasDel";
+
+          $(newDiv).append(minBasImg);
+          $(newDiv).append(minBasTitle);
+          $(newDiv).append(minAllSum);
+          $(newDiv).append(minBasLength);
+          $(newDiv).append(minBasDel);
+
+          var inplen = document.createElement("input");
+          inplen.className = "InputLength";
+          inplen.type = "number"
+          inplen.value = 1;
+          $(minBasLength).append(inplen)
+        }
+        $(".backet_load").hide();
+      });
+    },
+   DESIGHN: function(){
+     $(".basketBlock").click(function(){
+       if(BASKET.length >= 1){
+         Oplata.UPDATE_BASCET();
+       }else{
+         createAlert('','','Ваша корзина пуста :(','warning',false,true,'pageMessages')
+       }
+     });
      $(".searchBlock").hover(function(){
        $(".searchLine").css({"width":"170px"});
      });
 
-     $('body').click(function(e){
-       if(e.target.className != 'searchBlockVal' && $('#SEARCH').val().length === 0){
-         $(".searchLine").css({"width":"0px"});
-       }
+     $(".basket_close").click(function(){
+       $(".backet_load").show();
+       $("body").css({"overflow":"auto"});
+       $("#basketDATA").fadeOut(300);
      });
 
      $('.menu-wrapper').on('click', function() {
@@ -37,6 +100,16 @@ var Oplata = {
 
 
    },
+   BASKET: function(){
+     if(localStorage.getItem('VernissageBasket') !== null){
+
+       let MY = localStorage.getItem("VernissageBasket").split(",");
+       if(MY[0] !== ""){
+         $(".basketBlock span").html(MY.length);
+         BASKET = MY;
+       }
+     }
+   },
    INIT: function(){
     Oplata.DESIGHN();
    }
@@ -44,14 +117,10 @@ var Oplata = {
 
 $(document).ready(() => {
   Oplata.INIT();
+  Oplata.BASKET();
 });
 $(document).ready(function(){
-  $('.signup-slider').slick({
-    dots: true,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 2000
-  });
+
 
   $("img").height($(".main-box").height());
 

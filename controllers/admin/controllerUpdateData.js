@@ -7,7 +7,7 @@ const bParser = require('body-parser');
 
 router.use(cookieParser());
 
-//Обносление логотипа
+//Обновление логотипа
 var updateAva = (req, res, next) => {
   var base64Data = req.body.n.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,'');
   require("fs").writeFile("./publick/image/vernissageLogo.png", base64Data, 'base64', function(err) {
@@ -18,7 +18,7 @@ var updateAva = (req, res, next) => {
 router.post('/updateAva', updateAva, function(req, res, next){});
 ///*******************************////
 
-//Обносление заголовка
+//Обновление заголовка
 var saveTitle = (req, res, next) => {
   mongoClient.connect(global.baseIP ,function(err, client){
     const db = client.db(global.baseName);
@@ -34,7 +34,7 @@ var saveTitle = (req, res, next) => {
 router.post('/saveTitle', saveTitle, function(req, res, next){});
 ///*******************************////
 
-//Обносление статуса сайта
+//Обновление статуса сайта
 var siteStatus = (req, res, next) => {
   mongoClient.connect(global.baseIP ,function(err, client){
     const db = client.db(global.baseName);

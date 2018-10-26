@@ -137,5 +137,58 @@
     </div>
   </div>
 </div>
+
+<div id="basketDATA">
+  <div id="bas">
+    <div class="basket_close"></div>
+    <div class="backet_load" style="background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
+    <div class="basket_tovar">
+      <div class="BSK"></div>
+      <div class="NEXT_pay_bas">Заполнить данные</div>
+    </div>
+    <div class="basket_info">
+      <form action="/payment" enctype="application/json" type="get">
+        <p class="input-container">
+          <input type="text" name="name" id="input-PaymentName" class="login-input" autocomplete="off" required>
+          <label for="input-PaymentName" unselectable="on">Имя</label>
+        </p>
+        <p class="input-container">
+          <input type="text" name="foname" id="input-PaymentFourname" class="login-input" required>
+          <label for="input-PaymentFourname" unselectable="on">Фамилия</label>
+        </p>
+        <p class="input-container">
+          <input type="text" name="FamName" id="input-PaymentFamName" class="login-input" required>
+          <label for="input-PaymentFamName" unselectable="on">Отчество</label>
+        </p>
+
+        <p class="input-container">
+          <input type="text" name="FamName" id="input-PaymentPhone" class="login-input" required>
+          <label for="input-PaymentPhone" unselectable="on">Номер телефона</label>
+        </p>
+
+
+          <select class="selector" name="dosttype" id="typeOfDostavka" onchange="changeTypeDost($(this).val())" required>
+            <option value="0">Самовывоз</option>
+            <option value="1">Доставка курьером</option>
+            <option value="2">Доставка Новой Почтой</option>
+            <option value="3" disabled>Доставка УкрПочтой</option>
+          </select>
+
+          <p class="input-container" id="CityOfDost">
+            <input type="text" name="city" id="input-PaymentCity" class="login-input" required>
+            <label for="input-PaymentCity" unselectable="on">Город</label>
+          </p>
+
+          <p class="input-container" id="CityOfPostNP">
+            <input type="text" name="city" id="input-PaymentOtdelNP" class="login-input" required>
+            <label for="input-PaymentOtdelNP" unselectable="on">Отделение</label>
+          </p>
+
+          <button class="bubbly-button" onclick="">Подтвердить заказ</button>
+      </form>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>

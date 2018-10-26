@@ -155,6 +155,59 @@ var ADMIN = {
     }
 
   },
+  CHART_SALES_STATISTICS: function(){
+    $.post('/getCounters',function(res){
+      // console.log(res);
+      var countdata = res.counters_data;
+      // var paysdata = res.paysdata_data;
+      var line_chart = [];
+      for(let i = 0; i < countdata.length; i++){
+        line_chart.push({date: countdata[i].date, value: countdata[i].list.length });
+      }
+      $("#line-chart").empty();
+      var line = new Morris.Line({
+        element          : 'line-chart',
+        resize           : true,
+        data             : line_chart,
+        xkey             : 'date',
+        ykeys           : ['value'],
+        labels           : ['Value'],
+        lineColors       : ['#000'],
+        lineWidth        : 2,
+        hideHover        : 'auto',
+        gridTextColor    : '#fff',
+        gridStrokeWidth  : 0.4,
+        pointSize        : 4,
+        pointStrokeColors: ['#efefef'],
+        gridLineColor    : '#efefef',
+        gridTextFamily   : 'Open Sans',
+        gridTextSize     : 10
+      });
+      line.redraw();
+    });
+    $("#revenue-chart").empty();
+    let revenue = Morris.Area({
+      element   : 'revenue-chart',
+      resize    : true,
+      data      : [
+        { y: '2018 Q1', item1: 1 },
+        { y: '2018 Q2', item1: 10 },
+        { y: '2018 Q3', item1: 22 },
+        { y: '2018 Q4', item1: 18 },
+        { y: '2018 Q5', item1: 28 },
+        { y: '2018 Q5', item1: 28 },
+        { y: '2018 Q5', item1: 28 },
+      ],
+      xkey      : 'y',
+      ykeys     : ['item1'],
+      labels    : ['Item 1'],
+      lineColors: ['#a0d0e0'],
+      hideHover : 'auto'
+    });
+    revenue.redraw()
+
+
+  },
   BUTTONS: function(){
     $(".miniClick").click(function(){
       let index = $(".miniClick").index(this);
@@ -188,7 +241,6 @@ var ADMIN = {
               reader.readAsDataURL(this.files[0]);
           }
       }, false);
-
     /*Для загрузки новой аватарки*/
       newLogotype = document.getElementById('newLogotype');
       newLogotype.addEventListener('change', function () {
@@ -226,4 +278,5 @@ var ADMIN = {
 $(document).ready(function(){
   ADMIN.BUTTONS();
   ADMIN.SCRIPTS();
+  ADMIN.CHART_SALES_STATISTICS();
 });

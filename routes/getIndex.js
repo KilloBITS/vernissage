@@ -2,8 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
-// const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 const cookieParser = require('cookie-parser');
+const geoip = require('geoip-lite');
 
 router.use(cookieParser());
 
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next){
     }
   }
 
-  mongoClient.connect(global.baseIP, function(err, client){
+  mongoClient.connect(global.baseIP,{ useNewUrlParser: true }, function(err, client){
       const db = client.db(global.baseName);
       const config = db.collection("config");
       const menu  = db.collection(langMenu);
@@ -30,7 +30,21 @@ router.get('/', function(req, res, next){
       const news  = db.collection("news");
       const tovar  = db.collection("tovar");
 
+      const counters = db.collection("counters");
+
       if(err) return console.log(err);
+
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      if(dd<10) {
+          dd = '0'+dd
+      }
+      if(mm<10) {
+          mm = '0'+mm
+      }
+      today = mm + '-' + dd + '-' + yyyy;
 
        config.find().toArray(function(err, results_config){
          if(results_config[languageSystem].opens){
@@ -38,7 +52,28 @@ router.get('/', function(req, res, next){
              slider.find().toArray(function(err, results_slider ){
                news.find().toArray(function(err, results_news ){
                  tovar.find().sort({ AI: -1 }).limit(5).toArray(function(err, results_tovar ){
+                    //counters
+                    var ipuser = req.connection.remoteAddress.replace(/[^.\d]+/g,"");
+                    var geo = geoip.lookup(ipuser);
 
+                    counters.find({ date: today }).toArray(function(err, results_counters ){
+                      if(results_counters.length > 0){
+                        let oldList = results_counters[0].list;
+                        if(oldList.find(x => x.ip === ipuser) === undefined){
+                            counters.update({ date: today },{ $push: { list: { ip: ipuser, country: geo } } })
+                        }
+                      }else{
+                        console.log("нету");
+                        var newDate = {
+                            date: today,
+                            list: [{
+                              ip: ipuser,
+                              country: geo
+                            }]
+                          }
+                          counters.insert(newDate);
+                      }
+                    });
                      res.render('index.ejs',{
                        conf: results_config[languageSystem],
                        menu: results_menu,
@@ -47,10 +82,7 @@ router.get('/', function(req, res, next){
                        newtovar: results_tovar,
                        sessionUser: req.session.user
                      });
-
-                   client.close();
                  });
-
                });
              });
            });

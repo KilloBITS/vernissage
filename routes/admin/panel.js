@@ -4,9 +4,7 @@ const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
 const cookieParser = require('cookie-parser');
 
-
 router.use(cookieParser());
-//&& req.session.user === "mr.kalinuk@gmail.com"
 router.get('/', function(req, res, next){
   if (req.session) //&& req.session.admin && req.session.user !== undefined
     {
@@ -36,6 +34,7 @@ router.get('/', function(req, res, next){
           const categories  = db.collection("categories");
           const users  = db.collection("users");
 
+          const counters = db.collection("counters");
           if(err) return console.log(err);
 
          config.find().toArray(function(err, results_config){
@@ -47,21 +46,24 @@ router.get('/', function(req, res, next){
                      types.find().toArray(function(err, results_types ){
                        categories.find().toArray(function(err, results_categories ){
                          users.find().toArray(function(err, results_users ){
-                           res.render('admin/panel/panel.ejs',{  //admin/panel/panel.ejs
-                             conf: results_config[0],
-                             confua: results_config[1],
-                             menu: results_menu,
-                             slides: results_slider,
-                             news: results_news,
-                             tovar: results_tovar,
-                             tovaruk: results_tovaruk,
-                             type: results_types,
-                             categorie: results_categories,
-                             users: results_users,
-                             online: global.online,
-                             user: req.session.user
-                           })
-                           client.close();
+                           counters.find().toArray(function(err, results_counters ){
+                             res.render('admin/panel/panel.ejs',{  //admin/panel/panel.ejs
+                               conf: results_config[0],
+                               confua: results_config[1],
+                               menu: results_menu,
+                               slides: results_slider,
+                               news: results_news,
+                               tovar: results_tovar,
+                               tovaruk: results_tovaruk,
+                               type: results_types,
+                               categorie: results_categories,
+                               users: results_users,
+                               counters: results_counters,
+                               online: global.online,
+                               user: req.session.user
+                             })
+                             client.close();
+                           });
                          });
                        });
                      });

@@ -2,56 +2,62 @@
 var BASKET = [];
 
 var Details = {
-   UPDATE_BASCET: function(){
-     $('.basket_doc').remove();
-     $("#basketDATA").fadeIn(300);
-     $("body").css({"overflow":"hidden"});
-     $.post('/getbasket',{data:BASKET},function(tovar){
-       for(let i = 0; i < tovar.tovar.length; i++){
-         var newDiv = document.createElement("div");
-         newDiv.className = "basket_doc";
-         $(".basket_tovar").append(newDiv)
+  UPDATE_BASCET: function(){
+    $('.basket_doc').remove();
+    $("#basketDATA").fadeIn(300);
+    $("body").css({"overflow":"hidden"});
+    $.post('/getbasket',{data:BASKET},function(tovar){
+      for(let i = 0; i < tovar.tovar.length; i++){
+        var newDiv = document.createElement("div");
+        newDiv.className = "basket_doc";
+        $(".basket_tovar .BSK").append(newDiv)
 
-         var minBasImg = document.createElement("div");
-         minBasImg.style.backgroundImage = "url(../../../data/tovar/"+tovar.tovar[i].image+")";
-         minBasImg.className = "minBasImg";
+        var minBasImg = document.createElement("div");
+        minBasImg.style.backgroundImage = "url(../../../data/tovar/"+tovar.tovar[i].image+")";
+        minBasImg.className = "minBasImg";
 
-         var minBasTitle = document.createElement("div");
-         minBasTitle.innerHTML = tovar.tovar[i].title;
-         minBasTitle.className = "minBasTitle";
+        var minBasTitle = document.createElement("div");
+        minBasTitle.innerHTML = tovar.tovar[i].title;
+        minBasTitle.className = "minBasTitle";
 
-         var minAllSum = document.createElement("div");
-         minAllSum.className = "minAllSum";
+        var minAllSum = document.createElement("div");
+        minAllSum.innerHTML = tovar.tovar[i].price + " ГРН";
+        minAllSum.className = "minAllSum";
 
-         var minBasLength = document.createElement("div");
-         minBasLength.className = "minBasLength";
+        var minBasLength = document.createElement("div");
+        minBasLength.className = "minBasLength";
 
-         var minBasDel = document.createElement("div");
-         minBasDel.onclick = function(){
-           let index = $(".minBasDel").index(this);
-           BASKET.splice(index, 1);
-           localStorage.setItem("VernissageBasket", BASKET);
-           $(".basketBlock span").html(BASKET.length);
-           $(this).parent().remove();
+        var minBasDel = document.createElement("div");
+        minBasDel.onclick = function(){
+          let index = $(".minBasDel").index(this);
+          BASKET.splice(index, 1);
+          localStorage.setItem("VernissageBasket", BASKET);
+          $(".basketBlock span").html(BASKET.length);
+          $(this).parent().remove();
 
-           if(BASKET.length === 0){
-             $(".backet_load").show();
-             $("body").css({"overflow":"auto"});
-             $("#basketDATA").fadeOut(300);
-           }
+          if(BASKET.length === 0){
+            $(".backet_load").show();
+            $("body").css({"overflow":"auto"});
+            $("#basketDATA").fadeOut(300);
+          }
+        };
+        minBasDel.className = "minBasDel";
 
-         };
-         minBasDel.className = "minBasDel";
+        $(newDiv).append(minBasImg);
+        $(newDiv).append(minBasTitle);
+        $(newDiv).append(minAllSum);
+        $(newDiv).append(minBasLength);
+        $(newDiv).append(minBasDel);
 
-         $(newDiv).append(minBasImg);
-         $(newDiv).append(minBasTitle);
-         $(newDiv).append(minAllSum);
-         $(newDiv).append(minBasLength);
-         $(newDiv).append(minBasDel);
-       }
-       $(".backet_load").hide();
-     });
-   },
+        var inplen = document.createElement("input");
+        inplen.className = "InputLength";
+        inplen.type = "number"
+        inplen.value = 1;
+        $(minBasLength).append(inplen)
+      }
+      $(".backet_load").hide();
+    });
+  },
    DESIGHN: function(){
      $(".half,.full").click(function(){
        var tovID = $(this).attr("tovid");
@@ -72,35 +78,6 @@ var Details = {
        $(".backet_load").show();
        $("body").css({"overflow":"auto"});
        $("#basketDATA").fadeOut(300);
-     });
-     $( document ).ready(function() {
-       $(".input-login").each(function() {
-         if ($(this).val() != "") {
-           $(this).parent().addClass("animation");
-         }
-       });
-     });
-     $(".login-input").focus(function(){
-       $(this).parent().addClass("animation animation-color");
-     });
-     $(".login-input").focusout(function(){
-       if($(this).val() === "")
-         $(this).parent().removeClass("animation");
-       $(this).parent().removeClass("animation-color");
-     })
-     $(".btn-success").click(function(){
-
-     });
-     $(document).ready(function() {
-         $('#list').click(function(event){
-           event.preventDefault();
-           $('#products .item').addClass('list-group-item');
-         });
-         $('#grid').click(function(event){
-           event.preventDefault();
-           $('#products .item').removeClass('list-group-item');
-           $('#products .item').addClass('grid-group-item');
-         });
      });
      $('.menu-wrapper').on('click', function() {
        $('.hamburger-menu').toggleClass('animate');

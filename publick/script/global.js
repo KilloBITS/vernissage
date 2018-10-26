@@ -1,17 +1,38 @@
+function changeTypeDost(t){
+  $("#CityOfDost,#CityOfPostNP").fadeOut(130)
+  if(parseInt(t) === 0){
+
+  }
+  if(parseInt(t) === 1){
+    $("#CityOfDost").fadeIn(300);
+    $("#input-PaymentCity").val("Львів").attr("disabled",true);
+    $("#CityOfDost label").hide();
+  }
+  if(parseInt(t) === 2){
+    $("#CityOfDost,#CityOfPostNP").fadeIn(300);
+    $("#input-PaymentCity").val("").attr("disabled",false);
+    $("#CityOfDost label").show();
+  }
+  if(parseInt(t) === 3){
+
+  }
+
+};
+
 $(document).ready(() => {
+  $(".NEXT_pay_bas").click(function(){
+    $('.basket_info').show(300);
+  });
+
   $(".lang").click(function(){
     document.cookie = "vernissageLang="+$(this).attr("id");
     location.reload();
   });
-
   if($("body").width() > 800){
       return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
   }else{
       return $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
   }
-
-
-
 });
 
 function runOnKeys(func) {

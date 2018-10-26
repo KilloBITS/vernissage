@@ -80,7 +80,7 @@ var Index = {
        for(let i = 0; i < tovar.tovar.length; i++){
          var newDiv = document.createElement("div");
          newDiv.className = "basket_doc";
-         $(".basket_tovar").append(newDiv)
+         $(".basket_tovar .BSK").append(newDiv)
 
          var minBasImg = document.createElement("div");
          minBasImg.style.backgroundImage = "url(../../../data/tovar/"+tovar.tovar[i].image+")";

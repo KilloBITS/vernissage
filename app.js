@@ -63,49 +63,43 @@ app.post('/getbasket', getbasket);
 const auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*ADMIN*/
+//Получить список товаров
 const AdmiGetTovar = require('./controllers/admin/controllerTovar');
 app.post('/getAdmTovar', AdmiGetTovar);
+//удалить товар
 const delAdmTovar = require('./controllers/admin/controllerTovar');
 app.post('/delAdmTovar', delAdmTovar);
+//создать или отредактировать товар
 const setAdmTovar = require('./controllers/admin/controllerTovar');
 app.post('/setAdmTovar', setAdmTovar);
-
+//получить список меню
 const getMenu = require('./controllers/admin/controllerMenu');
 app.post('/getMenu', getMenu);
+//добавить категорию меню
 const addCategory = require('./controllers/admin/controllerMenu');
 app.post('/addCategory', addCategory);
-
+//обновить логотип сайта
 const updateAva = require('./controllers/admin/controllerUpdateData');
 app.post('/updateAva', updateAva);
+//выбрать другой загрузчик сайта
 const updateLoader = require('./controllers/admin/controllerUpdateData');
 app.post('/updateLoader', updateLoader);
+//Обновить локализацию индекса
 const updateLocal = require('./controllers/admin/controllerUpdateData');
-
 app.post('/updateLocal', updateLocal);
+//обновить локализацию раздела товар
 const updateLocalTovar = require('./controllers/admin/controllerUpdateData');
 app.post('/updateLocalTovar', updateLocalTovar);
-
-
+//обновить заголовок индекса
 const saveTitle = require('./controllers/admin/controllerUpdateData');
 app.post('/saveTitle', saveTitle);
+//управление сайтом (открыт/в разработке)
 const siteStatus = require('./controllers/admin/controllerUpdateData');
 app.post('/siteStatus', saveTitle);
-
-
-
+//получить список посетителей
+const getCounters = require('./controllers/admin/controllerCounters');
+app.post('/getCounters', getCounters);
 
 app.listen(4000, function(){
   global.baseName = 'VERNISSAGE';
@@ -113,9 +107,6 @@ app.listen(4000, function(){
   global.online = 0;
   console.warn('STARTED VERNISSAGE SERVER ON PORT: 4000');
 });
-
-
-
 
 // var options = {
 //   key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),

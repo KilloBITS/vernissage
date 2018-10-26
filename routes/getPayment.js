@@ -26,7 +26,7 @@ router.get('/', function(req, res, next){
       const menu  = db.collection(langMenu);
 
       if(err) return console.log(err);
-
+      console.log(req.query)
      config.find().toArray(function(err, results_config){
        if(results_config[languageSystem].opens){
          menu.find().toArray(function(err, results_menu ){
