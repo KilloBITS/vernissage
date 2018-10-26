@@ -37,7 +37,7 @@ const account = require('./routes/getAccount');
 
 app.use('/', index);
 app.use('/shop*', tovar);
-app.use('/auth', login);
+app.use('/login', login);
 app.use('/panel', panel);
 app.use('/basket', basket);
 app.use('/oplata', oplata);
