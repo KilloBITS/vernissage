@@ -15,8 +15,8 @@
   <link rel="stylesheet" type="text/css" href="/style/global.css">
 	<link rel="stylesheet" type="text/css" href="/style/global.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/style/contacts/contacts.css">
-	<!-- <link rel="stylesheet" type="text/css" href="/style/contacts/contacts.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="/style/account/style.css">
+	<link rel="stylesheet" type="text/css" href="/style/account/style.min.css">
   <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
   <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/script/bootstrap.min.js"></script>
@@ -27,6 +27,16 @@
   <!-- <script type="text/javascript" src="script/contacts/contacts.js"></script> -->
 </head>
 <body>
+
+  <div class="spn_hol" style="/* display: none; */">
+      <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+      </div>
+  </div>
+
+
 <div class="top">
 	<div class="topLine oneLine">
     <div class="topNavMobMenuOfBtm">
@@ -65,8 +75,38 @@
 	</div>
 </div>
 
-<div class="content">
 
+<!-- -->
+<div class="content">
+  <div class="noNumMessage">
+    У вас не подтвержден номер телефона, некоторые функции ограничены.<br>
+    <small>(Пожалуйста подтвердите номер телефона)</small>
+  </div>
+
+  <div class="account_block">
+    <div class="top_account">
+      <div class="ava_block">
+        <div class="avatarka" id="ava" style="background-image: url(../../../data/avatars/<%= user.ava %>)"></div>
+        <div class="uploadAva"></div>
+      </div>
+      <div class="user_menu">
+        <div class="UserNameAcc">
+          <b><%= user.nick %></b>
+          (<%= user.name %>) <br>
+          <small><%= user.email %></small>
+        </div>
+        <div class="umdtn" id="MP">Мои покупки</div>
+        <div class="umdtn" id="MH">Мои желания</div>
+        <div class="umdtn" id="ST">Настройки аккаунта</div>
+        <div class="umdtn" id="OP">Настройки оповещаний</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- -->
 
 
 </div>

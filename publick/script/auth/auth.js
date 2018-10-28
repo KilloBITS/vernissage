@@ -78,11 +78,29 @@ var AUTH = {
       password: $("#pass").val()
     };
 
-    $.post('/auth',ld,function(res){      
+    $.post('/auth',ld,function(res){
       if(res.code === 500){
         window.location.replace("/profile");
       }
     });
+  },
+  POST_REGISTER: function(){
+    if($("#checkPrav").is(":checked")){
+      $(".backet_load").fadeIn(200);
+      let na = {
+        newName: $("#newName").val(),
+        newEmail: $("#newEmail").val(),
+        newPass: $("#newPass").val()
+      };
+      $.post('/create_accaunt',na,function(res){
+        if(res.code === 500){
+          window.location.replace("/profile");
+        }
+      });
+    }else{
+      alert("Вы что не согласны с правилами сайта ?");
+    }
+
   },
   INIT: function(){
     AUTH.DESIGHN()

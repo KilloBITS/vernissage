@@ -6,7 +6,6 @@ const mongoClient = require("mongodb").MongoClient;
 
 router.get('/', function(req, res, next){
   var languageSystem, langMenu;
-  var titles = ["Контакты","Оплата та доставка"];
   if(req.cookies.vernissageLang === undefined){
     languageSystem = 0;
     langMenu = 'menu';
@@ -24,27 +23,30 @@ router.get('/', function(req, res, next){
   mongoClient.connect(global.baseIP, function(err, client){
       const db = client.db(global.baseName);
       const config = db.collection("config");
+      const titles_page = db.collection("titles_page");
       const menu  = db.collection(langMenu);
 
       if(err) return console.log(err);
 
-     config.find().toArray(function(err, results_config){
-       if(results_config[languageSystem].opens){
-         menu.find().toArray(function(err, results_menu ){
-           res.render('contacts.ejs',{
-             conf: results_config[languageSystem],
-             menu: results_menu,
-             title: titles[languageSystem],
-             sessionUser: req.session.user
+     titles_page.find().toArray(function(err, results_titles_page){
+       config.find().toArray(function(err, results_config){
+         if(results_config[languageSystem].opens){
+           menu.find().toArray(function(err, results_menu ){
+             res.render('contacts.ejs',{
+               conf: results_config[languageSystem],
+               menu: results_menu,
+               title: results_titles_page[languageSystem].contacts,
+               sessionUser: req.session.user
+             })
+             client.close();
+           });
+         }else{
+           res.render('close.ejs',{
+             conf: results_config[languageSystem]
            })
-           client.close();
-         });
-       }else{
-         res.render('close.ejs',{
-           conf: results_config[languageSystem]
-         })
-       }
+         }
 
+       });
      });
   });
 });

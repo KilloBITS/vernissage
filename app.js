@@ -27,7 +27,6 @@ const tovar = require('./routes/getTovar');
 const get404 = require('./routes/get404');
 const login = require('./routes/getLogin');
 const panel = require('./routes/admin/panel');
-const basket = require('./routes/getBasket');
 const oplata = require('./routes/getOplata');
 const details = require('./routes/getDetails');
 const contacts = require('./routes/getContacts');
@@ -39,7 +38,6 @@ app.use('/', index);
 app.use('/shop*', tovar);
 app.use('/login', login);
 app.use('/panel', panel);
-app.use('/basket', basket);
 app.use('/oplata', oplata);
 app.use('/details', details);
 app.use('/contacts', contacts);
@@ -65,6 +63,12 @@ app.post('/getbasket', getbasket);
 
 const auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
+
+const create_accaunt = require('./controllers/controllerAuthification');
+app.post('/create_accaunt', create_accaunt);
+
+const newComment = require('./controllers/controllerComments');
+app.post('/newComment', newComment);
 
 /*ADMIN*/
 //Получить список товаров

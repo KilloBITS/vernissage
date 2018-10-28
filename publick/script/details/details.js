@@ -59,7 +59,17 @@ var Details = {
       $(".backet_load").hide();
     });
   },
-   DESIGHN: function(){
+  DESIGHN: function(){
+    $(".setComments").click(function(){
+      $.post('/newComment',{text: $("#commentsText").val(), tovai: $("#commentsText").attr("tov_AI") }, function(res){
+        console.log(res);
+        if(res.code === 500){
+          
+        }else{
+
+        }
+      });
+    });
      $(".half,.full").click(function(){
        var tovID = $(this).attr("tovid");
        var setStar = $(this).attr("for").split('_')[0].replace(/[^-0-9]/gim,'');
@@ -101,7 +111,7 @@ var Details = {
            });
      });
    },
-   BASKET: function(){
+  BASKET: function(){
      if(localStorage.getItem('VernissageBasket') !== null){
 
        let MY = localStorage.getItem("VernissageBasket").split(",");
@@ -111,7 +121,7 @@ var Details = {
        }
      }
    },
-   setBasket: function(ind){
+  setBasket: function(ind){
      if(BASKET.indexOf(ind.toString()) === -1){
        BASKET.push(ind.toString());
        localStorage.setItem("VernissageBasket", BASKET);
@@ -121,7 +131,7 @@ var Details = {
        createAlert('','','Такой товар уже есть в вашей корзине!','warning',false,true,'pageMessages');
      }
    },
-   INIT: function(){
+  INIT: function(){
     Details.DESIGHN();
     Details.BASKET();
    }

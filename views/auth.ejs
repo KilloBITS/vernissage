@@ -94,43 +94,42 @@
     <div class="form-cont">
       <div class="top-buttons">
         <button class="to-signup ">
-          Регистрация
+          <%= conf.auth_local[4] %>
         </button>
         <button class="to-signin top-active-button">
-          Авторизация
+          <%= conf.auth_local[5] %>
         </button>
       </div>
       <div class="form form-signup">
         <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
         <div class="aForm" action="#">
-          <lable>Полное имя</lable>
+          <lable><%= conf.auth_local[6] %></lable>
           <input type="text"
-                 placeholder="Введите полное имя">
+                 placeholder="<%= conf.auth_local[7] %>" id="newName">
           <lable>E-MAIL</lable>
-          <input type="email"
-                 placeholder="Введите ваш E-mail">
-          <lable>Пароль</lable>
+          <input type="text"
+                 placeholder="<%= conf.auth_local[8] %>" id="newEmail">
+          <lable><%= conf.auth_local[1] %></lable>
           <input type="password"
-                 placeholder="Придумайте пароль">
+                 placeholder="<%= conf.auth_local[9] %>" id="newPass">
           <p class="terms">
-            <input type="checkbox">
-            Я согласен с
-            <a href="#" class="lined-link">правилами сайта</a>
+            <input type="checkbox" id="checkPrav">
+            <a href="#" class="lined-link"><%= conf.auth_local[10] %></a>
           </p>
-          <input type="submit" class="form-btn" value="Зарегистрировать"/>
-          <a href="#" class="lined-link to-signin-link">Я уже зарегистрирован</a>
+          <input type="submit" class="form-btn" value="<%= conf.auth_local[11] %>" onclick="AUTH.POST_REGISTER()"/>
+          <a href="#" class="lined-link to-signin-link" style="white-space: pre"><%= conf.auth_local[12] %></a>
         </div>
       </div>
 
       <div class="form form-signin">
         <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= conf.loader %>"></div>
         <div class="aForm">
-          <lable>E-MAIL</lable>
-          <input type="email" placeholder="Ваш логин" value="mr.kalinuk@gmail.com" id="login">
-          <lable>Пароль</lable>
-          <input type="password" placeholder="Ваш пароль" value="admin" id="pass">
-          <input type="submit" class="form-btn" value="Войти" onclick="AUTH.POST_AUTH()"/>
-          <a href="#" class="lined-link to-signup-link">Зарегистрировать аккаунт</a>
+          <lable><%= conf.auth_local[0] %></lable>
+          <input type="email" placeholder="<%= conf.auth_local[0] %>" value="mr.kalinuk@gmail.com" id="login">
+          <lable><%= conf.auth_local[1] %></lable>
+          <input type="password" placeholder="<%= conf.auth_local[1] %>" value="admin" id="pass">
+          <input type="submit" class="form-btn" value="<%= conf.auth_local[2] %>" onclick="AUTH.POST_AUTH()"/>
+          <a href="#" class="lined-link to-signup-link"><%= conf.auth_local[11] %></a>
         </div>
       </div>
     </div>

@@ -2,11 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
-// const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
 
 router.get('/*', function(req, res, next){
   var languageSystem, langMenu;
-  var titles = ["Каталог товаров","Каталог товарів"];
   if(req.cookies.vernissageLang === undefined){
     languageSystem = 0;
     langMenu = 'menu';
@@ -30,7 +28,11 @@ router.get('/*', function(req, res, next){
   mongoClient.connect(global.baseIP, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("config");
+    const titles_page = db.collection("titles_page");
     const menu  = db.collection(langMenu);
+    const users_session = db.collection("users");
+
+
     if(languageSystem === 0){
       var tovar  = db.collection("tovar");
     }else{
@@ -39,47 +41,62 @@ router.get('/*', function(req, res, next){
 
     if(err) return console.log(err);
 
-     config.find().toArray(function(err, results_config){
-       if(results_config[languageSystem].opens){
+     titles_page.find().toArray(function(err, results_titles_page){
+       config.find().toArray(function(err, results_config){
+         if(results_config[languageSystem].opens){
+           menu.find().toArray(function(err, results_menu ){
 
-         menu.find().toArray(function(err, results_menu ){
-           if(DA[0] !== "/"){
-             let FILTER = {
-               category: parseInt(searchData[0])
-             };
-             if(searchData.length >= 2 ){
-               FILTER.types = searchData[1];
-             }
+             users_session.find({email: req.session.user}).toArray(function(err, results_users_session ){
+               if(results_users_session.length > 0){
+                 var uSession = results_users_session;
+               }else{
+                 var uSession = false;
+               }
 
-             tovar.find(FILTER).sort({ AI: -1 }).limit(40).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{
-                 conf: results_config[languageSystem],
-                 menu: results_menu,
-                 tovarArr: results_tovar,
-                 title: titles[languageSystem],
-                 sessionUser: req.session.user
-               })
-               client.close();
+
+               if(DA[0] !== "/"){
+                 let FILTER = {
+                   category: parseInt(searchData[0])
+                 };
+                 if(searchData.length >= 2 ){
+                   FILTER.types = searchData[1];
+                 }
+
+                 tovar.find(FILTER).sort({ AI: -1 }).limit(40).toArray(function(err, results_tovar ){
+                   res.render('tovar.ejs',{
+                     conf: results_config[languageSystem],
+                     menu: results_menu,
+                     tovarArr: results_tovar,
+                     title: results_titles_page[languageSystem].tovar,
+                     sessionUser: req.session.user,
+                     users_data: uSession
+                   })
+                   client.close();
+                 });
+               }else{
+                 tovar.find().sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
+                   res.render('tovar.ejs',{
+                     conf: results_config[languageSystem],
+                     menu: results_menu,
+                     tovarArr: results_tovar,
+                     title: results_titles_page[languageSystem].tovar,
+                     sessionUser: req.session.user,
+                     users_data: uSession
+                   })
+                   client.close();
+                 });
+               }
+
+
              });
-           }else{
-             tovar.find().sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
-               res.render('tovar.ejs',{
-                 conf: results_config[languageSystem],
-                 menu: results_menu,
-                 tovarArr: results_tovar,
-                 title: titles[languageSystem],
-                 sessionUser: req.session.user
-               })
-               client.close();
-             });
-           }
 
-         });
-       }else{
-         res.render('close.ejs',{
-           conf: results_config[languageSystem]
-         })
-       }
+           });
+         }else{
+           res.render('close.ejs',{
+             conf: results_config[languageSystem]
+           })
+         }
+       });
      });
   });
 });

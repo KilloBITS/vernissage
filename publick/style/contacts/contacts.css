@@ -171,18 +171,16 @@
   height: auto !important;
   opacity: 1 !important;
 }
-.container {
-  max-width: 800px;
-  min-width: 640px;
-  margin: 0 auto;
+.container_svg {
+
 }
-.container:before,
-.container:after {
+.container_svg:before,
+.container_svg:after {
   content: '';
   display: block;
   clear: both;
 }
-.container .column {
+.container_svg .column {
   width: 50%;
   padding: 0 8px;
   -webkti-box-sizing: border-box;
@@ -191,35 +189,40 @@
   float: left;
   margin-bottom: 20px;
 }
-.container .column .demo-title {
+.container_svg .column .demo-title {
   margin: 0 0 15px;
   color: #666666;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
 }
-.container .info {
+.container_svg .info {
   width: 300px;
   margin: 50px auto;
   text-align: center;
 }
-.container .info h1 {
+.container_svg .info h1 {
   margin: 0 0 15px;
   padding: 0;
   font-size: 24px;
   font-weight: bold;
   color: #333333;
 }
-.container .info span {
+.container_svg .info span {
   color: #666666;
   font-size: 12px;
 }
-.container .info span a {
+.container_svg .info span a {
   color: #000000;
   text-decoration: none;
 }
-.container .info span .fa {
+.container_svg .info span .fa {
   color: #e74c3c;
+}
+
+.container_svg svg{
+  position: relative;
+bottom: -5px;
 }
 
 
@@ -302,4 +305,44 @@ form textarea {
 
 .cf:after {
   clear: both;
+}
+
+
+svg { visibility: hidden }
+
+.btnContainer {
+	position: fixed;
+	right: 5%;
+	visibility: hidden;
+}
+
+.btnContainer p {
+	border: 2px solid #FFF;
+	color: #FFF;
+	padding: 10px;
+	margin: 10px;
+	text-align: center;
+	cursor: pointer;
+	font-family: 'Nova Mono', monospace;
+}
+
+
+.FollowMe {
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	background-image: url("https://smalinux.github.io/myImg.jpg");
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:center;
+	cursor: pointer;
+}
+
+@media (min-width: 100px) and (max-width: 650px) {
+  .btnContainer {
+    display: none;
+  }
 }

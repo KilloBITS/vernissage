@@ -6,7 +6,6 @@ const mongoClient = require("mongodb").MongoClient;
 
 router.get('/', function(req, res, next){
   var languageSystem, langMenu;
-  var titles = ["Оплата товара","Оплата товару"];
   if(req.cookies.vernissageLang === undefined){
     languageSystem = 0;
     langMenu = 'menu';
@@ -24,26 +23,27 @@ router.get('/', function(req, res, next){
       const db = client.db(global.baseName);
       const config = db.collection("config");
       const menu  = db.collection(langMenu);
+      const titles_page = db.collection("titles_page");
 
       if(err) return console.log(err);
-      console.log(req.query)
-      config.find().toArray(function(err, results_config){
-       if(results_config[languageSystem].opens){
-         menu.find().toArray(function(err, results_menu ){
-           res.render('payment.ejs',{
-             conf: results_config[languageSystem],
-             menu: results_menu,
-             title: titles[languageSystem],
-             sessionUser: req.session.user
+      titles_page.find().toArray(function(err, results_titles_page){
+        config.find().toArray(function(err, results_config){
+         if(results_config[languageSystem].opens){
+           menu.find().toArray(function(err, results_menu ){
+             res.render('payment.ejs',{
+               conf: results_config[languageSystem],
+               menu: results_menu,
+               title: results_titles_page[languageSystem].payment,
+               sessionUser: req.session.user
+             })
+             client.close();
+           });
+         }else{
+           res.render('close.ejs',{
+             conf: results_config[languageSystem]
            })
-           client.close();
-         });
-       }else{
-         res.render('close.ejs',{
-           conf: results_config[languageSystem]
-         })
-       }
-
+         }
+       });
      });
   });
 });

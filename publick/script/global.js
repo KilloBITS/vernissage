@@ -27,6 +27,7 @@ var Global = {
       myTheme:$("#input-subject").val(),
       message:$("#input-message").val(),
     };
+
     $.post('/sendMessage',msg_data, function(data){
       if(
         ($("#input-name").val().length > 1)||
@@ -34,13 +35,11 @@ var Global = {
         ($("#input-subject").val().length > 1)||
         ($("#input-message").val().length > 1)){
           createAlert('','Сообщение отправленно!','Ваше сообщение біло успешно отправлено.','success',true,true,'pageMessages');
-          $(".cf input[type='text'],.cf input[type='email']").val('');
-
+          $(".cf input[type='text'],.cf input[type='email'], #input-message").val('');
       }else{
         createAlert('','','Сообщение не отправлено!','warning',false,true,'pageMessages');
         return false
       }
-
     });
 
   },
@@ -53,7 +52,7 @@ var Global = {
       document.cookie = "vernissageLang="+$(this).attr("id");
       location.reload();
     });
-    
+
     if($("body").width() > 800){
         return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
     }else{
@@ -65,6 +64,9 @@ var Global = {
 
 $(document).ready(() => {
   Global.BTN();
+  setTimeout(() => {
+    $(".spn_hol").fadeOut(500);
+  }, 1500);
 });
 
 function runOnKeys(func) {

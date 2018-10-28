@@ -851,9 +851,12 @@ input, textarea {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
-  font-family: 'Didact Gothic', sans-serif; "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
-  font-size: 1rem;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 18px;
   color: #555f77;
+  padding-right: 14px;
+  height: 56px;
+  line-height: 18px;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   color: #ced2db;
@@ -1022,4 +1025,18 @@ p {
   height: 100%;
   line-height: 50px;
   text-align: center;
+}
+
+.setComments{
+  background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDUxMCA1MTAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMCA1MTA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8ZyBpZD0idHJhbnNsYXRlIj4KCQk8cGF0aCBkPSJNMCwzODcuNnY5Ni45aDk2LjlsMjgwLjUtMjgzLjA1bC05Ni45LTk2LjlMMCwzODcuNnogTTQ1MS4zNSwxMjcuNWMxMC4yLTEwLjIsMTAuMi0yNS41LDAtMzUuN0wzOTIuNywzMy4xNDkgICAgYy0xMC4yLTEwLjItMjUuNS0xMC4yLTM1LjcsMGwtNDUuOSw0NS45bDk2LjksOTYuOUw0NTEuMzUsMTI3LjV6IE0yMjkuNSw0MzMuNWwtNTEsNTFINTEwdi01MUgyMjkuNXoiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  background-color: #19a73e;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
 }

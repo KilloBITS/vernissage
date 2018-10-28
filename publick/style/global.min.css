@@ -408,4 +408,8 @@
     right: 0;
   }
 
+  form input, form textarea {
+      width: 100%;
+  }
+
 }

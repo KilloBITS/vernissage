@@ -7,8 +7,8 @@ const nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'riznik.comment@gmail.com',
-        pass: 'qazwsx159357'
+        user: 'vernissage.developer@gmail.com',
+        pass: 'kakabuba666'
     }
 });
 
@@ -21,7 +21,7 @@ function mailOptions(a, b, c, d) {
 
 router.post('/sendMessage', function(req, res, next){
   console.log(req.body)
-  let ml = new mailOptions('riznik.comment@gmail.com', req.body.myEmail, req.body.myTheme, req.body.message); //panriznik@gmail.com
+  let ml = new mailOptions('vernissage.developer@gmail.com', 'vernissage-shop@ukr.net', req.body.myTheme, req.body.message + " [Моя почта для ответа: " +req.body.myEmail + "]");
   transporter.sendMail(ml, function (error, info) {
 
     res.send({code:500, msg: 'Сообщение отправлено'});
