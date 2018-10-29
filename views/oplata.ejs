@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
 	<script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
 	<script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/maskinput.js"></script>
 	<script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
 	<script type="text/javascript" src="script/oplata/oplata.js"></script>
   <script type="text/javascript" src="script/global.js"></script>
@@ -30,7 +31,7 @@
       </div>
   </div>
 
-  
+
 <div class="top">
   <div class="topLine oneLine">
     <div class="topNavMobMenuOfBtm">
@@ -157,7 +158,7 @@
       <div class="NEXT_pay_bas">Заполнить данные</div>
     </div>
     <div class="basket_info">
-      <form action="/payment" enctype="application/json" type="get">
+      <form action="/payment" enctype="application/json" type="get" name="paymentForm" novalidate>
         <input type="text" name="JSON_Tovar" id="JSTOVAR" style="display: none;">
         <p class="input-container">
           <input type="text" name="name" id="input-PaymentName" class="login-input" autocomplete="off" required>
@@ -173,7 +174,7 @@
         </p>
 
         <p class="input-container">
-          <input type="text" name="FamName" id="input-PaymentPhone" class="login-input" required>
+          <input type="text" name="phoneNum" id="input-PaymentPhone" class="login-input" required>
           <label for="input-PaymentPhone" unselectable="on">Номер телефона</label>
         </p>
 
@@ -191,23 +192,23 @@
           </p>
 
           <p class="input-container" id="CityOfPostNP">
-            <input type="text" name="city" id="input-PaymentOtdelNP" class="login-input" required>
+            <input type="text" name="npnum" id="input-PaymentOtdelNP" class="login-input" required>
             <label for="input-PaymentOtdelNP" unselectable="on">Отделение</label>
           </p>
 
           <p class="input-container" id="CityOfPostUl">
-            <input type="text" name="city" id="input-PaymentUlica" class="login-input" required>
+            <input type="text" name="ulica" id="input-PaymentUlica" class="login-input" required>
             <label for="input-PaymentUlica" unselectable="on">Улица</label>
           </p>
 
           <p class="input-container min50" id="CityOfPostD">
-            <input type="text" name="city" id="input-PaymentDom" class="login-input" required>
+            <input type="text" name="dom" id="input-PaymentDom" class="login-input" required>
             <label for="input-PaymentDom" unselectable="on">Дом</label>
           </p>
 
           <p class="input-container min50" id="CityOfPostK">
-            <input type="text" name="city" id="input-PaymentKV" class="login-input" required>
-            <label for="input-PaymentKV" unselectable="on">Улица</label>
+            <input type="text" name="kvartira" id="input-PaymentKV" class="login-input" required>
+            <label for="input-PaymentKV" unselectable="on">Квартира №</label>
           </p>
 
           <button class="bubbly-button" onclick="">Подтвердить заказ</button>

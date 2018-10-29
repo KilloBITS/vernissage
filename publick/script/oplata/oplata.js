@@ -8,6 +8,7 @@ var Oplata = {
       $("body").css({"overflow":"hidden"});
       $.post('/getbasket',{data:BASKET},function(tovar){
          $("#JSTOVAR").val(JSON.stringify(tovar.tovar));
+         $("#input-PaymentPhone").mask("+38(099) 999-9999");
         for(let i = 0; i < tovar.tovar.length; i++){
           var newDiv = document.createElement("div");
           newDiv.className = "basket_doc";

@@ -19,23 +19,23 @@
 	<link rel="stylesheet" type="text/css" href="/style/account/style.min.css">
   <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
   <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/maskinput.js"></script>
   <script type="text/javascript" src="/script/bootstrap.min.js"></script>
   <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 
 	<script type="text/javascript" src="script/global.js"></script>
-  <!-- <script type="text/javascript" src="script/contacts/contacts.js"></script> -->
+  <script type="text/javascript" src="script/account/acc.js"></script>
 </head>
 <body>
 
-  <div class="spn_hol" style="/* display: none; */">
-      <div class="spinner">
-          <div class="bounce1"></div>
-          <div class="bounce2"></div>
-          <div class="bounce3"></div>
-      </div>
-  </div>
-
+<div class="spn_hol" style="/* display: none; */">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
 
 <div class="top">
 	<div class="topLine oneLine">
@@ -74,18 +74,18 @@
   <% } %>
 	</div>
 </div>
-
-
 <!-- -->
 <div class="content">
-  <div class="noNumMessage">
-    У вас не подтвержден номер телефона, некоторые функции ограничены.<br>
-    <small>(Пожалуйста подтвердите номер телефона)</small>
-  </div>
+  <% if( user.phone === null ){ %>
+    <div class="noNumMessage">
+      У вас не подтвержден номер телефона, некоторые функции ограничены.<br>
+      <small>(Пожалуйста подтвердите номер телефона)</small>
+    </div>
+  <% } %>
 
   <div class="account_block">
     <div class="top_account">
-      <div class="ava_block">
+      <div class="ava_block <% if( user.phone === null ){ %>  disabled  <% } %>">
         <div class="avatarka" id="ava" style="background-image: url(../../../data/avatars/<%= user.ava %>)"></div>
         <div class="uploadAva"></div>
       </div>
@@ -95,20 +95,36 @@
           (<%= user.name %>) <br>
           <small><%= user.email %></small>
         </div>
-        <div class="umdtn" id="MP">Мои покупки</div>
-        <div class="umdtn" id="MH">Мои желания</div>
-        <div class="umdtn" id="ST">Настройки аккаунта</div>
-        <div class="umdtn" id="OP">Настройки оповещаний</div>
+        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="MP">Мои покупки</div>
+        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="MH">Мои желания</div>
+        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="ST">Настройки аккаунта</div>
+        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="OP">Настройки оповещаний</div>
       </div>
     </div>
   </div>
+
+  <div class="data_block">
+    <div class="data_menu <% if( user.phone === null ){ %>  disabled  <% } %>">
+      <div class="set_btn">Покупки</div>
+      <div class="set_btn">Сообщения <span>0</span></div>
+      <div class="set_btn">Уведомления</div>
+      <div class="set_btn">Настройки</div>
+    </div>
+    <div class="data_user_content <% if( user.phone === null ){ %>  noNumber  <% } %>">
+      <% if( user.phone === null ){ %>
+      <div class="number_modal">
+        <form action="/setNumbers" method="POST" enctype="application/json">
+          <h1>Подтверждение номера телефона</h1>
+          <p>(Введите и сохраните ваш номер телефона)</p>
+          <input type="text" name="phoneNumber" value="" id="phoneNumMask" placeholder="Введите номер телефона">
+          <input type="submit" value="Сохранить">
+        </form>
+      </div>
+      <% } %>
+    </div>
+  </div>
 </div>
-
-
-
 <!-- -->
-
-
 </div>
 <div class="siteMap">
   <div class="mapmap">

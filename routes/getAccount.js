@@ -33,7 +33,6 @@ router.get('/', function(req, res, next){
            users_session.find({email: req.session.user}).toArray(function(err, results_users_session){
              if(results_config[languageSystem].opens){
                menu.find().toArray(function(err, results_menu ){
-                 console.log(results_users_session);
                  res.render('account.ejs',{
                    conf: results_config[languageSystem],
                    menu: results_menu,

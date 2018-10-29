@@ -2,6 +2,7 @@
 var Index = {
   ML: "",
   DESIGHN: function() {
+    $("#phoneNumMask").mask("+38(099) 999-9999");
     $(".searchBlock").hover(function() {
       $(".searchLine").css({
         "width": "170px"
@@ -19,14 +20,6 @@ var Index = {
         });
       } else {
         $(".search_result").fadeOut(150);
-      }
-    });
-
-    $('body').click(function(e) {
-      if (e.target.className != 'searchBlockVal' && $('#SEARCH').val().length === 0) {
-        $(".searchLine").css({
-          "width": "0px"
-        });
       }
     });
 

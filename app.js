@@ -64,11 +64,16 @@ app.post('/getbasket', getbasket);
 const auth = require('./controllers/controllerAuthification');
 app.post('/auth', auth);
 
+const setNumbers = require('./controllers/controllerAuthification');
+app.post('/setNumbers*', setNumbers);
+
 const create_accaunt = require('./controllers/controllerAuthification');
 app.post('/create_accaunt', create_accaunt);
 
 const newComment = require('./controllers/controllerComments');
 app.post('/newComment', newComment);
+
+
 
 /*ADMIN*/
 //Получить список товаров
@@ -114,6 +119,19 @@ app.listen(4000, function(){
   global.online = 0;
   console.warn('STARTED VERNISSAGE SERVER ON PORT: 4000');
 });
+
+// const Nexmo = require('nexmo');
+// const nexmo = new Nexmo({
+//   apiKey: "a616dae5",
+//   apiSecret: "01oaiMhN0lsZ3L2g"
+// });
+//
+// const from = 'Nexmo'
+// const to = '380664273160'
+// const text = 'kuku'
+//
+// nexmo.message.sendSms(from, to, text)
+
 
 // var options = {
 //   key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
