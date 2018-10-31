@@ -99,14 +99,15 @@ var updateLocalTovar = (req, res, next) => {
   mongoClient.connect(global.baseIP ,function(err, client){
     const db = client.db(global.baseName);
     const config  = db.collection("config");
-
+    console.log(a)
+    console.log(b)
     if(err) return console.log(err);
     /* Для русского языка */
     config.update({LANG: "RU"},{ $set : { toBasket: a.btn_shopbas}});
     config.update({LANG: "RU"},{ $set : { btnDetails: a.btn_shopDetails}});
     // Для украинского языка
-    config.update({LANG: "UA"},{ $set : { toBasket: b.btn_shopDetails_ua}});
-    config.update({LANG: "UA"},{ $set : { btnDetails: b.btn_shopbas_ua}});
+    config.update({LANG: "UA"},{ $set : { toBasket: b.btn_shopbas_ua}});
+    config.update({LANG: "UA"},{ $set : { btnDetails: b.btn_shopDetails_ua}});
 
     res.send(req.body);
     client.close();

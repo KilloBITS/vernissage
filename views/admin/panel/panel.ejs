@@ -252,7 +252,8 @@
             </a>
             <ul class="treeview-menu">
               <li class="miniClick active"><a href="#"><i class="fa fa-circle-o"></i> Статистика </a></li>
-              <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Настройки </a></li>
+              <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Настройки сайта </a></li>
+              <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Настройки меню </a></li>
             </ul>
           </li>
 
@@ -275,6 +276,7 @@
           <li class="miniClick"><a href="#"><i class="fa fa-cubes"></i> <span>Управление товарами</span></a></li>
           <li class="miniClick"><a href="#"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
           <li class="miniClick"><a href="#"><i class="fa fa-comments"></i> <span>Сообщения</span></a></li>
+          <li class="miniClick"><a href="#"><i class="fa fa-cog"></i> <span>Система</span></a></li>
 
         </ul>
       </section>
@@ -352,9 +354,7 @@
                   <li class="pull-left header"><i class="fa fa-inbox"></i> Статистика продаж</li>
                 </ul>
                 <div class="tab-content no-padding">
-                  <!-- Morris chart - Sales -->
                   <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                  <!-- <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div> -->
                 </div>
               </div>
 
@@ -362,7 +362,7 @@
                 <div class="box-header">
                   <i class="ion ion-clipboard"></i>
 
-                  <h3 class="box-title">Список задач</h3>
+                  <h3 class="box-title">Список событий</h3>
 
                   <div class="box-tools pull-right">
                     <ul class="pagination pagination-sm inline">
@@ -492,82 +492,32 @@
               </div>
               <!-- /.box -->
 
-              <!-- Calendar -->
-              <div class="box box-solid bg-green-gradient">
-                <div class="box-header">
-                  <i class="fa fa-calendar"></i>
-
-                  <h3 class="box-title">Calendar</h3>
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                      <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="#">Add new event</a></li>
-                        <li><a href="#">Clear events</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">View calendar</a></li>
-                      </ul>
-                    </div>
-                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                  <!-- /. tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <!--The calendar -->
-                  <div id="calendar" style="width: 100%"></div>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer text-black">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- Progress bars -->
-                      <div class="clearfix">
-                        <span class="pull-left">Task #1</span>
-                        <small class="pull-right">90%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                      </div>
-
-                      <div class="clearfix">
-                        <span class="pull-left">Task #2</span>
-                        <small class="pull-right">70%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                      </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                      <div class="clearfix">
-                        <span class="pull-left">Task #3</span>
-                        <small class="pull-right">60%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                      </div>
-
-                      <div class="clearfix">
-                        <span class="pull-left">Task #4</span>
-                        <small class="pull-right">40%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                      </div>
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.box -->
-
             </section>
             <!-- right col -->
+
+            <section class="col-lg-5 connectedSortable">
+              <div class="box box-primary">
+              <div class="box-header with-border">
+                <i class="fa fa-bar-chart-o"></i>
+
+                <h3 class="box-title">Статистика работы систем (%)</h3>
+
+                <div class="box-tools pull-right">
+
+                  <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+                    <button type="button" class="btn btn-default btn-xs active" data-toggle="on">On</button>
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+                  </div>
+                </div>
+              </div>
+              <div class="box-body">
+                <div id="interactive" style="height: 300px;"></div>
+              </div>
+              <!-- /.box-body-->
+            </div>
+            </section>
+
+
           </div>
           <!-- /.row (main row) -->
 
@@ -587,15 +537,19 @@
               <form role="form">
                 <div class="box-body">
                   <div class="form-group">
+
                     <a class="btn btn-app" onclick="ADMIN.SITE_STATUS(0)">
-                    <i class="fa fa-play"></i> Старт
-                  </a>
+                    <i class="fa fa-play"></i> Старт</a>
+
                     <a class="btn btn-app" onclick="ADMIN.SITE_STATUS(1)">
-                    <i class="fa fa-pause"></i>Приостановить
-                  </a>
+                    <i class="fa fa-pause"></i>Остановить</a>
+
                     <a class="btn btn-app" onclick="ADMIN.SITE_STATUS(2)">
-                    <i class="fa fa-repeat"></i>Обновить
-                  </a>
+                    <i class="fa fa-repeat"></i>Обновить</a>
+
+                    <a class="btn btn-app" onclick="ADMIN.SITE_STATUS(3)">
+                    <i class="fa fa-bolt"></i>перезапустить</a>
+
                   </div>
                 </div>
               </form>
@@ -609,11 +563,11 @@
                 <div class="box-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Заголовок по Русски</label>
-                    <input type="text" class="ru_lang form-control" id="edit_title_ru" value="<%= conf.main_title %>" placeholder="Введите заголовок сайта">
+                    <input type="text" class="ru_lang form-control RU_PIC" id="edit_title_ru" value="<%= titles[0].index %>" placeholder="Введите заголовок сайта">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Заголовок по украински</label>
-                    <input type="text" class="ua_lang form-control" id="edit_title_ua" value="<%= confua.main_title %>" placeholder="Введіть заголовок сайту">
+                    <input type="text" class="ua_lang form-control UA_PIC" id="edit_title_ua" value="<%= titles[1].index %>" placeholder="Введіть заголовок сайту">
                   </div>
                 </div>
                 <div class="box-footer">
@@ -646,7 +600,7 @@
               <div class="box-header with-border">
                 <h3 class="box-title">Соц. сети</h3>
               </div>
-              <form role="form">
+              <form role="form" onsubmit="return false">
                 <div class="box-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">ВКонтакте</label>
@@ -665,10 +619,127 @@
                 </div>
 
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-block btn-success btn-sm save_pic" onclick="ADMIN.SAVE_TITLE()">Сохранить</button>
+                  <button type="submit" class="btn btn-block btn-success btn-sm save_pic" onclick="ADMIN.SAVE_SOCIALS()">Сохранить</button>
                 </div>
               </form>
             </div>
+
+          </div>
+        </section>
+      </div>
+      <!-- Настройки меню -->
+      <div class="pageOfPanel">
+        <section class="content">
+          <div class="small-box bg-aqua">
+            <div class="inner" style="text-align: center;">
+              <h3><%= menu.length %></h3>
+              <p>Категорий</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+          </div>
+          <div class="box box-default">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <% for(var i = 0; i < menu.length; i++){ %>
+                  <li><a href="#tab_<%= i %>" data-toggle="tab"><%= menu[i].name %></a></li>
+                <% } %>
+
+
+                <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+              </ul>
+              <div class="tab-content">
+                <!-- active -->
+                <% for(var i = 0; i < menu.length; i++){ %>
+                  <div class="tab-pane " id="tab_<%= i %>">
+
+                    <!-- <li class="pull-left header"><i class="fa fa-th"></i> <%= menu[i].name %></li> -->
+
+                    <% if(menu[i].podlink.length > 1){ %>
+
+                      <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
+
+                        <div class="box box-warning collapsed-box">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">• <%= menu[i].podlink[il].pname %></h3>
+
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                              </button>
+                            </div>
+                            <!-- /.box-tools -->
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body" style="display: none;">
+
+                            <div class="col-md-6">
+                              <div class="form-group has-warning">
+                                <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Название на Русском</label>
+                                <input type="text" class="form-control RU_PIC" id="" value="<%= menu[i].podlink[il].pname %>" placeholder="Enter ...">
+                                <!-- <span class="help-block">Help block with warning</span> -->
+                              </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group has-warning">
+                                <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Название на Украинском</label>
+                                <input type="text" class="form-control UA_PIC" id="" value="<%= menuuk[i].podlink[il].pname %>" placeholder="Enter ...">
+                                <!-- <span class="help-block">Help block with warning</span> -->
+                              </div>
+
+                            </div>
+
+
+
+                            <div class="form-group has-warning">
+                              <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Ссылка</label>
+                              <input type="text" class="form-control" id="" value="<%= menu[i].podlink[il].plink %>" placeholder="Enter ..." disabled>
+                              <!-- <span class="help-block">Help block with warning</span> -->
+                            </div>
+                          </div>
+                          <!-- /.box-body -->
+                        </div>
+                      <% } %>
+
+                    <% }else{%>
+                      <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> В данной категории нет типов!</h4>
+                        В данной категори не создано ниодного типа товаров
+                      </div>
+                      <% if(menu[i].edited){ %>
+                        <div class="alert alert-success alert-dismissible">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                          <h4><i class="icon fa fa-check"></i> Вы можете создать тип!</h4>
+                          В данной категории товаром можно создавать типы товаров.
+                        </div>
+
+                      <% } %>
+                    <% } %>
+                    <% if(menu[i].edited){ %>
+                      <button type="button" class="btn btn-block btn-primary btn-sm">Создать тип</button>
+                    <% } else { %>
+
+                      <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-ban"></i> В данной категории нельзя создавать типы! </h4>
+                        В данной категории товаров нельзя создавать типы.
+                      </div>
+
+
+                    <% } %>
+                  </div>
+                <% } %>
+
+
+                <!-- /.tab-pane -->
+              </div>
+              <!-- /.tab-content -->
+            </div>
+          </div>
+          <div class="col-md-6">
 
           </div>
         </section>
@@ -688,19 +759,19 @@
                 <form role="form">
                   <div class="form-group">
                     <label>Заголовок блока на Русском</label>
-                    <input type="text" class="form-control" id="news_titleNEW_ru" value="<%= conf.news_tovar[0] %>" placeholder="Enter ...">
+                    <input type="text" class="form-control RU_PIC" id="news_titleNEW_ru" value="<%= conf.news_tovar[0] %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Заголовок блока на Украинском</label>
-                    <input type="text" class="form-control" id="news_titleNEW_ua" value="<%= confua.news_tovar[0] %>" placeholder="Enter ...">
+                    <input type="text" class="form-control UA_PIC" id="news_titleNEW_ua" value="<%= confua.news_tovar[0] %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Описание блока на Русском</label>
-                    <textarea class="form-control" rows="3" id="news_textNEW_ru" placeholder="..."><%= conf.news_tovar[1] %></textarea>
+                    <textarea class="form-control RU_PIC" rows="3" id="news_textNEW_ru" placeholder="..."><%= conf.news_tovar[1] %></textarea>
                   </div>
                   <div class="form-group">
                     <label>Описание блока на Украинском</label>
-                    <textarea class="form-control" rows="3" id="news_textNEW_ua" placeholder="Enter ..."><%= confua.news_tovar[1] %></textarea>
+                    <textarea class="form-control UA_PIC" rows="3" id="news_textNEW_ua" placeholder="Enter ..."><%= confua.news_tovar[1] %></textarea>
                   </div>
                 </form>
               </div>
@@ -714,11 +785,11 @@
                 <form role="form">
                   <div class="form-group">
                     <label>Заголовок блока на Русском</label>
-                    <input type="text" class="form-control" id="newsB_titleNEW_ru" value="<%= conf.news %>" placeholder="Enter ...">
+                    <input type="text" class="form-control RU_PIC" id="newsB_titleNEW_ru" value="<%= conf.news %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Заголовок блока на Украинском</label>
-                    <input type="text" class="form-control" id="newsB_titleNEW_ua" value="<%= confua.news %>" placeholder="Enter ...">
+                    <input type="text" class="form-control UA_PIC" id="newsB_titleNEW_ua" value="<%= confua.news %>" placeholder="Enter ...">
                   </div>
                 </form>
               </div>
@@ -733,19 +804,19 @@
                 <form role="form">
                   <div class="form-group">
                     <label>Заголовок блока на Русском</label>
-                    <input type="text" class="form-control" id="about_titleNEW_ru" value="<%= conf.about[0] %>" placeholder="Enter ...">
+                    <input type="text" class="form-control RU_PIC" id="about_titleNEW_ru" value="<%= conf.about[0] %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Заголовок блока на Украинском</label>
-                    <input type="text" class="form-control" id="about_titleNEW_ua" value="<%= confua.about[0] %>" placeholder="Enter ...">
+                    <input type="text" class="form-control UA_PIC" id="about_titleNEW_ua" value="<%= confua.about[0] %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Описание блока на Русском</label>
-                    <textarea class="form-control" rows="3" id="about_textNEW_ru" placeholder="..."><%= conf.about[1] %></textarea>
+                    <textarea class="form-control RU_PIC" rows="3" id="about_textNEW_ru" placeholder="..."><%= conf.about[1] %></textarea>
                   </div>
                   <div class="form-group">
                     <label>Описание блока на Украинском</label>
-                    <textarea class="form-control" rows="3" id="about_textNEW_ua" placeholder="Enter ..."><%= confua.about[1] %></textarea>
+                    <textarea class="form-control UA_PIC" rows="3" id="about_textNEW_ua" placeholder="Enter ..."><%= confua.about[1] %></textarea>
                   </div>
                 </form>
               </div>
@@ -759,19 +830,19 @@
                 <form role="form">
                   <div class="form-group">
                     <label>Заголовок блока на Русском</label>
-                    <input type="text" class="form-control" id="mail_titleNEW_ru" value="<%= conf.contact[0] %>" placeholder="Enter ...">
+                    <input type="text" class="form-control RU_PIC" id="mail_titleNEW_ru" value="<%= conf.contact[0] %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Заголовок блока на Украинском</label>
-                    <input type="text" class="form-control" id="mail_titleNEW_ua" value="<%= confua.contact[0] %>" placeholder="Enter ...">
+                    <input type="text" class="form-control UA_PIC" id="mail_titleNEW_ua" value="<%= confua.contact[0] %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Описание блока на Русском</label>
-                    <textarea class="form-control" rows="3" id="mail_textNEW_ru" placeholder="..."><%= conf.contact[1] %></textarea>
+                    <textarea class="form-control RU_PIC" rows="3" id="mail_textNEW_ru" placeholder="..."><%= conf.contact[1] %></textarea>
                   </div>
                   <div class="form-group">
                     <label>Описание блока на Украинском</label>
-                    <textarea class="form-control" rows="3" id="mail_textNEW_ua" placeholder="Enter ..."><%= confua.contact[1] %></textarea>
+                    <textarea class="form-control UA_PIC" rows="3" id="mail_textNEW_ua" placeholder="Enter ..."><%= confua.contact[1] %></textarea>
                   </div>
                 </form>
               </div>
@@ -780,7 +851,6 @@
           <button type="button" class="btn btn-block btn-success btn-lg saveLocal" id="globalDataSave" onclick="ADMIN.SAVE_LOCAL_INDEX()">Сохранить</button>
         </section>
       </div>
-
       <!-- Локализация страницы товары -->
       <div class="pageOfPanel">
         <section class="content-header">
@@ -796,11 +866,11 @@
                 <form role="form">
                   <div class="form-group">
                     <label>на Русском</label>
-                    <input type="text" class="form-control" id="btn_shopDetails" value="<%= conf.btnDetails %>" placeholder="Enter ...">
+                    <input type="text" class="form-control RU_PIC" id="btn_shopDetails" value="<%= conf.btnDetails %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>на Украинском</label>
-                    <input type="text" class="form-control" id="btn_shopDetails_ua" value="<%= confua.btnDetails %>" placeholder="Enter ...">
+                    <input type="text" class="form-control UA_PIC" id="btn_shopDetails_ua" value="<%= confua.btnDetails %>" placeholder="Enter ...">
                   </div>
                 </form>
               </div>
@@ -816,11 +886,11 @@
                 <form role="form">
                   <div class="form-group">
                     <label>на Русском</label>
-                    <input type="text" class="form-control" id="btn_shopbas" value="<%= conf.toBasket %>" placeholder="Enter ...">
+                    <input type="text" class="form-control RU_PIC" id="btn_shopbas" value="<%= conf.toBasket %>" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>на Украинском</label>
-                    <input type="text" class="form-control" id="btn_shopbas_ua" value="<%= confua.toBasket %>" placeholder="Enter ...">
+                    <input type="text" class="form-control UA_PIC" id="btn_shopbas_ua" value="<%= confua.toBasket %>" placeholder="Enter ...">
                   </div>
                 </form>
               </div>
@@ -834,10 +904,10 @@
       <div class="pageOfPanel">
         <section class="content">
           <div class="col-md-6">
-
+            <button type="button" class="btn btn-block btn-info btn-flat">Оплата</button>
           </div>
           <div class="col-md-6">
-
+<button type="button" class="btn btn-block btn-info btn-flat">Доставка</button>
           </div>
         </section>
       </div>
@@ -909,7 +979,7 @@
                     <select id="tType" class="form-control"></select>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group" style="position: relative">
                     <label>Скидка</label>
                     <input type="checkbox" id="tSaleEnabled">
                     <input type="text" id="tSale" class="form-control" placeholder="Процент скидки">
@@ -985,12 +1055,12 @@
                       <% if(tovar[i].availability){ %>
                         <td class="tovar_active NOTMOBILE" style="background-color: #169814; text-align: center; color: white">
                           Товар активен
-                          <div class="visibility_off" title="Выключить товар"></div>
+                          <div class="visibility_off" title="Выключить товар" onclick="ADMIN.TOVAR_VISIBILITY(false, <%= tovar[i].AI %>)"></div>
                         </td>
                         <% } else { %>
                           <td class="tovar_none_active NOTMOBILE" style="background-color: #981414; text-align: center; color: white">
                             Товар неактивен
-                            <div class="visibility_on" title="Включить товар"></div>
+                            <div class="visibility_on" title="Включить товар" onclick="ADMIN.TOVAR_VISIBILITY(true,<%= tovar[i].AI %>)"></div>
                           </td>
                           <% } %>
 
@@ -1036,7 +1106,17 @@
           </div>
         </section>
       </div>
+      <!-- система -->
+      <div class="pageOfPanel">
+        <section class="content">
+          <div class="col-md-6">
 
+          </div>
+          <div class="col-md-6">
+
+          </div>
+        </section>
+      </div>
 
     </div>
     <!-- END CONTENT -->
@@ -1262,11 +1342,16 @@
   <script src="/panel/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
   <script src="/panel/bower_components/fastclick/lib/fastclick.js"></script>
   <script src="/panel/dist/js/adminlte.min.js"></script>
+  <script src="/panel/bower_components/Flot/jquery.flot.js"></script>
   <!-- <script src="/panel/dist/js/pages/dashboard.js"></script> -->
   <!-- <script src="/panel/dist/js/demo.js"></script> -->
   <script src="/panel/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="/panel/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript" src="/panel/dist/js/admin.js"></script>
+
+  <script>
+
+  </script>
 </body>
 
 </html>

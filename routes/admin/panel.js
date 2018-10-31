@@ -25,7 +25,8 @@ router.get('/', function(req, res, next){
       mongoClient.connect(global.baseIP, function(err, client){
           const db = client.db(global.baseName);
           const config = db.collection("config");
-          const menu  = db.collection(langMenu);
+          const menu  = db.collection("menu");
+          const menuuk  = db.collection("menu-uk");
           const slider  = db.collection("slider");
           const news  = db.collection("news");
           const tovar  = db.collection("tovar");
@@ -33,6 +34,7 @@ router.get('/', function(req, res, next){
           const types  = db.collection("types");
           const categories  = db.collection("categories");
           const users  = db.collection("users");
+          const titles_page  = db.collection("titles_page");
 
           const counters = db.collection("counters");
           if(err) return console.log(err);
@@ -47,22 +49,28 @@ router.get('/', function(req, res, next){
                        categories.find().toArray(function(err, results_categories ){
                          users.find().toArray(function(err, results_users ){
                            counters.find().toArray(function(err, results_counters ){
-                             res.render('admin/panel/panel.ejs',{  //admin/panel/panel.ejs
-                               conf: results_config[0],
-                               confua: results_config[1],
-                               menu: results_menu,
-                               slides: results_slider,
-                               news: results_news,
-                               tovar: results_tovar,
-                               tovaruk: results_tovaruk,
-                               type: results_types,
-                               categorie: results_categories,
-                               users: results_users,
-                               counters: results_counters,
-                               online: global.online,
-                               user: req.session.user
-                             })
-                             client.close();
+                             titles_page.find().toArray(function(err, results_titles_page ){
+                               menuuk.find().toArray(function(err, results_menuuk ){
+                                 res.render('admin/panel/panel.ejs',{  //admin/panel/panel.ejs
+                                   conf: results_config[0],
+                                   confua: results_config[1],
+                                   menu: results_menu,
+                                   menuuk: results_menuuk,
+                                   slides: results_slider,
+                                   news: results_news,
+                                   tovar: results_tovar,
+                                   tovaruk: results_tovaruk,
+                                   type: results_types,
+                                   categorie: results_categories,
+                                   users: results_users,
+                                   counters: results_counters,
+                                   online: global.online,
+                                   titles: results_titles_page,
+                                   user: req.session.user
+                                 })
+                                 client.close();
+                               });
+                             });
                            });
                          });
                        });

@@ -92,7 +92,7 @@ function runOnKeys(func) {
 runOnKeys(function() {
   var isAdmin = confirm("Вы действительно хотите перейти к панели управления?");
   if(isAdmin){
-    window.location.href = "/login";
+    window.location.href = "/panel";
   }
 },"Q".charCodeAt(0),"A".charCodeAt(0));
 function createAlert(title, summary, details, severity, dismissible, autoDismiss, appendToId) {

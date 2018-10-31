@@ -25,6 +25,7 @@ var ADMIN = {
 
     aaa.redraw()
   },
+
   /* Работа с меню */
   SAVE_NEW_CATEGORIES: function(){
     var NM = {
