@@ -4,20 +4,59 @@ var ADMIN = {
   EDIT_TYPE: '',
   EDIT_AI_SELECT: 0,
   EDIT_IMAGE: '',
+  URL_VAL: '',
+  REMOVE_CATEGORY:function(a,b){
+    var isAdmin = confirm("Вы действительно хотите удалить категорию '"+b+"' ?\n(востановление категории будет невозможно, а все товары находяциеся в ней нужно будет переносить в другую категорию!)");
+    if(isAdmin){
+      $.post("/removecategory",{index: a},(res) => {
+        console.log(res);
+      })
+    };
+  },
+  SAVE_NEW_CATEGORY: function(){
+    ADMIN.CONSOLE_TO_MESSAGE(false);
+    var nc = {
+      cat_name_ru: $("#newCatNameRU").val(),
+      cat_name_ua: $("#newCatNameUa").val(),
+      // identificator: $("#IDENTIFICATOR_NEW_CAT").val(),
+      test_url: $("#test_url").val()
+    };
+    $.post("/addCategory",nc, (res) => {
+      ADMIN.CONSOLE_TO_MESSAGE(res);
+    });
+  },
+  NEW_CATEGORY: function(){
+    // ADMIN.CONSOLE_TO_MESSAGE(false);
+    $('#modal-warning').modal('show');
+    $.post("/maxAImenu",function(res){
+      ADMIN.URL_VAL = "/shop?c="+res.ml
+      $("#test_url").val(ADMIN.URL_VAL);
+      // ADMIN.CONSOLE_TO_MESSAGE(res);
+    });
+  },
+  CONSOLE_TO_MESSAGE: function(status){
+    if(status === false){
+      $('.BIG_LOADER').fadeIn(100);
+      $('.wrapper').css({"filter":"blur(3.5px)"});
+    }else{
+      $('.BIG_LOADER').fadeOut(100);
+      $('.wrapper').css({"filter":"blur(0)"});
+    }
+  },
   SAVE_SOCIALS: function(){
+    ADMIN.CONSOLE_TO_MESSAGE(false);
     $.post("/saveSocials",{v: $("#VK").val() , i: $("#INSTA").val() , f: $("#FB").val() }, (res) => {
-      console.log(res);
+      ADMIN.CONSOLE_TO_MESSAGE(res);
     });
   },
   TOVAR_VISIBILITY: function(status, ai){
-    console.log(status);
-    console.log(ai);
-    $.post("/SetStatusVisibil"{}, function(res){
-      
+
+    $.post("/SetStatusVisibile",{a: status,b:ai}, function(res){
+      ADMIN.CONSOLE_TO_MESSAGE(res);
     })
   },
   SAVE_NEW_TOVAR:function(){
-
+    ADMIN.CONSOLE_TO_MESSAGE(false);
       let save_data = {
         title: $("#tName").val(),
         price: $("#tPrice").val(),
@@ -38,19 +77,18 @@ var ADMIN = {
 
       var url = '/setAdmTovar';
 
-      console.log(save_data);
-      console.log(save_data_ua);
       $.post(url,{ru:save_data, ua:save_data_ua, file: ADMIN.GLOBAL_FILE, te: ADMIN.NEW_TOVAR, ai:ADMIN.EDIT_AI_SELECT},function(res){
           ADMIN.CANCEL();
-
+          ADMIN.CONSOLE_TO_MESSAGE(res);
       });
   },
   EDIT_TOVAR: function(ai){
+
     ADMIN.NEW_TOVAR = false;
     ADMIN.EDIT_AI_SELECT = parseInt(ai);
       $('#modal-info').modal('show')
       $.post('/getAdmTovar',{d:ai},(res) => {
-        console.log(res);
+        ADMIN.CONSOLE_TO_MESSAGE(res);
         $("#tName").val(res.tovar_ru[0].title);
         $("#tName_ua").val(res.tovar_ua[0].title);
 
@@ -73,6 +111,7 @@ var ADMIN = {
       });
   },
   SAVE_LOCAL_TOVAR: function(){
+    ADMIN.CONSOLE_TO_MESSAGE(false);
     let RU = {
       btn_shopDetails: $("#btn_shopDetails").val(),
       btn_shopbas: $("#btn_shopbas").val(),
@@ -83,18 +122,19 @@ var ADMIN = {
     }
 
     $.post("/updateLocalTovar",{ru: RU, ua: UA}, (res) => {
-      console.log(res);
+      ADMIN.CONSOLE_TO_MESSAGE(res);
     });
   },
   SAVE_LOCAL_INDEX: function(){
+    ADMIN.CONSOLE_TO_MESSAGE(false);
     let RU = {
       news_titleNEW_ru: $("#news_titleNEW_ru").val(),
       news_textNEW_ru: $("#news_textNEW_ru").val(),
       news_btnNEW_ru: 'Посмотреть больше',
       about_titleNEW_ru: $("#about_titleNEW_ru").val(),
       about_textNEW_ru: $("#about_textNEW_ru").val(),
-      about_btnNEW_ru: $("#about_btnNEW_ru").val(),
-      newsB_titleNEW_ru: 'Детальнее',
+      about_btnNEW_ru: "Детальнее",
+      newsB_titleNEW_ru: $("#newsB_titleNEW_ru").val(),
       mail_titleNEW_ru: $("#mail_titleNEW_ru").val(),
       mail_textNEW_ru: $("#mail_textNEW_ru").val(),
       mail_btnNEW_ru: 'Отправить сообщение'
@@ -113,28 +153,29 @@ var ADMIN = {
     }
 
     $.post("/updateLocal",{ru: RU, ua: UA}, (res) => {
-      console.log(res);
+      ADMIN.CONSOLE_TO_MESSAGE(res);
     });
   },
   SITE_STATUS: function(s){
+    ADMIN.CONSOLE_TO_MESSAGE(false);
     $.post("/siteStatus",{status: s}, (res) => {
-      console.log(res);
+      ADMIN.CONSOLE_TO_MESSAGE(res);
     })
   },
   SAVE_TITLE: function(){
+    ADMIN.CONSOLE_TO_MESSAGE(false);
     var T = {
       title_ua: $("#edit_title_ua").val(),
       title_ru: $("#edit_title_ru").val()
     };
-
     $.post("/saveTitle",T,(res) => {
-      console.log(res);
+      ADMIN.CONSOLE_TO_MESSAGE(res);
     });
   },
   CHANGE_TYPE: function(){
     $.post("/getMenu",{c: $("#tCategories").val()},(res) => {
       $("#tType option").remove();
-      console.log(res)
+      ADMIN.CONSOLE_TO_MESSAGE(res);
       if(res.menu.podlink.length > 1){
         $("#tType").attr("disabled",false).removeAttr("style")
         for (var i = 0; i < res.menu.podlink.length; i++) {
@@ -169,9 +210,8 @@ var ADMIN = {
   },
   CHART_SALES_STATISTICS: function(){
     $.post('/getCounters',function(res){
-      // console.log(res);
+
       var countdata = res.counters_data;
-      // var paysdata = res.paysdata_data;
       var line_chart = [];
       for(let i = 0; i < countdata.length; i++){
         line_chart.push({date: countdata[i].date, value: countdata[i].list.length });
@@ -221,6 +261,26 @@ var ADMIN = {
 
   },
   BUTTONS: function(){
+    $('.miniClick').click(function(){
+      var ind = $('.miniClick').index(this);
+      localStorage.setItem("vernissage_miniClick", ind);
+    });
+
+    $('.treeview').click(function(){
+      var ind = $('.treeview').index(this);
+      localStorage.setItem("vernissage_treeview", ind);
+    });
+
+    $("#IDENTIFICATOR_NEW_CAT").on('keyup', function(){
+      $("#test_url").val(ADMIN.URL_VAL+ "," + $("#IDENTIFICATOR_NEW_CAT").val());
+    });
+    $(".text-muted").click(function(){
+      var a = $(this).offset();
+      $(".li_vipadayka").css({
+        "right":"11px",
+        "top": a.top + 40 + "px"
+      }).fadeIn(300);
+    });
     $(".miniClick").click(function(){
       let index = $(".miniClick").index(this);
       $(".miniClick").removeClass("active");
@@ -231,6 +291,13 @@ var ADMIN = {
     });
   },
   SCRIPTS:function(){
+    if(localStorage.getItem("vernissage_treeview") && localStorage.getItem("vernissage_treeview") >= 0){
+       $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+')').addClass("menu-open");
+       $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+') .treeview-menu').show();
+       $('.miniClick:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').click().addClass("active");
+       $('.pageOfPanel:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').addClass("pageActive");
+
+    }
     /*Для загрузки изображений в товары*/
       file = document.getElementById('tFile');
       file.addEventListener('change', function () {

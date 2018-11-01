@@ -52,7 +52,7 @@ router.get('/', function(req, res, next){
        });
     });
   } else {
-    res.redirect("/")
+    res.redirect("/login")
   }
 
 });

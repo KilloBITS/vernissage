@@ -28,6 +28,7 @@ var saveTitle = (req, res, next) => {
     config.update({LANG: "RU"},{ $set : { main_title: req.body.title_ru}});
     // Для украинского языка
     config.update({LANG: "UA"},{ $set : { main_title: req.body.title_ua}});
+    res.send({code:500})
     client.close();
   });
 };

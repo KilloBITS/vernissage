@@ -65,9 +65,11 @@ var Details = {
       $.post('/newComment',{text: $("#commentsText").val(), tovai: $("#commentsText").attr("tov_AI") }, function(res){
         console.log(res);
         if(res.code === 500){
-
+          var newCommebtData = '<div class="comment-wrap"> <div class="comment-block"><p class="comment-text">'+res.msg.text+'</p><div class="bottom-comment"><div class="comment-date">'+res.msg.author+'</div></div></div></div>';
+          $('.comments .comment-wrap:eq(0)').after(newCommebtData);
+          $("#commentsText").val("");
         }else{
-
+          createAlert('','Ошибка 403','нет доступа','success',true,true,'pageMessages');
         }
       });
     });

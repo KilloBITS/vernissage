@@ -121,7 +121,7 @@ var setAdmTovar = (req, res, next) => {
     tovar.find().sort({AI:-1}).limit(1).toArray(function(err, results_tovar ){
       var mainData = req.body;
       var NEXT_AI = results_tovar[0].AI + 1;
-      
+
       if(mainData.te === "true"){
         createUA(mainData.ua, NEXT_AI);
         createRU(mainData.ru, NEXT_AI);
@@ -139,10 +139,32 @@ var setAdmTovar = (req, res, next) => {
 
 };
 
+var setStatusVisibile = (req, res, next) => {
+  console.log(req.body);
+  if(req.body.a === 'false'){
+    var status = false;
+  }else{
+    var status = true;
+  }
+
+  mongoClient.connect(global.baseIP ,function(err, client){
+   const db = client.db(global.baseName);
+   const tovar  = db.collection("tovar");
+   const tovaruk  = db.collection("tovar-uk");
+   if(err) return console.log(err);
+   tovar.update({ AI: parseInt(req.body.b) },{$set: {availability: status}});
+   tovaruk.update({ AI: parseInt(req.body.b) },{$set: {availability: status}});
+
+   res.send("Статус товара успешно изменен")
+  });
+};
+
 router.post('/getAdmTovar', getAdmTovar, function(req, res, next){});
 
 router.post('/delAdmTovar', delAdmTovar, function(req, res, next){});
 
 router.post('/setAdmTovar', setAdmTovar, function(req, res, next){});
+
+router.post('/SetStatusVisibile', setStatusVisibile, function(req, res, next){});
 
 module.exports = router;

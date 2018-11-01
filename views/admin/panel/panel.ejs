@@ -65,9 +65,10 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini fixed">
-
+<div class="BIG_LOADER">
+  <div class="loader"></div>
+</div>
   <div class="wrapper">
-
     <header class="main-header">
       <!-- Logo -->
       <a href="/panel" class="logo">
@@ -243,7 +244,7 @@
         </form>
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">МЕНЮ</li>
-          <li class="active treeview">
+          <li class="treeview">
             <a href="#">
               <i class="fa fa-dashboard"></i> <span>Сайт</span>
               <span class="pull-right-container">
@@ -251,7 +252,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="miniClick active"><a href="#"><i class="fa fa-circle-o"></i> Статистика </a></li>
+              <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Статистика </a></li>
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Настройки сайта </a></li>
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Настройки меню </a></li>
             </ul>
@@ -259,7 +260,7 @@
 
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-bullhorn"></i> <span>Настройки локализации</span>
+              <i class="fa fa-bullhorn"></i> <span>Настройки страниц</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -268,7 +269,6 @@
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Главная </a></li>
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Товары </a></li>
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Оплата и доставка </a></li>
-              <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Контакты </a></li>
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Авторизация </a></li>
             </ul>
           </li>
@@ -285,7 +285,7 @@
     <!-- CONTENT -->
     <div class="content-wrapper">
       <!-- Главная страница со статистиками -->
-      <div class="pageOfPanel pageActive">
+      <div class="pageOfPanel">
         <section class="content-header">
           <h1>Уплавление сайтом <small>(Control panel)</small></h1>
         </section>
@@ -629,6 +629,38 @@
       </div>
       <!-- Настройки меню -->
       <div class="pageOfPanel">
+        <div class="modal modal-warning fade in" id="modal-warning" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Создать новую категорию</h4>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Название категории на руском</label>
+                  <input type="text" id="newCatNameRU" class="form-control RU_PIC" placeholder="Введите название товара на Русском">
+                </div>
+                <div class="form-group">
+                  <label>название категории на украинском</label>
+                  <input type="text" id="newCatNameUa" class="form-control UA_PIC" placeholder="Введите название товара на Украинском">
+                </div>
+                <div class="form-group">
+                  <label>URL</label>
+                  <input type="text" id="test_url" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-outline" onclick="ADMIN.SAVE_NEW_CATEGORY();">Сохранить</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
         <section class="content">
           <div class="small-box bg-aqua">
             <div class="inner" style="text-align: center;">
@@ -648,58 +680,46 @@
 
 
                 <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                <div class="li_vipadayka">
+                  <div id="newCategory" onclick="ADMIN.NEW_CATEGORY()">Создать категорию</div>
+                </div>
               </ul>
               <div class="tab-content">
                 <!-- active -->
                 <% for(var i = 0; i < menu.length; i++){ %>
                   <div class="tab-pane " id="tab_<%= i %>">
 
-                    <!-- <li class="pull-left header"><i class="fa fa-th"></i> <%= menu[i].name %></li> -->
-
                     <% if(menu[i].podlink.length > 1){ %>
 
                       <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
 
-                        <div class="box box-warning collapsed-box">
+                        <div class="box box-primary collapsed-box">
                           <div class="box-header with-border">
                             <h3 class="box-title">• <%= menu[i].podlink[il].pname %></h3>
-
                             <div class="box-tools pull-right">
                               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                               </button>
                             </div>
-                            <!-- /.box-tools -->
                           </div>
-                          <!-- /.box-header -->
-                          <div class="box-body" style="display: none;">
 
+                          <div class="box-body" style="display: none;">
                             <div class="col-md-6">
                               <div class="form-group has-warning">
                                 <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Название на Русском</label>
                                 <input type="text" class="form-control RU_PIC" id="" value="<%= menu[i].podlink[il].pname %>" placeholder="Enter ...">
-                                <!-- <span class="help-block">Help block with warning</span> -->
                               </div>
-
                             </div>
-
                             <div class="col-md-6">
                               <div class="form-group has-warning">
                                 <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Название на Украинском</label>
                                 <input type="text" class="form-control UA_PIC" id="" value="<%= menuuk[i].podlink[il].pname %>" placeholder="Enter ...">
-                                <!-- <span class="help-block">Help block with warning</span> -->
                               </div>
-
                             </div>
-
-
-
                             <div class="form-group has-warning">
                               <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Ссылка</label>
                               <input type="text" class="form-control" id="" value="<%= menu[i].podlink[il].plink %>" placeholder="Enter ..." disabled>
-                              <!-- <span class="help-block">Help block with warning</span> -->
                             </div>
                           </div>
-                          <!-- /.box-body -->
                         </div>
                       <% } %>
 
@@ -721,15 +741,16 @@
                     <% if(menu[i].edited){ %>
                       <button type="button" class="btn btn-block btn-primary btn-sm">Создать тип</button>
                     <% } else { %>
-
                       <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4><i class="icon fa fa-ban"></i> В данной категории нельзя создавать типы! </h4>
                         В данной категории товаров нельзя создавать типы.
                       </div>
-
-
                     <% } %>
+                      <% if( (i !== 0) && (i !== 1) && (menu[i].name !== 'Оплата и доставка')  && (menu[i].name !== 'Контакты')){ %>
+                        <button type="button" class="btn btn-block btn-danger btn-sm" onclick="ADMIN.REMOVE_CATEGORY(<%= menu[i].index %>, '<%= menu[i].name %>' )">Удалить категорию!</button>
+                      <% } %>
+
                   </div>
                 <% } %>
 
@@ -751,7 +772,7 @@
         </section>
         <section class="content">
           <div class="col-md-6">
-            <div class="box box-warning">
+            <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Блок новинок на главной странице</h3>
               </div>
@@ -777,7 +798,7 @@
               </div>
             </div>
 
-            <div class="box box-warning">
+            <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Блок "Наши новости" на главной странице</h3>
               </div>
@@ -796,7 +817,7 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="box box-warning">
+            <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Блок "О НАС" на главной странице</h3>
               </div>
@@ -822,7 +843,7 @@
               </div>
             </div>
 
-            <div class="box box-warning">
+            <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Блок "Обратная связь" на главной странице</h3>
               </div>
@@ -858,7 +879,7 @@
         </section>
         <section class="content">
           <div class="col-md-6">
-            <div class="box box-warning">
+            <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Кнопка "Деталнее"</h3>
               </div>
@@ -878,7 +899,7 @@
           </div>
           <div class="col-md-6">
 
-            <div class="box box-warning">
+            <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Кнопка "Добавить в корзину"</h3>
               </div>
@@ -903,22 +924,143 @@
       <!-- Локализация страницы оплата и доставка -->
       <div class="pageOfPanel">
         <section class="content">
-          <div class="col-md-6">
-            <button type="button" class="btn btn-block btn-info btn-flat">Оплата</button>
+          <div class="col-md-12">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">краткое описание:</h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>на Русском</label>
+                    <textarea class="form-control RU_PIC" rows="3" placeholder="Enter ..."><%= conf.dostavka_info %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>на Украинском</label>
+                    <textarea class="form-control UA_PIC" rows="3" placeholder="Enter ..."><%= confua.dostavka_info %></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
+
           <div class="col-md-6">
-<button type="button" class="btn btn-block btn-info btn-flat">Доставка</button>
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title"><%= conf.oplata[0].title %></h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>на Русском</label>
+                    <textarea class="form-control RU_PIC" rows="3" placeholder="Enter ..."><%= conf.oplata[0].text %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>на Украинском</label>
+                    <textarea class="form-control UA_PIC" rows="3" placeholder="Enter ..."><%= confua.oplata[0].text %></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title"><%= conf.dostavka[0].title %></h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>на Русском</label>
+                    <textarea class="form-control RU_PIC" rows="3" placeholder="Enter ..."><%= conf.dostavka[0].text %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>на Украинском</label>
+                    <textarea class="form-control UA_PIC" rows="3" placeholder="Enter ..."><%= confua.dostavka[0].text %></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title"><%= conf.dostavka[2].title %></h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>на Русском</label>
+                    <textarea class="form-control RU_PIC" rows="3" placeholder="Enter ..."><%= conf.dostavka[2].text %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>на Украинском</label>
+                    <textarea class="form-control UA_PIC" rows="3" placeholder="Enter ..."><%= confua.dostavka[2].text %></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
           </div>
-        </section>
-      </div>
 
-      <div class="pageOfPanel">
-        <section class="content">
+
+
           <div class="col-md-6">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title"><%= conf.oplata[1].title %></h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>на Русском</label>
+                    <textarea class="form-control RU_PIC" rows="3" placeholder="Enter ..."><%= conf.oplata[1].text %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>на Украинском</label>
+                    <textarea class="form-control UA_PIC" rows="3" placeholder="Enter ..."><%= confua.oplata[1].text %></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
 
-          </div>
-          <div class="col-md-6">
 
+
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title"><%= conf.dostavka[1].title %></h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>на Русском</label>
+                    <textarea class="form-control RU_PIC" rows="3" placeholder="Enter ..."><%= conf.dostavka[1].text %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>на Украинском</label>
+                    <textarea class="form-control UA_PIC" rows="3" placeholder="Enter ..."><%= confua.dostavka[1].text %></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title"><%= conf.dostavka[3].title %></h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>на Русском</label>
+                    <textarea class="form-control RU_PIC" rows="3" placeholder="Enter ..."><%= conf.dostavka[3].text %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>на Украинском</label>
+                    <textarea class="form-control UA_PIC" rows="3" placeholder="Enter ..."><%= confua.dostavka[3].text %></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -1055,12 +1197,12 @@
                       <% if(tovar[i].availability){ %>
                         <td class="tovar_active NOTMOBILE" style="background-color: #169814; text-align: center; color: white">
                           Товар активен
-                          <div class="visibility_off" title="Выключить товар" onclick="ADMIN.TOVAR_VISIBILITY(false, <%= tovar[i].AI %>)"></div>
+                          <div class="visibility_off" title="Выключить товар" onclick="ADMIN.TOVAR_VISIBILITY(false, <%= tovar[i].AI %>); $(this).parent().css({'background-color': '#981414'}).removeClass('tovar_active').addClass('tovar_none_active')"></div>
                         </td>
                         <% } else { %>
                           <td class="tovar_none_active NOTMOBILE" style="background-color: #981414; text-align: center; color: white">
                             Товар неактивен
-                            <div class="visibility_on" title="Включить товар" onclick="ADMIN.TOVAR_VISIBILITY(true,<%= tovar[i].AI %>)"></div>
+                            <div class="visibility_on" title="Включить товар" onclick="ADMIN.TOVAR_VISIBILITY(true,<%= tovar[i].AI %>);  $(this).parent().css({'background-color': '#169814'}).removeClass('tovar_none_active').addClass('tovar_active')"></div>
                           </td>
                           <% } %>
 
@@ -1095,11 +1237,27 @@
           </div>
         </section>
       </div>
-
+      <!-- настройка связи -->
       <div class="pageOfPanel">
         <section class="content">
           <div class="col-md-6">
-
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Настройки связи</h3>
+              </div>
+              <div class="box-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label>Email для обратной связи</label>
+                    <input type="text" class="form-control" id="ShopEmail" value="<%= conf.email %>" placeholder="Enter ...">
+                  </div>
+                  <div class="form-group">
+                    <label>Номер для связи</label>
+                    <input type="text" class="form-control" id="ShopNumber" value="<%= conf.number %>" placeholder="Enter ...">
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
           <div class="col-md-6">
 
@@ -1109,9 +1267,6 @@
       <!-- система -->
       <div class="pageOfPanel">
         <section class="content">
-          <div class="col-md-6">
-
-          </div>
           <div class="col-md-6">
 
           </div>

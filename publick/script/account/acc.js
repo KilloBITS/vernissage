@@ -2,6 +2,12 @@
 var Index = {
   ML: "",
   DESIGHN: function() {
+    $(".set_btn").click(function(){
+      var atribut = $(this).attr("opmenu");
+      console.log(atribut);
+      $(".MyBlock").hide(0);
+      $("#"+atribut).show(300);
+    });
     $("#phoneNumMask").mask("+38(099) 999-9999");
     $(".searchBlock").hover(function() {
       $(".searchLine").css({

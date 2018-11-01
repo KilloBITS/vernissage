@@ -208,4 +208,21 @@
       height: auto;
   }
 
+  .data_menu {
+      width: calc(100% - 20px);
+      height: auto;
+      display: inline-block;
+      border: 1px solid #dedede;
+      margin-left: 10px;
+      border-radius: 5px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+  .data_user_content {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+  }
+
 }

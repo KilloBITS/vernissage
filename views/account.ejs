@@ -95,25 +95,23 @@
           (<%= user.name %>) <br>
           <small><%= user.email %></small>
         </div>
-        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="MP">Мои покупки</div>
-        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="MH">Мои желания</div>
-        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="ST">Настройки аккаунта</div>
-        <div class="umdtn <% if( user.phone === null ){ %>  disabled  <% } %>" id="OP">Настройки оповещаний</div>
       </div>
     </div>
   </div>
 
   <div class="data_block">
     <div class="data_menu <% if( user.phone === null ){ %>  disabled  <% } %>">
-      <div class="set_btn">Покупки</div>
-      <div class="set_btn">Сообщения <span>0</span></div>
-      <div class="set_btn">Уведомления</div>
-      <div class="set_btn">Настройки</div>
+      <div class="set_btn" opmenu="myPays">Покупки</div>
+      <div class="set_btn" opmenu="myDesires">Иои желания</div>
+      <div class="set_btn" opmenu="myMessage">Сообщения <span>0</span></div>
+      <div class="set_btn" opmenu="myWarn">Уведомления</div>
+      <div class="set_btn" opmenu="mySetting">Настройки</div>
     </div>
     <div class="data_user_content <% if( user.phone === null ){ %>  noNumber  <% } %>">
       <% if( user.phone === null ){ %>
       <div class="number_modal">
-        <form action="/setNumbers" method="POST" enctype="application/json">
+        <form action="/setNumbers" method="GET" enctype="application/json">
+          <!--  enctype="application/json" -->
           <h1>Подтверждение номера телефона</h1>
           <p>(Введите и сохраните ваш номер телефона)</p>
           <input type="text" name="phoneNumber" value="" id="phoneNumMask" placeholder="Введите номер телефона">
@@ -121,6 +119,54 @@
         </form>
       </div>
       <% } %>
+      <div class="MyBlock" id="myPays" style="display:block;">
+        <div class="container">
+          <% if(user.payments.length > 0){ %>
+            <div class="line">
+            <% for(var i = 0; i < user.payments.length; i++) { %>
+                <div class="tileline">
+                  <div class="placeTitle">Заказ </div>
+                  <div class="placeType">
+                    <div class="type<%= user.payments[i].payType %>"></div>
+                    <div class="dost<%= user.payments[i].dostType %>"></div>
+                  </div>
+                  <div class="placeList"></div>
+                  <div class="placeDate"><%= user.payments[i].date %></div>
+
+                  <% if(user.payments[i].status == 0) { %>
+                    <div class="placeStatus">Заказ в обработке</div>
+                  <% } else { %>
+                    <div class="placeStatus">Товар отправлен</div>
+                    <div class="TTH">51000002563222215222365895</div>
+                  <% } %>
+
+
+                </div>
+            <% } %>
+            </div>
+          <% } else { %>
+              <div class="noNewsMessage">
+                У вас нет покупок.
+              </div>
+          <% } %>
+        </div>
+      </div>
+      <div class="MyBlock" id="myDesires">
+
+<!-- FLUID GRID -->
+
+<ul id="Grid">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+
+      </div>
+      <div class="MyBlock" id="myMessage">2</div>
+      <div class="MyBlock" id="myWarn">3</div>
+      <div class="MyBlock" id="mySetting">4</div>
     </div>
   </div>
 </div>

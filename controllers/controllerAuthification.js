@@ -67,23 +67,4 @@ router.post('/create_accaunt', function(req, res, next){
 
 });
 
-router.post('/setNumbers',function(req, res, next){
-  // res.redirect('/profile');
-  mongoClient.connect(global.baseIP, function(err, client){
-    const db = client.db(global.baseName);
-    const users = db.collection("users");
-    if(err) return console.log(err);
-
-    users.find({phone: req.body.phoneNumber}).toArray(function(err, results_usersEmail ){
-      if(results_usersEmail.length === 0){
-        // res.send({code: 500});
-        users.update({ email: req.session.user },{$set: { phone: req.body.phoneNumber } });
-      }else{
-        // res.send({code: 450});
-      }
-    });
-  });
-
-});
-//isAdmin
 module.exports = router;
