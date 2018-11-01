@@ -5390,3 +5390,7 @@ table.text-center, table.text-center td, table.text-center th {
     color: #444;
     border-top: 0;
 }
+
+.modal {
+    z-index: 999999999999999999999999999999999999999999999999999999999999;
+}
