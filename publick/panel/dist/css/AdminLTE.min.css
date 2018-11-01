@@ -5394,3 +5394,7 @@ table.text-center, table.text-center td, table.text-center th {
 .modal {
     z-index: 999999999999999999999999999999999999999999999999999999999999;
 }
+
+.modal-backdrop{
+  display: none;
+}
