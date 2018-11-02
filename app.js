@@ -251,12 +251,12 @@ app.post('/removecategory', removecategory);
 // });
 //
 
-app.listen(80, function(){
-  global.baseName = 'VERNISSAGE';
-  global.baseIP = 'mongodb://localhost:27017/';
-  global.online = 0;
-  console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
-});
+// app.listen(80, function(){
+//   global.baseName = 'VERNISSAGE';
+//   global.baseIP = 'mongodb://localhost:27017/';
+//   global.online = 0;
+//   console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
+// });
 
 // const Nexmo = require('nexmo');
 // const nexmo = new Nexmo({
@@ -271,28 +271,31 @@ app.listen(80, function(){
 // nexmo.message.sendSms(from, to, text)
 
 
-// var options = {
-//   key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
-//   cert: fs.readFileSync('test/fixtures/keys/agent2-cert.cert')
-// };
-// app.listen(443, options, function(){
-//   console.warn('started server Dark World from port: 443');
-// })
+var options = {
+  key: fs.readFileSync('ssl/apache-selfsigned.key'),
+  cert: fs.readFileSync('ssl/ca-certificated.crt')
+};
+app.listen(443, options, function(){
+  global.baseName = 'VERNISSAGE';
+  global.baseIP = 'mongodb://localhost:27017/';
+  global.online = 0;
+  console.warn('STARTED VERNISSAGE SERVER ON PORT: 443');
+})
 
 // http.createServer(app).listen(8000);
 // This line is from the Node.js HTTPS documentation.
 // var options = {
-  // key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
-  // cert: fs.readFileSync('test/fixtures/keys/agent2-cert.cert')
+//   key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+//   cert: fs.readFileSync('test/fixtures/keys/agent2-cert.cert')
 // };
-
+//
 // https.createServer(options, app).listen(443);
-
-
+//
+//
 // const mongoClient = require("mongodb").MongoClient;
-
+//
 // const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
-
+//
 // mongoClient.connect(url, function(err, client){
 //     const db = client.db("UsersData");
 //     const collection = db.collection("users");
@@ -303,10 +306,10 @@ app.listen(80, function(){
 //            console.log(results);
 //            client.close();
 //        });
-//
-//       //  db.collection("users").remove({name: 'Tom'}, function(err, obj) {
-//       //     if (err) throw err;
-//       //     console.log(obj.result.n + " document(s) deleted");
-//       //     client.close();
-//       // });
-// });
+
+      //  db.collection("users").remove({name: 'Tom'}, function(err, obj) {
+      //     if (err) throw err;
+      //     console.log(obj.result.n + " document(s) deleted");
+      //     client.close();
+      // });
+});
