@@ -9,7 +9,7 @@ function makeid() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  for (var i = 0; i < 24; i++)
+  for (var i = 0; i < 12; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return text;
@@ -37,14 +37,11 @@ router.get('/', function(req, res, next){
   }
 
   const pKey = "T9l51qLSTrMPTZDfDC7R3mneNT6cAU2MRYM3meOn";
-  var json_string = {"public_key":"i40058369372","version":"3","action":"pay","amount":"1","currency":"UAH","description":"test","order_id": makeid()};
+  var json_string = {public_key:"i40058369372", version:"3", action:"pay", amount:"1", currency:"UAH", description:"test", order_id: makeid()};
   var data = btoa(JSON.stringify(json_string));
   var sign_string = pKey + data + pKey;
-  var signature = btoa(sha1(sign_string));
-  console.log("js string^"+json_string);
-  console.log("data - "+data);
-  console.log("sign_string - - "+ sign_string);
-  console.log("signature -= -= -" +signature);
+  var signature = btoa(sha1(sign_string, 1));
+
 
   mongoClient.connect(global.baseIP, function(err, client){
       const db = client.db(global.baseName);
