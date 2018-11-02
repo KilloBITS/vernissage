@@ -128,7 +128,22 @@ app.post('/removecategory', removecategory);
 // var LiqPay = require('liqpay');
 //
 // var liqpay = new LiqPay("i40058369372", "T9l51qLSTrMPTZDfDC7R3mneNT6cAU2MRYM3meOn");
-
+//
+// liqpay.api("request", {
+// "action"         : "pay",
+// "version"        : "3",
+// "phone"          : "380950000001",
+// "amount"         : "1",
+// "currency"       : "USD",
+// "description"    : "description text",
+// "order_id"       : "order_id_1",
+// "card"           : "4731195301524634",
+// "card_exp_month" : "03",
+// "card_exp_year"  : "22",
+// "card_cvv"       : "111"
+// }, function( json ){
+// console.log( json.status );
+// });
 
 app.listen(80, function(){
 

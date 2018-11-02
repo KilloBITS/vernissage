@@ -8,32 +8,42 @@ const bParser = require('body-parser');
 router.use(cookieParser());
 
 var getAdmTovar = (req, res, next) => {
-  mongoClient.connect(global.baseIP, function(err, client){
-      const db = client.db(global.baseName);
-      const tovar = db.collection("tovar");
-      const tovaruk = db.collection("tovar-uk");
-      if(err) return console.log(err);
-     tovar.find({ AI: parseInt(req.body.d)}).toArray(function(err, results_tovar){
-       tovar.find({ AI: parseInt(req.body.d)}).toArray(function(err, results_tovar_ua){
-         res.send({code: 500, tovar_ru: results_tovar, tovar_ua: results_tovar_ua});
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  {
+    mongoClient.connect(global.baseIP, function(err, client){
+        const db = client.db(global.baseName);
+        const tovar = db.collection("tovar");
+        const tovaruk = db.collection("tovar-uk");
+        if(err) return console.log(err);
+       tovar.find({ AI: parseInt(req.body.d)}).toArray(function(err, results_tovar){
+         tovar.find({ AI: parseInt(req.body.d)}).toArray(function(err, results_tovar_ua){
+           res.send({code: 500, tovar_ru: results_tovar, tovar_ua: results_tovar_ua});
+         });
        });
-     });
-  });
+    });
+  }else{
+    res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
+  }
 };
 
 var delAdmTovar = (req, res, next) => {
-  mongoClient.connect(global.baseIP ,function(err, client){
-   const db = client.db(global.baseName);
-   const tovar  = db.collection("tovar");
-   const tovaruk  = db.collection("tovar-uk");
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  {
+    mongoClient.connect(global.baseIP ,function(err, client){
+     const db = client.db(global.baseName);
+     const tovar  = db.collection("tovar");
+     const tovaruk  = db.collection("tovar-uk");
 
-   if(err) return console.log(err);
+     if(err) return console.log(err);
 
-   tovar.remove({ AI: parseInt(req.body.d)});
-   tovaruk.remove({ AI: parseInt(req.body.d)});
+     tovar.remove({ AI: parseInt(req.body.d)});
+     tovaruk.remove({ AI: parseInt(req.body.d)});
 
-   res.send({code: 500, msg: "Товар удален!"})
-  });
+     res.send({code: 500, msg: "Товар удален!"})
+    });
+  }else{
+    res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
+  }
 };
 
 var createFile = function(file,AI){
@@ -114,49 +124,59 @@ var updateFile = function(file,AI){
 };
 
 var setAdmTovar = (req, res, next) => {
-  mongoClient.connect(global.baseIP, { useNewUrlParser: true } ,function(err, client){
-    const db = client.db(global.baseName);
-    const tovar  = db.collection("tovar");
-    if(err) return console.log(err);
-    tovar.find().sort({AI:-1}).limit(1).toArray(function(err, results_tovar ){
-      var mainData = req.body;
-      var NEXT_AI = results_tovar[0].AI + 1;
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  {
+    mongoClient.connect(global.baseIP, { useNewUrlParser: true } ,function(err, client){
+      const db = client.db(global.baseName);
+      const tovar  = db.collection("tovar");
+      if(err) return console.log(err);
+      tovar.find().sort({AI:-1}).limit(1).toArray(function(err, results_tovar ){
+        var mainData = req.body;
+        var NEXT_AI = results_tovar[0].AI + 1;
 
-      if(mainData.te === "true"){
-        createUA(mainData.ua, NEXT_AI);
-        createRU(mainData.ru, NEXT_AI);
-        createFile(mainData.file, NEXT_AI);
-      }else{
-        updateUA(mainData.ua, mainData.ai);
-        updateRU(mainData.ru, mainData.ai);
-        if(mainData.file.length > 20){
-          updateFile(mainData.file, mainData.ai);
+        if(mainData.te === "true"){
+          createUA(mainData.ua, NEXT_AI);
+          createRU(mainData.ru, NEXT_AI);
+          createFile(mainData.file, NEXT_AI);
+        }else{
+          updateUA(mainData.ua, mainData.ai);
+          updateRU(mainData.ru, mainData.ai);
+          if(mainData.file.length > 20){
+            updateFile(mainData.file, mainData.ai);
+          }
         }
-      }
-      res.send({code: 500});
+        res.send({code: 500});
+      });
     });
-  });
-
+  }else{
+    res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
+  }
 };
 
 var setStatusVisibile = (req, res, next) => {
-  console.log(req.body);
-  if(req.body.a === 'false'){
-    var status = false;
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  {
+    if(req.body.a === 'false'){
+      var status = false;
+    }else{
+      var status = true;
+    }
+
+    mongoClient.connect(global.baseIP ,function(err, client){
+     const db = client.db(global.baseName);
+     const tovar  = db.collection("tovar");
+     const tovaruk  = db.collection("tovar-uk");
+     if(err) return console.log(err);
+     tovar.update({ AI: parseInt(req.body.b) },{$set: {availability: status}});
+     tovaruk.update({ AI: parseInt(req.body.b) },{$set: {availability: status}});
+
+     res.send("Статус товара успешно изменен")
+    });
   }else{
-    var status = true;
+    res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
   }
 
-  mongoClient.connect(global.baseIP ,function(err, client){
-   const db = client.db(global.baseName);
-   const tovar  = db.collection("tovar");
-   const tovaruk  = db.collection("tovar-uk");
-   if(err) return console.log(err);
-   tovar.update({ AI: parseInt(req.body.b) },{$set: {availability: status}});
-   tovaruk.update({ AI: parseInt(req.body.b) },{$set: {availability: status}});
 
-   res.send("Статус товара успешно изменен")
-  });
 };
 
 router.post('/getAdmTovar', getAdmTovar, function(req, res, next){});

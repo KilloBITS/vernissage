@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 
 router.use(cookieParser());
 router.get('/', function(req, res, next){
-  if (req.session) //&& req.session.admin && req.session.user !== undefined
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
     {
       var languageSystem, langMenu;
       if(req.cookies.vernissageLang === undefined){

@@ -8,86 +8,106 @@ const bParser = require('body-parser');
 router.use(cookieParser());
 
 var getMenuData = (req, res, next) => {
-  mongoClient.connect(global.baseIP ,function(err, client){
-   const db = client.db(global.baseName);
-   const menu  = db.collection("menu");
-   if(err) return console.log(err);
-   menu.find( { categories: parseInt(req.body.c)}).toArray(function(err, results){
-       res.send({code:500, menu: results[0]});
-   });
-  });
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+    {
+      mongoClient.connect(global.baseIP ,function(err, client){
+       const db = client.db(global.baseName);
+       const menu  = db.collection("menu");
+       if(err) return console.log(err);
+       menu.find( { categories: parseInt(req.body.c)}).toArray(function(err, results){
+           res.send({code:500, menu: results[0]});
+       });
+      });
+    }else{
+      res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
+    }
 };
 var addCategory = (req, res, next) => {
-  mongoClient.connect(global.baseIP ,function(err, client){
-   const db = client.db(global.baseName);
-   const menu  = db.collection("menu");
-   const menuuk  = db.collection("menu-uk");
-   if(err) return console.log(err);
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+    {
+      mongoClient.connect(global.baseIP ,function(err, client){
+       const db = client.db(global.baseName);
+       const menu  = db.collection("menu");
+       const menuuk  = db.collection("menu-uk");
+       if(err) return console.log(err);
 
-   menu.find().sort({categories:-1}).limit(1).toArray(function(err, results_menu ){
-     menu.find().sort({index:-1}).limit(1).toArray(function(err, results_menu2 ){
-       var next = results_menu[0].categories + 1;
+       menu.find().sort({categories:-1}).limit(1).toArray(function(err, results_menu ){
+         menu.find().sort({index:-1}).limit(1).toArray(function(err, results_menu2 ){
+           var next = results_menu[0].categories + 1;
 
-       let newMenuUk = {
-         name: req.body.cat_name_ua,
-         podlink: ["/"],
-         glink: req.body.test_url,
-         categories: parseInt(next),
-         edited: true,
-         index: parseInt(results_menu2[0].index) + 1
-       };
+           let newMenuUk = {
+             name: req.body.cat_name_ua,
+             podlink: ["/"],
+             glink: req.body.test_url,
+             categories: parseInt(next),
+             edited: true,
+             index: parseInt(results_menu2[0].index) + 1
+           };
 
-       let newMenuRu = {
-         name: req.body.cat_name_ru,
-         podlink: ["/"],
-         glink: req.body.test_url,
-         categories: parseInt(next),
-         edited: true,
-         index: parseInt(results_menu2[0].index)+1
-       };
+           let newMenuRu = {
+             name: req.body.cat_name_ru,
+             podlink: ["/"],
+             glink: req.body.test_url,
+             categories: parseInt(next),
+             edited: true,
+             index: parseInt(results_menu2[0].index)+1
+           };
 
-       menu.insertOne(newMenuRu);
-       menuuk.insertOne(newMenuUk);
-       res.send({code:500});
-     });
-  });
-});
+           menu.insertOne(newMenuRu);
+           menuuk.insertOne(newMenuUk);
+           res.send({code:500});
+         });
+      });
+    });
+    }else{
+      res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
+    }
 };
 var maxAImenu = (req, res, next) => {
-  mongoClient.connect(global.baseIP ,function(err, client){
-   const db = client.db(global.baseName);
-   const menu  = db.collection("menu");
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+    {
+      mongoClient.connect(global.baseIP ,function(err, client){
+       const db = client.db(global.baseName);
+       const menu  = db.collection("menu");
 
-   if(err) return console.log(err);
+       if(err) return console.log(err);
 
-   menu.find().toArray(function(err, results_menu ){
-     res.send({code:500, ml: results_menu.length});
-   });
-  });
+       menu.find().toArray(function(err, results_menu ){
+         res.send({code:500, ml: results_menu.length});
+       });
+      });
+    }else{
+      res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
+    }
 };
 var removecategory = (req, res, next) => {
-  mongoClient.connect(global.baseIP ,function(err, client){
-   const db = client.db(global.baseName);
-   const menu  = db.collection("menu");
-   const menuuk  = db.collection("menu-uk");
+  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+    {
+      mongoClient.connect(global.baseIP ,function(err, client){
+       const db = client.db(global.baseName);
+       const menu  = db.collection("menu");
+       const menuuk  = db.collection("menu-uk");
 
-   var myquery = { index: parseInt(req.body.index) };
-   menu.remove(myquery, function(err, obj) {
-     if (err) throw err;
-     console.log(obj.result.n + " category UA deleted");
-   });
+       var myquery = { index: parseInt(req.body.index) };
+       menu.remove(myquery, function(err, obj) {
+         if (err) throw err;
+         console.log(obj.result.n + " category UA deleted");
+       });
 
-   menuuk.remove(myquery, function(err, obj) {
-     if (err) throw err;
-     console.log(obj.result.n + " category RU deleted");
-   });
+       menuuk.remove(myquery, function(err, obj) {
+         if (err) throw err;
+         console.log(obj.result.n + " category RU deleted");
+       });
 
-   res.send({code: 500});
-  });
-
-
+       res.send({code: 500});
+      });
+    }else{
+      res.send({code: 403, msg: 'У вас нет доступа к данной операции!'});
+    }
 
 };
+
+
 router.post('/getMenu', getMenuData, function(req, res, next){});
 router.post('/addCategory', addCategory, function(req, res, next){});
 router.post('/maxAImenu', maxAImenu, function(req, res, next){});

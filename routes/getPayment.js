@@ -1,8 +1,19 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const btoa = require('btoa');
+const sha1 = require('sha1');
 const mongoClient = require("mongodb").MongoClient;
 // const url = "mongodb://localhost:27017/"; //url from mongoDB dataBase
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 24; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 
 router.get('/', function(req, res, next){
   var languageSystem, langMenu;
@@ -19,6 +30,22 @@ router.get('/', function(req, res, next){
     }
   }
 
+  // console.log(req.query.JSON_Tovar);
+  var sum = 0;
+  for(let i = 0; i < JSON.parse(req.query.JSON_Tovar).length; i++){
+    sum = sum + parseFloat(JSON.parse(req.query.JSON_Tovar)[i].price);
+  }
+
+  const pKey = "T9l51qLSTrMPTZDfDC7R3mneNT6cAU2MRYM3meOn";
+  var json_string = {"public_key":"i40058369372","version":"3","action":"pay","amount":"1","currency":"UAH","description":"test","order_id": makeid()};
+  var data = btoa(JSON.stringify(json_string));
+  var sign_string = pKey + data + pKey;
+  var signature = btoa(sha1(sign_string));
+  console.log("js string^"+json_string);
+  console.log("data - "+data);
+  console.log("sign_string - - "+ sign_string);
+  console.log("signature -= -= -" +signature);
+
   mongoClient.connect(global.baseIP, function(err, client){
       const db = client.db(global.baseName);
       const config = db.collection("config");
@@ -34,7 +61,9 @@ router.get('/', function(req, res, next){
                conf: results_config[languageSystem],
                menu: results_menu,
                title: results_titles_page[languageSystem].payment,
-               sessionUser: req.session.user
+               sessionUser: req.session.user,
+               datadata: data,
+               signaturedata: signature,
              })
              client.close();
            });

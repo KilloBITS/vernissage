@@ -52,11 +52,12 @@ router.post('/create_accaunt', function(req, res, next){
           NEW_USER.AI = NEXT_AI,
           NEW_USER.isAdmin = false,
           NEW_USER.ava = "";
+          NEW_USER.desires = [];
+          NEW_USER.payments = [];
           users.insertOne(NEW_USER);
           req.session.user = req.body.newEmail;
           req.session.admin = false;
           global.online = global.online + 1;
-
           res.send({code: 500});
         });
       }else{
