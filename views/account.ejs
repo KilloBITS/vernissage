@@ -121,7 +121,7 @@
       <% } %>
       <div class="MyBlock" id="myPays" style="display:block;">
         <div class="container">
-          <% if(user.payments.length > 0){ %>
+          <% if(user.payments && user.payments.length > 0){ %>
             <div class="line">
             <% for(var i = 0; i < user.payments.length; i++) { %>
                 <div class="tileline">

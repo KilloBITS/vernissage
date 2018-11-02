@@ -32,6 +32,50 @@
       </div>
   </div>
 
+<% if(conf.inDevelopers){ %>
+<div class="global-modal global-modal-show">
+   <div class="overlay"></div>
+   <div class="global-modal_contents modal-transition">
+    <div class="global-modal-header">
+      <span class="mobile-close"> X </span>
+      <h3> <span> Внимание! Магазин </span>  <b>VERNISSAGE</b> <br> <span> Сейчас на стадии разработки и тестирования</span></h3>
+    </div>
+    <div class="global-modal-body">
+      <div class="content-left">
+        <p>
+          Если вы нашли "ошибку" или же столкнулись с какой то проблемой сообщите нам.
+        </p>
+        <a href="/contacts"class="btn-green-flat">Сообщить</a>
+      </div>
+      <div class="content-right">
+       <p> Некоторые товары могут не соответствовать реальным<br>
+         <small>(так как мы тестируем все наши сервисы)</small>
+         <br>
+         а так же они могут отстутствовать вобще
+       </p>
+     </div>
+   </div>
+ </div>
+</div>
+
+<script>
+  var globalModal = $('.global-modal');
+    $( ".btn-green-flat-trigger" ).on( "click", function(e) {
+      e.preventDefault();
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+    $( ".overlay" ).on( "click", function() {
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+    $( ".global-modal_close" ).on( "click", function() {
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+    $(".mobile-close").on("click", function(){
+      $( globalModal ).toggleClass('global-modal-show');
+    });
+</script>
+
+<% } %>
 	<div class="top">
 		<div class="topLine oneLine">
       <div class="topNavMobMenuOfBtm">
