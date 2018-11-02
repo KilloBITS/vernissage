@@ -47,6 +47,8 @@ app.use('/profile', account);
 app.use('/setNumbers*', setNumbers);
 
 app.get('*', get404);
+
+
 const search = require('./controllers/controllerSearch');
 app.post('/search', search);
 
@@ -136,14 +138,14 @@ var options = {
   cert: fs.readFileSync('./ssl/apache-selfsigned.crt')
 };
 
-https.createServer(options, (req, res) => {
-  global.baseName = 'VERNISSAGE';
-  global.baseIP = 'mongodb://localhost:27017/';
-  global.online = 0;
-  console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
-}).listen(80);
-
-
+// https.createServer(options, (req, res) => {
+//
+//   console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
+// }).listen(80);
+global.baseName = 'VERNISSAGE';
+global.baseIP = 'mongodb://localhost:27017/';
+global.online = 0;
+https.createServer(options, app).listen(443);
 
 // http.createServer(app).listen(8000);
 // This line is from the Node.js HTTPS documentation.
