@@ -125,17 +125,12 @@ app.post('/maxAImenu', maxAImenu);
 const removecategory = require('./controllers/admin/controllerMenu');
 app.post('/removecategory', removecategory);
 
-// app.listen(80, function(){
-//   global.baseName = 'VERNISSAGE';
-//   global.baseIP = 'mongodb://localhost:27017/';
-//   global.online = 0;
-//   console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
-// });
-
-
-
-
-
+app.listen(80, function(){
+  global.baseName = 'VERNISSAGE';
+  global.baseIP = 'mongodb://localhost:27017/';
+  global.online = 0;
+  console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
+});
 
 var options = {
   key: fs.readFileSync('./ssl/apache-selfsigned.key'),
