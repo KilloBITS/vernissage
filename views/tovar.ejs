@@ -17,8 +17,10 @@
 	<link rel="stylesheet" type="text/css" href="/style/tovar/tovar.min.css">
   <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
   <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/jquery-ui.js"></script>
   <script type="text/javascript" src="/script/maskinput.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
+
 
   <script type="text/javascript" src="/script/bootstrap.min.js"></script>
   <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
@@ -105,7 +107,6 @@
         <% for(var i = 0; i < tovarArr.length; i++) { %>
           <% if(tovarArr[i].availability) { %>
           <div class="item  col-xs-4 col-lg-4 grid-group-item">
-
               <div class="thumbnail">
                 <% if(tovarArr[i].sale[0] && (tovarArr[i].sale[0] === 'true')){ %>
                   <div class="sale">
@@ -114,7 +115,6 @@
                   </div>
                 <% } %>
                   <div class="water_icon"></div>
-
                   <img class="group list-group-image" src="../../../data/tovar/<%= tovarArr[i].image %>" alt="" />
                   <div class="caption">
                     <div class="blockOfNavBtn">
@@ -176,17 +176,19 @@
           <% } %>
         <% } %>
       </div>
-      <% if(tovarArr.length > 24){ %>
-        <div id="pagination"></div>
-        <script>
-        $("#pagination").html(createPagination(<%= tovarArr.length / 24 %>, 1));
-        </script>
-      <% } %>
+
 
       <% if(tovarArr.length === 0){ %>
           <div class="NONE_TOVAR">Нет товаров в данной категории :(</div>
       <% } %>
     </div>
+
+    <% if(offLength > 24){ %>
+      <div id="pagination"></div>
+      <script>
+        $("#pagination").html(createPagination(Math.ceil(<%= offLength / 24 %>), 1));
+      </script>
+    <% } %>
 	</div>
 </div>
 
@@ -252,58 +254,80 @@
           <input type="text" name="FamName" id="input-PaymentFamName" class="login-input" required>
           <label for="input-PaymentFamName" unselectable="on">Отчество</label>
         </p>
-
         <p class="input-container">
           <input type="text" name="phoneNum" id="input-PaymentPhone" class="login-input" required>
           <label for="input-PaymentPhone" unselectable="on">Номер телефона</label>
         </p>
-
-
-          <select class="selector" name="dosttype" id="typeOfDostavka" onchange="Global.changeTypeDost($(this).val())" required>
-            <option value="0">Самовывоз</option>
-            <option value="1">Доставка курьером</option>
-            <option value="2">Доставка Новой Почтой</option>
-            <option value="3" disabled>Доставка УкрПочтой</option>
-          </select>
-
-          <p class="input-container" id="CityOfDost">
-            <input type="text" name="city" id="input-PaymentCity" class="login-input" required>
-            <label for="input-PaymentCity" unselectable="on">Город</label>
-          </p>
-
-          <p class="input-container" id="CityOfPostNP">
-            <input type="text" name="npnum" id="input-PaymentOtdelNP" class="login-input" required>
-            <label for="input-PaymentOtdelNP" unselectable="on">Отделение</label>
-          </p>
-
-          <p class="input-container" id="CityOfPostUl">
-            <input type="text" name="ulica" id="input-PaymentUlica" class="login-input" required>
-            <label for="input-PaymentUlica" unselectable="on">Улица</label>
-          </p>
-
-          <p class="input-container min50" id="CityOfPostD">
-            <input type="text" name="dom" id="input-PaymentDom" class="login-input" required>
-            <label for="input-PaymentDom" unselectable="on">Дом</label>
-          </p>
-
-          <p class="input-container min50" id="CityOfPostK">
-            <input type="text" name="kvartira" id="input-PaymentKV" class="login-input" required>
-            <label for="input-PaymentKV" unselectable="on">Квартира №</label>
-          </p>
-
-          <button class="bubbly-button" onclick="">Подтвердить заказ</button>
+        <select class="selector" name="dosttype" id="typeOfDostavka" onchange="Global.changeTypeDost($(this).val())" required>
+          <option value="0">Самовывоз</option>
+          <option value="1">Доставка курьером</option>
+          <option value="2">Доставка Новой Почтой</option>
+          <option value="3" disabled>Доставка УкрПочтой</option>
+        </select>
+        <p class="input-container" id="CityOfDost">
+          <input type="text" name="city" id="input-PaymentCity" class="login-input" required>
+          <label for="input-PaymentCity" unselectable="on">Город</label>
+        </p>
+        <p class="input-container" id="CityOfPostNP">
+          <input type="text" name="npnum" id="input-PaymentOtdelNP" class="login-input" required>
+          <label for="input-PaymentOtdelNP" unselectable="on">Отделение</label>
+        </p>
+        <p class="input-container" id="CityOfPostUl">
+          <input type="text" name="ulica" id="input-PaymentUlica" class="login-input" required>
+          <label for="input-PaymentUlica" unselectable="on">Улица</label>
+        </p>
+        <p class="input-container min50" id="CityOfPostD">
+          <input type="text" name="dom" id="input-PaymentDom" class="login-input" required>
+          <label for="input-PaymentDom" unselectable="on">Дом</label>
+        </p>
+        <p class="input-container min50" id="CityOfPostK">
+          <input type="text" name="kvartira" id="input-PaymentKV" class="login-input" required>
+          <label for="input-PaymentKV" unselectable="on">Квартира №</label>
+        </p>
+        <button class="bubbly-button" onclick="">Подтвердить заказ</button>
       </form>
-
     </div>
   </div>
 </div>
 
-<div class="container-call">
+<div class="container-call ">
   <div class="back-circle"></div>
-  <div class="button"></div>
+  <div class="button-call"></div>
   <div class="front-circle"></div>
   <i class="fa fa-phone phone"></i>
 </div>
+
+<section class="avenue-messenger draggable">
+  <div class="menu">
+   <div class="items">
+     <span>
+       <a href="#" title="Minimize">&mdash;</a><br>
+       <a href="#" title="End Chat">&#10005;</a>
+     </span>
+    </div>
+    <div class="button">...</div>
+  </div>
+  <div class="agent-face">
+    <div class="half">
+     <img class="agent circle" src="../../../image/chatbot.jpg" alt="Jesse Tino"></div>
+  </div>
+<div class="chat">
+  <div class="chat-title">
+    <h1>ЮЛЯ</h1>
+    <h2>(виртуальний помошник)</h2>
+  </div>
+  <div class="messages">
+    <div class="messages-content"></div>
+  </div>
+  <div class="message-box">
+    <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+    <button type="submit" class="message-submit">Send</button>
+  </div>
+</div>
+  </div>
+<!--<div class="bg"></div>-->
+
+
 
 </body>
 </html>

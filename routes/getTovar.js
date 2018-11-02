@@ -62,26 +62,28 @@ router.get('/*', function(req, res, next){
                    FILTER.types = searchData[1];
                  }
 
-                 tovar.find(FILTER).sort({ AI: -1 }).limit(40).toArray(function(err, results_tovar ){
+                 tovar.find(FILTER).sort({ AI: -1 }).toArray(function(err, results_tovar ){
                    res.render('tovar.ejs',{
                      conf: results_config[languageSystem],
                      menu: results_menu,
-                     tovarArr: results_tovar,
+                     tovarArr: results_tovar.slice(0, 24),
                      title: results_titles_page[languageSystem].tovar,
                      sessionUser: req.session.user,
-                     users_data: uSession
+                     users_data: uSession,
+                     offLength: results_tovar.length
                    })
                    client.close();
                  });
                }else{
-                 tovar.find().sort({ AI: -1 }).limit(24).toArray(function(err, results_tovar ){
+                 tovar.find().sort({ AI: -1 }).toArray(function(err, results_tovar ){
                    res.render('tovar.ejs',{
                      conf: results_config[languageSystem],
                      menu: results_menu,
-                     tovarArr: results_tovar,
+                     tovarArr: results_tovar.slice(0, 24),
                      title: results_titles_page[languageSystem].tovar,
                      sessionUser: req.session.user,
-                     users_data: uSession
+                     users_data: uSession,
+                     offLength: results_tovar.length
                    })
                    client.close();
                  });

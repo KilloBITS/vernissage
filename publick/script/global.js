@@ -1,3 +1,4 @@
+
 var Global = {
   changeTypeDost: function(t){
     $("#CityOfDost,#CityOfPostNP,#CityOfPostUl,#CityOfPostD,#CityOfPostK").fadeOut(130)
@@ -44,6 +45,13 @@ var Global = {
 
   },
   BTN: function(){
+
+
+    $( ".draggable" ).draggable({
+      cursor: "crosshair"
+    });
+
+
     $(".NEXT_pay_bas").click(function(){
       $('.basket_info').show(300);
     });
@@ -221,3 +229,74 @@ $(function() {
 
   })
 }).call(this);
+var $messages = $('.messages-content'),
+    d, h, m,
+    i = 0;
+$(document).ready(function(){
+  $('.container-call').click(function(){
+    $(".avenue-messenger").toggle();
+    if(i === 0){
+      setTimeout(function() {
+        fakeMessage();
+      }, 100);
+    }
+
+  });
+
+
+  function setDate(){
+    d = new Date()
+    if (m != d.getMinutes()) {
+      m = d.getMinutes();
+      $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
+      $('<div class="checkmark-sent-delivered">&check;</div>').appendTo($('.message:last'));
+      $('<div class="checkmark-read">&check;</div>').appendTo($('.message:last'));
+    }
+  }
+
+  function insertMessage() {
+    msg = $('.message-input').val();
+    if ($.trim(msg) == '') {
+      return false;
+    }
+
+    $('<div class="message message-personal">' + msg + '</div>').appendTo($('.messages')).addClass('new');
+    setDate();
+
+    $('.message-input').val(null);
+    setTimeout(function() {
+    }, 1000 + (Math.random() * 20) * 100);
+  }
+
+  $('.message-submit').click(function() {
+    insertMessage();
+  });
+
+  $(window).on('keydown', function(e) {
+    if (e.which == 13) {
+      insertMessage();
+      return false;
+    }
+  })
+
+  var Fake = ['Здравствуйте, я виртуальный помошник Юля, у вас появились вопроссы ? я могу вам чем то помочь ?']
+
+  function fakeMessage() {
+    if ($('.message-input').val() != '') {
+      return false;
+    }
+    $('<div class="message loading new"><figure class="avatar"><img src="../../../image/chatbot.jpg" /></figure><span></span></div>').appendTo($('.messages-content'));
+
+    setTimeout(function() {
+      $('.message.loading').remove();
+      $('<div class="message new"><figure class="avatar"><img src="../../../image/chatbot.jpg" /></figure>' + Fake[i] + '</div>').appendTo($('.messages')).addClass('new');
+      setDate();
+      i++;
+    }, 1000 + (Math.random() * 20) * 100);
+  }
+  $('.button').click(function(){
+    $('.menu .items span').toggleClass('active');
+     $('.menu .button').toggleClass('active');
+  });
+
+});

@@ -125,7 +125,13 @@ app.post('/maxAImenu', maxAImenu);
 const removecategory = require('./controllers/admin/controllerMenu');
 app.post('/removecategory', removecategory);
 
+// var LiqPay = require('liqpay');
+//
+// var liqpay = new LiqPay("i40058369372", "T9l51qLSTrMPTZDfDC7R3mneNT6cAU2MRYM3meOn");
+
+
 app.listen(80, function(){
+
   global.baseName = 'VERNISSAGE';
   global.baseIP = 'mongodb://localhost:27017/';
   global.online = 0;
