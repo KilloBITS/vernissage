@@ -251,11 +251,11 @@ app.post('/removecategory', removecategory);
 // });
 //
 
-app.listen(4000, function(){
+app.listen(80, function(){
   global.baseName = 'VERNISSAGE';
   global.baseIP = 'mongodb://localhost:27017/';
   global.online = 0;
-  console.warn('STARTED VERNISSAGE SERVER ON PORT: 4000');
+  console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
 });
 
 // const Nexmo = require('nexmo');
