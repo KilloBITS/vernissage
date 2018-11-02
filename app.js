@@ -133,7 +133,7 @@ app.post('/removecategory', removecategory);
 
 var options = {
   key: fs.readFileSync('./ssl/apache-selfsigned.key'),
-  cert: fs.readFileSync('./ssl/ca-certificates.crt')
+  cert: fs.readFileSync('./ssl/apache-selfsigned.crt')
 };
 
 https.createServer(options, (req, res) => {
