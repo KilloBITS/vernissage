@@ -133,18 +133,14 @@ app.post('/removecategory', removecategory);
 // });
 
 
+
+
+
+
 var options = {
   key: fs.readFileSync('./ssl/apache-selfsigned.key'),
   cert: fs.readFileSync('./ssl/apache-selfsigned.crt')
 };
-
-// https.createServer(options, (req, res) => {
-//
-//   console.warn('STARTED VERNISSAGE SERVER ON PORT: 80');
-// }).listen(80);
-global.baseName = 'VERNISSAGE';
-global.baseIP = 'mongodb://localhost:27017/';
-global.online = 0;
 https.createServer(options, app).listen(443);
 
 // http.createServer(app).listen(8000);
