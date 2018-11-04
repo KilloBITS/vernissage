@@ -78,6 +78,8 @@ app.post('/newComment', newComment);
 const updateAvaUser = require('./controllers/controllerProfile');
 app.post('/updateAvaUser', updateAvaUser);
 
+const addToJelaniya = require('./controllers/controllerProfile');
+app.post('/addToJelaniya', addToJelaniya);
 
 
 /*ADMIN*/
@@ -151,7 +153,6 @@ app.post('/removecategory', removecategory);
 // });
 
 app.listen(80, function(){
-
   global.baseName = 'VERNISSAGE';
   global.baseIP = 'mongodb://localhost:27017/';
   global.online = 0;

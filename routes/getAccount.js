@@ -24,6 +24,8 @@ router.get('/', function(req, res, next){
         const config = db.collection("config");
         const titles_page = db.collection("titles_page");
         const users_session = db.collection("users");
+        const payments = db.collection("payments");
+        const tovar = db.collection("tovar");
         const menu  = db.collection(langMenu);
 
         if(err) return console.log(err);
@@ -33,14 +35,20 @@ router.get('/', function(req, res, next){
            users_session.find({email: req.session.user}).toArray(function(err, results_users_session){
              if(results_config[languageSystem].opens){
                menu.find().toArray(function(err, results_menu ){
-                 res.render('account.ejs',{
-                   conf: results_config[languageSystem],
-                   menu: results_menu,
-                   title: results_titles_page[languageSystem].account,
-                   sessionUser: req.session.user,
-                   user: results_users_session[0]
-                 })
-                 client.close();
+                 payments.find( { id: { $in: results_users_session[0].payments } }).toArray(function(err, results_payments ){
+                   tovar.find( { AI: { $in: results_users_session[0].desires } }).toArray(function(err, results_desires ){
+                     res.render('account.ejs',{
+                       conf: results_config[languageSystem],
+                       menu: results_menu,
+                       title: results_titles_page[languageSystem].account,
+                       sessionUser: req.session.user,
+                       user: results_users_session[0],
+                       payments_user: results_payments,
+                       desires_user: results_desires
+                     })
+                     client.close();
+                   });
+                 });
                });
              }else{
                res.render('close.ejs',{

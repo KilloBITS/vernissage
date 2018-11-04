@@ -2,13 +2,15 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <<link rel="stylesheet" href="/style/delivery/delivery.css">
+  <link rel="stylesheet" href="/style/delivery/delivery.css">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
   <title>Товарный чек</title>
+  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 </head>
-<body bgcolor="#333D46">
+<body bgcolor="#333D46" id="toCheck">
   <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
     <tr>
-      <td bgcolor="#333D46" height="2" align="center" valign="top" style="color: #333D46; font-size:1px; line-height:1px; font-family: Arial; white-space:wrap;">Trip Total: $18.34 | Want to leave a tip? |
+      <td bgcolor="#333D46" height="2" align="center" valign="top" style="color: #333D46; font-size:1px; line-height:1px; font-family: 'Didact Gothic', sans-serif;">Trip Total: $18.34 | Want to leave a tip? |
       </td>
     </tr>
   </table>
@@ -18,7 +20,7 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <td width="460" align="center">
-              <table cellpadding="0" cellspacing="0" width="100%" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+              <table cellpadding="0" cellspacing="0" width="100%" style="    font-family: 'Didact Gothic', sans-serif;">
                 <tr>
                   <td>
 
@@ -37,7 +39,7 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <td width="460">
-              <table cellpadding="0" cellspacing="0" width="100%" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:center">
+              <table cellpadding="0" cellspacing="0" width="100%" style="    font-family: 'Didact Gothic', sans-serif; text-align:center;">
                 <tr>
                   <td style="color:#EA0B8C;font-size:32px;line-height:34px;font-weight:700;">Товарный чек</td>
                 </tr>
@@ -65,7 +67,7 @@
                     <table cellpadding="0" cellspacing="0" width="100%">
                       <tr>
                         <td align="center" style="padding:0 20px;border-bottom: 1px solid #f2f4f5;">
-                          <table cellpadding="0" cellspacing="0" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                          <table cellpadding="0" cellspacing="0" style="    font-family: 'Didact Gothic', sans-serif;">
                             <tr>
                               <td style="color:#2d394f;font-size:18px;line-height:24px;font-weight:700;text-align:center;padding:32px 0 0">Чек</td>
                             </tr>
@@ -73,7 +75,7 @@
                               <td align="center" style="padding:8px 0 16px">
                                 <table cellpadding="0" cellspacing="0">
                                   <tr valign="top">
-                                    <td valign="top" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;color:#333D47;font-size:40px;line-height:42px; letter-spacing: -1px;"><%= data.summa %> ГРН</td>
+                                    <td valign="top" style="    font-family: 'Didact Gothic', sans-serif;color:#333D47;font-size:40px;line-height:42px; letter-spacing: -1px;"><%= data.summa %> ГРН</td>
                                   </tr>
                                 </table>
                               </td>
@@ -86,11 +88,11 @@
                       </tr>
                       <tr>
                         <td style="border-bottom: 1px solid #f2f4f5;padding:12px 20px 22px">
-                          <table border="0" cellpadding="0" cellspacing="0" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;;text-align:center" width="100%">
+                          <table border="0" cellpadding="0" cellspacing="0" style="    font-family: 'Didact Gothic', sans-serif; text-align:center" width="100%">
                             <tr valign="top">
                               <td valign="top" style="color:#333D46;font-size:14px;line-height:18px;text-align:left;padding:0 4px 0 0;font-weight:600;">Доставка:  </td>
                               <td valign="top" width="350" style="padding:0 0 10px 0">
-                                <table cellpadding="0" cellspacing="0" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:right">
+                                <table cellpadding="0" cellspacing="0" style="    font-family: 'Didact Gothic', sans-serif; text-align:right">
                                   <tr>
                                     <td style="color:#a3a3a3;font-size:14px;line-height:18px;padding:0 0 4px"> <%= data.dostavka %> </td>
                                   </tr>
@@ -99,7 +101,7 @@
                             </tr>
                             <tr valign="top">
                               <td valign="top" width="320" style="padding:0 0 10px 0">
-                                <table cellpadding="0" cellspacing="0" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;;text-align:right">
+                                <table cellpadding="0" cellspacing="0" style="    font-family: 'Didact Gothic', sans-serif; text-align:right">
                                   <tr>
                                     <td style="color:#a3a3a3;font-size:14px;line-height:18px;padding:0 0 4px"><%= data.adress %></td>
                                   </tr>
@@ -111,7 +113,7 @@
                       </tr>
                       <tr>
                         <td style="border-bottom: 1px solid #f2f4f5;padding:32px 20px">
-                          <table cellpadding="0" cellspacing="0" style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:left" width="100%">
+                          <table cellpadding="0" cellspacing="0" style="    font-family: 'Didact Gothic', sans-serif; text-align:left" width="100%">
 
                             <% for(var i = 0; i < data.tovars.length; i++){ %>
                               <tr valign="top">
@@ -125,6 +127,9 @@
                                 Загальна сумма:
                                 <br>
                               </td>
+                              <td valign="top" width="320" style="    color: #2d394f;    font-size: 14px;    line-height: 24px;    font-weight: 700;    padding: 0 0 10px;     bottom: 10px;    right: 166px;    transform: rotate(32deg);  opacity: 0.4;">
+                                <img src="../../../image/stamp.png" width="150" height="150">
+                              </td>
                               <td valign="top" align="right" style="color:#2d394f;font-size:18px;line-height:24px;font-weight:700"><%= data.summa %> ГРН</td>
                             </tr>
                           </table>
@@ -137,21 +142,27 @@
           </tr>
         </table>
         <tr>
-          <td style="font-family: 'Gotham Book', Gotham, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;;color:#5f6a7c;font-size:14px;line-height:22px;text-align:center; padding: 20px 0 0;">
+          <td style="    font-family: 'Didact Gothic', sans-serif; color:#5f6a7c;font-size:14px;line-height:22px;text-align:center; padding: 20px 0 0;">
             Дякуэмо за покупку!
           </td>
         </tr>
-  <table bgcolor="#F4F5F5" width="100%" cellpadding="0" cellspacing="0" style="padding: 10px 0;">
-    <tr>
-      <td></td>
-    </tr>
-  </table>
+        <table bgcolor="#F4F5F5" width="100%" cellpadding="0" cellspacing="0" style="padding: 10px 0;">
+          <tr>
+            <td>
+              <div class="toPostLink">
+                <span>Отправить вам на почту ?</span>
+                <input type="text" name="toMyPost" class="tomypost" placeholder="Введите ваш email адресс">
+                <input type="button" class="tobtnmypost" value="Отправить">
+              </div>
+            </td>
+          </tr>
+        </table>
 
 
       </td>
     </tr>
   </table>
-  <!--TWEET AT ME END-->
+
 </body>
 
 </html>ы

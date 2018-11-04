@@ -98,12 +98,14 @@
           <div class="product-gallery">
             <div class="product-image">
               <div class="blockOfNavBtn">
-                <div class="BIG_BTN addToJelaniya">
-                  <span><%= conf.big_btn[0] %></span>
-                </div>
-                <div class="BIG_BTN addToSravnenie">
-                  <span><%= conf.big_btn[1] %></span>
-                </div>
+                <% if(sessionUser !== undefined){ %>
+                  <div class="BIG_BTN addToJelaniya" tovAI="<%= tovarArr[0].AI %>">
+                    <span><%= conf.big_btn[0] %></span>
+                  </div>
+                  <div class="BIG_BTN addToSravnenie">
+                    <span><%= conf.big_btn[1] %></span>
+                  </div>
+                <% } %>
               </div>
               <img class="active" src="../../../data/tovar/<%= tovarArr[0].image %>">
               <fieldset class="rating">

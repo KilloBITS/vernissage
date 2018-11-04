@@ -105,15 +105,12 @@
     <div class="data_menu <% if( user.phone === null ){ %>  disabled  <% } %>">
       <div class="set_btn" opmenu="myPays">Покупки</div>
       <div class="set_btn" opmenu="myDesires">Мои желания</div>
-      <div class="set_btn" opmenu="myMessage">Сообщения <span>0</span></div>
-      <div class="set_btn" opmenu="myWarn">Уведомления</div>
       <div class="set_btn" opmenu="mySetting">Настройки</div>
     </div>
     <div class="data_user_content <% if( user.phone === null ){ %>  noNumber  <% } %>">
       <% if( user.phone === null ){ %>
       <div class="number_modal">
         <form action="/setNumbers" method="GET" enctype="application/json">
-          <!--  enctype="application/json" -->
           <h1>Подтверждение номера телефона</h1>
           <p>(Введите и сохраните ваш номер телефона)</p>
           <input type="text" name="phoneNumber" value="" id="phoneNumMask" placeholder="Введите номер телефона">
@@ -123,23 +120,60 @@
       <% } %>
       <div class="MyBlock" id="myPays" style="display:block;">
         <div class="container">
-          <% if(user.payments && user.payments.length > 0){ %>
+          <% if(payments_user && payments_user.length > 0){ %>
             <div class="line">
-            <% for(var i = 0; i < user.payments.length; i++) { %>
+            <% for(var i = 0; i < payments_user.length; i++) { %>
                 <div class="tileline">
-                  <div class="placeTitle">Заказ </div>
+                  <div class="placeTitle">Заказ № <%= payments_user[i].id %> </div>
                   <div class="placeType">
                     <div class="type<%= user.payments[i].payType %>"></div>
                     <div class="dost<%= user.payments[i].dostType %>"></div>
                   </div>
-                  <div class="placeList"></div>
-                  <div class="placeDate"><%= user.payments[i].date %></div>
+                  <a href="/delivery?<%= payments_user[i].id %>" target="_blank"> <div class="placeList">Посмотреть чек</div> </a>
+                  <div class="placeDate"><%= payments_user[i].today %></div>
 
-                  <% if(user.payments[i].status == 0) { %>
+                  <% if(payments_user[i].status === 0) { %>
                     <div class="placeStatus">Заказ в обработке</div>
                   <% } else { %>
                     <div class="placeStatus">Товар отправлен</div>
-                    <div class="TTH">51000002563222215222365895</div>
+                    <div class="TTH"><%= payments_user[i].TTH %></div>
+                    <div class="details_TTH">
+
+                    </div>
+                    <script>
+                    var CCC = {
+                      "apiKey": "<%= conf.NEW_POST_API %>",
+                      "modelName": "TrackingDocument",
+                      "calledMethod": "getStatusDocuments",
+                      "methodProperties": {
+                          "Documents": [
+                              {
+                                  "DocumentNumber": "<%= payments_user[i].TTH %>",
+                                  "Phone":""
+                              }
+                          ]
+                      }
+
+                    };
+
+                    $(function() {
+                      var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "https://api.novaposhta.ua/v2.0/json/",
+                        "method": "POST",
+                        "headers": {
+                          "content-type": "application/json",
+                        },
+                        "processData": false,
+                        "data": JSON.stringify(CCC)
+                      }
+
+                      $.ajax(settings).done(function (response) {                   
+                        $(".details_TTH").html('<b>'+response.data[0].Status+'</b>')
+                      });
+                    });
+                    </script>
                   <% } %>
 
 
@@ -155,20 +189,50 @@
       </div>
       <div class="MyBlock" id="myDesires">
 
-<!-- FLUID GRID -->
+        <% if(desires_user && desires_user.length > 0){ %>
+          <% for(var i = 0; i < desires_user.length; i++) { %>
+            <div class="desires_box">
+              <div class="desires_remove" onclick="removeDesires(<%= desires_user[i].AI %>)"></div>
+              <div class="desires_title"><%= desires_user[i].title %></div>
+              <div class="desires_image" style="background-image: url(../../../data/tovar/<%= desires_user[i].image %>)"></div>
+              <a href="/details?tov=<%= desires_user[i].AI %>" target="_blank"> <div class="desires_more"> Открыть товар </div> </a>
+            </div>
+          <% } %>
+        <% } else { %>
+            <div class="noNewsMessage">
+              У вас нет желаний
+            </div>
+        <% } %>
 
-<ul id="Grid">
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-</ul>
+
+
+
 
       </div>
-      <div class="MyBlock" id="myMessage">2</div>
-      <div class="MyBlock" id="myWarn">3</div>
-      <div class="MyBlock" id="mySetting">4</div>
+      <div class="MyBlock" id="mySetting">
+        <div class="setting_line proc50">
+          <span>Изменить e-mail</span>
+          <input type="text" name="email" placeholder="введите новый email адресс">
+          <div class="buttonSetting">Сохранить</div>
+        </div>
+
+        <div class="setting_line proc50">
+          <span>Изменить Номер телефона</span>
+          <input type="text" name="number" placeholder="введите новый номер">
+          <div class="buttonSetting">Сохранить</div>
+        </div>
+
+        <div class="setting_line">
+          <span>Старый пароль</span>
+          <input type="password" name="passwordOld"  placeholder="Введите старый пароль">
+          <span>Новый пароль</span>
+          <input type="password" name="passwordNew"  placeholder="Введите новый пароль">
+          <span>Повторите пароль</span>
+          <input type="password" name="passwordNew2" placeholder="Повторите пароль">
+          <div class="buttonSetting">Сохранить</div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

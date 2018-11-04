@@ -79,6 +79,8 @@ router.get('/', function(req, res, next){
              NEW_ZAKAZ.today = today;
              NEW_ZAKAZ.summa = sum;
              NEW_ZAKAZ.bonus = vernissageCoin;
+             NEW_ZAKAZ.status = 0;
+             NEW_ZAKAZ.TTH = null;
              NEW_ZAKAZ.tovars = JSON.parse(req.query.JSON_Tovar);
 
              if(parseInt(req.query.dosttype) === 0){ //Самовывоз
@@ -101,9 +103,9 @@ router.get('/', function(req, res, next){
 
              if (req.session && req.session.user !== undefined){
                users.find({email: req.session.user}).toArray(function(err, results_users){
-                 results_users[0].payments.push(NEW_ZAKAZ);
+                 results_users[0].payments.push(NEW_ZAKAZ.id);
                  users.update({email: req.session.user},{ $set : { payments: results_users[0].payments}});
-               });               
+               });
              }
 
 
