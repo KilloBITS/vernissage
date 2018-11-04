@@ -33,6 +33,7 @@ const contacts = require('./routes/getContacts');
 const payment = require('./routes/getPayment');
 const account = require('./routes/getAccount');
 const setNumbers = require('./controllers/controllerSetNumbers');
+const delivery = require('./routes/getDelivery');
 
 
 app.use('/', index);
@@ -45,6 +46,7 @@ app.use('/contacts', contacts);
 app.use('/payment', payment);
 app.use('/profile', account);
 app.use('/setNumbers*', setNumbers);
+app.use('/delivery*', delivery);
 
 app.get('*', get404);
 
@@ -72,6 +74,9 @@ app.post('/create_accaunt', create_accaunt);
 
 const newComment = require('./controllers/controllerComments');
 app.post('/newComment', newComment);
+
+const updateAvaUser = require('./controllers/controllerProfile');
+app.post('/updateAvaUser', updateAvaUser);
 
 
 

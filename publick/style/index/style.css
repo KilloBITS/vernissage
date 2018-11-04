@@ -190,9 +190,43 @@ font-family: 'Didact Gothic', sans-serif; 'Didact Gothic', sans-serif;*/
 }
 
 .header{
-    height: 542px;
-    overflow: hidden;
+  height: 542px;
+  position: relative;
 }
+
+.prevSliderBtn,.nextSliderBtn{
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background: white;
+  z-index: 9;
+  top: calc(50% - 20px);
+  border-radius: 3px;
+  outline: 1px dashed silver;
+  outline-offset: -4px;
+  box-shadow: 0px 0px 11px 0px #646464;
+  text-align: center;
+  line-height: 54px;
+  font-size: 47px;
+  font-family: cursive;
+  cursor: pointer;
+  color: silver;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.nextSliderBtn{
+  right: -30px;
+}
+
+.prevSliderBtn{
+  left: -30px;
+}
+
+.prevSliderBtn:hover,.nextSliderBtn:hover{
+  opacity: 1
+}
+
 
 
 svg {
@@ -208,6 +242,7 @@ svg {
       -ms-user-select: none;
           user-select: none;
   cursor: all-scroll;
+  overflow: hidden;
 }
 
 .slider-control {

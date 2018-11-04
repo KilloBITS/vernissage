@@ -21,14 +21,12 @@ var Global = {
   },
   message: function(e){
     e.preventDefault(e);
-
     var msg_data = {
       MyName: $("#input-name").val(),
       myEmail:$("#input-email").val(),
       myTheme:$("#input-subject").val(),
       message:$("#input-message").val(),
     };
-
     $.post('/sendMessage',msg_data, function(data){
       if(
         ($("#input-name").val().length > 1)||
@@ -42,25 +40,19 @@ var Global = {
         return false
       }
     });
-
   },
   BTN: function(){
-
 
     $( ".draggable" ).draggable({
       cursor: "crosshair"
     });
-
-
     $(".NEXT_pay_bas").click(function(){
       $('.basket_info').show(300);
     });
-
     $(".lang").click(function(){
       document.cookie = "vernissageLang="+$(this).attr("id");
       location.reload();
     });
-
     if($("body").width() > 800){
         return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
     }else{
@@ -68,7 +60,6 @@ var Global = {
     }
   }
 };
-
 
 $(document).ready(() => {
   Global.BTN();

@@ -144,6 +144,8 @@
 
 	<div class="content">
 		<div class="header block">
+      <div class="nextSliderBtn">></div>
+      <div class="prevSliderBtn"><</div>
 			<div class="slider-container">
 			  <div class="slider-control left inactive"></div>
 			  <div class="slider-control right"></div>
@@ -207,22 +209,17 @@
 <div class="container">
 	<div class="mainDLG">
 		<div class="mainTitleDLG"><%= conf.news %></div>
-		<!-- <div class="mainTextDLG">Браслеты, сережци кольца и многое другое, только у нас вы найдете то что вам понравится, и добавит красок в серые осенние будни.</div> -->
 	</div>
 
 	<% for(var i = 0; i < news.length; i++) { %>
-		<!-- Normal Demo-->
 	  <div class="column">
-	    <!-- Post-->
 	    <div class="post-module">
-	      <!-- Thumbnail-->
 	      <div class="thumbnail">
 	        <div class="date">
 	          <div class="day"><%= news[i].date.split('.')[0] %></div>
 	          <div class="month"><%= news[i].date.split('.')[1] %></div>
 	        </div><img src="../../../data/news/<%= news[i].img %>"/>
 	      </div>
-	      <!-- Post Content-->
 	      <div class="post-content">
 	        <div class="category"><%= news[i].minName %></div>
 	        <h1 class="title"><%= news[i].title %></h1>
@@ -232,7 +229,6 @@
 	    </div>
 	  </div>
 	<% } %>
-
 </div>
 		</div>
 		<div class="contact block">
@@ -240,7 +236,6 @@
 				<div class="mainTitleDLG"><%= conf.contact[0] %></div>
 				<div class="mainTextDLG"><%= conf.contact[1] %></div>
 			</div>
-      <!-- onsubmit="return  Index.message();" -->
 			<form class="cf">
 			  <div class="half left cf">
 			    <input type="text" name="MyName" id="input-name" placeholder="Ваше имя">

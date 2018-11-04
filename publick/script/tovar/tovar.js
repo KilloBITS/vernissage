@@ -1,7 +1,6 @@
 'use strict';
 var BASKET = [];
 // let pages = 666;
-
 function createPagination(pages, page) {
   let str = '<ul>';
   let active;
@@ -72,11 +71,12 @@ var Index = {
      $.post('/getbasket',{data:BASKET},function(tovar){
        $("#JSTOVAR").val(JSON.stringify(tovar.tovar));
        $("#input-PaymentPhone").mask("+38(099) 999-9999");
+       var summa = 0;
        for(let i = 0; i < tovar.tovar.length; i++){
          var newDiv = document.createElement("div");
          newDiv.className = "basket_doc";
          $(".basket_tovar .BSK").append(newDiv)
-
+         summa = summa + parseFloat(tovar.tovar[i].price);
          var minBasImg = document.createElement("div");
          minBasImg.style.backgroundImage = "url(../../../data/tovar/"+tovar.tovar[i].image+")";
          minBasImg.className = "minBasImg";
@@ -120,6 +120,9 @@ var Index = {
          inplen.value = 1;
          $(minBasLength).append(inplen)
        }
+       $(".allSum").html(summa + ' ГРН');
+       $(".bubbly-button").html($(".bubbly-button").html() + " на сумму: " + summa + ' ГРН');
+
        $(".backet_load").hide();
      });
    },

@@ -8,21 +8,32 @@ const bParser = require('body-parser');
 router.use(cookieParser());
 
 router.post('/auth', function(req, res, next){
+  var msg = ['Неверный логин или пароль','Невірно введені данні'];
+  if(req.cookies.vernissageLang === undefined){
+    var languageSystem = 0;
+  }else{
+    if(req.cookies.vernissageLang === 'ua'){
+      var languageSystem = 1;
+    }else{
+      var languageSystem = 0;
+    }
+  }
+
   if (!req.body.login || !req.body.password) {
-    res.send({code:450, message: 'Неверный логин или пароль'});
+    res.send({code:450, message: msg[languageSystem]});
   }else{
     mongoClient.connect(global.baseIP, function(err, client){
       const db = client.db(global.baseName);
       const users = db.collection("users");
       if(err) return console.log(err);
       users.find({email: req.body.login}).toArray(function(err, results_users){
-        if(req.body.login === results_users[0].email || req.body.password === results_users[0].password) {
+        if((results_users.length !== 0) && (req.body.login === results_users[0].email && req.body.password === results_users[0].password)) {
           req.session.user = results_users[0].email;
           req.session.admin = results_users[0].isAdmin;
           global.online = global.online + 1;
           res.send({code:500});
         }else{
-          res.send({code:450, message: 'Неверный логин или пароль'});
+          res.send({code:450, message: msg[languageSystem]});
         }
       });
     });
@@ -30,6 +41,16 @@ router.post('/auth', function(req, res, next){
 });
 
 router.post('/create_accaunt', function(req, res, next){
+  var msg = ['Данный Email уже зарегистрирован','Такий Email уже існує'];
+  if(req.cookies.vernissageLang === undefined){
+    var languageSystem = 0;
+  }else{
+    if(req.cookies.vernissageLang === 'ua'){
+      var languageSystem = 1;
+    }else{
+      var languageSystem = 0;
+    }
+  }
   mongoClient.connect(global.baseIP, function(err, client){
     const db = client.db(global.baseName);
     const users = db.collection("users");
@@ -61,7 +82,7 @@ router.post('/create_accaunt', function(req, res, next){
           res.send({code: 500});
         });
       }else{
-        res.send({code: 450})
+        res.send({code: 450, message: msg[languageSystem]})
       }
     });
   });

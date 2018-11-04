@@ -169,6 +169,14 @@ var Index = {
       }
     });
 
+    $(".nextSliderBtn").click(function(){
+      navigateRight();
+    });
+    $(".prevSliderBtn").click(function(){
+      navigateLeft();
+    });
+
+
     $(document).on("click", ".slider-pagi__elem", function() {
       curSlide = $(this).data("page");
       changeSlides();

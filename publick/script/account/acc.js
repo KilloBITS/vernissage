@@ -1,7 +1,11 @@
 'use strict';
-var Index = {
+var USER = {
   ML: "",
+  GLOBAL_FILE: '',
   DESIGHN: function() {
+    $(".uploadAva").click(function(){
+      $("#tFile").click();
+    });
     $(".set_btn").click(function(){
       var atribut = $(this).attr("opmenu");
       console.log(atribut);
@@ -36,18 +40,18 @@ var Index = {
 
     $(".menuBTN").hover(function() {
       try {
-        $("." + Index.ML + ",.opensMenu").hide();
+        $("." + USER.ML + ",.opensMenu").hide();
       } catch (e) {
         console.warn('Есть небольшой конфликт, но это не критично')
       }
-      Index.ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
-      if (Index.ML != undefined) {
-        $("." + Index.ML + ",.opensMenu").show();
+      USER.ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
+      if (USER.ML != undefined) {
+        $("." + USER.ML + ",.opensMenu").show();
       }
     }, function(e) {
-      Index.ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
+      USER.ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
       $(".opensMenu").hover(function() {}, function(e) {
-        $("." + Index.ML + ",.opensMenu").hide();
+        $("." + USER.ML + ",.opensMenu").hide();
       });
     });
 
@@ -176,13 +180,44 @@ var Index = {
 
 
   },
+  NEW_AVA: function(e){
+    $.post('/updateAvaUser',{newAva: e}, function(res){
+      console.log(res);
+      $("#ava").css({"background-image":"url("+e+")"})
+    });
+  },
   INIT: function() {
-    Index.DESIGHN();
+    USER.DESIGHN();
+    var file = document.getElementById('tFile');
+    file.addEventListener('change', function () {
+      console.log("1")
+      $("#ava").css({"background-image":"url(../../../image/loaders/load0.gif)"})
+        var fullPath = file.value;
+        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+        var filename = fullPath.substring(startIndex);
+        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+            filename = filename.substring(1);
+        }
+        console.log("2")
+        if (this.files && this.files[0]) {
+          console.log("3")
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              console.log("4")
+                USER.GLOBAL_FILE = e.target.result;
+                console.log("sssdsdsds")
+                USER.NEW_AVA(e.target.result);
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    }, false);
   }
 }
 
 $(document).ready(() => {
-  Index.INIT();
+  USER.INIT();
+  /*Для загрузки изображений в товары*/
+
 });
 $(document).on('ready', function(){
     $modal = $('.modal-frame');
@@ -204,5 +239,6 @@ $(document).on('ready', function(){
       $overlay.addClass('state-show');
       $modal.removeClass('state-leave').addClass('state-appear');
     });
+
 
   });

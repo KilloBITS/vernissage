@@ -88,10 +88,7 @@ router.get('/*', function(req, res, next){
                    client.close();
                  });
                }
-
-
              });
-
            });
          }else{
            res.render('close.ejs',{

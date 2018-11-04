@@ -81,6 +81,9 @@ var AUTH = {
     $.post('/auth',ld,function(res){
       if(res.code === 500){
         window.location.replace("/profile");
+      }else{
+        $(".backet_load").fadeOut(50);
+        $(".errorUP:eq(1)").html(res.message).fadeIn(400);
       }
     });
   },
@@ -95,6 +98,9 @@ var AUTH = {
       $.post('/create_accaunt',na,function(res){
         if(res.code === 500){
           window.location.replace("/profile");
+        }else{
+          $(".backet_load").fadeOut(50);
+          $(".errorUP:eq(0)").html(res.message).fadeIn(400);
         }
       });
     }else{
