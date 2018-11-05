@@ -9,7 +9,7 @@ router.use(cookieParser());
 
 //Обновление логотипа
 var updateAva = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     var base64Data = req.body.n.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,'');
     require("fs").writeFile("./publick/image/vernissageLogo.png", base64Data, 'base64', function(err) {
@@ -26,7 +26,7 @@ router.post('/updateAva', updateAva, function(req, res, next){});
 
 //Обновление заголовка
 var saveTitle = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     mongoClient.connect(global.baseIP ,function(err, client){
       const db = client.db(global.baseName);
@@ -49,7 +49,7 @@ router.post('/saveTitle', saveTitle, function(req, res, next){});
 
 //Обновление статуса сайта
 var siteStatus = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     mongoClient.connect(global.baseIP ,function(err, client){
       const db = client.db(global.baseName);
@@ -84,7 +84,7 @@ router.post('/siteStatus', siteStatus, function(req, res, next){});
 
 //Обновление локализации на главной странице
 var updateLocal = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     var a = req.body.ru;
     var b = req.body.ua;
@@ -119,7 +119,7 @@ router.post('/updateLocal', updateLocal, function(req, res, next){});
 
 //Обновление локализации на странице товаров
 var updateLocalTovar = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     var a = req.body.ru;
     var b = req.body.ua;
@@ -148,7 +148,7 @@ router.post('/updateLocalTovar', updateLocalTovar, function(req, res, next){});
 ///*******************************////
 
 var updateLoader = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     mongoClient.connect(global.baseIP ,function(err, client){
      const db = client.db(global.baseName);

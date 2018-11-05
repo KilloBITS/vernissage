@@ -8,7 +8,7 @@ const bParser = require('body-parser');
 router.use(cookieParser());
 
 var getAdmTovar = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req))
   {
     mongoClient.connect(global.baseIP, function(err, client){
         const db = client.db(global.baseName);
@@ -27,7 +27,7 @@ var getAdmTovar = (req, res, next) => {
 };
 
 var delAdmTovar = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     mongoClient.connect(global.baseIP ,function(err, client){
      const db = client.db(global.baseName);
@@ -124,7 +124,7 @@ var updateFile = function(file,AI){
 };
 
 var setAdmTovar = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     mongoClient.connect(global.baseIP, { useNewUrlParser: true } ,function(err, client){
       const db = client.db(global.baseName);
@@ -132,7 +132,13 @@ var setAdmTovar = (req, res, next) => {
       if(err) return console.log(err);
       tovar.find().sort({AI:-1}).limit(1).toArray(function(err, results_tovar ){
         var mainData = req.body;
-        var NEXT_AI = results_tovar[0].AI + 1;
+        console.log(results_tovar)
+        if(results_tovar.length > 0){
+          var NEXT_AI = results_tovar[0].AI + 1;
+        } else{
+          var NEXT_AI = 1;
+        }
+
 
         if(mainData.te === "true"){
           createUA(mainData.ua, NEXT_AI);
@@ -154,7 +160,7 @@ var setAdmTovar = (req, res, next) => {
 };
 
 var setStatusVisibile = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
   {
     if(req.body.a === 'false'){
       var status = false;

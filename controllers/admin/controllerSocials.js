@@ -9,7 +9,7 @@ router.use(cookieParser());
 
 
 var saveSocials = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) 
     {
       mongoClient.connect(global.baseIP ,function(err, client){
        const db = client.db(global.baseName);
@@ -23,7 +23,7 @@ var saveSocials = (req, res, next) => {
          newResConf[0].link = req.body.v;
          newResConf[1].link = req.body.i;
          newResConf[2].link = req.body.f;
-         config.update({},{ $set : { socials: newResConf }});
+         config.update({},{ $set : { socials: newResConf }},{ multi: true });
          res.send({code:500});
          client.close();
 

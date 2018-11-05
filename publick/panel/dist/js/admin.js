@@ -5,11 +5,31 @@ var ADMIN = {
   EDIT_AI_SELECT: 0,
   EDIT_IMAGE: '',
   URL_VAL: '',
+  NEW_MENU_TYPE: function(index){
+    if ($("#newTypeNameRu").val().length > 3) {
+      if ($("#newTypeNameUa").val().length > 3) {
+        if ($("#newTypeMiniLink").val().length > 3) {
+          $(".newCatError").html("").fadeOut(300);
+          $.post('/addNewType', {ind: index, catData: [{name: $("#newTypeNameRu").val() }, { name: $("#newTypeNameUa").val() }, {enType: $("#newTypeMiniLink").val() }] }, (res) => {
+            console.log(res);
+          });
+        }else {
+          $(".newCatError:eq(2)").html("некорректно введен LINK категории").fadeIn(300);
+        }
+      }else {
+        $(".newCatError:eq(1)").html("некорректно введено название на украинском").fadeIn(300);
+      }
+    } else {
+      $(".newCatError:eq(0)").html("некорректно введено название на русском").fadeIn(300);
+    }
+  },
   REMOVE_CATEGORY:function(a,b){
     var isAdmin = confirm("Вы действительно хотите удалить категорию '"+b+"' ?\n(востановление категории будет невозможно, а все товары находяциеся в ней нужно будет переносить в другую категорию!)");
     if(isAdmin){
       $.post("/removecategory",{index: a},(res) => {
-        console.log(res);
+        if(res.code === 500){
+          $(".task:eq("+a+"), #tab_"+a).remove();
+        }
       })
     };
   },
@@ -18,15 +38,17 @@ var ADMIN = {
     var nc = {
       cat_name_ru: $("#newCatNameRU").val(),
       cat_name_ua: $("#newCatNameUa").val(),
-      // identificator: $("#IDENTIFICATOR_NEW_CAT").val(),
       test_url: $("#test_url").val()
     };
     $.post("/addCategory",nc, (res) => {
       ADMIN.CONSOLE_TO_MESSAGE(res);
+      if(res.code === 500){
+        $('#modal-warning').modal('hide');
+        alert('Категория создана, она появится после обновления страницы')
+      }
     });
   },
   NEW_CATEGORY: function(){
-    // ADMIN.CONSOLE_TO_MESSAGE(false);
     $('#modal-warning').modal('show');
     $.post("/maxAImenu",function(res){
       ADMIN.URL_VAL = "/shop?c="+res.ml
@@ -80,6 +102,7 @@ var ADMIN = {
       $.post(url,{ru:save_data, ua:save_data_ua, file: ADMIN.GLOBAL_FILE, te: ADMIN.NEW_TOVAR, ai:ADMIN.EDIT_AI_SELECT},function(res){
           ADMIN.CANCEL();
           ADMIN.CONSOLE_TO_MESSAGE(res);
+          $('#modal-info').modal('hide')
       });
   },
   EDIT_TOVAR: function(ai){
@@ -210,32 +233,33 @@ var ADMIN = {
   },
   CHART_SALES_STATISTICS: function(){
     $.post('/getCounters',function(res){
-
-      var countdata = res.counters_data;
-      var line_chart = [];
-      for(let i = 0; i < countdata.length; i++){
-        line_chart.push({date: countdata[i].date, value: countdata[i].list.length });
+      if(res.code  === 500){
+        var countdata = res.counters_data;
+        var line_chart = [];
+        for(let i = 0; i < countdata.length; i++){
+          line_chart.push({date: countdata[i].date, value: countdata[i].list.length });
+        }
+        $("#line-chart").empty();
+        var line = new Morris.Line({
+          element          : 'line-chart',
+          resize           : true,
+          data             : line_chart,
+          xkey             : 'date',
+          ykeys           : ['value'],
+          labels           : ['Value'],
+          lineColors       : ['#000'],
+          lineWidth        : 2,
+          hideHover        : 'auto',
+          gridTextColor    : '#fff',
+          gridStrokeWidth  : 0.4,
+          pointSize        : 4,
+          pointStrokeColors: ['#efefef'],
+          gridLineColor    : '#efefef',
+          gridTextFamily   : 'Open Sans',
+          gridTextSize     : 10
+        });
+        line.redraw();
       }
-      $("#line-chart").empty();
-      var line = new Morris.Line({
-        element          : 'line-chart',
-        resize           : true,
-        data             : line_chart,
-        xkey             : 'date',
-        ykeys           : ['value'],
-        labels           : ['Value'],
-        lineColors       : ['#000'],
-        lineWidth        : 2,
-        hideHover        : 'auto',
-        gridTextColor    : '#fff',
-        gridStrokeWidth  : 0.4,
-        pointSize        : 4,
-        pointStrokeColors: ['#efefef'],
-        gridLineColor    : '#efefef',
-        gridTextFamily   : 'Open Sans',
-        gridTextSize     : 10
-      });
-      line.redraw();
     });
     $("#revenue-chart").empty();
     let revenue = Morris.Area({
@@ -291,13 +315,16 @@ var ADMIN = {
     });
   },
   SCRIPTS:function(){
-    if(localStorage.getItem("vernissage_treeview") && localStorage.getItem("vernissage_treeview") >= 0){
-       $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+')').addClass("menu-open");
-       $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+') .treeview-menu').show();
-       $('.miniClick:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').click().addClass("active");
-       $('.pageOfPanel:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').addClass("pageActive");
-
-    }
+    $('.treeview:eq('+0+') .treeview-menu').show();
+    $('.miniClick:eq('+0+')').click().addClass("active");
+    $('.pageOfPanel:eq('+0+')').addClass("pageActive");
+    // if(localStorage.getItem("vernissage_treeview") && localStorage.getItem("vernissage_treeview") >= 0){
+    //    $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+')').addClass("menu-open");
+    //    $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+') .treeview-menu').show();
+    //    $('.miniClick:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').click().addClass("active");
+    //    $('.pageOfPanel:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').addClass("pageActive");
+    //
+    // }
     /*Для загрузки изображений в товары*/
       file = document.getElementById('tFile');
       file.addEventListener('change', function () {

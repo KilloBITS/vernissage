@@ -31,6 +31,11 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+  <script src="/panel/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/panel/bower_components/jquery-ui/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js"></script>
+
+
   <style type="text/css">
     .pageOfPanel {
       display: none;
@@ -673,10 +678,31 @@
           </div>
           <div class="box box-default">
             <div class="nav-tabs-custom">
-              <ul class="nav nav-tabs">
+              <ul class="nav nav-tabs" id="to-do">
                 <% for(var i = 0; i < menu.length; i++){ %>
-                  <li><a href="#tab_<%= i %>" data-toggle="tab"><%= menu[i].name %></a></li>
+                  <li class="task"><a href="#tab_<%= i %>" data-toggle="tab"><%= menu[i].name %></a></li>
                 <% } %>
+
+                <script>
+                  dragula([
+                    document.getElementById("to-do"),
+                  ]);
+
+                  removeOnSpill: false
+                    .on("drag", function(el) {
+                      el.className.replace("ex-moved", "");
+                    })
+                    .on("drop", function(el) {
+                      el.className += "ex-moved";
+                    })
+                    .on("over", function(el, container) {
+                      container.className += "ex-over";
+                    })
+                    .on("out", function(el, container) {
+                      container.className.replace("ex-over", "");
+                    });
+
+                </script>
 
 
                 <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
@@ -684,15 +710,11 @@
                   <div id="newCategory" onclick="ADMIN.NEW_CATEGORY()">Создать категорию</div>
                 </div>
               </ul>
-              <div class="tab-content">
-                <!-- active -->
+              <div class="tab-content" id="TTTTT">
                 <% for(var i = 0; i < menu.length; i++){ %>
                   <div class="tab-pane " id="tab_<%= i %>">
-
-                    <% if(menu[i].podlink.length > 1){ %>
-
+                    <% if(menu[i].podlink.length >= 1 || menu[i].podlink[0] !== '/'){ %>
                       <% for(var il = 0; il < menu[i].podlink.length; il++) { %>
-
                         <div class="box box-primary collapsed-box">
                           <div class="box-header with-border">
                             <h3 class="box-title">• <%= menu[i].podlink[il].pname %></h3>
@@ -701,7 +723,6 @@
                               </button>
                             </div>
                           </div>
-
                           <div class="box-body" style="display: none;">
                             <div class="col-md-6">
                               <div class="form-group has-warning">
@@ -722,7 +743,6 @@
                           </div>
                         </div>
                       <% } %>
-
                     <% }else{%>
                       <div class="alert alert-warning alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -735,11 +755,17 @@
                           <h4><i class="icon fa fa-check"></i> Вы можете создать тип!</h4>
                           В данной категории товаром можно создавать типы товаров.
                         </div>
-
                       <% } %>
                     <% } %>
                     <% if(menu[i].edited){ %>
-                      <button type="button" class="btn btn-block btn-primary btn-sm">Создать тип</button>
+                      <label class="newCatError"></label>
+                      <input type="text" class="newTypesInput RU_PIC" id="newTypeNameRu" placeholder="Название типа на русском">
+                      <label class="newCatError"></label>
+                      <input type="text" class="newTypesInput UA_PIC" id="newTypeNameUa" placeholder="Название типа на украинском">
+                      <label class="newCatError"></label>
+                      <input type="text" class="newTypesInput" id="newTypeMiniLink"  placeholder="Идентификатор типа (Обычно как английское название)">
+
+                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="ADMIN.NEW_MENU_TYPE(<%= menu[i].index %>)">Создать тип</button>
                     <% } else { %>
                       <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -1478,8 +1504,7 @@
   </div>
 
 
-  <script src="/panel/bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="/panel/bower_components/jquery-ui/jquery-ui.min.js"></script>
+
   <script>
     $.widget.bridge('uibutton', $.ui.button);
   </script>

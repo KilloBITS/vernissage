@@ -75,6 +75,7 @@ router.get('/', function(req, res, next){
                             counters.insert(newDate);
                         }
                       });
+                      
                        res.render('index.ejs',{
                          conf: results_config[languageSystem],
                          menu: results_menu,

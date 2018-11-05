@@ -8,7 +8,7 @@ const bParser = require('body-parser');
 router.use(cookieParser());
 
 var getCounters = (req, res, next) => {
-  if (req.session && req.session.admin && req.session.user !== undefined) //&& req.session.admin && req.session.user !== undefined
+  if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
     {
       mongoClient.connect(global.baseIP ,function(err, client){
        const db = client.db(global.baseName);

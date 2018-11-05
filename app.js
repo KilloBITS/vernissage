@@ -83,6 +83,10 @@ app.post('/addToJelaniya', addToJelaniya);
 
 
 /*ADMIN*/
+//парсим админа
+const parseAdmin = require('./controllers/admin/controllerIsAdmin');
+// app.post('/getAdmTovar', AdmiGetTovar);
+
 //Получить список товаров
 const AdmiGetTovar = require('./controllers/admin/controllerTovar');
 app.post('/getAdmTovar', AdmiGetTovar);
@@ -95,9 +99,6 @@ app.post('/setAdmTovar', setAdmTovar);
 //получить список меню
 const getMenu = require('./controllers/admin/controllerMenu');
 app.post('/getMenu', getMenu);
-//добавить категорию меню
-const addCategory = require('./controllers/admin/controllerMenu');
-app.post('/addCategory', addCategory);
 //обновить логотип сайта
 const updateAva = require('./controllers/admin/controllerUpdateData');
 app.post('/updateAva', updateAva);
@@ -128,29 +129,20 @@ app.post('/SetStatusVisibile', setStatusVisibiles);
 
 const maxAImenu = require('./controllers/admin/controllerMenu');
 app.post('/maxAImenu', maxAImenu);
+//добавить категорию меню
 
-const removecategory = require('./controllers/admin/controllerMenu');
-app.post('/removecategory', removecategory);
+/** Уплавление меню (категориями) **/
+const MENU_Controll = require('./controllers/admin/controllerMenu');
+app.post('/addCategory', MENU_Controll);
+//Удалить категорию
+app.post('/removecategory', MENU_Controll);
+//Добавить тип
+app.post('/addNewType', MENU_Controll);
 
-// var LiqPay = require('liqpay');
-//
-// var liqpay = new LiqPay("i40058369372", "T9l51qLSTrMPTZDfDC7R3mneNT6cAU2MRYM3meOn");
-//
-// liqpay.api("request", {
-// "action"         : "pay",
-// "version"        : "3",
-// "phone"          : "380950000001",
-// "amount"         : "1",
-// "currency"       : "USD",
-// "description"    : "description text",
-// "order_id"       : "order_id_1",
-// "card"           : "4731195301524634",
-// "card_exp_month" : "03",
-// "card_exp_year"  : "22",
-// "card_cvv"       : "111"
-// }, function( json ){
-// console.log( json.status );
-// });
+
+
+
+
 
 app.listen(80, function(){
   global.baseName = 'VERNISSAGE';
