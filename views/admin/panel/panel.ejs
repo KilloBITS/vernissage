@@ -738,8 +738,10 @@
                             </div>
                             <div class="form-group has-warning">
                               <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Ссылка</label>
-                              <input type="text" class="form-control" id="" value="<%= menu[i].podlink[il].plink %>" placeholder="Enter ..." disabled>
+                              <input type="text" class="form-control" id="" value="<%= menu[i].podlink[il].plink %>" placeholder="Вводится автоматически" disabled>
                             </div>
+
+                            <button type="button" class="btn btn-block btn-danger btn-sm" onclick="ADMIN.REMOVE_TYPE(<%= menu[i].index %>, '<%= menu[i].podlink[il].pname %>','<%= menuuk[i].podlink[il].pname %>')">Удалить тип</button>
                           </div>
                         </div>
                       <% } %>
@@ -759,13 +761,13 @@
                     <% } %>
                     <% if(menu[i].edited){ %>
                       <label class="newCatError"></label>
-                      <input type="text" class="newTypesInput RU_PIC" id="newTypeNameRu" placeholder="Название типа на русском">
+                      <input type="text" class="newTypesInput RU_PIC" id="newTypeNameRu<%= i %>" placeholder="Название типа на русском" onkeyup="ADMIN.CORRECT_NEW_LINK(this)">
                       <label class="newCatError"></label>
-                      <input type="text" class="newTypesInput UA_PIC" id="newTypeNameUa" placeholder="Название типа на украинском">
+                      <input type="text" class="newTypesInput UA_PIC" id="newTypeNameUa<%= i %>" placeholder="Название типа на украинском">
                       <label class="newCatError"></label>
-                      <input type="text" class="newTypesInput" id="newTypeMiniLink"  placeholder="Идентификатор типа (Обычно как английское название)">
+                      <input type="text" class="newTypesInput disClass" id="newTypeMiniLink<%= i %>"  placeholder="Вводится автоматически">
 
-                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="ADMIN.NEW_MENU_TYPE(<%= menu[i].index %>)">Создать тип</button>
+                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="ADMIN.NEW_MENU_TYPE(<%= menu[i].index %>,<%= i %>)">Создать тип</button>
                     <% } else { %>
                       <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -1232,15 +1234,15 @@
                           </td>
                           <% } %>
 
-                            <td class="">
-                              <a class="btn btn-app" title="Редактировать" onclick="ADMIN.EDIT_TOVAR(<%= tovar[i].AI %>)">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                              <a class="btn btn-app" title="Удалить" onclick="ADMIN.REMOVE(<%= tovar[i].AI %>)">
-                      <i class="fa fa-ban" ></i>
-                    </a>
-                            </td>
-                    </tr>
+                          <td class="">
+                            <a class="btn btn-app" title="Редактировать" onclick="ADMIN.EDIT_TOVAR(<%= tovar[i].AI %>)">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="btn btn-app" title="Удалить" onclick="ADMIN.TOVAR_REMOVE(<%= tovar[i].AI %>)">
+                              <i class="fa fa-ban" ></i>
+                            </a>
+                          </td>
+                        </tr>
                     <% } %>
                 </tbody>
                 <tfoot>
@@ -1252,14 +1254,81 @@
           </div>
         </section>
       </div>
-
+      <!-- Пользователи -->
       <div class="pageOfPanel">
+        <section class="content-header">
+          <h1>Управление товарами</h1>
+        </section>
         <section class="content">
-          <div class="col-md-6">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Список пользователей</h3>
+            </div>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr style="background-color: #3c8dbc; color: white;">
+                    <th>#</th>
+                    <th>Имя</th>
+                    <th class="NOTMOBILE">email</th>
+                    <th class="NOTMOBILE">Номер телефона</th>
+                    <th class="NOTMOBILE">Сек. отв.</th>
+                    <th class="NOTMOBILE">Ранг</th>
+                    <th class="NOTMOBILE">Репутация</th>
+                    <th class="NOTMOBILE">Должность</th>
+                    <th class="NOTMOBILE">Действия</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < users.length; i++){ %>
+                    <tr class="tovar-ai-<%= users[i].AI %>">
+                      <td>
+                        <%= users[i].AI %>
+                      </td>
+                      <td>
+                        <%= users[i].name %>
+                      <small>
+                        <div class="miniTitleNameIcon"></div>
+                      </small>
+                      </td>
+                      <td class="NOTMOBILE">
+                        <%= users[i].email %>
+                        <div class="sendUserMessage" mail="<%= users[i].email %>"></div>
+                      </td>
+                      <td class="NOTMOBILE">
+                        <%= users[i].phone %>
+                      </td>
+                      <td class="NOTMOBILE">
+                        <%= users[i].secret %>
+                      </td>
+                      <td class="NOTMOBILE">
+                        <%= users[i].rank %>
+                      </td>
+                      <td class="NOTMOBILE">
+                        <%= users[i].stars %>
+                      </td>
+                      <% if( users[i].isAdmin || users[i].isAdmin === 'true'){ %>
+                      <td class="NOTMOBILE">
+                        Администратор
+                      </td>
+                      <% }else{ %>
+                        <td class="NOTMOBILE">
+                          Пользователь
+                        </td>
+                      <% } %>
+                      <td class="NOTMOBILE">
+                        <a class="btn btn-app" title="Заблокировать" onclick="ADMIN.BANNED(<%= users[i].AI %>)">
+                          <i class="fa fa-remove"></i>
+                        </a>
+                      </td>
+                  <% } %>
+                </tbody>
+                <tfoot>
 
-          </div>
-          <div class="col-md-6">
-
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
           </div>
         </section>
       </div>

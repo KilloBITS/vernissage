@@ -36,7 +36,7 @@ router.get('/', function(req, res, next){
     sum = sum + parseFloat(JSON.parse(req.query.JSON_Tovar)[i].price);
   }
 
-  //раззчет бонуса
+  //раccчет бонуса
   var vernissageCoin = (parseInt(sum) / 100);
   if(vernissageCoin > 1){
     //обработка бонуса

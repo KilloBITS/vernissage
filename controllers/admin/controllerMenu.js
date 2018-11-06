@@ -25,6 +25,7 @@ var getMenuData = (req, res, next) => {
 var addCategory = (req, res, next) => {
   if (global.isAdminParse(req)) //&& req.session.admin && req.session.user !== undefined
     {
+      console.log(111)
       mongoClient.connect(global.baseIP ,function(err, client){
        const db = client.db(global.baseName);
        const menu  = db.collection("menu");
@@ -144,7 +145,7 @@ var addNewType = (req, res, next) => {
           }
 
           menuuk.update({index: parseInt(req.body.ind)}, {$set : { podlink: results_configuk[0].podlink}});
-          res.send({code:500});
+          res.send({code:500, msg: results_config[0].name});
         });
        });
     });

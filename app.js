@@ -26,7 +26,6 @@ const index = require('./routes/getIndex');
 const tovar = require('./routes/getTovar');
 const get404 = require('./routes/get404');
 const login = require('./routes/getLogin');
-const panel = require('./routes/admin/panel');
 const oplata = require('./routes/getOplata');
 const details = require('./routes/getDetails');
 const contacts = require('./routes/getContacts');
@@ -35,11 +34,9 @@ const account = require('./routes/getAccount');
 const setNumbers = require('./controllers/controllerSetNumbers');
 const delivery = require('./routes/getDelivery');
 
-
 app.use('/', index);
 app.use('/shop*', tovar);
 app.use('/login', login);
-app.use('/panel', panel);
 app.use('/oplata', oplata);
 app.use('/details', details);
 app.use('/contacts', contacts);
@@ -47,6 +44,11 @@ app.use('/payment', payment);
 app.use('/profile', account);
 app.use('/setNumbers*', setNumbers);
 app.use('/delivery*', delivery);
+
+
+
+const panel = require('./routes/admin/panel');
+app.use('/panel', panel);
 
 app.get('*', get404);
 
@@ -133,6 +135,7 @@ app.post('/maxAImenu', maxAImenu);
 
 /** Уплавление меню (категориями) **/
 const MENU_Controll = require('./controllers/admin/controllerMenu');
+
 app.post('/addCategory', MENU_Controll);
 //Удалить категорию
 app.post('/removecategory', MENU_Controll);

@@ -5,22 +5,147 @@ var ADMIN = {
   EDIT_AI_SELECT: 0,
   EDIT_IMAGE: '',
   URL_VAL: '',
-  NEW_MENU_TYPE: function(index){
-    if ($("#newTypeNameRu").val().length > 3) {
-      if ($("#newTypeNameUa").val().length > 3) {
-        if ($("#newTypeMiniLink").val().length > 3) {
+  CONSOLE_TO_MESSAGE: function(status){
+    if(status === false){
+      $('.BIG_LOADER').fadeIn(100);
+      $('.wrapper').css({"filter":"blur(3.5px)"});
+    }else{
+      $('.BIG_LOADER').fadeOut(100);
+      $('.wrapper').css({"filter":"blur(0)"});
+    }
+  },
+  CORRECT_NEW_LINK:function(e){
+    function toTranslit(text) {
+        return text.replace(/([а-яё])|([\s_-])|([^a-z\d])/gi,
+        function (all, ch, space, words, i) {
+            if (space || words) {
+                return space ? '-' : '';
+            }
+            var code = ch.charCodeAt(0),
+                index = code == 1025 || code == 1105 ? 0 :
+                    code > 1071 ? code - 1071 : code - 1039,
+                t = ['yo', 'a', 'b', 'v', 'g', 'd', 'e', 'zh',
+                    'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p',
+                    'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh',
+                    'shch', '', 'y', '', 'e', 'yu', 'ya'
+                ];
+            return t[index];
+        });
+    }
+    var id = $("#newTypeMiniLink"+e.id.replace(/[^-0-9]/gim,'')).val(toTranslit($("#"+e.id).val()))
+  },
+  NEW_MENU_TYPE: function(index, ai){
+    if ($("#newTypeNameRu"+ai).val().length > 3) {
+      if ($("#newTypeNameUa"+ai).val().length > 3) {
+        if ($("#newTypeMiniLink"+ai).val().length >= 3) {
+          console.log('новый товыар')
           $(".newCatError").html("").fadeOut(300);
-          $.post('/addNewType', {ind: index, catData: [{name: $("#newTypeNameRu").val() }, { name: $("#newTypeNameUa").val() }, {enType: $("#newTypeMiniLink").val() }] }, (res) => {
-            console.log(res);
+          ADMIN.CONSOLE_TO_MESSAGE(false);
+          var ARR = [{name: $("#newTypeNameRu"+ai).val() }, { name: $("#newTypeNameUa"+ai).val() }, {enType: $("#newTypeMiniLink"+ai).val() }];
+          $.post('/addNewType', {ind: index, catData: ARR }, (res) => {
+            let box = document.createElement("div");
+            box.className = 'box box-primary collapsed-box';
+            box.id = 'newBoxID'+ai;
+            $("#TTTTT .active").prepend(box);
+
+            let box_header = document.createElement("div");
+            box_header.className = 'box-header with-border';
+
+            let box_body = document.createElement("div");
+            box_body.className = 'box-body';
+            box_body.style.display = "none";
+
+            let h3 = document.createElement("h3");
+            h3.className = 'box-title'
+            h3.innerHTML = '• '+$("#newTypeNameRu"+ai).val();
+
+            let box_tools = document.createElement("div");
+            box_tools.className = 'box-tools pull-right';
+
+            let btn = document.createElement("button");
+            btn.className = 'btn btn-box-tool';
+            btn.type = 'button';
+            btn.setAttribute("data-widget","collapse");
+
+            let a = document.createElement("a");
+            a.className = 'fa fa-plus';
+
+            $(box).append(box_header);
+            $(box).append(box_body);
+            $(box_header).append(h3);
+            $(box_header).append(box_tools);
+            $(box_tools).append(btn);
+            $(btn).append(a);
+
+            var textArr = ["Название на русском", "Название на украинском", "Ссылка"];
+            var uaandru = ["RU_PIC", "UA_PIC"];
+            for(let i = 0; i < 2; i++){
+              let col_md_6 = document.createElement("div");
+              col_md_6.className = 'col-md-6';
+              $(box_body).append(col_md_6);
+
+              let form_group = document.createElement("div");
+              form_group.className = "form-group has-warning";
+              $(col_md_6).append(form_group);
+
+              let label = document.createElement("label");
+              label.className = "control-label";
+              label.innerHTML = textArr[i];
+              $(form_group).append(label);
+
+              input = document.createElement("input");
+              input.className = "form-control "+uaandru[i];
+              input.type = 'text';
+              input.value = ARR[i].name;
+              $(form_group).append(input);
+
+              let ia = document.createElement("i");
+              ia.className = "fa fa-bell-o";
+              $(form_group).append(ia);
+            }
+
+            let form_group2 = document.createElement("div");
+            form_group2.className = "form-group has-warning";
+            $(box_body).append(form_group2);
+
+            let label2 = document.createElement("label");
+            label2.className = "control-label";
+            label2.for = "inputWarning";
+            label2.innerHTML = textArr[2];
+            $(form_group2).append(label2);
+
+            let ia2 = document.createElement("i");
+            ia2.className = "fa fa-bell-o";
+            $(label2).append(ia2);
+
+
+            input2 = document.createElement("input");
+            input2.className = "form-control";
+            input2.type = 'text';
+            input2.value = "Ссылка";
+            $(form_group2).append(input2);
+
+
+            $('#newBoxID'+ai).boxWidget({
+              animationSpeed: 500,
+              collapseTrigger: '.btn-box-tool',
+              collapseIcon: 'fa-minus',
+              expandIcon: 'fa-plus',
+              removeIcon: 'fa-times'
+            });
+
+            $('#newTypeNameRu, #newTypeNameUa, #newTypeMiniLink').val('');
+            ADMIN.CONSOLE_TO_MESSAGE(res);
+
           });
         }else {
-          $(".newCatError:eq(2)").html("некорректно введен LINK категории").fadeIn(300);
+          $(".active .newCatError:eq(2)").html("некорректно введен LINK категории").fadeIn(300);
         }
       }else {
-        $(".newCatError:eq(1)").html("некорректно введено название на украинском").fadeIn(300);
+        $(".active .newCatError:eq(1)").html("некорректно введено название на украинском").fadeIn(300);
       }
     } else {
-      $(".newCatError:eq(0)").html("некорректно введено название на русском").fadeIn(300);
+      $(".active .newCatError:eq(0)").html("некорректно введено название на русском").fadeIn(300);
     }
   },
   REMOVE_CATEGORY:function(a,b){
@@ -56,23 +181,20 @@ var ADMIN = {
       // ADMIN.CONSOLE_TO_MESSAGE(res);
     });
   },
-  CONSOLE_TO_MESSAGE: function(status){
-    if(status === false){
-      $('.BIG_LOADER').fadeIn(100);
-      $('.wrapper').css({"filter":"blur(3.5px)"});
-    }else{
-      $('.BIG_LOADER').fadeOut(100);
-      $('.wrapper').css({"filter":"blur(0)"});
-    }
-  },
   SAVE_SOCIALS: function(){
     ADMIN.CONSOLE_TO_MESSAGE(false);
     $.post("/saveSocials",{v: $("#VK").val() , i: $("#INSTA").val() , f: $("#FB").val() }, (res) => {
       ADMIN.CONSOLE_TO_MESSAGE(res);
     });
   },
+  TOVAR_REMOVE: function(ai){
+    ADMIN.CONSOLE_TO_MESSAGE(false);
+    $.post('/delAdmTovar',{d: ai},(res) => {
+      $('.tovar-ai-'+ai).remove();
+      ADMIN.CONSOLE_TO_MESSAGE(res);
+    });
+  },
   TOVAR_VISIBILITY: function(status, ai){
-
     $.post("/SetStatusVisibile",{a: status,b:ai}, function(res){
       ADMIN.CONSOLE_TO_MESSAGE(res);
     })
@@ -191,18 +313,26 @@ var ADMIN = {
       title_ua: $("#edit_title_ua").val(),
       title_ru: $("#edit_title_ru").val()
     };
+
     $.post("/saveTitle",T,(res) => {
       ADMIN.CONSOLE_TO_MESSAGE(res);
     });
   },
   CHANGE_TYPE: function(){
+
+    $("#tType option").remove();
+    let option = document.createElement("option");
+    option.value = "Идет загрузка типов...";
+    option.text = "Идет загрузка типов...";
+    option.setAttribute("selected","true")
+    $("#tType").append(option);
     $.post("/getMenu",{c: $("#tCategories").val()},(res) => {
       $("#tType option").remove();
       ADMIN.CONSOLE_TO_MESSAGE(res);
       if(res.menu.podlink.length > 1){
         $("#tType").attr("disabled",false).removeAttr("style")
         for (var i = 0; i < res.menu.podlink.length; i++) {
-          var option = document.createElement("option");
+          let option = document.createElement("option");
           option.value = res.menu.podlink[i].types;
           option.text = res.menu.podlink[i].pname;
           $("#tType").append(option);
@@ -378,43 +508,29 @@ var ADMIN = {
         'info'        : true,
         'autoWidth'   : true
       });
+
+      $(".BIG_LOADER").fadeOut(300);
   },
   GET_CPU: function(){
-
-    /*
-    * Flot Interactive Chart
-    * -----------------------
-    */
-    // We use an inline data source in the example, usually data would
-    // be fetched from a server
-    var data = [], totalPoints = 100
-
+    var data = [], totalPoints = 100;
     function getRandomData() {
-
     if (data.length > 0)
     data = data.slice(1)
-
-    // Do a random walk
     while (data.length < totalPoints) {
-
-    var prev = data.length > 0 ? data[data.length - 1] : 50,
-    y    = prev + Math.random() * 10 - 5
-
-    if (y < 0) {
-    y = 0
-    } else if (y > 100) {
-    y = 100
+      var prev = data.length > 0 ? data[data.length - 1] : 50,
+      y = prev + Math.random() * 10 - 5
+      if (y < 0) {
+        y = 0
+      } else if (y > 100) {
+        y = 100
+      }
+      data.push(y)
     }
 
-    data.push(y)
-    }
-
-    // Zip the generated y values with the x values
     var res = []
     for (var i = 0; i < data.length; ++i) {
-    res.push([i, data[i]])
+      res.push([i, data[i]])
     }
-
     return res
     }
 
