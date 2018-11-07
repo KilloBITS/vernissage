@@ -169,7 +169,7 @@
                         "data": JSON.stringify(CCC)
                       }
 
-                      $.ajax(settings).done(function (response) {                   
+                      $.ajax(settings).done(function (response) {
                         $(".details_TTH").html('<b>'+response.data[0].Status+'</b>')
                       });
                     });
@@ -188,7 +188,6 @@
         </div>
       </div>
       <div class="MyBlock" id="myDesires">
-
         <% if(desires_user && desires_user.length > 0){ %>
           <% for(var i = 0; i < desires_user.length; i++) { %>
             <div class="desires_box">
@@ -203,11 +202,6 @@
               У вас нет желаний
             </div>
         <% } %>
-
-
-
-
-
       </div>
       <div class="MyBlock" id="mySetting">
         <div class="setting_line proc50">
@@ -229,6 +223,13 @@
           <input type="password" name="passwordNew"  placeholder="Введите новый пароль">
           <span>Повторите пароль</span>
           <input type="password" name="passwordNew2" placeholder="Повторите пароль">
+          <div class="buttonSetting">Сохранить</div>
+        </div>
+
+        <div class="setting_line">
+          <span>Секретное слово</span>
+          <input type="password" name="secretString" id="secretString" placeholder="Служит для востановления пароля">
+          <div class="showHide"></div>
           <div class="buttonSetting">Сохранить</div>
         </div>
 

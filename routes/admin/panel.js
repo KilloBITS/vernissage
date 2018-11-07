@@ -40,7 +40,7 @@ router.get('/', function(req, res, next){
           if(err) return console.log(err);
 
          config.find().toArray(function(err, results_config){
-           menu.find().toArray(function(err, results_menu ){
+           menu.find().sort({ isEnded: 1 }).toArray(function(err, results_menu ){
              slider.find().toArray(function(err, results_slider ){
                news.find().toArray(function(err, results_news ){
                  tovar.find().toArray(function(err, results_tovar ){
@@ -50,7 +50,7 @@ router.get('/', function(req, res, next){
                          users.find().toArray(function(err, results_users ){
                            counters.find().toArray(function(err, results_counters ){
                              titles_page.find().toArray(function(err, results_titles_page ){
-                               menuuk.find().toArray(function(err, results_menuuk ){
+                               menuuk.find().sort({ isEnded: 1 }).toArray(function(err, results_menuuk ){
                                  res.render('admin/panel/panel.ejs',{  //admin/panel/panel.ejs
                                    conf: results_config[0],
                                    confua: results_config[1],

@@ -14,6 +14,9 @@ var ADMIN = {
       $('.wrapper').css({"filter":"blur(0)"});
     }
   },
+  SEND_USER_MESSAGE: function(mail){
+
+  },
   CORRECT_NEW_LINK:function(e){
     function toTranslit(text) {
         return text.replace(/([а-яё])|([\s_-])|([^a-z\d])/gi,
@@ -363,12 +366,14 @@ var ADMIN = {
   },
   CHART_SALES_STATISTICS: function(){
     $.post('/getCounters',function(res){
+      console.log(res)
       if(res.code  === 500){
         var countdata = res.counters_data;
         var line_chart = [];
         for(let i = 0; i < countdata.length; i++){
           line_chart.push({date: countdata[i].date, value: countdata[i].list.length });
         }
+        console.log(line_chart)
         $("#line-chart").empty();
         var line = new Morris.Line({
           element          : 'line-chart',
@@ -391,6 +396,7 @@ var ADMIN = {
         line.redraw();
       }
     });
+    
     $("#revenue-chart").empty();
     let revenue = Morris.Area({
       element   : 'revenue-chart',

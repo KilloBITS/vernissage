@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>панель управления</title>
+  <link rel="shortcut icon" href="../../image/favicon.ico" type="image/x-icon">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -260,6 +261,7 @@
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Статистика </a></li>
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Настройки сайта </a></li>
               <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Настройки меню </a></li>
+              <li class="miniClick"><a href="#"><i class="fa fa-circle-o"></i> Новости </a></li>
             </ul>
           </li>
 
@@ -793,10 +795,21 @@
           </div>
         </section>
       </div>
-      <!-- Локализация главной страницы -->
+      <!-- Новости -->
+      <div class="pageOfPanel">
+        <section class="content">
+          <div class="col-md-6">
+
+          </div>
+          <div class="col-md-6">
+
+          </div>
+        </section>
+      </div>
+      <!-- настройки главной страницы -->
       <div class="pageOfPanel">
         <section class="content-header">
-          <h1>Локализация главной страницы</h1>
+          <h1>Настройки главной страницы</h1>
         </section>
         <section class="content">
           <div class="col-md-6">
@@ -900,10 +913,10 @@
           <button type="button" class="btn btn-block btn-success btn-lg saveLocal" id="globalDataSave" onclick="ADMIN.SAVE_LOCAL_INDEX()">Сохранить</button>
         </section>
       </div>
-      <!-- Локализация страницы товары -->
+      <!-- настройки страницы товары -->
       <div class="pageOfPanel">
         <section class="content-header">
-          <h1>Локализация страницы "Товары"</h1>
+          <h1>Настройки страницы "Товары"</h1>
         </section>
         <section class="content">
           <div class="col-md-6">
@@ -946,11 +959,14 @@
             </div>
 
           </div>
-          <button type="button" class="btn btn-block btn-success btn-lg saveLocal" id="globalDataSave" onclick="ADMIN.SAVE_LOCAL_TOVAR()">Сохранить</button>
+          <button type="button" class="btn btn-block btn-success btn-lg saveLocal" id="globalDataSave2" onclick="ADMIN.SAVE_LOCAL_TOVAR()">Сохранить</button>
         </section>
       </div>
-      <!-- Локализация страницы оплата и доставка -->
+      <!-- настройки страницы оплата и доставка -->
       <div class="pageOfPanel">
+        <section class="content-header">
+          <h1>Настройки страницы "Оплата и доставка"</h1>
+        </section>
         <section class="content">
           <div class="col-md-12">
             <div class="box box-primary">
@@ -1025,11 +1041,7 @@
                 </form>
               </div>
             </div>
-
-
           </div>
-
-
 
           <div class="col-md-6">
             <div class="box box-primary">
@@ -1050,8 +1062,6 @@
               </div>
             </div>
 
-
-
             <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title"><%= conf.dostavka[1].title %></h3>
@@ -1069,8 +1079,6 @@
                 </form>
               </div>
             </div>
-
-
 
             <div class="box box-primary">
               <div class="box-header with-border">
@@ -1090,6 +1098,7 @@
               </div>
             </div>
           </div>
+          <button type="button" class="btn btn-block btn-success btn-lg saveLocal" id="globalDataSave2" onclick="ADMIN.SAVE_LOCAL_INDEX()">Сохранить</button>
         </section>
       </div>
 
@@ -1293,10 +1302,29 @@
                       </td>
                       <td class="NOTMOBILE">
                         <%= users[i].email %>
-                        <div class="sendUserMessage" mail="<%= users[i].email %>"></div>
+                        <div class="sendUserMessage" mail="<%= users[i].email %>" onclick="ADMIN.SEND_USER_MESSAGE('<%= users[i].email %>')"></div>
                       </td>
                       <td class="NOTMOBILE">
-                        <%= users[i].phone %>
+                        <%= users[i].phone_number %>
+                        <div class="type_operator_<%= i %>"></div>
+                        <script>
+                        var test_str = "<%= users[i].phone_number %>";
+                        var start_pos = test_str.indexOf('(') + 1;
+                        var end_pos = test_str.indexOf(')',start_pos);
+                        var text_to_get = test_str.substring(start_pos,end_pos);
+
+                        switch(text_to_get){
+                          case "066": $(".type_operator_<%= i %>").addClass("mts").attr("title","VODAFONE"); break;
+                          case "099": $(".type_operator_<%= i %>").addClass("mts").attr("title","VODAFONE"); break;
+                          case "050": $(".type_operator_<%= i %>").addClass("mts").attr("title","VODAFONE"); break;
+                          case "063": $(".type_operator_<%= i %>").addClass("Life").attr("title","LIFECELL"); break;
+                          case "073": $(".type_operator_<%= i %>").addClass("Life").attr("title","LIFECELL"); break;
+                          case "097": $(".type_operator_<%= i %>").addClass("Kievstar").attr("title","Киевстар"); break;
+                          case "098": $(".type_operator_<%= i %>").addClass("Kievstar").attr("title","Киевстар"); break;
+                          case "067": $(".type_operator_<%= i %>").addClass("Kievstar").attr("title","Киевстар"); break;
+                          default: console.log("none"); break;
+                        }
+                        </script>
                       </td>
                       <td class="NOTMOBILE">
                         <%= users[i].secret %>
@@ -1319,6 +1347,9 @@
                       <td class="NOTMOBILE">
                         <a class="btn btn-app" title="Заблокировать" onclick="ADMIN.BANNED(<%= users[i].AI %>)">
                           <i class="fa fa-remove"></i>
+                        </a>
+                        <a class="btn btn-app" title="Редактировать" onclick="ADMIN.EDIT_USER(<%= users[i].AI %>)">
+                          <i class="fa fa-edit"></i>
                         </a>
                       </td>
                   <% } %>

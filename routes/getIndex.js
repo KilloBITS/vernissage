@@ -44,12 +44,13 @@ router.get('/', function(req, res, next){
       if(mm<10) {
           mm = '0'+mm
       }
-      today = mm + '-' + dd + '-' + yyyy;
+      today = yyyy + '-' + mm + '-' + dd;
 
        titles_page.find().toArray(function(err, results_titles_page){
          config.find().toArray(function(err, results_config){
            if(results_config[languageSystem].opens){
-             menu.find().toArray(function(err, results_menu ){
+             menu.find().sort({ isEnded: 1 }).toArray(function(err, results_menu ){
+               console.log(results_menu);
                slider.find().toArray(function(err, results_slider ){
                  news.find().toArray(function(err, results_news ){
                    tovar.find().sort({ AI: -1 }).limit(5).toArray(function(err, results_tovar ){
@@ -75,7 +76,7 @@ router.get('/', function(req, res, next){
                             counters.insert(newDate);
                         }
                       });
-                      
+
                        res.render('index.ejs',{
                          conf: results_config[languageSystem],
                          menu: results_menu,

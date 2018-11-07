@@ -9,6 +9,7 @@ router.use(cookieParser());
 
 router.post('/auth', function(req, res, next){
   var msg = ['Неверный логин или пароль','Невірно введені данні'];
+  var msgBlock = ['Ваша страница заблокированна','Ваша сторінка заблокована'];
   if(req.cookies.vernissageLang === undefined){
     var languageSystem = 0;
   }else{
@@ -28,10 +29,15 @@ router.post('/auth', function(req, res, next){
       if(err) return console.log(err);
       users.find({email: req.body.login}).toArray(function(err, results_users){
         if((results_users.length !== 0) && (req.body.login === results_users[0].email && req.body.password === results_users[0].password)) {
-          req.session.user = results_users[0].email;
-          req.session.admin = results_users[0].isAdmin;
-          global.online = global.online + 1;
-          res.send({code:500});
+          if(!results_users[0].isBlocked){
+            req.session.user = results_users[0].email;
+            req.session.admin = results_users[0].isAdmin;
+            global.online = global.online + 1;
+            res.send({code:500});
+          }else{
+            res.send({code:403, message: msgBlock[languageSystem]});
+          }
+
         }else{
           res.send({code:450, message: msg[languageSystem]});
         }
@@ -72,6 +78,7 @@ router.post('/create_accaunt', function(req, res, next){
           NEW_USER.stars = 0,
           NEW_USER.AI = NEXT_AI,
           NEW_USER.isAdmin = false,
+          NEW_USER.isBlocked = false,
           NEW_USER.ava = "";
           NEW_USER.desires = [];
           NEW_USER.payments = [];

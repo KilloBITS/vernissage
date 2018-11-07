@@ -3,6 +3,15 @@ var USER = {
   ML: "",
   GLOBAL_FILE: '',
   DESIGHN: function() {
+    $(".showHide").click(function(){
+      $(".showHide").toggleClass('SHOW');
+      if($(".showHide").hasClass("SHOW")){
+        $("#secretString").attr("type","text")
+      }else{
+        $("#secretString").attr("type","password")
+      }
+    });
+
     $(".uploadAva").click(function(){
       $("#tFile").click();
     });
