@@ -202,10 +202,10 @@ app.post('/addcategory', menuPanelMethods);
 app.post('/addtype', menuPanelMethods);
 app.post('/removecategory', menuPanelMethods);
 
-var options = {
-  key: fs.readFileSync('./ssl/apache-selfsigned.key'),
-  cert: fs.readFileSync('./ssl/apache-selfsigned.crt')
-};
+// var options = {
+//   key: fs.readFileSync('./ssl/apache-selfsigned.key'),
+//   cert: fs.readFileSync('./ssl/apache-selfsigned.crt')
+// };
 
 const Nexmo = require('nexmo')
 const nexmo = new Nexmo({
