@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= locale.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/flickity.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/auth/auth.css">
+  <link rel="stylesheet" type="text/css" href="/style/auth/auth.min.css">
+
+  <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/jquery-ui.js"></script>
+  <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="/script/draggabilly.pkgd.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+  <script type="text/javascript" src="script/global.js"></script>
+  <script type="text/javascript" src="script/basket.js"></script>
+  <script type="text/javascript" src="script/auth/auth.js"></script>
+  <script src="assets/js/pace.min.js"></script>
+  <% if(isAdm){ %>
+  <script type="text/javascript" src="script/ADM_FOLDER/adm_script.js"></script>
+  <link rel="stylesheet" type="text/css" href="script/ADM_FOLDER/adm_style.css">
+  <% } %>
+</head>
+<body>
+  <%- include ./includes/preloader.ejs %>
+  <%- include ./includes/closed.ejs %>  
+  <div class="top">
+   <div class="topLine oneLine">
+    <div class="topNavMobMenuOfBtm">
+      <div class="menu-wrapper">
+        <div class="hamburger-menu"></div>
+      </div>
+    </div>
+    <div class="logotype" style="background-image: url(../../../image/<%= config.logotype %>)"></div>
+    <div class="topNavBlockOfBtm">
+     <a href="tel:<%= contacts.number %>" class="contact_number"><%= contacts.number %></a>
+     <%- include ./includes/session.ejs %>
+     <div class="basketBlock">
+      <span>0</span>
+    </div>
+  </div>
+</div>
+<%- include ./includes/menu.ejs %>
+</div>
+<div class="content">
+  <div class="main-box">
+    <div class="slider-cont">
+      <div class="signup-slider">
+        <div class="img-txt">
+          <img src="../../../image/auth_sliders/2.jpg"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-cont">
+      <div class="top-buttons">
+        <button class="to-signup ">
+          <%= locale.registration %>
+        </button>
+        <button class="to-signin top-active-button">
+          <%= locale.authification %>
+        </button>
+      </div>
+      <div class="form form-signup">
+        <div class="register_socials">
+          <div class="socials_title_log"><%= locale.regsoc %></div>
+          <div class="socialAccount faceboock"></div>
+          <div class="socialAccount google"></div>
+          <div class="socialAccount instagram"></div>
+        </div>
+        <div class="errorUP"></div>
+        <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= config.loader %>"></div>
+        <div class="aForm" action="#">
+          <lable><%= locale.FIO %></lable>
+          <input type="text"
+          placeholder="<%= locale.FIO %>" id="newName">
+          <lable>EMAIL</lable>
+          <input type="text"
+          placeholder="EMAIL" id="newEmail">
+          <lable><%= locale.password %></lable>
+          <input type="password" placeholder="<%= locale.password %>" id="newPass">
+          <p class="terms">
+
+            <div class="checkedsBlocked" style="font-size:.65em">
+              <label class="check-switch"><input id="checkPrav" type="checkbox" /><div class="track"><div class="knob"></div></div></label>
+              <div class="checkText"><%= locale.rulesSite %></div>
+            </div>
+
+          </p>
+          <input type="submit" class="form-btn" value="<%= locale.btnReg %>" onclick="AUTH.POST_REGISTER()"/>
+          <a href="#" class="lined-link to-signin-link" style="white-space: pre"><%= locale.toSignin %></a>
+        </div>
+      </div>
+
+      <div class="form form-signin">
+        <div class="auch_socials">
+          <div class="socials_title_log"><%= locale.authSoc %></div>
+          <div class="socialAccount faceboock"></div>
+          <div class="socialAccount google"></div>
+          <div class="socialAccount instagram"></div>
+        </div>
+        <div class="errorUP"></div>
+        <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= config.loader %>"></div>
+        <div class="aForm">
+          <lable><%= locale.login %></lable>
+          <input type="email" placeholder="<%= locale.login %>" value="" id="login">
+          <lable><%= locale.pass %></lable>
+          <input type="password" placeholder="<%= locale.pass %>" value="" id="pass">
+          <input type="submit" class="form-btn" value="<%= locale.authification %>" onclick="AUTH.POST_AUTH()"/>
+          <a href="#" class="lined-link to-signup-link"><%= locale.registration %></a>
+        </div>
+      </div>
+    </div>
+    <div class="clear-fix"></div>
+  </div>
+</div>
+<%- include ./includes/footer.ejs %>
+<div id="pageMessages"></div>
+</body>
+</html>

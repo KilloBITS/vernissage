@@ -12,8 +12,9 @@ router.get('/*', function(req, res, next){
     if(err) return console.log(err);
 
      payments.find({id: DA}).toArray(function(err, results_payments){
-       res.render('delivery.ejs',{
-         data: results_payments[0]
+       res.render('pages/delivery.ejs',{
+         data: results_payments[0],
+         isAdm: req.session.admin
        })
      });
   });

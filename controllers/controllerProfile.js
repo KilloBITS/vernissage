@@ -16,7 +16,7 @@ var updateAvaUser = (req, res, next) => {
       users.find({email: req.session.user}).toArray(function(err, results){
         if(results[0] !== undefined){
           var base64Data = req.body.newAva.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,'');
-          require("fs").writeFile("./publick/data/avatars/" + results[0].ava, base64Data, 'base64', function(err) {
+          require("fs").writeFile("./publick/data/avatars/" + results[0].AI + ".jpg", base64Data, 'base64', function(err) {
             res.send({code:500, img: req.body.n})
           });
         }else{
@@ -26,16 +26,12 @@ var updateAvaUser = (req, res, next) => {
       });
     });
 };
-
 router.post('/updateAvaUser', updateAvaUser, function(req, res, next){});
-
-
 
 var addToJelaniya = (req, res, next) => {
     mongoClient.connect(global.baseIP, { useNewUrlParser: true } ,function(err, client){
       var db = client.db(global.baseName);
       var users = db.collection("users");
-
       if(err) return console.log(err);
       users.find({email: req.session.user}).toArray(function(err, results_users){
         if(results_users[0] !== undefined){
@@ -50,9 +46,5 @@ var addToJelaniya = (req, res, next) => {
     });
 };
 router.post('/addToJelaniya', addToJelaniya, function(req, res, next){});
-
-
-
-addToJelaniya
 
 module.exports = router;

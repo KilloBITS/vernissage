@@ -1,5 +1,5 @@
 {
-  "name": "vernissage",
+  "name": "Vernissage",
   "version": "1.0.0",
   "description": "Vernissage for Ihor Kalenyuk",
   "main": "app.js",
@@ -24,6 +24,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "btoa": "^1.2.1",
+    "connect-mongo": "^2.0.2",
+    "connect-mongodb": "^1.1.5",
     "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
     "ejs": "^2.6.1",
@@ -40,14 +42,18 @@
     "messaging-api-viber": "^0.7.11",
     "moment-timezone": "^0.5.21",
     "mongodb": "^3.1.1",
+    "mongoose": "^5.3.14",
     "nexmo": "^2.4.0",
+    "node-analytics": "^1.2.15",
+    "node-telegram-bot-api": "^0.30.0",
     "nodemailer": "^4.6.8",
     "os": "^0.1.1",
+    "pagination": "^0.4.6",
+    "request": "^2.88.0",
     "sha1": "^1.1.1",
     "socket.io": "^2.1.1",
+    "ssl-root-cas": "^1.2.5",
     "tunnel-ssh": "^4.1.4",
-    "viber-bot": "^1.0.13",
-    "vue-3d-model": "^1.0.2"
-  },
-  "devDependencies": {}
+    "viber-bot": "^1.0.13"
+  }
 }

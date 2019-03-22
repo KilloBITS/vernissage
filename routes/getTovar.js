@@ -2,102 +2,83 @@
 const express = require('express');
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
+const pagination = require('pagination');
 
 router.get('/*', function(req, res, next){
-  var languageSystem, langMenu;
-  if(req.cookies.vernissageLang === undefined){
-    languageSystem = 0;
-    langMenu = 'menu';
-  }else{
-    if(req.cookies.vernissageLang === 'ua'){
-      languageSystem = 1;
-      langMenu = 'menu-uk';
-    }else{
-      languageSystem = 0;
-      langMenu = 'menu';
-    }
-  }
+  try{
+    var searchData;
+    var DA = req.url.split('=');
 
-  var searchData;
-  var DA = req.url.split('=');
-
-  if(DA[0] !== "/"){
-    searchData = DA[1].split(',');
-  }
-
-  mongoClient.connect(global.baseIP, function(err, client){
-    const db = client.db(global.baseName);
-    const config = db.collection("config");
-    const titles_page = db.collection("titles_page");
-    const menu  = db.collection(langMenu);
-    const users_session = db.collection("users");
-
-
-    if(languageSystem === 0){
-      var tovar  = db.collection("tovar");
-    }else{
-      var tovar  = db.collection("tovar-uk");
+    if(DA[0] !== "/"){
+      searchData = DA[1].split(',');
     }
 
-    if(err) return console.log(err);
+    var page = req.url.split('page=')[1];
 
-     titles_page.find().toArray(function(err, results_titles_page){
-       config.find().toArray(function(err, results_config){
-         if(results_config[languageSystem].opens){
-           menu.find().toArray(function(err, results_menu ){
+    if(parseInt(page) === 1){
+      var otTovar = 0;
+      var doTovar = 18;
+    }else{
+      var otTovar = 18 * (parseInt(page)-1);
+      var doTovar = otTovar + 18;
+    }
 
-             users_session.find({email: req.session.user}).toArray(function(err, results_users_session ){
-               if(results_users_session.length > 0){
-                 var uSession = results_users_session;
-               }else{
-                 var uSession = false;
-               }
+    mongoClient.connect(global.baseIP, function(err, client){
+      const db = client.db(global.baseName);
+      const locale = db.collection("LOCALE");
+      const users = db.collection("USERS");
+      const menu = db.collection("MENU");
+      const tovar = db.collection("TOVAR");
+      const news = db.collection("NEWS");
+      const contacts = db.collection("CONTACTS");
+      const config = db.collection("CONFIG");
+      
+      if(err) return console.log(err);
 
-
-               if(DA[0] !== "/"){
-                 let FILTER = {
-                   category: parseInt(searchData[0])
-                 };
-                 if(searchData.length >= 2 ){
-                   FILTER.types = searchData[1];
-                 }
-
-                 tovar.find(FILTER).sort({ AI: -1 }).toArray(function(err, results_tovar ){
-                   res.render('tovar.ejs',{
-                     conf: results_config[languageSystem],
-                     menu: results_menu,
-                     tovarArr: results_tovar.slice(0, 24),
-                     title: results_titles_page[languageSystem].tovar,
-                     sessionUser: req.session.user,
-                     users_data: uSession,
-                     offLength: results_tovar.length
-                   })
-                   client.close();
-                 });
-               }else{
-                 tovar.find().sort({ AI: -1 }).toArray(function(err, results_tovar ){
-                   res.render('tovar.ejs',{
-                     conf: results_config[languageSystem],
-                     menu: results_menu,
-                     tovarArr: results_tovar.slice(0, 24),
-                     title: results_titles_page[languageSystem].tovar,
-                     sessionUser: req.session.user,
-                     users_data: uSession,
-                     offLength: results_tovar.length
-                   })
-                   client.close();
-                 });
-               }
-             });
-           });
-         }else{
-           res.render('close.ejs',{
-             conf: results_config[languageSystem]
-           })
-         }
-       });
-     });
-  });
+      locale.find().toArray(function(err, resLocale){
+        users.find({email: (req.session.user === undefined)?false:req.session.user}).toArray(function(err, resUsers){
+          menu.find().sort({index: 1}).toArray(function(err, resMenu){
+            let FILTER = {
+              categories: parseInt(searchData[0]),
+            };
+            if(searchData.length >= 2 ){
+              FILTER.type = searchData[1].split('&')[0];
+            };
+            console.log(FILTER)
+            tovar.find(FILTER).sort({AI: -1}).toArray(function(err, resTovar){
+              console.log(resTovar)
+              config.find().toArray(function(err, resConfig){
+                news.find().toArray(function(err, resNews){
+                  contacts.find().toArray(function(err, resContacts){
+                    var current_page = page;
+                    var paginator = new pagination.SearchPaginator({prelink: '/shop?c='+searchData[0]+','+searchData[1].split('&')[0], current: current_page, rowsPerPage: 18, totalResult: resTovar.length-1});
+                    var p = paginator.getPaginationData();
+                    res.render('pages/tovar.ejs',{
+                      isAdm: req.session.admin,
+                      sessionUser: resUsers[0],
+                      locale: resLocale[0][global.parseLanguage(req)].tovar,
+                      menu: resMenu,
+                      globalLocale:  resLocale[0][global.parseLanguage(req)],
+                      contacts: resContacts[0],
+                      numLang: global.parseNumLang(req),
+                      tovarArr: resTovar.slice(otTovar, doTovar),
+                      offLength: resTovar.length,
+                      isPage: page,
+                      paginate: p,
+                      config: resConfig[0]
+                    });
+                  });
+                });
+              });
+            });
+          }); 
+        }); 
+      });
+    });
+  }catch(e){
+    res.redirect('/')
+  }
+  
 });
 
 module.exports = router;

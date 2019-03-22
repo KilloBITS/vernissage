@@ -6,22 +6,29 @@ const mongoClient = require("mongodb").MongoClient;
 const bParser = require('body-parser');
 
 router.use(cookieParser());
+ 
+function findPartial( a, s )
+{  
+console.log(test);
+}
 
 var searchFunction = (req, res, next) => {
     mongoClient.connect(global.baseIP, { useNewUrlParser: true,textSearchEnabled:true } ,function(err, client){
       const db = client.db(global.baseName);
-      const tovar  = db.collection("tovar");
+      const tovar  = db.collection("TOVAR");
 
       if(err) return console.log(err);
 
-      tovar.find( { title: { $in: [req.body.name] } }).toArray(function(err, results){
-        console.log(results);
-        if(results[0] !== undefined){
-            res.send({code:500, searchResult: JSON.stringify(results)})
-        }else{
-          res.send({code:430})
-        }
-        client.close();
+      tovar.find().toArray(function(err, results){
+        var resultArray = [];
+        results.forEach(function(item, i, arr) {
+          
+          if(item.title[0].toUpperCase().indexOf(req.body.name.toUpperCase()) !== -1){
+            resultArray.push(item)
+          }
+
+        });
+        res.send({code:500, searchResult: resultArray})
       });
     });
   }

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="yandex-verification" content="9a1b70e463a6d38b" />
+  <meta name="google-site-verification" content="wWRtd2X7z9M75zFAqoGxciFAQpCUnX4IMJUzNBaGmdk" />
+  <meta charset="utf-8">
+  <meta name="Description" content="Lady & Man - онлайн магазин недорогой, стильной и качественной одежды. Мы предлагаем огромный выбор товаров на любой вкус и праздник. Добавляем новые товары каждый день.">
+  <title><%= locale.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" href="/style/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/flickity.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css">
+  <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/index/style.css">
+  <link rel="stylesheet" type="text/css" href="/style/index/style.min.css">
+
+  <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/jquery-ui.js"></script>
+  <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="/script/TweenMax.min.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/sachinchoolur/lg-hash.js/master/dist/lg-hash.js"></script>
+  <script type="text/javascript" src="/script/global.js"></script>
+  <script type="text/javascript" src="/script/basket.js"></script>
+  <script type="text/javascript" src="/script/webflow.js"></script>
+  <script type="text/javascript" src="script/index/index.js"></script>
+  <script src="assets/js/pace.min.js"></script>
+  <% if(isAdm){ %>
+  <script type="text/javascript" src="script/ADM_FOLDER/adm_script.js"></script>
+  <link rel="stylesheet" type="text/css" href="script/ADM_FOLDER/adm_style.css">
+  <% } %>
+</head>
+<body>
+  <%- include ./includes/preloader.ejs %>
+  <%- include ./includes/closed.ejs %>
+  <%- include ./includes/socials.ejs %>
+  <div class="top">
+    <div class="topLine oneLine">
+      <div class="topNavMobMenuOfBtm">
+        <div class="menu-wrapper">
+          <div class="hamburger-menu"></div>
+        </div>
+      </div>
+      <div class="logotype" style="background-image: url(../../../image/<%= config.logotype %>)"></div>
+      <div class="topNavBlockOfBtm">        
+        <%- include ./includes/session.ejs %>
+        <%- include ./includes/search.ejs %>				
+      </div>
+    </div>
+    <%- include ./includes/menu.ejs %>
+  </div>
+  <div class="content">
+    <div class="header block">
+      <div class="nextSliderBtn">></div>
+      <div class="prevSliderBtn"><</div>
+      <div class="slider-container">
+        <div class="slider-control left inactive"></div>
+        <div class="slider-control right"></div>
+        <div class="slider">
+          <% for(var i = 0; i < slides.length; i++) { %>
+          <% if(i <= 0){ %>
+          <div class="slide slide-<%= i %> active">
+            <% } else { %>
+            <div class="slide slide-<%= i %>">
+              <% } %>
+              <div class="slide__bg max" style="background-image: url(../../../data/slider/<%= slides[i].slideImage %>)"></div>
+              <div class="slide__bg min" style="background-image: url(../../../data/slider/min/<%= slides[i].slideImage %>)"></div>
+              <div class="clockTimer"></div>
+              <a href="<%= slides[i].slideLink %>" target="_blank">
+                <div class="slide-button">
+                  <%= slides[i].slideName[numLang] %>
+                </div>
+              </a>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="headerArrow">
+          <div class="arrowsss bounce" id="head_arrow"><i class="fa fa-angle-down fa-5x" aria-hidden="true"></i></div>
+        </div>
+      </div>      
+  </div>
+</div>
+<div class="data block" style="background-color: <%= config.A_COLOR %>">
+  <% if(newtovar.length > 0){ %>
+  <div class="mainDLG">
+    <div class="mainTitleDLG post"><%= locale.newgoods %></div>
+    <div class="mainTextDLG post"><%= locale.newgoods2 %></div>
+  </div> 
+ <div class="carousel-wrapper" style="background-color: <%= config.A_COLOR %>">
+  <div class="carousel" data-flickity='{ "wrapAround": true }'>    
+    <% for(var i = 0; i < newtovar.length; i++){ %>
+    <a class="more carousel-cell" href="/details?tov=<%= newtovar[i].AI %>&<%= newtovar[i].type %>" data-ix="scale-on-scroll">
+      <div class="carousel-cell w-col w-col-3 feature-pill">
+        <div class="newTov"></div>
+        <h3> <%= newtovar[i].title[numLang] %> </h3>
+        <div class="backCaruselImage" style="background-image: url(<%= newtovar[i].images[0] %>)"></div>
+      </div>
+    </a>
+    <% } %>   
+  </div>
+</div>
+<div class="mainBTN_block" style="background-color: <%= config.A_COLOR %>; padding-top: 20px;">
+ <a href="/shopNews"><div  data-ix="scale-on-scroll" class="mainBTN"><%= locale.moreproducts %></div></a>
+</div>
+<% } %>
+
+<div class="mainDLG" style="background: <%= config.A_COLOR %>; color: #333333;">
+ <div class="mainTitleDLG post"  data-ix="scale-on-scroll"><%= locale.about %></div>
+ <textarea id="hideareaAbout" style="display: none;"><%= locale.abouttext %></textarea>
+ <div class="mainTextDLG post" id="aboutBlockPaste" data-ix="scale-on-scroll"></div>
+ <script type="text/javascript">
+  $("#aboutBlockPaste").append($("#hideareaAbout").val())
+</script>
+
+</div>
+<div class="mainBTN_block" style="background-color: <%= config.A_COLOR %>;">
+ <a href="/about">
+  <div class="mainBTN"  data-ix="scale-on-scroll"><%= locale.details %></div>
+</a>
+<div class="zub_lineB" style="background-image: url(../../image/<%= config.borderbottom %>)"></div>
+</div>
+</div>
+<div class="videoBlock block">
+  <div class="container">
+    <div class="buttonGallery" data-click-state='1'><%= locale.gallery %></div>
+    <div class="insta_logo"  data-ix="scale-on-scroll">
+      <span><%= locale.myinsta %></span>
+    </div>
+    <h3><%= locale.reviews %></h3>
+    <div class="carouselInsta">
+      <div class="carousel__nav">
+       <span id="moveLeft" class="carousel__arrow">
+        <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+        </svg>
+      </span>
+      <span id="moveRight" class="carousel__arrow" >
+        <svg class="carousel__icon"  width="24" height="24" viewBox="0 0 24 24">
+          <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+        </svg>
+      </span>
+    </div>
+
+    <% for(let i = 0; i < reviewsSlide.length; i++){ %>        
+    <div class="carousel-item carousel-item--<%= i %>">
+      <div class="carousel-item__image" style="background-image: url(../../../data/instagram/<%= reviewsSlide[i].data %>);"></div>
+      <div class="carousel-item__info">
+        <div class="carousel-item__container">
+          <h2 class="carousel-item__subtitle"><%= reviewsSlide[i].title %></h2>
+          <h1 class="carousel-item__title"><%= reviewsSlide[i].name %></h1>
+          <p class="carousel-item__description"><%= reviewsSlide[i].text %></p>
+          <a href="https://www.instagram.com/<%= reviewsSlide[i].link %>/" class="carousel-item__btn">@<%= reviewsSlide[i].link %></a>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  <div class="galleryInsta">
+    <div class="demo-gallery">
+      <ul id="lightgallery">
+        <% for(let i = 0; i < reviewsSlide.length; i++){ %>        
+        <li data-responsive="../../../data/instagram/<%= reviewsSlide[i].data %> 375, ../../../data/instagram/<%= reviewsSlide[i].data %> 480, ../../../data/instagram/<%= reviewsSlide[i].data %> 800" data-src="../../../data/instagram/<%= reviewsSlide[i].data %>"
+          data-sub-html="<h4><%= reviewsSlide[i].title %><%= reviewsSlide[i].name %></h4><p><%= reviewsSlide[i].text %></p>">
+          <a href="">
+            <img class="img-responsive" src="../../../data/instagram/<%= reviewsSlide[i].data %>">
+            <div class="demo-gallery-poster">
+              <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+            </div>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+  <a href="https://www.instagram.com/ladyman_store/" target="_blank" id="toInstagramm">@LADIMAN_STORE</a>
+</div>
+<div class="videoFilter"></div>
+<video autoplay muted loop>
+  <source src="../../../video/<%= config.backvideo %>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+</div>
+<div class="news block" style="background-color: <%= config.A_COLOR %>">
+  <div class="white_zub" style="background-image: url(../../image/<%= config.bordertop %>)"></div>
+  <div class="container" style="max-width: 1024px;">
+    <% if(news.length >= 1){ %>
+    <div class="mainDLG">
+      <div class="mainTitleDLG" style="margin-bottom: 22px;"><%= locale.newstitle %></div>
+    </div>
+    <% } %>    
+    <% if(news.length >= 1){ %>
+    <% if(news.length === 1){ var newWidth = '100%' } %>
+    <% if(news.length === 2){ var newWidth = '50%' } %>
+    <% if(news.length >= 3){ var newWidth = '33%' } %>
+    <% for(var i = 0; i < news.length; i++) { %>      
+    <div class="column post" data-ix="scale-on-scroll" style="width: <%= newWidth %>">
+      <div class="post-module">
+        <div class="thumbnail">
+          <div class="date">
+            <div class="day"><%= news[i].date %></div>
+          </div>
+          <img src="../../../data/news/<%= news[i].logo %>"/>
+        </div>
+        <div class="post-content">
+          <h1 class="title"><%= news[i].title[numLang] %></h1>
+          <textarea id="hideareaNews<%= i %>" style="display: none;"><%= news[i].text[numLang] %></textarea>
+          <div class="description" id="descriptionNews<%= i %>"></div>
+          <script type="text/javascript">
+            $("#descriptionNews<%= i %>").append($('#hideareaNews<%= i %>').val());
+          </script>
+          <a href="#" class="openNews"><%= locale.readonly %></a>
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <% } %>     
+  </div>
+  <% if(news.length > 6){ %>
+  <a href="#">
+    <div class="mainBTN" data-ix="scale-on-scroll">
+      <%= locale.allnews %>
+    </div>
+  </a>
+  <% } %>
+</div>
+<div class="counters block" style="background-color: <%= config.A_COLOR %>">
+  <div class="counters_conent">
+    <div class="countersB post"  data-ix="scale-on-scroll">
+      <div class="counters_icon" id="buyers"></div>
+      <div class="counters_text"><%= locale.buyers %></div>
+      <div class="counters_length">0</div>
+    </div>
+    <div class="countersB post"  data-ix="scale-on-scroll">
+      <div class="counters_icon" id="products"></div>
+      <div class="counters_text"><%= locale.products %></div>
+      <div class="counters_length">0</div>
+    </div>
+    <div class="countersB post"  data-ix="scale-on-scroll">
+      <div class="counters_icon" id="purchases"></div>
+      <div class="counters_text"><%= locale.purchases %></div>
+      <div class="counters_length">0</div>
+    </div>
+    <div class="countersB post"  data-ix="scale-on-scroll">
+      <div class="counters_icon" id="discounts"></div>
+      <div class="counters_text"><%= locale.discounts %></div>
+      <div class="counters_length">0</div>
+    </div>
+  </div>
+</div>
+
+<div class="contact block" style="background-color: <%= config.B_COLOR %>">
+  <div class="zub_line" style="background-image: url(../../image/<%= config.borderbottom %>)"></div>
+  <div class="mainDLG post">
+   <div class="mainTitleDLG" data-ix="scale-on-scroll"><%= locale.mainmessage %></div>
+   <div class="mainTextDLG" data-ix="scale-on-scroll-delay-300"><%= locale.mainmessagetxt %></div>
+ </div>
+ <form class="cf">
+  <div class="half left cf">
+    <input type="text" name="MyName" id="input-name" placeholder="<%= locale.yourname %>">
+    <input type="email" name="myEmail" id="input-email" placeholder="<%= locale.email %>">
+    <input type="text" name="myTheme" id="input-subject" placeholder="<%= locale.messagesubject %>">
+  </div>
+  <div class="half right cf">
+    <textarea name="message" type="text" id="input-message" placeholder="<%= locale.entertext %>"></textarea>
+  </div>
+
+  <div class="send-button" id="input-submit" onclick="Global.submitmessage()">
+    <span class="text"><%= locale.tosend %></span>
+  </div>
+</form>
+</div>
+</div>
+<%- include ./includes/footer.ejs %>
+<div class='back-to-top' id='back-to-top' title='Back to top'>
+  <i class='fa fa-chevron-up'></i>
+</div>
+<div id="pageMessages"></div>
+</div>
+</body>
+</html>

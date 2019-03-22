@@ -1,7 +1,13 @@
+@font-face {
+    font-family: 'Didact Gothic';
+    src: url('../DidactGothic.ttf');
+}
+
 .contact {
-    background: #eef3fb;
+    background: #ffc9df;
     padding-top: 15px;
     padding-bottom: 50px;
+    position: relative;
 }
 
 .mainDLG{
@@ -19,7 +25,7 @@
     width: -moz-fit-content;
     margin: 0 auto;
     font-size: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 0px;
 }
 
 .mainTextDLG{
@@ -260,14 +266,36 @@ form input:focus, form textarea:focus {
   box-shadow: 0 0px 2px #e74c3c !important;
 }
 form #input-submit {
-  color: white;
-  background: #e74c3c;
-  cursor: pointer;
+    color: white;
+    background: #e74c3c;
+    cursor: pointer;
+    float: left;
+    width: 100%;
+    position: relative;
+    background-color: #c51162;
+    height: 45px;
+    border-radius: 2px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s;
 }
 form #input-submit:hover {
   -moz-box-shadow: 0 1px 1px 1px rgba(170, 170, 170, 0.6);
   -webkit-box-shadow: 0 1px 1px 1px rgba(170, 170, 170, 0.6);
   box-shadow: 0 1px 1px 1px rgba(170, 170, 170, 0.6);
+}
+
+form #input-submit .text {
+    left: 10px;
+    font-size: 22px;
+    font-size: 17px;
+    text-align: center;
+    line-height: 45px;
+    font-family: 'Didact Gothic', sans-serif;
+    /* font-weight: 400; */
+    color: #f8bbd0;
+    /* text-transform: uppercase; */
+    margin: auto;
 }
 form textarea {
   height: 126px;
@@ -294,19 +322,16 @@ form textarea {
     margin-bottom: 0;
   }
 }
-/* Clearfix */
+
 .cf:before,
 .cf:after {
   content: " ";
-  /* 1 */
   display: table;
-  /* 2 */
 }
 
 .cf:after {
   clear: both;
 }
-
 
 svg { visibility: hidden }
 
@@ -345,4 +370,54 @@ svg { visibility: hidden }
   .btnContainer {
     display: none;
   }
+}
+
+.container_partners{
+  padding-top: 50px;
+  max-width: 1024px;
+  margin: auto;
+  padding-bottom: 30px;
+}
+
+.block_left,.block_right{
+  display: inline-grid;
+  width: calc(50% - 2px);
+  padding: 32px 46px;
+  font-size: 20px;
+}
+
+.block_left{
+    text-align: left;
+}
+
+.block_right{
+    text-align: left;
+}
+
+.block_right li{
+  background-image: url(http://chudozero.ru/wp-content/uploads/2017/08/galochka.png);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 0 6px;
+  padding-left: 26px;
+}
+
+.containerPartnersData{
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+
+.container_partnersList{
+  padding-top: 25px;
+  padding-bottom: 30px;
+}
+
+
+.containerPartnersData img{
+  margin: 20px;
+}
+
+#map{
+  
 }

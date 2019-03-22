@@ -1,4 +1,5 @@
-
+'use strict';
+var ML = "";
 var Global = {
   changeTypeDost: function(t){
     $("#CityOfDost,#CityOfPostNP,#CityOfPostUl,#CityOfPostD,#CityOfPostK").fadeOut(130)
@@ -19,31 +20,28 @@ var Global = {
 
     }
   },
-  message: function(e){
-    e.preventDefault(e);
-    var msg_data = {
-      MyName: $("#input-name").val(),
-      myEmail:$("#input-email").val(),
-      myTheme:$("#input-subject").val(),
-      message:$("#input-message").val(),
-    };
-    $.post('/sendMessage',msg_data, function(data){
-      if(
-        ($("#input-name").val().length > 1)||
-        ($("#input-email").val().length > 1)||
-        ($("#input-subject").val().length > 1)||
-        ($("#input-message").val().length > 1)){
-          createAlert('','Сообщение отправленно!','Ваше сообщение біло успешно отправлено.','success',true,true,'pageMessages');
-          $(".cf input[type='text'],.cf input[type='email'], #input-message").val('');
-      }else{
-        createAlert('','','Сообщение не отправлено!','warning',false,true,'pageMessages');
-        return false
-      }
+  submitmessage: function(){
+    $("#input-submit").val('Отправка сообщения').css({"background-image":"../../../image/loaders/load2.gif"});
+    $.post('/sendmessage',{
+      a: $("#input-name").val(),
+      b: $("#input-email").val(),
+      c: $("#input-subject").val(),
+      d: $("#input-message").val()
+    }, function(res){
+      createAlert('','Сообщение отправленно!','Ваше сообщение было успешно отправлено.','success',true,true,'pageMessages');
+      $(".cf input[type='text'],.cf input[type='email'], #input-message").val('');
+      console.log(res);
     });
-  },
+  },  
   BTN: function(){
+    $('.menu-wrapper').on('click', function() {
+      $('.hamburger-menu').toggleClass('animate');
+      $(".menu_data").hide();
+      $(".twoLine").slideToggle();
+    })
+
     $(".addToJelaniya").click(function(){
-      $.post('/addToJelaniya',{numObj: $(this).attr('tovAI')},(res) => {
+      $.post('/addToJelaniya',{numObj: $(this).attr('tovAI')}, function(res) {
         $(this).css({
           "background-image":"url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU3Ljk5OSA1Ny45OTkiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU3Ljk5OSA1Ny45OTk7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4Ij4KPGc+Cgk8cGF0aCBkPSJNNTYuNDE3LDIxLjgxNmMtMi4wMzcsMi4wODktMjMuNDc5LDIyLjUxLTIzLjQ3OSwyMi41MUMzMS44NSw0NS40NDEsMzAuNDI0LDQ2LDI4Ljk5OSw0NiAgIGMtMS40MjgsMC0yLjg1NC0wLjU1OS0zLjkzOS0xLjY3NGMwLDAtMjEuNDQxLTIwLjQyMS0yMy40OC0yMi41MWMtMi4wMzctMi4wOS0yLjE3Ni01Ljg0OCwwLTguMDc4ICAgYzIuMTc0LTIuMjI5LDUuMjExLTIuNDA2LDcuODc5LDBsMTkuNTQsMTguNzM1bDE5LjUzOS0xOC43MzVjMi42Ny0yLjQwNiw1LjcwNS0yLjIyOSw3Ljg3OSwwICAgQzU4LjU5NSwxNS45NjksNTguNDU2LDE5LjcyNyw1Ni40MTcsMjEuODE2eiIgZmlsbD0iI0ZGRkZGRiIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=)"
         });
@@ -53,8 +51,6 @@ var Global = {
     $(".addToSravnenie").click(function(){
 
     });
-
-
     $( ".draggable" ).draggable({
       cursor: "crosshair"
     });
@@ -62,50 +58,17 @@ var Global = {
       $('.basket_info').show(300);
     });
     $(".lang").click(function(){
-      document.cookie = "vernissageLang="+$(this).attr("id");
+      document.cookie = "pageLang="+$(this).attr("id");
       location.reload();
     });
     if($("body").width() > 800){
-        return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
+      return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show");
     }else{
-        return $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
+      return $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
     }
   }
 };
 
-$(document).ready(() => {
-  Global.BTN();
-  setTimeout(() => {
-    $(".spn_hol").fadeOut(500);
-  }, 1500);
-});
-
-function runOnKeys(func) {
-  var codes = [].slice.call(arguments, 1);
-  var pressed = {};
-  document.onkeydown = function(e) {
-    e = e || window.event;
-    pressed[e.keyCode] = true;
-    for (var i = 0; i < codes.length; i++) {
-      if (!pressed[codes[i]]) {
-        return;
-      }
-    }
-    pressed = {};
-    func();
-
-  };
-  document.onkeyup = function(e) {
-    e = e || window.event;
-    delete pressed[e.keyCode];
-  };
-}
-runOnKeys(function() {
-  var isAdmin = confirm("Вы действительно хотите перейти к панели управления?");
-  if(isAdmin){
-    window.location.href = "/panel";
-  }
-},"Q".charCodeAt(0),"A".charCodeAt(0));
 function createAlert(title, summary, details, severity, dismissible, autoDismiss, appendToId) {
   var iconMap = {
     info: "fa fa-info-circle",
@@ -190,6 +153,7 @@ $(function() {
     var stickyTop = $('#sidecontent3').offset().top;
     var stickyHeight = $('#sidecontent3').height();
     $(window).scroll(function() {
+
       var limit = $('#footer-wrapper').offset().top - stickyHeight - 20;
       var windowTop = $(window).scrollTop();
       if (stickyTop < windowTop) {
@@ -212,6 +176,40 @@ $(function() {
 // Back to top button
 (function() {
   $(document).ready(function() {
+    if($(window).height() < 800){
+      $('.menuLeft').css({"max-height":$(window).height() - 40 - $(".topLine.twoLine").height() - 60+"px"})
+    }
+    $('.dropdown-toggle').click(function(){
+      $(this).next('.dropdownsession').toggle();
+    });
+
+    $(document).click(function(e) {
+      var target = e.target;
+      if (!$(target).is('.dropdown-toggle') && !$(target).parents().is('.dropdown-toggle')) {
+        $('.dropdownsession').hide();
+      }
+    });
+
+
+    $(".menuBTN").hover(function() {
+      try {
+        $("." + ML + ",.opensMenu").hide();
+      } catch (e) {
+        console.log('Есть небольшой конфликт, но это не критично');
+      }
+      ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
+      if (ML != undefined) {
+        $("." + ML + ",.opensMenu").show();
+      }
+      
+    }, function(e) {
+      ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
+      $(".opensMenu").hover(function() {}, function(e) {
+        $("." + ML + ",.opensMenu").hide();
+      });
+    });
+
+
     if($("body").width() > 800){
       return $(window).scroll(function() {
         return $(window).scrollTop() > 300 ? $(".logotype").css({"height":"50px"}) : $(".logotype").css({"height":"100px"}), $(window).scrollTop() > 600 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
@@ -233,9 +231,17 @@ $(function() {
   })
 }).call(this);
 var $messages = $('.messages-content'),
-    d, h, m,
-    i = 0;
+d, h, m,
+i = 0;
 $(document).ready(function(){
+  Global.BTN();
+  setTimeout(function() {
+    $(".spn_hol").css({"transform": "scale(3)", "opacity": "0.3", "filter":"grayscale(100%)"}).fadeOut(400);
+  }, 1000);
+  
+  $('.close_chat').click(function(){
+    $(".avenue-messenger").hide();
+  });
   $('.container-call').click(function(){
     $(".avenue-messenger").toggle();
     if(i === 0){
@@ -266,6 +272,14 @@ $(document).ready(function(){
     $('<div class="message message-personal">' + msg + '</div>').appendTo($('.messages')).addClass('new');
     setDate();
 
+    $('<div class="message loading new"><figure class="avatar"><img src="../../../image/chatbot.jpg" /></figure><span></span></div>').appendTo($('.messages'));
+
+    $.post('/to-yuliadMessage', {messageText: msg}, function(res){
+      $('.message.loading').remove();
+      $('<div class="message new"><figure class="avatar"><img src="../../../image/chatbot.jpg" /></figure>' + res.msgNewServer + '</div>').appendTo($('.messages')).addClass('new');
+      setDate();
+    })
+
     $('.message-input').val(null);
     setTimeout(function() {
     }, 1000 + (Math.random() * 20) * 100);
@@ -282,24 +296,19 @@ $(document).ready(function(){
     }
   })
 
-  var Fake = ['Здравствуйте, я виртуальный помошник Юля, у вас появились вопроссы ? я могу вам чем то помочь ?']
+  var Fake = ['Здравствуйте, я виртуальный помошник Юля, у вас появились вопроссы ? я могу вам чем то помочь ?'];
 
   function fakeMessage() {
     if ($('.message-input').val() != '') {
       return false;
     }
-    $('<div class="message loading new"><figure class="avatar"><img src="../../../image/chatbot.jpg" /></figure><span></span></div>').appendTo($('.messages-content'));
+    $('<div class="message loading new"><figure class="avatar"><img src="../../../image/chatbot.jpg" /></figure><span></span></div>').appendTo($('.messages'));
 
     setTimeout(function() {
       $('.message.loading').remove();
       $('<div class="message new"><figure class="avatar"><img src="../../../image/chatbot.jpg" /></figure>' + Fake[i] + '</div>').appendTo($('.messages')).addClass('new');
       setDate();
       i++;
-    }, 1000 + (Math.random() * 20) * 100);
+    }, 1000 + (Math.random() * 20) * 50);
   }
-  $('.button').click(function(){
-    $('.menu .items span').toggleClass('active');
-     $('.menu .button').toggleClass('active');
-  });
-
 });

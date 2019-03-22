@@ -8,98 +8,58 @@ const geoip = require('geoip-lite');
 router.use(cookieParser());
 
 router.get('/', function(req, res, next){
-  var languageSystem, langMenu;
-  if(req.cookies.vernissageLang === undefined){
-    languageSystem = 0;
-    langMenu = 'menu';
-  }else{
-    if(req.cookies.vernissageLang === 'ua'){
-      languageSystem = 1;
-      langMenu = 'menu-uk';
-    }else{
-      languageSystem = 0;
-      langMenu = 'menu';
-    }
-  }
+  mongoClient.connect(global.baseIP, function(err, client){
+    const db = client.db(global.baseName);
+    const locale = db.collection("LOCALE");
+    const users = db.collection("USERS");
+    const menu = db.collection("MENU");
+    const mainslide = db.collection("MAINSLIDE");
+    const tovar = db.collection("TOVAR");
+    const news = db.collection("NEWS");
+    const contacts = db.collection("CONTACTS");
+    const config = db.collection("CONFIG");
+    const reviews = db.collection("REVIEWS");
 
-  mongoClient.connect(global.baseIP,{ useNewUrlParser: true }, function(err, client){
-      const db = client.db(global.baseName);
-      const config = db.collection("config");
-      const menu  = db.collection(langMenu);
-      const slider  = db.collection("slider");
-      const news  = db.collection("news");
-      const tovar  = db.collection("tovar");
-      const titles_page = db.collection("titles_page");
-      const counters = db.collection("counters");
 
-      if(err) return console.log(err);
-
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1;
-      var yyyy = today.getFullYear();
-      if(dd<10) {
-          dd = '0'+dd
-      }
-      if(mm<10) {
-          mm = '0'+mm
-      }
-      today = yyyy + '-' + mm + '-' + dd;
-
-       titles_page.find().toArray(function(err, results_titles_page){
-         config.find().toArray(function(err, results_config){
-           if(results_config[languageSystem].opens){
-             menu.find().sort({ isEnded: 1 }).toArray(function(err, results_menu ){
-               console.log(results_menu);
-               slider.find().toArray(function(err, results_slider ){
-                 news.find().toArray(function(err, results_news ){
-                   tovar.find().sort({ AI: -1 }).limit(5).toArray(function(err, results_tovar ){
-                      //counters
-                      var ipuser = req.connection.remoteAddress.replace(/[^.\d]+/g,"");
-                      var geo = geoip.lookup(ipuser);
-
-                      counters.find({ date: today }).toArray(function(err, results_counters ){
-                        if(results_counters.length > 0){
-                          let oldList = results_counters[0].list;
-                          if(oldList.find(x => x.ip === ipuser) === undefined){
-                              counters.update({ date: today },{ $push: { list: { ip: ipuser, country: geo } } })
-                          }
-                        }else{
-                          console.log("нету");
-                          var newDate = {
-                              date: today,
-                              list: [{
-                                ip: ipuser,
-                                country: geo
-                              }]
-                            }
-                            counters.insert(newDate);
-                        }
+    if(err) return console.log(err);
+    locale.find().toArray(function(err, resLocale){
+      users.find({email: (req.session.user === undefined)?false:req.session.user}).toArray(function(err, resUsers){
+        menu.find().sort({isEnded: 1}).toArray(function(err, resMenu){
+          mainslide.find().toArray(function(err, resMainslide){
+            tovar.find().sort({AI: -1}).limit(18).toArray(function(err, resTovar){
+              news.find().sort({AI: -1}).limit(6).toArray(function(err, resNews){
+                contacts.find().toArray(function(err, resContacts){
+                  config.find().toArray(function(err, resConfig){
+                    
+                    reviews.find().limit(20).toArray(function(err, resReviews){
+                    
+                      res.render('pages/index.ejs',{
+                        isAdm: req.session.admin,
+                        sessionUser: resUsers[0],
+                        locale: resLocale[0][global.parseLanguage(req)].index,
+                        menu: resMenu,
+                        globalLocale:  resLocale[0][global.parseLanguage(req)],
+                        contacts: resContacts[0],
+                        numLang: global.parseNumLang(req),
+                        /*Только для индекса*/
+                        slides: resMainslide,
+                        newtovar: resTovar,
+                        news: resNews,
+                        config: resConfig[0],
+                        reviewsSlide: resReviews
                       });
+                      
+                    });
 
-                       res.render('index.ejs',{
-                         conf: results_config[languageSystem],
-                         menu: results_menu,
-                         slides: results_slider,
-                         news: results_news,
-                         newtovar: results_tovar,
-                         title: results_titles_page[languageSystem].index,
-                         sessionUser: req.session.user
-                       });
-                   });
-                 });
-               });
-             });
-           }else{
-             res.render('close.ejs',{
-               conf: results_config[languageSystem]
-             })
-           }
-
-         });
-
-       });
-  });
+                  });
+                });
+              });
+            });
+          }); 
+        }); 
+      }); 
+    });    
+  });      
 });
 
 module.exports = router;

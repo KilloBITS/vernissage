@@ -1,25 +1,17 @@
 'use strict';
 var USER = {
-  ML: "",
   GLOBAL_FILE: '',
   DESIGHN: function() {
-    $(".showHide").click(function(){
-      $(".showHide").toggleClass('SHOW');
-      if($(".showHide").hasClass("SHOW")){
-        $("#secretString").attr("type","text")
-      }else{
-        $("#secretString").attr("type","password")
-      }
-    });
-
     $(".uploadAva").click(function(){
       $("#tFile").click();
     });
     $(".set_btn").click(function(){
       var atribut = $(this).attr("opmenu");
-      console.log(atribut);
-      $(".MyBlock").hide(0);
-      $("#"+atribut).show(300);
+      if(atribut !== undefined){
+        console.log(atribut);
+        $(".MyBlock").hide(0);
+        $("#"+atribut).show(300);
+      }
     });
     $("#phoneNumMask").mask("+38(099) 999-9999");
     $(".searchBlock").hover(function() {
@@ -41,30 +33,6 @@ var USER = {
         $(".search_result").fadeOut(150);
       }
     });
-
-    $('.menu-wrapper').on('click', function() {
-      $('.hamburger-menu').toggleClass('animate');
-      $('.twoLine').toggleClass('openMenuClass');
-    })
-
-    $(".menuBTN").hover(function() {
-      try {
-        $("." + USER.ML + ",.opensMenu").hide();
-      } catch (e) {
-        console.warn('Есть небольшой конфликт, но это не критично')
-      }
-      USER.ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
-      if (USER.ML != undefined) {
-        $("." + USER.ML + ",.opensMenu").show();
-      }
-    }, function(e) {
-      USER.ML = $(".menuBTN:eq(" + $(".menuBTN").index(this) + ")").attr('menu-link');
-      $(".opensMenu").hover(function() {}, function(e) {
-        $("." + USER.ML + ",.opensMenu").hide();
-      });
-    });
-
-
 
     var $slider = $(".slider"),
       $slideBGs = $(".slide__bg"),

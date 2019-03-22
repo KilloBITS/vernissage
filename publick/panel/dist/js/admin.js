@@ -1,5 +1,5 @@
 var ADMIN = {
-  GLOBAL_FILE: "",
+  GLOBAL_FILE: [],
   NEW_TOVAR: false,
   EDIT_TYPE: '',
   EDIT_AI_SELECT: 0,
@@ -204,34 +204,56 @@ var ADMIN = {
   },
   SAVE_NEW_TOVAR:function(){
     ADMIN.CONSOLE_TO_MESSAGE(false);
-      let save_data = {
-        title: $("#tName").val(),
-        price: $("#tPrice").val(),
-        category: parseInt($("#tCategories").val()),
-        types: $("#tType").val(),
-        text: $("#tText").val(),
-        sale: [$("#tSaleEnabled").is(':checked'), $("#tSale").val()]
-      };
 
-      let save_data_ua = {
-        title: $("#tName_ua").val(),
-        price: $("#tPrice").val(),
-        category: parseInt($("#tCategories").val()),
-        types: $("#tType").val(),
-        text: $("#tText_ua").val(),
-        sale: [$("#tSaleEnabled").is(':checked'), $("#tSale").val()]
-      };
+    var allVals = [];
+    $('[name="sizes"]:checked').each(function() {
+    	allVals.push($(this).val());
+    });
 
-      var url = '/setAdmTovar';
+    let save_data = {
+      title: $("#tName").val(),
+      price: $("#tPrice").val(),
+      category: parseInt($("#tCategories").val()),
+      types: $("#tType").val(),
+      text: $("#tText").val(),
+      sale: [$("#tSaleEnabled").is(':checked'), $("#tSale").val()],
+      postavka: $("#tPostavka").val(),
+      tIncrement: $("#tIncrement").val(),
+      sizes: allVals
+    };
 
-      $.post(url,{ru:save_data, ua:save_data_ua, file: ADMIN.GLOBAL_FILE, te: ADMIN.NEW_TOVAR, ai:ADMIN.EDIT_AI_SELECT},function(res){
-          ADMIN.CANCEL();
-          ADMIN.CONSOLE_TO_MESSAGE(res);
-          $('#modal-info').modal('hide')
-      });
+    let save_data_ua = {
+      title: $("#tName_ua").val(),
+      price: $("#tPrice").val(),
+      category: parseInt($("#tCategories").val()),
+      types: $("#tType").val(),
+      text: $("#tText_ua").val(),
+      sale: [$("#tSaleEnabled").is(':checked'), $("#tSale").val()],
+      postavka: $("#tPostavka").val(),
+      tIncrement: $("#tIncrement").val(),
+      sizes: allVals
+    };
+
+    var url = '/setAdmTovar';
+
+    $.post(url,{ru:save_data, ua:save_data_ua, file: ADMIN.GLOBAL_FILE, te: ADMIN.NEW_TOVAR, ai:ADMIN.EDIT_AI_SELECT},function(res){
+      if(res.code === 500){
+        ADMIN.CANCEL();
+        ADMIN.CONSOLE_TO_MESSAGE('res');
+        $("#example1 tbody").prepend('<tr class="tovar-ai-1 odd" role="row"> <td class="sorting_1"> NEW </td> <td> ' + save_data.title + ' <small> <div class="miniTitleNameIcon"></div> </small> </td> <td class="NOTMOBILE"> ' + save_data.price + ' UAH </td> <td class="tovar_active NOTMOBILE" style="background-color: #169814; text-align: center; color: white"> Товар активен <div class="visibility_off" title="Выключить товар" onclick="ADMIN.TOVAR_VISIBILITY(false, 1); $(this).parent().css({"background-color": "#981414"}).removeClass("tovar_active").addClass("tovar_none_active")"></div> </td> <td class=""> <a class="btn btn-app" title="Редактировать" onclick="ADMIN.EDIT_TOVAR(1)"> <i class="fa fa-edit"></i> </a> <a class="btn btn-app" title="Удалить" onclick="ADMIN.TOVAR_REMOVE(1)"> <i class="fa fa-ban"></i> </a> </td> </tr>');
+
+        ADMIN.GLOBAL_FILE = [];
+        $('#tName, #tName_ua ,#tIncrement ,#tPrice ,#tSale ,#tText ,#tText_ua').val('');
+        $('.ViewImage').remove();
+        $('#modal-info').modal('hide')
+      }else{
+        alert(res.message);
+        ADMIN.CONSOLE_TO_MESSAGE('res');
+      }
+
+    });
   },
   EDIT_TOVAR: function(ai){
-
     ADMIN.NEW_TOVAR = false;
     ADMIN.EDIT_AI_SELECT = parseInt(ai);
       $('#modal-info').modal('show')
@@ -244,6 +266,9 @@ var ADMIN = {
         ADMIN.EDIT_TYPE = res.tovar_ru[0].types;
 
         $("#tPrice").val(res.tovar_ru[0].price);
+        $("#tPostavka").val(res.tovar_ru[0].postavka);
+        $("#tIncrement").val(res.tovar_ru[0].tIncrement);
+
         if(res.tovar_ru[0].sale[0]){
           $("#tSaleEnabled").attr("checked",true);
           $("#tSale").val(res.tovar_ru[0].sale[1]).removeAttr("disabled");
@@ -396,7 +421,7 @@ var ADMIN = {
         line.redraw();
       }
     });
-    
+
     $("#revenue-chart").empty();
     let revenue = Morris.Area({
       element   : 'revenue-chart',
@@ -454,34 +479,36 @@ var ADMIN = {
     $('.treeview:eq('+0+') .treeview-menu').show();
     $('.miniClick:eq('+0+')').click().addClass("active");
     $('.pageOfPanel:eq('+0+')').addClass("pageActive");
-    // if(localStorage.getItem("vernissage_treeview") && localStorage.getItem("vernissage_treeview") >= 0){
-    //    $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+')').addClass("menu-open");
-    //    $('.treeview:eq('+parseInt(localStorage.getItem("vernissage_treeview"))+') .treeview-menu').show();
-    //    $('.miniClick:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').click().addClass("active");
-    //    $('.pageOfPanel:eq('+parseInt(localStorage.getItem("vernissage_miniClick"))+')').addClass("pageActive");
-    //
-    // }
     /*Для загрузки изображений в товары*/
       file = document.getElementById('tFile');
       file.addEventListener('change', function () {
-        // $("#tImageDemo").css({"background-image":" url(../../../image/loaders/load.gif)"});
         $("#tImageDemo").attr("src","../../../image/loaders/load.gif")
-          var fullPath = file.value;
-          var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-          var filename = fullPath.substring(startIndex);
-          if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-              filename = filename.substring(1);
+          function setupReader(file){
+            var name = file.name;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              ADMIN.GLOBAL_FILE.push(e.target.result);
+              var viewImage = document.createElement('div');
+              viewImage.className = 'ViewImage';
+              viewImage.style.backgroundImage = 'url('+e.target.result+')'
+              $('#formInage').append(viewImage);
+
+              var delImage = document.createElement("div");
+              delImage.className = 'deleteImage';
+              delImage.onclick = function(){
+                var indexura = $(this).index(this);
+                ADMIN.GLOBAL_FILE.splice(indexura, 1);
+                $(this).parent().remove();
+              };
+              $(viewImage).append(delImage);
+            };
+            reader.readAsDataURL(file);
+          }
+          for (var i = 0; i < this.files.length; i++) {
+              setupReader(this.files[i]);
           }
 
-          if (this.files && this.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                  ADMIN.GLOBAL_FILE = e.target.result;
-                  $("#tImageDemo").attr("src",ADMIN.GLOBAL_FILE)
-                  // $("#tImageDemo").css({"background-image":" url("+ADMIN.GLOBAL_FILE+")"});
-              };
-              reader.readAsDataURL(this.files[0]);
-          }
+          file.value ='';
       }, false);
     /*Для загрузки новой аватарки*/
       newLogotype = document.getElementById('newLogotype');

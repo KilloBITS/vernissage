@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= locale.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic|Fira+Sans+Extra+Condensed|PT+Mono|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/flickity.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.css">
+  <link rel="stylesheet" type="text/css" href="/style/global.min.css">
+  <link rel="stylesheet" type="text/css" href="/style/account/style.css">
+  <link rel="stylesheet" type="text/css" href="/style/account/style.min.css">
+  <script type="text/javascript" src="/script/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/script/jquery-ui.js"></script>
+  <script type="text/javascript" src="/script/maskinput.js"></script>
+  <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/script/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+  <script type="text/javascript" src="script/global.js"></script>
+  <script type="text/javascript" src="script/basket.js"></script>
+  <script type="text/javascript" src="script/account/acc.js"></script>
+  <script src="assets/js/pace.min.js"></script>
+  <% if(isAdm){ %>
+  <script type="text/javascript" src="script/ADM_FOLDER/adm_script.js"></script>
+  <link rel="stylesheet" type="text/css" href="script/ADM_FOLDER/adm_style.css">
+  <% } %>
+</head>
+<body>
+  <%- include ./includes/preloader.ejs %>
+  <%- include ./includes/closed.ejs %>  
+  <div class="top">
+   <div class="topLine oneLine">
+    <div class="topNavMobMenuOfBtm">
+      <div class="menu-wrapper">
+        <div class="hamburger-menu"></div>
+      </div>
+    </div>
+    <div class="logotype" style="background-image: url(../../../image/<%= config.logotype %>)"></div>
+    <div class="topNavBlockOfBtm">
+      <a href="/logout"><div class="userlogoutInBlock" title="Выход"></div></a>
+    </div>
+  </div>
+  <%- include ./includes/menu.ejs %>
+</div>
+<div class="content">
+  <% if( sessionUser.phone_number === null ){ %>
+  <div class="noNumMessage">
+    У вас не подтвержден номер телефона, некоторые функции ограничены.<br>
+    <small>(Пожалуйста подтвердите номер телефона)</small>
+  </div>
+  <% } %>
+  <div class="account_block">
+    <div class="top_account">
+      <div class="ava_block <% if( sessionUser.phone_number === null ){ %>  disabled  <% } %>">
+        <div class="avatarka" id="ava" style="background-image: url(../../../data/avatars/<%= sessionUser.AI %>.jpg)"></div>
+        <input type="file" id="tFile" style="display: none;">
+        <div class="uploadAva"></div>
+      </div>
+      <div class="user_menu">
+        <div class="UserNameAcc">
+          <% if( sessionUser.official ){ %>
+          <div class="official"></div>
+          <% } %>
+          <% if( sessionUser.isPartner ){ %>
+          <div class="partnericon"></div>
+          <% } %>
+          <b><%= sessionUser.nick %></b>
+          (<%= sessionUser.name %>) <br>
+          <small><%= sessionUser.email %></small>
+          <div id="ballance">
+            Ваш баланс: <b style="color: red"> <%= sessionUser.LM_COIN %> </b> LM-Coin
+            <div id="ballanceInfo">
+              <span>
+                LM-Coin - Бонусная валюта нашего сайта. <br><br>
+                1 LM-Coin = 1 Гривна
+                <br><br>
+                LM-Coin можно использовать при покупке свыше 2500 Гривен.
+              </span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" style="width: <%= parseInt(sessionUser.LM_COIN) / 10 %>%"></div>
+              <div class="progress_start">0</div>
+              <div class="progress_end">1000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="data_block">
+    <div class="data_menu <% if( sessionUser.phone === null ){ %>  disabled  <% } %>">
+      <div class="set_btn" opmenu="myPays">Покупки</div>
+      <div class="set_btn" opmenu="myDesires">Мои желания</div>
+      <div class="set_btn" opmenu="mySetting">Настройки</div>
+      <% if( sessionUser.isPartner ){ %>
+      <div class="set_btn" opmenu="myTovars">Мои товары</div>
+      <% } %>
+      <% if(sessionUser.isAdmin){ %>
+      <a href="/index-panel" target="_blank"> <div class="set_btn">Панель управления</div> </a>
+      <% } %>
+    </div>
+    <div class="data_user_content <% if( sessionUser.phone === null ){ %>  noNumber  <% } %>">
+      <% if( sessionUser.phone_number === null ){ %>
+      <div class="number_modal">
+        <form action="/setNumbers" method="GET" enctype="application/json">
+          <h1>Подтверждение номера телефона</h1>
+          <p>(Введите и сохраните ваш номер телефона)</p>
+          <input type="text" name="phoneNumber" value="" id="phoneNumMask" placeholder="Введите номер телефона">
+          <input type="submit" value="Сохранить">
+        </form>
+      </div>
+      <% } %>
+      <div class="MyBlock" id="myPays" style="display:block;">
+        <div class="container">
+          <% if(payments_user && payments_user.length > 0){ %>
+          <div class="line">
+            <% for(var i = 0; i < payments_user.length; i++) { %>
+            <div class="tileline">
+              <div class="placeTitle">Заказ № <%= payments_user[i].id %> </div>
+              <div class="placeType">
+                <div class="type<%= user.payments[i].payType %>"></div>
+                <div class="dost<%= user.payments[i].dostType %>"></div>
+              </div>
+              <a href="/delivery?<%= payments_user[i].id %>" target="_blank"> <div class="placeList">Посмотреть чек</div> </a>
+              <div class="placeDate"><%= payments_user[i].today %></div>
+              <div class="placePAYS"><%= payments_user[i].PAYS %></div>
+              <div class="otpravka_line">
+                <div class="line_point onePoint">
+                  <div class="pointImage1"></div>
+                </div>
+                <div class="line_point twoPoint">
+                  <div class="pointImage2"></div>
+                </div>
+                <div class="line_point threePoint">
+                  <div class="pointImage3"></div>
+                </div>
+                <div class="line_point fourPoint">
+                  <div class="pointImage4"></div>
+                </div>
+                <div class="line_point fivePoint">
+                  <div class="pointImage5"></div>
+                </div>
+              </div>
+              <div class="cancel_zakaz"></div>
+              <% if(payments_user[i].status === 0) { %>
+              <div class="placeStatus">Заказ в обработке</div>
+              <% } %>
+              <% if(payments_user[i].status === 0) { %>
+              <div class="placeStatus">Товар укомплектован</div>
+              <% } %>
+              <% if(payments_user[i].status === 2) { %>
+              <div class="placeStatus">Товар отправлен</div>
+              <div class="TTH"><%= payments_user[i].TTH %></div>
+              <div class="details_TTH"></div>
+              <% } %>
+              <% if(payments_user[i].status === 3) { %>
+              <div class="placeStatus" style="color: red;">заказ отменен</div>
+              <% } %>
+            </div>
+            <% } %>
+          </div>
+          <script>
+            const MyPhone = "<%= user.phone_number %>".replace(/[^0-9.]/g,'')
+            var CCC = {
+              "apiKey": "<%= conf.NEW_POST_API %>",
+              "modelName": "TrackingDocument",
+              "calledMethod": "getStatusDocuments",
+              "methodProperties": {
+                "Documents": [
+                <% for(var it = 0; it < payments_user.length; it++) { %>
+                  <% if(payments_user[it].status === 2) { %>
+                    {
+                      "DocumentNumber": "<%= payments_user[it].TTH %>",
+                      "Phone":MyPhone
+                    },
+                    <% } %>
+                    <% } %>
+                    ]
+                  }
+                };
+                $(function() {
+                  var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.novaposhta.ua/v2.0/json/",
+                    "method": "POST",
+                    "headers": {
+                      "content-type": "application/json",
+                    },
+                    "processData": false,
+                    "data": JSON.stringify(CCC)
+                  }
+                  $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    for(let i = 0; i < response.data.length; i++){
+                      if(parseInt(response.data[i].StatusCode) == 1){
+                        $(".otpravka_line:eq("+i+") .line_point:eq(1) div").addClass('current');
+                      }
+                      if(parseInt(response.data[i].StatusCode) == 4 && parseInt(response.data[i].StatusCode) == 41 && parseInt(response.data[i].StatusCode) == 5){
+                        $(".otpravka_line:eq("+i+") .line_point:eq(2) div").addClass('current');
+                      }
+                      if(parseInt(response.data[i].StatusCode) == 6){
+                        $(".otpravka_line:eq("+i+") .line_point:eq(3) div").addClass('current');
+                      }
+                      if(parseInt(response.data[i].StatusCode) == 7 && parseInt(response.data[i].StatusCode) == 8){
+                        $(".otpravka_line:eq("+i+") .line_point:eq(4) div").addClass('current');
+                      }
+                      if(parseInt(response.data[i].StatusCode) < 9){
+                        $(".details_TTH:eq("+i+")").html('<b>'+response.data[i].Status+'</b>');
+                      }else{
+                        $(".details_TTH:eq("+i+")").html('<b>'+response.data[i].Status+'</b>');
+                        var zo = document.createElement('div');
+                        zo.className = 'otrimanoData';
+                        zo.innerHTML = 'Заказ получен :)';
+                        $(".tileline:eq("+i+")").addClass("otrimano").append(zo);
+                      }
+                    }
+                  });
+                });
+              </script>
+              <% } else { %>
+              <div class="noNewsMessage">
+                У вас нет покупок.
+                <div class="goToShop">
+                  <a href="/stock?page=1">
+                    <div class="css-button">
+                      <p class="css-button-text">Перейти в каталог</p>
+                      <div class="css-button-inner">
+                        <div class="reset-skew">
+                          <p class="css-button-inner-text" style="line-height: 31px;">Перейти в каталог</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="MyBlock" id="myDesires">
+
+            <% if(desires_user && desires_user.length > 0){ %>
+            <% for(var i = 0; i < desires_user.length; i++) { %>
+            <div class="desires_box">
+              <div class="desires_remove" onclick="removeDesires(<%= desires_user[i].AI %>&<%= desires_user[i].types %>)"></div>
+              <div class="desires_title"><%= desires_user[i].title %></div>
+              <img src="../../../data/tovar/<%= desires_user[i].image[0] %>">
+              <!-- <div class="desires_image" style="background-image: url()"></div> -->
+              <a href="/details?tov=<%= desires_user[i].AI %>&<%= desires_user[i].types %>" target="_blank"> <div class="desires_more"> Открыть товар </div> </a>
+            </div>
+            <% } %>
+            <% } else { %>
+            <div class="noNewsMessage">
+              У вас нет желаний
+            </div>
+            <% } %>
+          </div>
+          <div class="MyBlock" id="mySetting">
+            <h3>Личная информация</h3>
+            <div class="setting_line proc50">
+              <span>Дата роджения</span>
+              <input type="date" name="dateofbirth" id="dateofbirth">
+            </div>
+            <div class="setting_line proc50">
+              <span>Изменить Номер телефона</span>
+              <input type="text" name="number" placeholder="введите новый номер">
+            </div>
+            <div class="setting_line proc50">
+              <span>Изменить e-mail</span>
+              <input type="text" name="email" placeholder="введите новый email адресс">
+            </div>
+            <h3>Изменить пароль</h3>
+            <div class="setting_line">
+              <span>Старый пароль</span>
+              <input type="password" name="passwordOld"  placeholder="Введите старый пароль">
+              <span>Новый пароль</span>
+              <input type="password" name="passwordNew"  placeholder="Введите новый пароль">
+              <span>Повторите пароль</span>
+              <input type="password" name="passwordNew2" placeholder="Повторите пароль">
+              <div class="buttonSetting">Сохранить</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include ./includes/footer.ejs %>
+  <div id="pageMessages"></div>
+</body>
+</html>

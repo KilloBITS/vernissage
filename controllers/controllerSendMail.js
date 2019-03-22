@@ -1,32 +1,26 @@
-'use strict';
-const express = require('express');
+"use strict";
+const express = require("express");
 const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
 
-const nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'vernissage.developer@gmail.com',
-        pass: 'kakabuba666'
-    }
-});
-
-function mailOptions(a, b, c, d) {
-    this.from = a, //'riznik.comment@gmail.com',
-    this.to = b, //'mr.kalinuk@gmail.com',
-    this.subject = c, //'Sending Email using Node.js',
-    this.text = d;//'That was easy!';
-}
-
-router.post('/sendMessage', function(req, res, next){
+router.post("/sendmessage", function(req, res, next){
   console.log(req.body)
-  let ml = new mailOptions('vernissage.developer@gmail.com', 'vernissage-shop@ukr.net', req.body.myTheme, req.body.message + " [Моя почта для ответа: " +req.body.myEmail + "]");
-  transporter.sendMail(ml, function (error, info) {
+  mongoClient.connect(global.baseIP, function(err, client){
+    const db = client.db(global.baseName);
+    const msg = db.collection("MESSAGE");
 
-    res.send({code:500, msg: 'Сообщение отправлено'});
+    if(err) return console.log(err);
 
-  });
+    msg.find().sort({AI: -1}).limit(1).toArray(function(err, resTov){
+      var NEW_MESSAGE = req.body;
+      NEW_MESSAGE.AI = (resTov.length === 0)?0:parseInt(resTov[0].AI) + 1;               
+      NEW_MESSAGE.author = req.session.user;
+      NEW_MESSAGE.availability = false;
+      NEW_MESSAGE.date = global.getDate();
+      msg.insertOne(NEW_MESSAGE);  
+      res.send({code: 500, className: 'nSuccess', message: 'Сообщение успешно отправлено'});       
+    });   
+  });   
 });
 
 module.exports = router;
