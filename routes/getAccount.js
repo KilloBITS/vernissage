@@ -25,14 +25,16 @@ router.get('/', function(req, res, next){
     locale.find().toArray(function(err, resLocale){
       users.find({email: (req.session.user === undefined)?false:req.session.user}).toArray(function(err, resUsers){
         if(resUsers.length > 0 || req.session.login !== undefined){
-          menu.find().sort({index: 1}).toArray(function(err, resMenu){
+          menu.find().sort({isEnded: 1}).toArray(function(err, resMenu){
             mainslide.find().toArray(function(err, resMainslide){
               tovar.find().sort({AI: -1}).limit(18).toArray(function(err, resTovar){
                 news.find().sort({AI: -1}).limit(6).toArray(function(err, resNews){
                   contacts.find().toArray(function(err, resContacts){
                     payments.find( { id: { $in: resUsers[0].payments } }).toArray(function(err, resPayments ){
+                      console.log(resPayments)
                       tovar.find( { AI: { $in: resUsers[0].desires } }).toArray(function(err, resDesires ){
                         config.find().toArray(function(err, resConfig ){
+                          global.visitors(req);
                           res.render('pages/account.ejs',{
                             isAdm: req.session.admin,
                             sessionUser: resUsers[0],
@@ -41,7 +43,7 @@ router.get('/', function(req, res, next){
                             globalLocale:  resLocale[0][global.parseLanguage(req)],
                             contacts: resContacts[0],
                             numLang: global.parseNumLang(req),
-                            payments_user: payments,
+                            payments_user: resPayments,
                             desires_user: resDesires,
                             config: resConfig[0]      
                           });

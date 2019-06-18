@@ -45,6 +45,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li><a href="/index-panel"><i class="fa fa-dashboard"></i> <span>Главная</span></a></li>
+                            <li><a href="/payments-panel"><i class="fa fa-dollar"></i> <span>Заказы</span></a></li>
                             <li><a href="/menu-panel"><i class="fa fa-navicon"></i> <span>Категории/Типы</span></a></li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-edit"></i><span>Информация</span></a>
@@ -136,6 +137,7 @@
                                                 <th>Номер</th>                            
                                                 <th>LM_COIN</th>
                                                 <th>Должность</th>
+                                                <th>Пароль</th>
                                                 <th>Действия</th>
                                             </tr>
                                         </thead>
@@ -145,34 +147,37 @@
                                                 <td><%= userData[i].AI %></td>
                                                 <td><b><%= userData[i].nick %></b></td>
                                                 <td><a href="mailto:<%= userData[i].email %>?subject=Администрация Lady&Man clothing store" class="adressLineMap"><%= userData[i].email %></a></td>
-                                                <td><a href="tel:<%= userData[i].phone_number %>" class="adressLineMap"><%= userData[i].phone_number %></a></td>
+                                                <td>
+                                                    <% if(userData[i].phone_number !== null){ %>
+                                                    <a href="tel:<%= userData[i].phone_number %>" class="adressLineMap"><%= userData[i].phone_number %></a>
+                                                    <% }else{ %>   
+                                                    <a href="#" class="adressLineMap redBack" style="color: red">Номер не указан</a> 
+                                                    <% } %>                                                    
+                                                </td>
                                                 <td><%= userData[i].LM_COIN %></td>
 
                                                 <% if(userData[i].blocked){ %>
                                                 <td class="redBack">Заблокирован</td>
                                                 <% }else{ %>    
-                                                    <% if(userData[i].isAdmin){ %>
-                                                    <td class="redTable youAdmin"><div class="official"></div>Администратор</td>
-                                                    <% }else{ %>    
-                                                    <td class="greenTable">Пользователь</td>
-                                                    <% } %> 
+                                                <% if(userData[i].isAdmin){ %>
+                                                <td class="redTable youAdmin"><div class="official"></div>Администратор</td>
+                                                <% }else{ %>    
+                                                <td class="greenTable">Пользователь</td>
+                                                <% } %> 
                                                 <% } %>
+                                                <td hide-data="<%= userData[i].password %>" class="cpoionter" onclick="USER.showPassword(this)"><i class="fa fa-key" aria-hidden="true"></i></td>
                                                 <td>
                                                     <% if(userData[i].blocked){ %>
                                                     <button type="button" class="btn btn-success btn-xs mb-3" onclick="USER.block('<%= userData[i].AI %>',false)">Разблокировать</button>
                                                     <% }else{ %>
                                                     <button type="button" class="btn btn-danger btn-xs mb-3" onclick="USER.block('<%= userData[i].AI %>',true)">Заблокировать</button>
-                                                    <% } %> 
-                                                    
+                                                    <% } %>                                                     
                                                     <button type="button" class="btn btn-warning btn-xs mb-3" onclick="USER.edit('<%= userData[i].AI %>')">Редактировать</button>
-
                                                     <% if(userData[i].isAdmin){ %>
                                                     <button type="button" class="btn btn-secondary btn-xs mb-3" onclick="USER.setadmin('<%= userData[i].AI %>',false)">Разжаловать администратора</button>
                                                     <% }else{ %>
                                                     <button type="button" class="btn btn-secondary btn-xs mb-3" onclick="USER.setadmin('<%= userData[i].AI %>',true)">Назначить администратором</button>
-                                                    <% } %>  
-                                                    
-
+                                                    <% } %> 
                                                     <button type="button" class="btn btn-dark btn-xs mb-3" onclick="USER.delete('<%= userData[i].AI %>')">Удалить</button>
                                                 </td>
                                             </tr>

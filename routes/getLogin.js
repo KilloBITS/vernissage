@@ -17,26 +17,26 @@ router.get('/', function(req, res, next){
 
     locale.find().toArray(function(err, resLocale){
       users.find({email: (req.session.user === undefined)?false:req.session.user}).toArray(function(err, resUsers){
-        menu.find().sort({index: 1}).toArray(function(err, resMenu){
+        menu.find().sort({isEnded: 1}).toArray(function(err, resMenu){
           contacts.find().toArray(function(err, resContacts){            
-              config.find().toArray(function(err, resConfig){   
-                console.log((req.session.user === undefined)?true:req.session.user)
-                if((req.session.user === undefined)?true:false){
-                  res.render('pages/auth.ejs',{
-                    isAdm: req.session.admin,
-                    sessionUser: resUsers[0],
-                    locale: resLocale[0][global.parseLanguage(req)].login,
-                    menu: resMenu,
-                    globalLocale:  resLocale[0][global.parseLanguage(req)],
-                    contacts: resContacts[0],
-                    numLang: global.parseNumLang(req),
-                    config: resConfig[0]
-                  });     
-                }else{
-                  res.redirect('/profile');
-                }        
-                           
-              });            
+            config.find().toArray(function(err, resConfig){   
+             global.visitors(req);
+             if((req.session.user === undefined)?true:false){
+              res.render('pages/auth.ejs',{
+                isAdm: req.session.admin,
+                sessionUser: resUsers[0],
+                locale: resLocale[0][global.parseLanguage(req)].login,
+                menu: resMenu,
+                globalLocale:  resLocale[0][global.parseLanguage(req)],
+                contacts: resContacts[0],
+                numLang: global.parseNumLang(req),
+                config: resConfig[0]
+              });     
+            }else{
+              res.redirect('/profile');
+            }        
+            
+          });            
           });
         }); 
       }); 

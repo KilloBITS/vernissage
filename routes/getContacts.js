@@ -4,12 +4,6 @@ const router = express.Router();
 const mongoClient = require("mongodb").MongoClient;
 
 router.get('/', function(req, res, next){
-  switch(req.cookies.pageLang){
-    case 'ru': var numLangs = 0 ;break;
-    case 'ua': var numLangs = 1 ;break;
-    case 'en': var numLangs = 2 ;break;
-    default: var numLangs = 0;
-  }
   mongoClient.connect(global.baseIP, function(err, client){
     const db = client.db(global.baseName);
     const config = db.collection("CONFIG");
@@ -23,9 +17,10 @@ router.get('/', function(req, res, next){
     config.find().toArray(function(err, resConfig){
       locale.find().toArray(function(err, resLocale){
         users.find({email: (req.session.user === undefined)?false:req.session.user}).toArray(function(err, resUsers){
-          menu.find().sort({index: 1}).toArray(function(err, resMenu){
+          menu.find().sort({isEnded: 1}).toArray(function(err, resMenu){
             contacts.find().toArray(function(err, resContacts){
               parrtners.find().toArray(function(err, resPartners){
+                global.visitors(req);
                 res.render('pages/contacts.ejs',{
                   isAdm: req.session.admin,
                   sessionUser: resUsers[0],
@@ -34,7 +29,7 @@ router.get('/', function(req, res, next){
                   globalLocale:  resLocale[0][global.parseLanguage(req)],
                   contacts: resContacts[0],
                   partners: resPartners,
-                  numLang: numLangs,
+                  numLang: global.parseNumLang(req),
                   config: resConfig[0],
                 });
               });
@@ -43,7 +38,7 @@ router.get('/', function(req, res, next){
         }); 
       });
     })
-     
+
   });
 });
 

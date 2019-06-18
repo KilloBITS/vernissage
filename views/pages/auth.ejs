@@ -32,6 +32,27 @@
   <script type="text/javascript" src="script/ADM_FOLDER/adm_script.js"></script>
   <link rel="stylesheet" type="text/css" href="script/ADM_FOLDER/adm_style.css">
   <% } %>
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 </head>
 <body>
   <%- include ./includes/preloader.ejs %>
@@ -63,7 +84,6 @@
         </div>
       </div>
     </div>
-
     <div class="form-cont">
       <div class="top-buttons">
         <button class="to-signup ">
@@ -74,11 +94,11 @@
         </button>
       </div>
       <div class="form form-signup">
-        <div class="register_socials">
+        <div class="register_socials disabled">
           <div class="socials_title_log"><%= locale.regsoc %></div>
-          <div class="socialAccount faceboock"></div>
+          <a href="/auth/facebook"><div class="socialAccount faceboock"></div></a>
           <div class="socialAccount google"></div>
-          <div class="socialAccount instagram"></div>
+          <a href="/auth/instagram"><div class="socialAccount instagram"></div></a>
         </div>
         <div class="errorUP"></div>
         <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= config.loader %>"></div>
@@ -105,11 +125,11 @@
       </div>
 
       <div class="form form-signin">
-        <div class="auch_socials">
+        <div class="auch_socials ">
           <div class="socials_title_log"><%= locale.authSoc %></div>
-          <div class="socialAccount faceboock"></div>
+          <a href="/auth/facebook"><div class="socialAccount faceboock"></div></a>
           <div class="socialAccount google"></div>
-          <div class="socialAccount instagram"></div>
+          <a href="/auth/instagram"><div class="socialAccount instagram"></div></a>
         </div>
         <div class="errorUP"></div>
         <div class="backet_load" style="display: none; background-image: url(../../../image/loaders/<%= config.loader %>"></div>

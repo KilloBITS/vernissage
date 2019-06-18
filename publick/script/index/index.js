@@ -48,11 +48,6 @@ var Index = {
         }, 1000);
     }
 
-    window.onload = () => {
-      const deadline = new Date("December 31, 2018 23:59:59");
-      startTimer("clockTimer", deadline)
-    };
-
     $('#head_arrow').click(function(){
       $('html,body').animate({
         scrollTop: $('.content').height()
@@ -90,41 +85,6 @@ var Index = {
     $(".searchLine").css({
       "width": "170px"
     });
-  });
-
-  $("#SEARCH").on("keyup", function() {
-    if ($("#SEARCH").val().length > 3) {
-      $(".search_result").fadeIn(150);
-      $.post("/search", {
-        name: $("#SEARCH").val()
-      }, function(result) {
-        console.log(result.searchResult);
-        var res = result.searchResult;
-        $('.search_data div').remove();
-        $(".search_title span").html(res.length)
-        for(let i = 0; i < res.length; i++){
-          var newObj = document.createElement('div');
-          newObj.className = 'search_object';            
-          $('.search_data').append(newObj);
-
-          var obImg =  document.createElement('div');
-          obImg.className = 'search_min_img';            
-          $(newObj).append(obImg);
-
-          var img =  document.createElement('img');
-          img.id = 'TovImg'+i;   
-          img.setAttribute('src', '../../../data/tovar/'+res[i].image[0]);         
-          $(obImg).append(img);
-
-          var obTitle =  document.createElement('div');
-          obTitle.className = 'search_min_title';
-          obTitle.innerHTML = res[i].title;
-          $(newObj).append(obTitle);
-        }
-      });
-    } else {
-      $(".search_result").fadeOut(150);
-    }
   });
 
   $('body').click(function(e) {

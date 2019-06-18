@@ -19,6 +19,7 @@ router.get('/', function(req, res, next){
     const contacts = db.collection("CONTACTS");
     const config = db.collection("CONFIG");
     const reviews = db.collection("REVIEWS");
+    const voting = db.collection("VOTING");
 
 
     if(err) return console.log(err);
@@ -29,8 +30,9 @@ router.get('/', function(req, res, next){
             tovar.find().sort({AI: -1}).limit(18).toArray(function(err, resTovar){
               news.find().sort({AI: -1}).limit(6).toArray(function(err, resNews){
                 contacts.find().toArray(function(err, resContacts){
-                  config.find().toArray(function(err, resConfig){
-                    reviews.find().limit(20).toArray(function(err, resReviews){                    
+                  config.find().toArray(function(err, resConfig){                    
+                    reviews.find().limit(20).toArray(function(err, resReviews){
+                      global.visitors(req);
                       res.render('pages/index.ejs',{
                         isAdm: req.session.admin,
                         sessionUser: resUsers[0],
@@ -39,22 +41,23 @@ router.get('/', function(req, res, next){
                         globalLocale:  resLocale[0][global.parseLanguage(req)],
                         contacts: resContacts[0],
                         numLang: global.parseNumLang(req),
+                        /*Только для индекса*/
                         slides: resMainslide,
                         newtovar: resTovar,
                         news: resNews,
                         config: resConfig[0],
                         reviewsSlide: resReviews
-                      });                
+                      });                      
                     });
                   });
                 });
               });
             });
-          }); 
+          });
         }); 
       }); 
-    });    
-  });      
-});
+    }); 
+  });    
+});      
 
 module.exports = router;

@@ -11,19 +11,47 @@ const request = require("request");
 const app = express();
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
-// const analytics = require('node-analytics');
 
 app.use(session({
-    secret: '2C44-4D44-WppQ38S',
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({
-        url: 'mongodb://localhost:27017/SHOP_DB'
-    }),
-    cookie: {
+  secret: '2C44-4D44-WppQ38S',
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: 'mongodb://localhost:27017/SHOP_DB'
+  }),
+  cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7 * 2 // two weeks
-    }
+      }
 }));
+
+const passport = require('passport');
+var Instagram = require('passport-instagram');
+const InstagramStrategy = Instagram.Strategy;
+
+passport.serializeUser((user, done) => {
+  done(null, user)
+})
+passport.deserializeUser((user, done) => {
+  done(null, user)
+})
+
+passport.use(new InstagramStrategy({
+  clientID: "89e795eb46f643cf86c51d7cd0b66849",
+  clientSecret: "ad15d5e24d5b46c199527e8165683a74",
+  callbackURL: "http://ladyman.club/auth/instagram/callback" 
+}, (accessToken, refreshToken, profile, done) => {
+  console.log(profile);
+}));
+
+app.get('/auth/instagram', passport.authenticate('instagram'));
+
+app.get(
+  '/auth/instagram/callback',
+  passport.authenticate('instagram', {
+    successRedirect: '/profile',
+    failureRedirect: '/login'
+  })
+);
 
 //project libs use
 app.use(express.json({limit: '50mb'}));
@@ -40,6 +68,12 @@ app.use(bParser.raw({limit: '50mb'}));
 require('./controllers/system/controllerLanguage');
 require('./controllers/system/controllerDate');
 require('./controllers/system/controllerNotification');
+require('./controllers/system/controllerSMS');
+require('./controllers/system/controllerStatistic');
+require('./controllers/controllerFacebook_auth');
+require('./controllers/controllerInstagram_auth');
+
+
 
 //User routes
 const index = require('./routes/getIndex');
@@ -59,8 +93,10 @@ const pp = require('./routes/getPrivacyPolicy');
 const dap = require('./routes/getDAP');
 const map = require('./routes/getSiteOfMap');
 const about = require('./routes/getAbout');
+const shopNews = require('./routes/getShopNews');
 
 app.use('/', index);
+app.use('/shopNews*', shopNews);
 app.use('/shop*', tovar);
 app.use('/stock*', getStock);
 app.use('/login', login);
@@ -76,7 +112,6 @@ app.use('/privacy_policy', pp);
 app.use('/discounts-and-promotions', dap);
 app.use('/site_of_map', map);
 app.use('/about', about);
-
 
 //Admin routes
 const admAbout = require('./routes/panel/getAboutPanel');
@@ -97,6 +132,7 @@ const admVisual = require('./routes/panel/getVisualPanel');
 const admMenu = require('./routes/panel/getMenuPanel');
 const admPrivacePolicy = require('./routes/panel/getPrivacePolicyPanel');
 const admTermsOfUse = require('./routes/panel/getTermsOfUsePAnel');
+const admPayments = require('./routes/panel/getPaymentsPanel');
 
 app.use('/about-panel', admAbout);
 app.use('/API-panel', admAPI);
@@ -116,6 +152,7 @@ app.use('/faq-panel', admFaq);
 app.use('/menu-panel', admMenu);
 app.use('/privacepolicy-panel', admPrivacePolicy);
 app.use('/termsofuse-panel', admTermsOfUse);
+app.use('/payments-panel', admPayments);
 
 
 const podpiska = require('./controllers/controllerNewCallUserTovar');
@@ -150,6 +187,9 @@ app.post('/newComment', newComment);
 
 const updateAvaUser = require('./controllers/controllerProfile');
 app.post('/updateAvaUser', updateAvaUser);
+
+const cancelPayment = require('./controllers/controllerProfile');
+app.post('/cancelPayment', cancelPayment);
 
 const addToJelaniya = require('./controllers/controllerProfile');
 app.post('/addToJelaniya', addToJelaniya);
@@ -202,45 +242,34 @@ app.post('/addcategory', menuPanelMethods);
 app.post('/addtype', menuPanelMethods);
 app.post('/removecategory', menuPanelMethods);
 
-// var options = {
-//   key: fs.readFileSync('./ssl/apache-selfsigned.key'),
-//   cert: fs.readFileSync('./ssl/apache-selfsigned.crt')
-// };
+
 
 const Nexmo = require('nexmo')
 const nexmo = new Nexmo({
   apiKey: '8e5f959d',
   apiSecret: 't3KDkf6suo3RQBjV'
 })
+
 app.get('/logout', function(req, res) {
   req.session.destroy();
   res.redirect('/');
 });
 
 app.get('*', get404);
+
+
+var options = {
+  key: fs.readFileSync('./ssl/apache-selfsigned.key'),
+  cert: fs.readFileSync('./ssl/apache-selfsigned.crt')
+};
+
+https.createServer(options, app).listen(443);
+
 app.listen(80, function(){
   global.baseName = 'SHOP_DB';
   global.baseIP = 'mongodb://localhost:27017/';
   global.online = 0;
   // require('./controllers/telegram/telegaBOT');
+  global.clearVisitors();
   console.warn('STARTED HTTP LM_SHOP SERVER ON PORT: 80');
-  PARSE_DB()
 });
-//проверка базы
-var DEFAULT_COLLECTION = ['CONFIG','CONTACTS','DISCOUNTS','LOCALE','LOGS','MAINSLIDE','MANUFACTURERS','MENU','NEWS','NOTIFICATION','PARTNERS','PAYMENTANDDELIVERY','PAYMENTS','TOVAR', 'USERS']
-var PARSE_DB = function(){
-  mongoClient.connect(global.baseIP, function(err, database) {
-    const db = database.db(global.baseName);
-    if (err) throw err;
-    // db.listCollections().toArray(function(err, collInfos) {
-    //   for(var i = 0; i < DEFAULT_COLLECTION.length; i++){
-    //     if(collInfos.find(x => x.name === DEFAULT_COLLECTION[i]) === undefined){
-    //       db.createCollection(DEFAULT_COLLECTION[i], function(err, result) {
-    //         if (err) throw err;
-    //         console.log("Collection "+ result.name +" is created!");        
-    //       });
-    //     }
-    //   }
-    // });  
-  });
-};

@@ -1545,7 +1545,8 @@ form textarea {
   height: 100%;
   display: none;
 }
-.line{
+
+.content .line{
   padding: 5px 0 5px 30px;
   border-left: 3px solid #dd127b;
   height: 100%;
@@ -1554,12 +1555,12 @@ form textarea {
   text-align: center;
   width: 100%;
   padding: 10px 10px 0 10px;
-  border: 1px solid #dd127b;
+  border: 1px solid #f8cfe5;
   color: #03254a;
   margin: 60px 0;
   position: relative;
-  background: linear-gradient(-53deg, #ffffff 79%,#0a0a0ade 80%,#a5003d 40%,#f7005e 98%);
-  min-height: 46px;
+  background: linear-gradient(-70deg, #ffffff 79%,#0a0a0ade 80%,#a5003d 40%,#f7005e 98%);
+  min-height: 90px;
   margin-top: 34px;
 }
 .tileline:before{
@@ -1591,6 +1592,20 @@ form textarea {
 
 .placeTitle{
 
+}
+
+.minimTovar{
+
+}
+.miniTovar{
+  position: relative;
+  right: 0;
+  width: fit-content;
+  display: inline-block;
+  margin-top: 16px;
+}
+.miniTovar img{
+  max-width: 40px;
 }
 .placeType{
   position: absolute;
@@ -1625,12 +1640,12 @@ form textarea {
 }
 
 .placeStatus{
-  position: absolute;
-  right: -1px;
-  top: -23px;
-  border: 1px solid #dd127b;
+  /* position: absolute; */
+  /* right: -1px; */
+  /* top: -23px; */
+  /* border: 1px solid #dd127b; */
   border-bottom: 0;
-  background-color: white;
+  /* background-color: white; */
   padding: 0px 14px;
   border-radius: 10px 0 0 0;
   font-size: 16px;
@@ -1815,24 +1830,6 @@ form textarea {
   width: calc(50% - 2px);
 }
 
-
-.details_TTH{
-  right: 7px;
-  top: 14px;
-  font-size: 14px;
-  padding: 4px 15px;
-  background: silver;
-  width: fit-content;
-  margin: auto;
-  margin-top: 12px;
-  border-radius: 15px 15px 0 0;
-  border: 1px solid #8c8c8c;
-  border-bottom: 0;
-  transition: 0.3s;
-  color: black;
-  text-shadow: 1px 1px 1px white;
-}
-
 #ballance{
   position: absolute;
   top: 0;
@@ -1921,7 +1918,7 @@ input {
 
 .otpravka_line{
   position: absolute;
-  width: calc(100% - 200px);
+  width: calc(100% - 24px);
   height: 2px;
   background: #bb0000;
   left: 20px;
