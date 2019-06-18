@@ -35,7 +35,7 @@ router.post('/getTypesOfCatalog', function(req, res, next){
 
 			if(err) return console.log(err);
 
-			menu.find({categories: parseInt(req.body.a)}).toArray(function(err, resMenu){
+			menu.find({index: parseInt(req.body.a)}).toArray(function(err, resMenu){
 				console.log(resMenu)
 				res.send({code: 500, className: 'nSuccess', data: resMenu[0].podlink });
 			});
