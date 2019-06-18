@@ -173,8 +173,9 @@
                                                 <div class="col-md-12 mb-3">
                                                     <label class="col-form-label">Категория</label>
                                                     <select class="custom-select" id="categoriesSelectImport" onchange="CATALOG.categoriesselect(this)">
+                                                        <option value="null" selected>Не выбрано</option>
                                                         <% for(var i = 0; i < config.categories.length; i++){ %>
-                                                        <option value="<%= config.categories[i].index %>"><%= config.categories[i].name %></option>
+                                                          <option value="<%= config.categories[i].index %>"><%= config.categories[i].name %></option>
                                                         <% } %>
                                                     </select>
                                                 </div>
@@ -184,7 +185,7 @@
                                                     </div>
                                                     <label class="col-form-label">Тип</label>
                                                     <select class="custom-select" id="typeSelectImport">
-                                                                             
+
                                                     </select>
                                                 </div>
 
@@ -292,6 +293,7 @@
                                             <div class="col-md-4 mb-3">
                                                 <label class="col-form-label">Категория</label>
                                                 <select class="custom-select" id="categoriesSelect" onchange="CATALOG.categoriesselect(this)">
+                                                    <option value="null" selected>Не выбрано</option>
                                                     <% for(var i = 0; i < config.categories.length; i++){ %>
                                                     <option value="<%= config.categories[i].index %>"><%= config.categories[i].name %></option>
                                                     <% } %>
