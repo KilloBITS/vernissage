@@ -562,6 +562,7 @@ var MENU = {
 			$.post('/gettypes',{a:c}, (res) => {
 				MENU.PODLINK = res.data.podlink;
 				MENU.CATEGORIES = res.data.categories;
+				MENU.INDEX = res.data.index;
 				$("#typestable tbody").empty();
 				if(res.data.podlink[0] === '/'){
 					$("#typestable tbody").empty().append('<td class="bg-danger">В данной категории нету типов</td><td class="bg-danger">В данной категории нету типов</td><td class="bg-danger">В данной категории нету типов</td>!');
@@ -598,7 +599,7 @@ var MENU = {
 	},
 	keyrusup: function(){
 		$('#types-new').val(rus_to_latin($("#pname-RU-new").val().toLowerCase()));
-		$('#plink-new').val('/shop?c='+MENU.CATEGORIES+','+rus_to_latin($("#pname-RU-new").val().toLowerCase())+'&page=1');
+		$('#plink-new').val('/shop?c='+MENU.INDEX+','+rus_to_latin($("#pname-RU-new").val().toLowerCase())+'&page=1');
 	},
 	saveeditpodlink: function(){
 		var PL = {
