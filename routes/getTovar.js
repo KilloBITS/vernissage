@@ -44,6 +44,7 @@ router.get('/*', function(req, res, next){
             if(searchData.length >= 2 ){
               FILTER.type = searchData[1].split('&')[0];
             };
+            console.log(FILTER)
             tovar.find(FILTER).sort({AI: -1}).toArray(function(err, resTovar){
               console.log(resTovar)
               config.find().toArray(function(err, resConfig){
