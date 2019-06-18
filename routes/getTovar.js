@@ -32,7 +32,7 @@ router.get('/*', function(req, res, next){
       const news = db.collection("NEWS");
       const contacts = db.collection("CONTACTS");
       const config = db.collection("CONFIG");
-      
+
       if(err) return console.log(err);
 
       locale.find().toArray(function(err, resLocale){
@@ -43,8 +43,9 @@ router.get('/*', function(req, res, next){
             };
             if(searchData.length >= 2 ){
               FILTER.type = searchData[1].split('&')[0];
-            };            
+            };
             tovar.find(FILTER).sort({AI: -1}).toArray(function(err, resTovar){
+              console.log(resTovar)
               config.find().toArray(function(err, resConfig){
                 news.find().toArray(function(err, resNews){
                   contacts.find().toArray(function(err, resContacts){
@@ -71,14 +72,14 @@ router.get('/*', function(req, res, next){
                 });
               });
             });
-          }); 
-        }); 
+          });
+        });
       });
     });
   }catch(e){
     res.redirect('/')
   }
-  
+
 });
 
 module.exports = router;
