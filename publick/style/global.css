@@ -136,7 +136,7 @@ body{
 .logotype{
 	width: 220px;
   height: 100px;
-  background-image: url(../../../image/LOGOTYPE.jpg);
+  background-image: url(../../../image/LOGOTYPE.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -1750,7 +1750,7 @@ p.min50{
   left: 0;
   right: 0;
   bottom: 0;
-  /*background: #fff url(../../../image/LOGOTYPE.jpg);*/
+  /*background: #fff url(../../../image/LOGOTYPE.png);*/
   background-color: white;
   z-index: 99999999;
   opacity: 1;
